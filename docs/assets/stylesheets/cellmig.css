@@ -472,3 +472,4 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-cloud span.cm-cloud__lab, .cm-cloud__legend .cm-cloud__lab { color: #7a35c4; }
 .cm-cloud__legend { text-align: center; }
 .cm-alumni__years { font-variant-numeric: tabular-nums; color: #8a8a8a; }
+.cm-person__before { display: block; font-size: .56rem; opacity: .8; }

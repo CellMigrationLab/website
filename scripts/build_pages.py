@@ -403,7 +403,7 @@ def load_members():
             person = dict(r)
             person["slug"] = slugify(r["name"])
             person["order"] = i
-            person["status"] = "alumni" if r.get("end_date") else "current"
+            person["status"] = r.get("status") or "current"
             extra = DATA / "members" / f"{person['slug']}.yaml"
             if extra.exists():
                 for k, v in (load(extra) or {}).items():
@@ -416,9 +416,7 @@ def load_members():
             people.append(person)
     for m in people:
         m["_file"] = f"data/members/{m['slug']}.yaml"
-        start, end = year_of(m.get("start_date")), year_of(m.get("end_date"))
-        if m["status"] == "alumni" and start and end:
-            m.setdefault("years", f"{start}–{end}" if start != end else str(end))
+        m["roles"] = list(m.get("previous_roles") or []) + [m.get("role", "")]
         if not m.get("photo"):
             for ext in ("jpg", "jpeg", "png", "webp"):
                 p = DATA / "photos" / f"{m['slug']}.{ext}"
@@ -621,7 +619,7 @@ def page_members(members):
     alumni = [m for m in members if m.get("status") == "alumni"]
     order = {g: i for i, (g, _) in enumerate(GROUPS)}
     current.sort(key=lambda m: (order.get(m.get("group", "other"), 99), m.get("order", 999), m["name"]))
-    alumni.sort(key=lambda m: (-(year_of(m.get("end_date")) or 0), m.get("order", 999)))
+    alumni.sort(key=lambda m: m.get("order", 999))
 
     p = Page("lab-members.md", title="Lab members", edit_url=f"{REPO}/tree/main/data/members",
              description="Meet the people of the Cell Migration Lab in Turku, Finland.")
@@ -646,7 +644,7 @@ def page_members(members):
         for m in alumni:
             years = f' <span class="cm-alumni__years">{esc(m["years"])}</span>' if m.get("years") else ""
             now = f' <span class="cm-alumni__now">now {md(m["now"], inline=True)}</span>' if m.get("now") else ""
-            p.add(f'<li><strong>{esc(m["name"])}</strong> <span>{esc(m.get("role", ""))}</span>{years}{now}</li>')
+            p.add(f'<li><strong>{esc(m["name"])}</strong> <span>{esc(", ".join(r for r in m["roles"] if r))}</span>{years}{now}</li>')
         p.add("</ul>")
 
     form = f"{REPO}/issues/new?template=lab-member.yml"
@@ -677,6 +675,10 @@ def person_card(m):
         links.append(f'<a href="{esc(url)}" aria-label="{esc(m["name"])} – {key}">{ICONS[label]}</a>')
     link_html = f'<span class="cm-person__links">{"".join(links)}</span>' if links else ""
     bio = f'<span class="cm-person__bio">{md(m["bio"], inline=True)}</span>' if m.get("bio") else ""
+    if m.get("previous_roles"):
+        before = ", ".join(m["previous_roles"])
+        bio += f'<span class="cm-person__before">Previously {esc(before[0].lower() + before[1:])}</span>'
+
     return (f'<li class="cm-person" id="{esc(m["slug"])}"><figure>{pic}'
             f'<figcaption><span class="cm-person__name">{esc(m["name"])}</span>'
             f'<span class="cm-person__role">{esc(m.get("role", ""))}</span>{bio}{link_html}</figcaption></figure></li>')
