@@ -156,15 +156,6 @@
     });
   }
 
-  // Home page: "Show all featured papers"
-  function initShowMore() {
-    const btn = document.querySelector("[data-cm-show-more]");
-    const grid = document.querySelector("[data-cm-more]");
-    if (!btn || !grid) return;
-    btn.hidden = false;
-    btn.addEventListener("click", () => { grid.classList.add("is-open"); btn.parentElement.remove(); });
-  }
-
   // Preprint lag chart: tooltip on hover / focus / tap
   function initLagChart() {
     const plot = document.querySelector(".cm-lag__plot");
@@ -187,7 +178,6 @@
   }
 
   function init() {
-    initShowMore();
     initLagChart();
     initHeader();
     initVideos();

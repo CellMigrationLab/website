@@ -13,8 +13,8 @@ ledger/registries/datasets  ─┘   (runs scripts/sync_things_done.py)
 ```
 
 Only public fields are copied: title, authors, venue, year, DOI, abstract,
-open-access status, links between preprints and journal versions, the
-`featured` flag, and the software/dataset descriptions and links. Supervision, roles, notes and
+open-access status, links between preprints and journal versions, whether
+Guillaume is corresponding author, and the software/dataset descriptions and links. Supervision, roles, notes and
 everything else in the ledger is never read. The website never gets access to
 the private repository: the token below only allows things_done to *write* to
 this website repository.
@@ -49,9 +49,13 @@ this website repository.
 
 - **Publications** and **Latest papers**: every record; preprints are folded into
   their journal version when `related_dois` links them.
-- **Featured research** (home page and `/portfolio/…` pages): records with
-  `featured: true`, plus those listed in `data/featured.yaml` (which also holds
-  the pictures). Title, authors, journal and abstract come from the record.
+- **Featured research** (home page, `/featured-research/` and `/portfolio/…`
+  pages): every record where `me.corresponding_author` is true (on the paper
+  or its preprint). Title, authors, journal and abstract come from the record;
+  pictures come from `data/featured.yaml` in the website repository.
+- **Preprints and journal versions** are paired using `related_dois` and the
+  ledger's own crosswalk report (confident matches only), so each paper appears
+  once.
 - **From preprint to paper**: the lag between each linked preprint and its
   journal version. The sync looks up exact dates from the DOIs once and caches
   them in `data/things_done/dates.yaml`; an `issued_date: YYYY-MM-DD` on a
@@ -64,8 +68,8 @@ this website repository.
 
 | Add | Effect on the website |
 | --- | --- |
-| `featured: true` on a publication | it appears in Featured research, with its own page |
-| `related_dois` between every preprint and its journal version | the lag figure covers all papers (today 13 pairs are linked) and duplicates disappear from the list |
+| `me.corresponding_author: true` (already recorded) | the paper appears in Featured research, with its own page |
+| `related_dois` between every preprint and its journal version | the website already uses the crosswalk report; explicit links make pairing certain |
 | `related_publication_dois` on software and datasets | the paper's page lists its code and data |
 | `issued_date` (optional) | exact dates without an online lookup |
 
@@ -74,7 +78,8 @@ this website repository.
 | On the website | Comes from | Edit |
 | --- | --- | --- |
 | Publications page, "Latest papers" on the home page | `ledger/publications/*.yaml` | things_done |
-| Citations on featured research pages | ledger, by DOI | `data/featured/*.yaml` lists the DOIs |
+| Featured research: which papers, titles, abstracts | ledger (`me.corresponding_author`) | things_done |
+| Featured research: pictures | `data/featured.yaml` | this repository |
 | Software page: which projects, names, years, GitHub, paper DOI | `ledger/registries/software.yaml` | things_done |
 | Software page: colours, pictures, longer text | `data/software.yaml` | this repository |
 | Datasets page | `ledger/registries/datasets.yaml` | things_done |

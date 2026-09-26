@@ -44,7 +44,7 @@ OUT = ROOT / "data" / "things_done"
 PUBLICATION_FIELDS = (
     "doi", "year", "type", "status", "title", "authors", "venue",
     "abstract", "peer_reviewed", "open_access_status", "related_dois",
-    "featured", "issued_date",
+    "issued_date",
 )
 SOFTWARE_FIELDS = (
     "id", "title", "status", "start_date", "repository_url", "github_repo_url",
@@ -88,9 +88,35 @@ def publications(ledger):
             item["title"] = clean_text(item["title"])
             if "abstract" in item:
                 item["abstract"] = clean_text(item["abstract"])
+            if (rec.get("me") or {}).get("corresponding_author"):
+                item["corresponding"] = True   # Guillaume is (co-)corresponding author
             records.append(item)
     records.sort(key=lambda r: (-int(r.get("year") or 0), r["title"].casefold()))
     return records
+
+
+def add_crosswalk(ledger, records):
+    """Link preprints to their journal versions using the ledger's own crosswalk
+    report (report/generated/publications/preprint_publication_crosswalk.json),
+    when `related_dois` does not already do it. Only confident matches are used:
+    same work cluster, or titles at least 85% similar."""
+    path = ledger / "report" / "generated" / "publications" / "preprint_publication_crosswalk.json"
+    if not path.exists():
+        return
+    by_doi = {r["doi"].lower(): r for r in records}
+    added = 0
+    for pair in json.loads(path.read_text(encoding="utf-8")).get("matched_pairs") or []:
+        if not (pair.get("method") == "cluster_work_id" or pair.get("confidence", 0) >= 0.85):
+            continue
+        a, b = by_doi.get(str(pair.get("preprint_id")).lower()), by_doi.get(str(pair.get("published_id")).lower())
+        if not (a and b):
+            continue
+        for x, y in ((a, b), (b, a)):
+            links = x.setdefault("related_dois", [])
+            if y["doi"].lower() not in {str(d).lower() for d in links}:
+                links.append(y["doi"])
+                added += 1
+    print(f"crosswalk: {added // 2} preprint/journal links added")
 
 
 def registry(ledger, name, fields):
@@ -128,7 +154,8 @@ def csl_date(doi):
 
 
 def dates(records, offline=False):
-    """Dates for every preprint that has a journal version. The ledger's
+    """Dates for every preprint that has a journal version (preprint lag) and
+    for corresponding-author papers (to order Featured research). The ledger's
     `issued_date` wins; other dates are looked up once and cached."""
     path = OUT / "dates.yaml"
     cache = (load(path).get("dates") or {}) if path.exists() else {}
@@ -141,6 +168,7 @@ def dates(records, offline=False):
             other = by_doi.get(str(d).lower())
             if other and other.get("status") in ("published", "in_press"):
                 wanted.update({r["doi"].lower(), other["doi"].lower()})
+    wanted.update(r["doi"].lower() for r in records if r.get("corresponding"))
     out, fetched = {}, 0
     for doi in sorted(wanted):
         rec = by_doi[doi]
@@ -217,6 +245,7 @@ def main():
     if not (ledger / "ledger").is_dir():
         raise SystemExit(f"{ledger} does not look like a things_done checkout (no ledger/ folder)")
     pubs = publications(ledger)
+    add_crosswalk(ledger, pubs)
     dump("publications", pubs, "ledger/publications")
     dates(pubs, offline=args.offline)
     authors(pubs, offline=args.offline)

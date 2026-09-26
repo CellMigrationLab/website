@@ -405,32 +405,56 @@ def load_members():
 
 
 def load_featured(ledger):
-    """Featured papers: data/featured.yaml (with pictures) plus any paper marked
-    `featured: true` in the ledger. Everything but the picture comes from the ledger."""
-    items, seen = [], set()
-    listed = load(DATA / "featured.yaml") or []
-    flagged = [{"doi": r["doi"]} for r in ledger.pubs if r.get("featured")]
-    for pos, entry in enumerate(listed + flagged):
-        rec = ledger.get(entry["doi"])
+    """Featured research = every paper on which Guillaume is (co-)corresponding
+    author (ledger `me.corresponding_author`, on the paper or its preprint).
+    data/featured.yaml only adds pictures and page addresses; `show: true` adds a
+    paper that is not corresponding-author, `hide: true` removes one.
+
+    Returns (featured, extra): `extra` are papers listed in data/featured.yaml that
+    are not featured; they keep their page so old addresses keep working."""
+    entries = load(DATA / "featured.yaml") or []
+    by_family = {}
+    for e in entries:
+        rec = ledger.get(e["doi"])
         if not rec:
-            raise SystemExit(f"data/featured.yaml: DOI {entry['doi']} is not in the things_done ledger")
-        main = ledger.published_version(rec)
-        if main["doi"].lower() in seen:
-            continue
-        seen.add(main["doi"].lower())
+            raise SystemExit(f"data/featured.yaml: DOI {e['doi']} is not in the things_done ledger")
+        by_family[ledger.published_version(rec)["doi"].lower()] = e
+
+    def family(rec):
+        return [rec] + [ledger.get(d) for d in rec.get("related_dois") or [] if ledger.get(d)]
+
+    def make(main, entry, pos):
+        entry = entry or {}
         pubs = [main] + [ledger.published_version(ledger.get(d)) for d in entry.get("also") or [] if ledger.get(d)]
-        item = dict(entry)
-        item["papers"] = [entry["doi"]] + list(entry.get("also") or [])
-        item["_pubs"] = pubs
-        item["title"] = main["title"]
-        item["slug"] = entry.get("slug") or slugify(main["title"])[:90]
-        item["year"] = main.get("year") or 0
-        item["date"] = ledger.dates.get(main["doi"].lower()) or f"{item['year']}-01-01"
-        item["summary"] = "\n\n".join(p["abstract"] for p in pubs if p.get("abstract"))
-        item["_pos"] = pos
-        items.append(item)
-    items.sort(key=lambda i: (-int(i["year"]), i["_pos"]))
-    return items
+        return {
+            "papers": [main["doi"]] + list(entry.get("also") or []),
+            "_pubs": pubs,
+            "image": entry.get("image"),
+            "title": main["title"],
+            "slug": entry.get("slug") or slugify(main["title"])[:90],
+            "year": int(main.get("year") or 0),
+            "date": ledger.dates.get(main["doi"].lower())
+                    or next((ledger.dates[r["doi"].lower()] for r in family(main) if r["doi"].lower() in ledger.dates), None)
+                    or f"{main.get('year') or 0}-06-30",
+            "summary": "\n\n".join(p["abstract"] for p in pubs if p.get("abstract")),
+            "_pos": pos,
+        }
+
+    featured, extra, used = [], [], set()
+    for pos, main in enumerate(ledger.grouped()):
+        key = main["doi"].lower()
+        entry = by_family.get(key)
+        corresponding = any(r.get("corresponding") for r in family(main))
+        if entry and entry.get("hide"):
+            corresponding = False
+        if corresponding or (entry and entry.get("show")):
+            featured.append(make(main, entry, pos))
+            used.add(key)
+    for pos, (key, entry) in enumerate(by_family.items()):
+        if key not in used:
+            extra.append(make(ledger.get(key), entry, 1000 + pos))
+    featured.sort(key=lambda i: (i["date"], -i["_pos"]), reverse=True)
+    return featured, extra
 
 
 def featured_by_doi(featured, ledger):
@@ -467,24 +491,10 @@ def page_home(site, featured, ledger, lab):
         "</section>",
         f'<p class="cm-intro">{esc(site["intro"])}</p>',
     )
-    shown = 6
-    p.add(section_title("Featured research", id_="featured"), '<div class="cm-cards cm-cards--home" data-cm-more>')
-    for i, item in enumerate(featured):
-        pub = item["_pubs"][0]
-        pic = (media(item["image"], "", 700) if item.get("image")
-               else f'<span class="cm-card__placeholder">{esc(pub.get("venue") or "")}</span>')
-        extra = " is-extra" if i >= shown else ""
-        p.add(
-            f'<a class="cm-card{extra}" href="portfolio/{item["slug"]}/">',
-            f'<div class="cm-card__media">{pic}</div>',
-            f'<p class="cm-card__title">{esc(item["title"])}</p>',
-            f'<p class="cm-card__meta">{esc(pub.get("venue") or "")} · {pub.get("year")}</p></a>',
-        )
-    p.add("</div>")
-    if len(featured) > shown:
-        p.add(f'<p class="cm-more-link"><button type="button" class="cm-show-more" data-cm-show-more hidden>'
-              f'Show all {len(featured)} featured papers</button></p>',
-              '<noscript><style>.cm-card.is-extra{display:block}</style></noscript>')
+    p.add(section_title("Featured research", id_="featured"), '<div class="cm-cards cm-cards--home">')
+    for item in featured[:HOME_FEATURED]:
+        p.add(feature_card(item))
+    p.add("</div>", f'<p class="cm-more-link"><a href="featured-research/">All featured research ({len(featured)})</a></p>')
 
     bands = site.get("bands") or []
 
@@ -507,6 +517,23 @@ def page_home(site, featured, ledger, lab):
     band(1)
     p.add(section_title("Funding"), logo_row(site["funding"]))
     p.write()
+
+
+HOME_FEATURED = 8
+
+
+def feature_card(item, summary=False):
+    pub = item["_pubs"][0]
+    pic = (media(item["image"], "", 700) if item.get("image")
+           else f'<span class="cm-card__placeholder">{esc(pub.get("venue") or "")}</span>')
+    text = ""
+    if summary:
+        t = re.sub(r"\s+", " ", item.get("summary") or "").strip()
+        text = f'<p class="cm-card__text">{esc(t[:200].rsplit(" ", 1)[0] + "…" if len(t) > 200 else t)}</p>'
+    return (f'<a class="cm-card" href="portfolio/{item["slug"]}/">'
+            f'<div class="cm-card__media">{pic}</div>'
+            f'<p class="cm-card__title">{esc(item["title"])}</p>'
+            f'<p class="cm-card__meta">{esc(pub.get("venue") or "")} · {pub.get("year")} {badges(pub)}</p>{text}</a>')
 
 
 def logo_row(items):
@@ -680,10 +707,21 @@ def page_software(ledger):
     p.write()
 
 
-def page_stories(featured, ledger, lab):
+def page_featured(featured, extra, ledger, lab):
+    p = Page("featured-research.md", title="Featured Research", edit_url=edit_url("data/featured.yaml"),
+             description="Our main papers: every paper led by the Cell Migration Lab, with its abstract.")
+    p.add("# Featured Research",
+          '<p class="cm-lead">Papers led by our lab, newest first. See <a href="publications/">all our publications</a>.</p>',
+          '<div class="cm-cards cm-cards--grid">')
+    for item in featured:
+        p.add(feature_card(item))
+    p.add("</div>")
+    p.write()
     software = software_list(ledger)
     for i, item in enumerate(featured):
         page_story(item, featured, i, ledger, lab, software)
+    for item in extra:  # old addresses, not listed
+        page_story(item, [item], 0, ledger, lab, software)
 
 
 def page_story(item, featured, i, ledger, lab, software):
@@ -908,7 +946,7 @@ def lag_figure(ledger):
     base = 24 + tallest * gap
     H = base + 34
     parts = [f'<svg class="cm-lag__chart" viewBox="0 0 {W} {H}" role="img" '
-             f'aria-label="Months from preprint to journal publication for {len(rows)} papers; median {median:.0f} months">']
+             f'aria-label="Months from preprint to journal publication for {len(rows)} papers; median {median:.1f} months">']
     for t in range(0, top, 6):
         parts.append(f'<line class="cm-lag__grid" x1="{x(t):.1f}" x2="{x(t):.1f}" y1="12" y2="{base}"/>'
                      f'<text class="cm-lag__tick" x="{x(t):.1f}" y="{base + 18}">{t}</text>')
@@ -926,7 +964,7 @@ def lag_figure(ledger):
     table = "".join(f'<tr><td>{esc(r["title"])}</td><td>{r["posted"]}</td><td>{r["published"]}</td>'
                     f'<td>{r["months"]:.1f}</td></tr>' for r in sorted(rows, key=lambda r: r["published"], reverse=True))
     return (f'<section class="cm-lag" aria-labelledby="lag-title">'
-            f'<div class="cm-lag__head"><p class="cm-lag__hero"><strong>{median:.0f}</strong> months</p>'
+            f'<div class="cm-lag__head"><p class="cm-lag__hero"><strong>{f"{median:.1f}".rstrip("0").rstrip(".")}</strong> months</p>'
             f'<p><span id="lag-title" class="cm-lag__title">From preprint to paper</span>'
             f'Median time between posting a preprint and its journal publication, for {len(rows)} papers. '
             f'Each dot is a paper; hover or tap for details.</p></div>'
@@ -1085,13 +1123,13 @@ def main():
     ledger = Ledger()
     lab = lab_names()
     members = load_members()
-    featured = load_featured(ledger)
+    featured, extra = load_featured(ledger)
 
     page_home(site, featured, ledger, lab)
     page_research(load(DATA / "research.yaml"), ledger, lab)
     page_members(members)
     page_software(ledger)
-    page_stories(featured, ledger, lab)
+    page_featured(featured, extra, ledger, lab)
     page_collaborators(ledger, lab)
     page_publications(ledger, featured, lab)
     page_datasets(ledger, site)
