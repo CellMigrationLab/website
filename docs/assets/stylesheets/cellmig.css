@@ -400,7 +400,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
   .md-typeset ul.cm-people { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
   .md-typeset .cm-person figcaption { padding: 1.6rem .5rem .5rem; }
   .cm-person__name { font-size: .66rem; }
-  .cm-person__role { font-size: .56rem; }
+  .cm-person__role { font-size: .6rem; }
 }
 .cm-home .md-typeset { padding-bottom: 3.2rem; }
 
