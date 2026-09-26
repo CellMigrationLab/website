@@ -23,8 +23,8 @@ button (top right) that opens the right file.
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
 | Research | `data/research.yaml` |
 | Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done; pictures in `data/featured.yaml` |
-| Publications, latest papers, preprint-to-paper lag | automatic, from things_done |
-| Collaborators | automatic: co-authors with ≥3 joint papers, affiliations from OpenAlex |
+| Publications, latest papers | automatic, from things_done |
+| Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done (members count from `data/members/`) |
 | Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
 | Lab members (one grid, ordered by `group` then `order`) | `data/members/<name>.yaml` (one per person), team photos in `data/team.yaml` |

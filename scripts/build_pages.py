@@ -40,7 +40,7 @@ REPO = "https://github.com/CellMigrationLab/website"
 SITE_URL = "https://cellmig.org/"
 
 GENERATED = [
-    "index.md", "research.md", "lab-members.md", "software.md", "collaborators.md", "featured-research.md",
+    "index.md", "research.md", "lab-members.md", "software.md", "lab-in-numbers.md", "collaborators.md", "featured-research.md",
     "publications.md", "datasets.md", "gallery.md", "online-lectures.md",
     "portfolio", "feed.xml", "feed", THUMBS,
 ]
@@ -285,8 +285,17 @@ class Ledger:
         self.software = load(td / "software.yaml").get("records") or []
         self.datasets = load(td / "datasets.yaml").get("records") or []
         self.by_doi = {p["doi"].lower(): p for p in self.pubs}
-        dates = td / "dates.yaml"
-        self.dates = (load(dates).get("dates") or {}) if dates.exists() else {}
+        lag = td / "preprint_lag.yaml"
+        self.lag = (load(lag).get("pairs") or []) if lag.exists() else []
+        co = td / "coauthors.yaml"
+        self.coauthors = (load(co).get("coauthors") or []) if co.exists() else []
+        mt = td / "metrics.yaml"
+        self.metrics = load(mt) if mt.exists() else {}
+        # journal publication dates (from the ledger's lag report) to order papers within a year
+        self.dates = {}
+        for p in self.lag:
+            if p.get("published_date_precision") == "day":
+                self.dates[str(p["published_doi"]).lower()] = p["published_date"]
 
     def get(self, doi):
         return self.by_doi.get(str(doi).lower())
@@ -799,7 +808,6 @@ def page_publications(ledger, featured, lab):
           "</div>",
           '<p class="cm-filter__count" data-cm-count aria-live="polite"></p>',
           "</form>")
-    p.add(lag_figure(ledger))
     for y in years:
         p.add(f'<section class="cm-year" data-cm-year><h2 id="y{y}">{y}</h2><ol class="cm-pubs">')
         for rec in [r for r in records if r.get("year") == y]:
@@ -817,161 +825,253 @@ def page_publications(ledger, featured, lab):
     p.write()
 
 
-COUNTRIES = {
-    "AU": "Australia", "AT": "Austria", "BE": "Belgium", "BR": "Brazil", "CA": "Canada",
-    "CH": "Switzerland", "CN": "China", "CZ": "Czechia", "DE": "Germany", "DK": "Denmark",
-    "EE": "Estonia", "ES": "Spain", "FI": "Finland", "FR": "France", "GB": "United Kingdom",
-    "GR": "Greece", "IE": "Ireland", "IL": "Israel", "IN": "India", "IT": "Italy", "JP": "Japan",
-    "KR": "South Korea", "NL": "Netherlands", "NO": "Norway", "NZ": "New Zealand", "PL": "Poland",
-    "PT": "Portugal", "RU": "Russia", "SE": "Sweden", "SG": "Singapore", "US": "United States",
-}
-
-
-def collaborators(ledger, lab, min_papers=3):
-    """External co-authors with at least `min_papers` joint papers, from the
-    OpenAlex affiliations that the sync stores in data/things_done/authors.yaml."""
-    path = DATA / "things_done" / "authors.yaml"
-    works = (load(path).get("works") or {}) if path.exists() else {}
-    shown = {r["doi"].lower(): r for r in ledger.grouped()}
-    people, all_people, countries, institutions = {}, set(), set(), set()
-    for doi, authors in works.items():
-        rec = shown.get(doi)
-        if not rec:
-            continue
-        year = int(rec.get("year") or 0)
-        spelled = rec.get("authors") or []
-        for idx, a in enumerate(authors):
-            # Prefer the ledger's spelling (same author order) over OpenAlex's
-            name = spelled[idx] if len(spelled) == len(authors) else a["name"]
-            if normalize_name(name) in lab or is_lab_member(name, lab):
-                continue
-            key = a.get("orcid") or normalize_name(name)
-            all_people.add(key)
-            inst = (a.get("institutions") or [None])[0]
-            if inst:
-                institutions.add(inst["name"])
-                if inst.get("country"):
-                    countries.add(inst["country"])
-            p = people.setdefault(key, {"name": name, "papers": 0, "first": year, "last": 0, "inst": None, "inst_year": 0})
-            p["papers"] += 1
-            p["first"] = min(p["first"], year)
-            if year >= p["last"]:
-                p["last"], p["name"] = year, name
-            if inst and year >= p["inst_year"]:
-                p["inst"], p["inst_year"] = inst, year
-            if a.get("orcid"):
-                p["orcid"] = a["orcid"]
-    top = [p for p in people.values() if p["papers"] >= min_papers]
-    top.sort(key=lambda p: (-p["papers"], p["name"]))
-    return top, len(all_people), len(countries), len(institutions)
-
+# --------------------------------------------------------------------------- lab in numbers
 
 def is_lab_member(name, lab):
-    """Match "Joanna W. Pylvänäinen" to "Joanna Pylvänäinen" (first + last name)."""
+    """Lab member, also for "Joanna W. Pylvänäinen" vs "Joanna Pylvänäinen"."""
     parts = name.split()
-    return len(parts) > 2 and normalize_name(parts[0] + parts[-1]) in lab
+    return normalize_name(name) in lab or (len(parts) > 2 and normalize_name(parts[0] + parts[-1]) in lab)
 
 
 def flag(code):
     return "".join(chr(0x1F1E6 + ord(c) - 65) for c in code.upper()) if code and len(code) == 2 else ""
 
 
-def page_collaborators(ledger, lab):
-    top, n_people, n_countries, n_inst = collaborators(ledger, lab)
-    p = Page("collaborators.md", title="Collaborators",
-             description="The researchers and institutions the Cell Migration Lab works with.")
-    p.add("# Collaborators",
-          '<p class="cm-lead">Science is a team effort. These are the researchers we publish with most often.</p>',
-          '<div class="cm-stats">',
-          f'<div><strong>{n_people}</strong><span>co-authors</span></div>',
-          f'<div><strong>{n_inst}</strong><span>institutions</span></div>',
-          f'<div><strong>{n_countries}</strong><span>countries</span></div>',
-          "</div>")
-    by_country = {}
-    for c in top:
-        code = (c["inst"] or {}).get("country") or ""
-        by_country.setdefault(code, []).append(c)
-    order = sorted(by_country, key=lambda k: (-len(by_country[k]), COUNTRIES.get(k, k or "~")))
-    for code in order:
-        label = COUNTRIES.get(code, code) if code else "Other"
-        p.add(f'<h2 class="cm-country"><span aria-hidden="true">{flag(code)}</span> {esc(label)}</h2>', '<ul class="cm-collabs">')
-        for c in by_country[code]:
-            years = f'{c["first"]}–{c["last"]}' if c["first"] != c["last"] else str(c["last"])
-            inst = esc((c["inst"] or {}).get("name", ""))
-            q = esc(c["name"].split()[-1])
-            name = esc(c["name"])
-            if c.get("orcid"):
-                name = f'<a href="https://orcid.org/{esc(c["orcid"])}">{name}</a>'
-            p.add(f'<li><span class="cm-collabs__name">{name}</span>'
-                  f'<span class="cm-collabs__inst">{inst}</span>'
-                  f'<a class="cm-collabs__papers" href="publications/?q={q}">{c["papers"]} papers · {years}</a></li>')
-        p.add("</ul>")
-    p.add('<p class="cm-small cm-source">Generated automatically from our publications (co-authors with three or more '
-          'joint papers) and their affiliations on the most recent joint paper, from '
-          '<a href="https://openalex.org">OpenAlex</a>.</p>')
-    p.write()
+def fmt(n):
+    return f"{n:,}".replace(",", " ")  # thin space as thousands separator
 
 
-def lag_figure(ledger):
-    """Preprint-to-publication lag: a dot histogram, one dot per paper."""
-    rows = []
-    for rec in ledger.pubs:
-        if rec.get("status") != "preprint":
+def world_map(counts):
+    """Choropleth of co-authors per country, rendered at build time as SVG
+    (Equal Earth projection; world-atlas / Natural Earth outlines)."""
+    import json
+    import math
+    world = json.loads((DATA / "world" / "countries-110m.json").read_text(encoding="utf-8"))
+    iso = json.loads((DATA / "world" / "iso-alpha2-to-numeric.json").read_text(encoding="utf-8"))
+    num_to_a2 = {v: k for k, v in iso.items()}
+    sx, sy = world["transform"]["scale"]
+    tx, ty = world["transform"]["translate"]
+    arcs = []
+    for arc in world["arcs"]:
+        x = y = 0
+        pts = []
+        for dx, dy in arc:
+            x += dx
+            y += dy
+            pts.append((x * sx + tx, y * sy + ty))
+        arcs.append(pts)
+
+    A1, A2, A3, A4, M = 1.340264, -0.081106, 0.000893, 0.003796, math.sqrt(3) / 2
+
+    def project(lon, lat):
+        lam, phi = math.radians(lon), math.radians(lat)
+        th = math.asin(M * math.sin(phi))
+        t2 = th * th
+        t6 = t2 * t2 * t2
+        x = lam * math.cos(th) / (M * (A1 + 3 * A2 * t2 + t6 * (7 * A3 + 9 * A4 * t2)))
+        y = th * (A1 + A2 * t2 + t6 * (A3 + A4 * t2))
+        return x, y
+
+    W, H = 960, 440
+    k, cx, cy = W / (2 * 2.7064), W / 2, 250  # Antarctica left out, so shift up
+
+    def ring(indexes):
+        pts = []
+        for i in indexes:
+            arc = arcs[i] if i >= 0 else arcs[~i][::-1]
+            pts.extend(arc if not pts else arc[1:])
+        out, prev = [], None
+        for lon, lat in pts:
+            x, y = project(lon, lat)
+            px, py = cx + k * x, cy - k * y
+            # a jump across the map = the ring crosses the antimeridian: start a new subpath
+            cmd = "M" if prev is None or abs(px - prev) > W / 3 else "L"
+            out.append(f"{cmd}{px:.1f},{py:.1f}")
+            prev = px
+        return "".join(out) + "Z"
+
+    top = max(counts.values()) if counts else 1
+    steps = [(1, 1), (2, 4), (5, 9), (10, 24), (25, 99), (100, 10 ** 9)]
+    # One hue, light -> dark (sequential)
+    ramp = ["#e9ddf7", "#d2b8ef", "#b48ae3", "#9560d3", "#733cb3", "#4f2182"]
+
+    def color(n):
+        for (lo, hi), c in zip(steps, ramp):
+            if lo <= n <= hi:
+                return c
+        return ramp[-1]
+
+    paths = []
+    for g in world["objects"]["countries"]["geometries"]:
+        if g.get("id") == "010" or g["type"] not in ("Polygon", "MultiPolygon"):
             continue
-        pub = ledger.published_version(rec)
-        if pub is rec:
-            continue
-        d1, d2 = ledger.dates.get(rec["doi"].lower()), ledger.dates.get(pub["doi"].lower())
-        if not (d1 and d2):
-            continue
-        days = (datetime.strptime(d2, "%Y-%m-%d") - datetime.strptime(d1, "%Y-%m-%d")).days
-        if days < 0:
-            continue
-        rows.append({"title": pub["title"], "venue": pub.get("venue") or "", "months": days / 30.44,
-                     "posted": d1, "published": d2, "doi": pub["doi"]})
+        polys = g["arcs"] if g["type"] == "MultiPolygon" else [g["arcs"]]
+        d = "".join(ring(r) for poly in polys for r in poly)
+        a2 = num_to_a2.get(g.get("id"), "")
+        name = (g.get("properties") or {}).get("name", "")
+        n = counts.get(a2, 0)
+        if n:
+            tip = f"{name}: {n} co-author{'s' if n != 1 else ''}"
+            paths.append(f'<path class="cm-map__on" d="{d}" style="fill:{color(n)}" data-tip="{esc(tip)}" tabindex="0">'
+                         f'<title>{esc(tip)}</title></path>')
+        else:
+            paths.append(f'<path d="{d}"/>')
+    legend = "".join(
+        f'<li><span style="background:{c}"></span>{lo if lo == hi else (f"{lo}+" if hi > 10 ** 6 else f"{lo}–{hi}")}</li>'
+        for (lo, hi), c in zip(steps, ramp) if lo <= top)
+    return (f'<div class="cm-map"><svg class="cm-map__svg" viewBox="0 0 {W} {H}" role="img" '
+            f'aria-label="World map of co-authors by country">{"".join(paths)}</svg>'
+            f'<div class="cm-chart-tip" hidden></div></div>'
+            f'<ul class="cm-map__legend" aria-label="Co-authors per country">{legend}</ul>')
+
+
+def lag_section(ledger):
+    """Preprint-to-publication lag from things_done's report (nothing computed
+    here but the summary). Hollow dots: a date known only to the month/year."""
+    rows = [p for p in ledger.lag if isinstance(p.get("gap_days"), int) and p["gap_days"] >= 0]
     if len(rows) < 3:
         return ""
-    rows.sort(key=lambda r: r["months"])
-    months = [r["months"] for r in rows]
-    mid = len(months) // 2
-    median = months[mid] if len(months) % 2 else (months[mid - 1] + months[mid]) / 2
-    top = max(12, int((max(months) + 5.99) // 6 * 6))
+    gaps = sorted(r["gap_days"] for r in rows)
+    n = len(gaps)
+    median = gaps[n // 2] if n % 2 else (gaps[n // 2 - 1] + gaps[n // 2]) / 2
+    to_m = lambda d: d / 30.44  # noqa: E731
+    top = max(12, int((to_m(gaps[-1]) + 5.99) // 6 * 6))
     W, left, right, r, gap = 640, 16, 16, 5, 12
-    x = lambda m: left + (W - left - right) * m / top
+    x = lambda m: left + (W - left - right) * m / top  # noqa: E731
     bins = {}
-    for row in rows:
-        row["bin"] = int(row["months"])
-        bins.setdefault(row["bin"], []).append(row)
+    for row in sorted(rows, key=lambda r: r["gap_days"]):
+        bins.setdefault(int(to_m(row["gap_days"])), []).append(row)
     tallest = max(len(v) for v in bins.values())
     base = 24 + tallest * gap
     H = base + 34
     parts = [f'<svg class="cm-lag__chart" viewBox="0 0 {W} {H}" role="img" '
-             f'aria-label="Months from preprint to journal publication for {len(rows)} papers; median {median:.1f} months">']
+             f'aria-label="Months from preprint to journal publication for {n} papers; median {to_m(median):.1f} months">']
     for t in range(0, top, 6):
         parts.append(f'<line class="cm-lag__grid" x1="{x(t):.1f}" x2="{x(t):.1f}" y1="12" y2="{base}"/>'
                      f'<text class="cm-lag__tick" x="{x(t):.1f}" y="{base + 18}">{t}</text>')
     parts.append(f'<line class="cm-lag__axis" x1="{left}" x2="{W - right}" y1="{base}" y2="{base}"/>')
-    parts.append(f'<line class="cm-lag__median" x1="{x(median):.1f}" x2="{x(median):.1f}" y1="4" y2="{base}"/>'
-                 f'<text class="cm-lag__label" x="{x(median) + 6:.1f}" y="14">median {median:.1f} months</text>')
+    mx = x(to_m(median))
+    parts.append(f'<line class="cm-lag__median" x1="{mx:.1f}" x2="{mx:.1f}" y1="4" y2="{base}"/>'
+                 f'<text class="cm-lag__label" x="{mx + 6:.1f}" y="14">median {to_m(median):.1f} months</text>')
     for b, items in bins.items():
-        for k, row in enumerate(items):
-            cx, cy = x(b + 0.5), base - 10 - k * gap
-            tip = f'{row["title"]} — {row["venue"]}: {row["months"]:.1f} months ({row["posted"]} → {row["published"]})'
-            parts.append(f'<a href="https://doi.org/{esc(row["doi"])}"><circle class="cm-lag__dot" cx="{cx:.1f}" cy="{cy:.1f}" r="{r}" '
-                         f'data-tip="{esc(tip)}"><title>{esc(tip)}</title></circle></a>')
-    parts.append(f'<text class="cm-lag__tick cm-lag__unit" x="{W - right}" y="{base + 18}">months</text>')
+        for i, row in enumerate(items):
+            exact = row.get("preprint_date_precision") == "day" and row.get("published_date_precision") == "day"
+            tip = (f'{row.get("published_title", "")}: {to_m(row["gap_days"]):.1f} months '
+                   f'({row.get("preprint_date")} → {row.get("published_date")}{"" if exact else ", approximate date"})')
+            parts.append(f'<a href="https://doi.org/{esc(row["published_doi"])}"><circle class="cm-lag__dot{"" if exact else " is-approx"}" '
+                         f'cx="{x(b + 0.5):.1f}" cy="{base - 10 - i * gap:.1f}" r="{r}" data-tip="{esc(tip)}"><title>{esc(tip)}</title></circle></a>')
     parts.append("</svg>")
-    table = "".join(f'<tr><td>{esc(r["title"])}</td><td>{r["posted"]}</td><td>{r["published"]}</td>'
-                    f'<td>{r["months"]:.1f}</td></tr>' for r in sorted(rows, key=lambda r: r["published"], reverse=True))
-    return (f'<section class="cm-lag" aria-labelledby="lag-title">'
-            f'<div class="cm-lag__head"><p class="cm-lag__hero"><strong>{f"{median:.1f}".rstrip("0").rstrip(".")}</strong> months</p>'
-            f'<p><span id="lag-title" class="cm-lag__title">From preprint to paper</span>'
-            f'Median time between posting a preprint and its journal publication, for {len(rows)} papers. '
-            f'Each dot is a paper; hover or tap for details.</p></div>'
-            f'<div class="cm-lag__plot">{"".join(parts)}<div class="cm-lag__tip" hidden></div></div>'
+    table = "".join(
+        f'<tr><td>{esc(r.get("published_title", ""))}</td><td>{r.get("preprint_date")}</td>'
+        f'<td>{r.get("published_date")}</td><td>{to_m(r["gap_days"]):.1f}</td></tr>'
+        for r in sorted(rows, key=lambda r: r.get("published_date", ""), reverse=True))
+    approx = sum(1 for r in rows if not (r.get("preprint_date_precision") == "day" and r.get("published_date_precision") == "day"))
+    note = f" Hollow dots ({approx}): one of the two dates is only known to the month." if approx else ""
+    return (f'<div class="cm-lag">'
+            f'<div class="cm-lag__head"><p class="cm-lag__hero"><strong>{to_m(median):.1f}</strong> months</p>'
+            f'<p><span class="cm-lag__title">Median time from preprint to journal</span>'
+            f'Months between posting and journal publication, for {n} papers. Each dot is a paper; hover or tap for details.{note}</p></div>'
+            f'<div class="cm-lag__plot">{"".join(parts)}<div class="cm-chart-tip" hidden></div></div>'
             f'<details class="cm-lag__table"><summary>Show as table</summary><table><thead><tr><th>Paper</th>'
-            f'<th>Preprint</th><th>Journal</th><th>Months</th></tr></thead><tbody>{table}</tbody></table></details>'
-            f'</section>')
+            f'<th>Preprint</th><th>Journal</th><th>Months</th></tr></thead><tbody>{table}</tbody></table></details></div>')
+
+
+def papers_per_year(records):
+    counts = {}
+    for r in records:
+        if r.get("year"):
+            counts[int(r["year"])] = counts.get(int(r["year"]), 0) + 1
+    years = list(range(min(counts), max(counts) + 1))
+    top = max(counts.values())
+    W, H, pad, base = 640, 170, 24, 140
+    bw = (W - 2 * pad) / len(years)
+    bars = []
+    for i, y in enumerate(years):
+        n = counts.get(y, 0)
+        h = (base - 16) * n / top
+        bx = pad + i * bw + 2
+        tip = f"{y}: {n} paper{'s' if n != 1 else ''}"
+        if n:
+            bars.append(f'<rect class="cm-bars__bar" x="{bx:.1f}" y="{base - h:.1f}" width="{bw - 4:.1f}" height="{h:.1f}" rx="3" '
+                        f'data-tip="{esc(tip)}" tabindex="0"><title>{esc(tip)}</title></rect>')
+        if y % 2 == years[-1] % 2:
+            bars.append(f'<text class="cm-lag__tick" x="{bx + (bw - 4) / 2:.1f}" y="{base + 18}">{y}</text>')
+    bars.append(f'<line class="cm-lag__axis" x1="{pad}" x2="{W - pad}" y1="{base}" y2="{base}"/>')
+    return (f'<div class="cm-bars"><svg class="cm-lag__chart" viewBox="0 0 {W} {H}" role="img" '
+            f'aria-label="Papers per year">{"".join(bars)}</svg><div class="cm-chart-tip" hidden></div></div>')
+
+
+def page_numbers(ledger, lab, members):
+    records = ledger.grouped()
+    papers = [r for r in records if r.get("status") != "preprint"]
+    preprints = [r for r in records if r.get("status") == "preprint"]
+    current = [m for m in members if m.get("status", "current") == "current"]
+    alumni = [m for m in members if m.get("status") == "alumni"]
+    co = ledger.coauthors
+    countries = {}
+    for c in co:
+        if c.get("country"):
+            countries[c["country"]] = countries.get(c["country"], 0) + 1
+    mt = ledger.metrics
+
+    p = Page("lab-in-numbers.md", title="Lab in numbers",
+             description="The Cell Migration Lab in numbers: papers, citations, people, collaborators and how long it takes a preprint to become a paper.")
+    p.add("# Lab in numbers", '<p class="cm-lead">Generated automatically from our activity ledger.</p>')
+    tiles = [
+        (fmt(len(papers)), "papers", "publications/"),
+        (fmt(len(preprints)), "preprints", "publications/"),
+    ]
+    if mt.get("citation_count"):
+        tiles.append((fmt(mt["citation_count"]), "citations", mt.get("scholar_url")))
+    if mt.get("h_index"):
+        tiles.append((str(mt["h_index"]), "h-index", mt.get("scholar_url")))
+    tiles += [
+        (str(len(current) + len(alumni)), f"lab members ({len(current)} now)", "lab-members/"),
+        (fmt(len(co)), "co-authors", "#collaborators"),
+        (str(len(countries)), "countries", "#map"),
+        (str(len(software_list(ledger))), "software tools", "software/"),
+        (str(len(ledger.datasets)), "datasets", "datasets/"),
+    ]
+    p.add('<ul class="cm-tiles">' + "".join(
+        f'<li><a href="{esc(link)}"><strong>{value}</strong><span>{esc(label)}</span></a></li>' for value, label, link in tiles) + "</ul>")
+    if mt.get("fetched_at"):
+        p.add(f'<p class="cm-small">Citations and h-index from Google Scholar, {str(mt["fetched_at"])[:10]}.</p>')
+
+    p.add(section_title("Papers per year"), papers_per_year(records))
+    lag = lag_section(ledger)
+    if lag:
+        p.add(section_title("From preprint to paper"), lag)
+
+    external = [c for c in co if not is_lab_member(c["name"], lab)]
+    top = external[:12]
+    if top:
+        most = top[0]["papers"]
+        p.add(section_title("Top collaborators", id_="collaborators"), '<ol class="cm-toplist">')
+        for c in top:
+            years = f'{c["first_year"]}–{c["last_year"]}' if c.get("first_year") != c.get("last_year") else str(c.get("last_year"))
+            p.add(f'<li><span class="cm-toplist__name">{esc(c["name"])} <span aria-hidden="true">{flag(c.get("country"))}</span></span>'
+                  f'<span class="cm-toplist__bar"><span style="width:{100 * c["papers"] / most:.0f}%"></span></span>'
+                  f'<a class="cm-toplist__n" href="publications/?q={esc(c["name"].split()[-1])}">{c["papers"]} papers</a>'
+                  f'<span class="cm-toplist__years">{years}</span></li>')
+        p.add("</ol>")
+
+    if countries:
+        p.add(section_title("Where our co-authors are", id_="map"), world_map(countries))
+
+    cloud = co[:70]
+    if cloud:
+        most = cloud[0]["papers"]
+        words = sorted(cloud, key=lambda c: c["name"].split()[-1])
+        p.add(section_title("Co-authors"), '<p class="cm-cloud" aria-label="Co-authors; larger names share more papers">')
+        for c in words:
+            size = 0.7 + 1.8 * (c["papers"] / most) ** 0.5
+            cls = "cm-cloud__lab" if is_lab_member(c["name"], lab) else ""
+            p.add(f'<span class="{cls}" style="font-size:{size:.2f}rem" title="{esc(c["name"])}: {c["papers"]} joint papers">{esc(c["name"])}</span>')
+        p.add("</p>", '<p class="cm-small cm-cloud__legend">Size: number of joint papers. '
+              '<span class="cm-cloud__lab">Purple</span>: lab members.</p>')
+    p.add('<p class="cm-small cm-source">All numbers come from our <em>things_done</em> activity ledger and its reports '
+          '(co-author countries from OpenAlex) and update automatically.</p>')
+    p.write()
 
 
 def page_datasets(ledger, site):
@@ -1130,7 +1230,7 @@ def main():
     page_members(members)
     page_software(ledger)
     page_featured(featured, extra, ledger, lab)
-    page_collaborators(ledger, lab)
+    page_numbers(ledger, lab, members)
     page_publications(ledger, featured, lab)
     page_datasets(ledger, site)
     page_gallery(load(DATA / "gallery.yaml"))

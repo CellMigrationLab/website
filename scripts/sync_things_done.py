@@ -2,49 +2,42 @@
 
     python scripts/sync_things_done.py --ledger ../things_done
 
-Reads (in the things_done checkout):
-  ledger/publications/<year>.yaml     papers and preprints
-  ledger/registries/software.yaml     software projects
-  ledger/registries/datasets.yaml     datasets
+things_done is the single source of truth: this script only copies (and
+leaves out private fields). It computes nothing and needs no network, so
+there is one place to maintain. things_done runs it after every update
+(.github/workflows/update_website.yml there).
 
-Writes (committed to this repository, read by scripts/build_pages.py):
-  data/things_done/publications.yaml
-  data/things_done/software.yaml
-  data/things_done/datasets.yaml
-  data/things_done/dates.yaml   day-precision dates of preprint/journal pairs
-                                (for the preprint-to-publication lag)
-  data/things_done/authors.yaml co-authors' institutions and countries, per DOI,
-                                from OpenAlex (for the collaborators page)
+Reads (in the things_done checkout)                    Writes (data/things_done/)
+  ledger/publications/<year>.yaml                        publications.yaml
+  ledger/registries/software.yaml                        software.yaml
+  ledger/registries/datasets.yaml                        datasets.yaml
+  report/generated/publications/
+    preprint_publication_crosswalk.json  (pairs)         related_dois in publications.yaml
+    preprint_lag.json                                    preprint_lag.yaml
+    coauthor_network.json (nodes) + coauthor_countries   coauthors.yaml
+  .cache/scholar_metrics.json                            metrics.yaml
 
-Dates and affiliations are looked up online once per DOI and cached, so a
-normal sync only fetches what is new (use --offline to skip lookups).
-
-Only fields that are already public (title, authors, venue, DOI, links,
-descriptions) are copied. Everything else in the ledger - supervision,
-roles, notes, conflict-of-interest data, author-position bookkeeping - is
-never read, so it cannot end up on the website.
-
-The things_done repository runs this script after every push (see
-integrations/things_done/update-website.yml), so the website stays in sync
-without the website ever needing access to the private ledger.
+Only fields that are already public are copied (title, authors, venue, DOI,
+abstract, links, whether Guillaume is corresponding author, descriptions,
+co-author countries). Supervision, roles, notes and conflict-of-interest
+data are never read.
 """
 
 import argparse
 import html
 import json
 import re
-import urllib.request
 from pathlib import Path
 
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "things_done"
+REPORTS = Path("report") / "generated" / "publications"
 
 PUBLICATION_FIELDS = (
     "doi", "year", "type", "status", "title", "authors", "venue",
     "abstract", "peer_reviewed", "open_access_status", "related_dois",
-    "issued_date",
 )
 SOFTWARE_FIELDS = (
     "id", "title", "status", "start_date", "repository_url", "github_repo_url",
@@ -54,10 +47,19 @@ DATASET_FIELDS = (
     "id", "title", "status", "dataset_type", "start_date", "repository_url",
     "archive_doi", "description", "dataset_tags", "related_publication_dois",
 )
+LAG_FIELDS = (
+    "preprint_doi", "published_doi", "published_title", "preprint_date",
+    "preprint_date_precision", "published_date", "published_date_precision", "gap_days",
+)
 
 
 def load(path):
-    return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    return yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
+
+
+def load_json(path):
+    path = Path(path)
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
 def clean_text(value):
@@ -69,13 +71,15 @@ def clean_text(value):
 
 
 def pick(record, fields):
-    out = {}
-    for key in fields:
-        value = record.get(key)
-        if value in (None, "", []):
-            continue
-        out[key] = value
-    return out
+    return {k: record[k] for k in fields if record.get(k) not in (None, "", [])}
+
+
+def dump(name, data, source):
+    OUT.mkdir(parents=True, exist_ok=True)
+    header = (f"# Copied by scripts/sync_things_done.py from things_done/{source}.\n"
+              "# Do not edit by hand: change things_done instead, the website updates itself.\n")
+    body = yaml.safe_dump(data, allow_unicode=True, sort_keys=False, width=100)
+    (OUT / f"{name}.yaml").write_text(header + body, encoding="utf-8")
 
 
 def publications(ledger):
@@ -91,166 +95,90 @@ def publications(ledger):
             if (rec.get("me") or {}).get("corresponding_author"):
                 item["corresponding"] = True   # Guillaume is (co-)corresponding author
             records.append(item)
-    records.sort(key=lambda r: (-int(r.get("year") or 0), r["title"].casefold()))
-    return records
 
-
-def add_crosswalk(ledger, records):
-    """Link preprints to their journal versions using the ledger's own crosswalk
-    report (report/generated/publications/preprint_publication_crosswalk.json),
-    when `related_dois` does not already do it. Only confident matches are used:
-    same work cluster, or titles at least 85% similar."""
-    path = ledger / "report" / "generated" / "publications" / "preprint_publication_crosswalk.json"
-    if not path.exists():
-        return
+    # Preprint <-> journal pairs, as matched by the ledger's crosswalk report
+    crosswalk = load_json(ledger / REPORTS / "preprint_publication_crosswalk.json") or {}
     by_doi = {r["doi"].lower(): r for r in records}
-    added = 0
-    for pair in json.loads(path.read_text(encoding="utf-8")).get("matched_pairs") or []:
-        if not (pair.get("method") == "cluster_work_id" or pair.get("confidence", 0) >= 0.85):
-            continue
-        a, b = by_doi.get(str(pair.get("preprint_id")).lower()), by_doi.get(str(pair.get("published_id")).lower())
+    pairs = 0
+    for match in crosswalk.get("matched_pairs") or []:
+        ev = match.get("evidence") or {}
+        a = by_doi.get(str(ev.get("preprint_doi")).lower())
+        b = by_doi.get(str(ev.get("published_doi")).lower())
         if not (a and b):
             continue
+        pairs += 1
         for x, y in ((a, b), (b, a)):
             links = x.setdefault("related_dois", [])
             if y["doi"].lower() not in {str(d).lower() for d in links}:
                 links.append(y["doi"])
-                added += 1
-    print(f"crosswalk: {added // 2} preprint/journal links added")
+    records.sort(key=lambda r: (-int(r.get("year") or 0), r["title"].casefold()))
+    dump("publications", {"records": records}, "ledger/publications")
+    print(f"publications: {len(records)} records, {pairs} preprint/journal pairs")
 
 
 def registry(ledger, name, fields):
     data = load(ledger / "ledger" / "registries" / f"{name}.yaml")
     out = [pick(r, fields) for r in data.get("records") or [] if r.get("title")]
     out.sort(key=lambda r: (-int(str(r.get("start_date") or "0")[:4] or 0), r["title"].casefold()))
-    return out
+    dump(name, {"records": out}, f"ledger/registries/{name}.yaml")
+    print(f"{name}: {len(out)} records")
 
 
-def dump(name, records, source):
-    OUT.mkdir(parents=True, exist_ok=True)
-    header = (
-        f"# Generated by scripts/sync_things_done.py from things_done/{source}.\n"
-        "# Do not edit by hand: change the ledger instead, the website updates itself.\n"
-    )
-    body = yaml.safe_dump({"records": records}, allow_unicode=True, sort_keys=False, width=100)
-    (OUT / f"{name}.yaml").write_text(header + body, encoding="utf-8")
-    print(f"{name}: {len(records)} records")
+def preprint_lag(ledger):
+    data = load_json(ledger / REPORTS / "preprint_lag.json")
+    if not data:
+        print("preprint lag: not in things_done yet (run 'Analyze Preprint-to-Publication Lag' there)")
+        return
+    pairs = [pick(p, LAG_FIELDS) for p in data.get("pairs") or [] if "gap_days" in p]
+    dump("preprint_lag", {"generated_at": data.get("generated_at"), "pairs": pairs},
+         f"{REPORTS}/preprint_lag.json")
+    print(f"preprint lag: {len(pairs)} pairs")
 
 
-def csl_date(doi):
-    """Posting date of a preprint / first publication date of an article, from
-    the DOI's own metadata (works for Crossref and DataCite DOIs)."""
-    req = urllib.request.Request(
-        f"https://doi.org/{doi}",
-        headers={"Accept": "application/vnd.citationstyles.csl+json",
-                 "User-Agent": "cellmig-website (mailto:guillaume.jacquemet@abo.fi)"})
-    with urllib.request.urlopen(req, timeout=20) as r:
-        data = json.load(r)
-    for key in ("posted", "published-online", "published-print", "issued", "created"):
-        parts = (data.get(key) or {}).get("date-parts") or [[]]
-        if len(parts[0]) == 3:
-            return "%04d-%02d-%02d" % tuple(parts[0])
-    return None
-
-
-def dates(records, offline=False):
-    """Dates for every preprint that has a journal version (preprint lag) and
-    for corresponding-author papers (to order Featured research). The ledger's
-    `issued_date` wins; other dates are looked up once and cached."""
-    path = OUT / "dates.yaml"
-    cache = (load(path).get("dates") or {}) if path.exists() else {}
-    by_doi = {r["doi"].lower(): r for r in records}
-    wanted = set()
-    for r in records:
-        if r.get("status") != "preprint":
+def coauthors(ledger):
+    network = load_json(ledger / REPORTS / "coauthor_network.json")
+    if not network:
+        return
+    countries = load_json(ledger / REPORTS / "coauthor_countries.json") or {}
+    country = {c["name"]: c["country"] for c in countries.get("coauthors") or []}
+    nodes = []
+    for n in network.get("nodes") or []:
+        if n.get("is_self"):
             continue
-        for d in r.get("related_dois") or []:
-            other = by_doi.get(str(d).lower())
-            if other and other.get("status") in ("published", "in_press"):
-                wanted.update({r["doi"].lower(), other["doi"].lower()})
-    wanted.update(r["doi"].lower() for r in records if r.get("corresponding"))
-    out, fetched = {}, 0
-    for doi in sorted(wanted):
-        rec = by_doi[doi]
-        if rec.get("issued_date"):
-            out[doi] = str(rec["issued_date"])
-        elif doi in cache:
-            out[doi] = cache[doi]
-        elif not offline:
-            try:
-                value = csl_date(rec["doi"])
-            except Exception as err:  # network hiccup: try again next time
-                print(f"  could not get date for {doi}: {err}")
-                value = None
-            if value:
-                out[doi] = value
-                fetched += 1
-    body = yaml.safe_dump({"dates": out}, sort_keys=True)
-    path.write_text("# Generated by scripts/sync_things_done.py (DOI metadata, cached).\n" + body, encoding="utf-8")
-    print(f"dates: {len(out)} of {len(wanted)} ({fetched} looked up)")
+        item = {"name": n["id"], "papers": n.get("total", 0),
+                "first_year": n.get("first_year"), "last_year": n.get("last_year")}
+        if country.get(n["id"]):
+            item["country"] = country[n["id"]]
+        nodes.append(item)
+    nodes.sort(key=lambda n: (-n["papers"], n["name"]))
+    dump("coauthors", {"generated_at": network.get("generated_at"), "coauthors": nodes},
+         f"{REPORTS}/coauthor_network.json + coauthor_countries.json")
+    print(f"coauthors: {len(nodes)} ({sum(1 for n in nodes if 'country' in n)} with a country)")
 
 
-def openalex_authors(doi):
-    url = (f"https://api.openalex.org/works/doi:{doi}?select=authorships"
-           "&mailto=guillaume.jacquemet@abo.fi")
-    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "cellmig-website"}), timeout=20) as r:
-        data = json.load(r)
-    out = []
-    for a in data.get("authorships") or []:
-        person = {"name": (a.get("author") or {}).get("display_name")}
-        orcid = (a.get("author") or {}).get("orcid")
-        if orcid:
-            person["orcid"] = orcid.rsplit("/", 1)[-1]
-        inst = [{"name": i["display_name"], "country": i.get("country_code")}
-                for i in a.get("institutions") or [] if i.get("display_name")]
-        if inst:
-            person["institutions"] = inst[:2]
-        if person["name"]:
-            out.append(person)
-    return out
-
-
-def authors(records, offline=False):
-    """Co-author affiliations per DOI, cached. A preprint is skipped when its
-    journal version is in the ledger (same authors)."""
-    path = OUT / "authors.yaml"
-    cache = (load(path).get("works") or {}) if path.exists() else {}
-    by_doi = {x["doi"].lower(): x for x in records}
-    out, fetched = {}, 0
-    for r in records:
-        if r.get("status") == "preprint" and any(
-                (by_doi.get(str(d).lower()) or {}).get("status") in ("published", "in_press")
-                for d in r.get("related_dois") or []):
-            continue
-        doi = r["doi"].lower()
-        if doi in cache:
-            out[doi] = cache[doi]
-        elif not offline:
-            try:
-                out[doi] = openalex_authors(r["doi"])
-                fetched += 1
-            except Exception as err:
-                print(f"  no OpenAlex record for {doi}: {err}")
-    body = yaml.safe_dump({"works": out}, allow_unicode=True, sort_keys=True, width=120)
-    path.write_text("# Generated by scripts/sync_things_done.py (OpenAlex authorships, cached).\n" + body, encoding="utf-8")
-    print(f"authors: {len(out)} works ({fetched} looked up)")
+def metrics(ledger):
+    data = load_json(ledger / ".cache" / "scholar_metrics.json")
+    if not data:
+        return
+    keep = {k: data[k] for k in ("citation_count", "h_index", "i10_index", "fetched_at", "scholar_url") if k in data}
+    dump("metrics", keep, ".cache/scholar_metrics.json")
+    print(f"metrics: {keep.get('citation_count')} citations, h-index {keep.get('h_index')}")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--ledger", required=True, type=Path, help="path to a things_done checkout")
-    parser.add_argument("--offline", action="store_true", help="do not look up missing dates online")
-    args = parser.parse_args()
-    ledger = args.ledger.resolve()
+    ledger = parser.parse_args().ledger.resolve()
     if not (ledger / "ledger").is_dir():
         raise SystemExit(f"{ledger} does not look like a things_done checkout (no ledger/ folder)")
-    pubs = publications(ledger)
-    add_crosswalk(ledger, pubs)
-    dump("publications", pubs, "ledger/publications")
-    dates(pubs, offline=args.offline)
-    authors(pubs, offline=args.offline)
-    dump("software", registry(ledger, "software", SOFTWARE_FIELDS), "ledger/registries/software.yaml")
-    dump("datasets", registry(ledger, "datasets", DATASET_FIELDS), "ledger/registries/datasets.yaml")
+    for old in ("dates.yaml", "authors.yaml"):  # computed by an earlier version of this script
+        (OUT / old).unlink(missing_ok=True)
+    publications(ledger)
+    registry(ledger, "software", SOFTWARE_FIELDS)
+    registry(ledger, "datasets", DATASET_FIELDS)
+    preprint_lag(ledger)
+    coauthors(ledger)
+    metrics(ledger)
 
 
 if __name__ == "__main__":

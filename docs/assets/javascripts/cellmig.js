@@ -156,29 +156,31 @@
     });
   }
 
-  // Preprint lag chart: tooltip on hover / focus / tap
-  function initLagChart() {
-    const plot = document.querySelector(".cm-lag__plot");
-    if (!plot) return;
-    const tip = plot.querySelector(".cm-lag__tip");
-    const show = (dot) => {
-      const box = plot.getBoundingClientRect(), r = dot.getBoundingClientRect();
-      tip.textContent = dot.dataset.tip;
-      tip.style.left = Math.min(Math.max(r.left + r.width / 2 - box.left, 90), box.width - 90) + "px";
-      tip.style.top = (r.top - box.top) + "px";
-      tip.hidden = false;
-    };
-    plot.querySelectorAll(".cm-lag__dot").forEach((dot) => {
-      dot.querySelector("title")?.remove();  // our tooltip replaces the browser's
-      dot.addEventListener("mouseenter", () => show(dot));
-      dot.addEventListener("mouseleave", () => { tip.hidden = true; });
-      dot.parentElement.addEventListener("focus", () => show(dot));
-      dot.parentElement.addEventListener("blur", () => { tip.hidden = true; });
+  // Charts and map: tooltip on hover / keyboard focus
+  function initChartTips() {
+    document.querySelectorAll(".cm-lag__plot, .cm-bars, .cm-map").forEach((box) => {
+      const tip = box.querySelector(".cm-chart-tip");
+      if (!tip) return;
+      const show = (el) => {
+        const b = box.getBoundingClientRect(), r = el.getBoundingClientRect();
+        tip.textContent = el.dataset.tip;
+        tip.style.left = Math.min(Math.max(r.left + r.width / 2 - b.left, 90), b.width - 90) + "px";
+        tip.style.top = (r.top - b.top) + "px";
+        tip.hidden = false;
+      };
+      box.querySelectorAll("[data-tip]").forEach((el) => {
+        el.querySelector("title")?.remove();  // our tooltip replaces the browser's
+        const target = el.closest("a") || el;
+        el.addEventListener("mouseenter", () => show(el));
+        el.addEventListener("mouseleave", () => { tip.hidden = true; });
+        target.addEventListener("focus", () => show(el));
+        target.addEventListener("blur", () => { tip.hidden = true; });
+      });
     });
   }
 
   function init() {
-    initLagChart();
+    initChartTips();
     initHeader();
     initVideos();
     initLoops();
