@@ -675,9 +675,6 @@ def person_card(m):
         links.append(f'<a href="{esc(url)}" aria-label="{esc(m["name"])} – {key}">{ICONS[label]}</a>')
     link_html = f'<span class="cm-person__links">{"".join(links)}</span>' if links else ""
     bio = f'<span class="cm-person__bio">{md(m["bio"], inline=True)}</span>' if m.get("bio") else ""
-    if m.get("previous_roles"):
-        before = ", ".join(m["previous_roles"])
-        bio += f'<span class="cm-person__before">Previously {esc(before[0].lower() + before[1:])}</span>'
 
     return (f'<li class="cm-person" id="{esc(m["slug"])}"><figure>{pic}'
             f'<figcaption><span class="cm-person__name">{esc(m["name"])}</span>'

@@ -39,8 +39,8 @@ button (top right) that opens the right file.
 **Who is in the lab and their roles come from things_done**
 (`ledger/profile/lab_members.yaml`): add a person there with their `role`
 (and earlier roles in `previous_roles`), and set `status: alumni` when they
-leave — they then move to the Alumni list with their roles. No dates are
-shown. The website only adds the look:
+leave. Current members show their current role; alumni show all their
+roles. No dates are shown. The website only adds the look:
 
 - Photo: `data/photos/<name>.jpg` (file name = the person's name in lower case
   with hyphens, e.g. `jane-doe.jpg`). Photos are cropped to a square
