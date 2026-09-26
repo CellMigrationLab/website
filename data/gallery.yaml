@@ -1,0 +1,92 @@
+# Gallery on https://cellmig.org/gallery/
+# Add a picture: put the file in docs/wp-content/uploads/<year>/<month>/ (or
+# docs/assets/images/gallery/) and add an entry below. Captions are shown in the
+# lightbox and read by screen readers, so describe what is in the picture.
+
+covers:
+- image: wp-content/uploads/2023/02/m_jcb_216_10_cover.png
+  caption: Journal of Cell Biology, October 2017
+- image: wp-content/uploads/2023/02/markmorganguillaumejacquemet-2013jcscover.webp
+  caption: Journal of Cell Science, September 2013
+- image: wp-content/uploads/2023/02/978-1-4939-9686-5.webp
+  caption: Computer Optimized Microscopy (Methods in Molecular Biology), 2019
+- image: wp-content/uploads/2023/03/jcs_136_04_forauthor.jpg
+  caption: Journal of Cell Science, February 2023
+- image: wp-content/uploads/2023/02/cover.webp
+  caption: Developmental Cell, October 2022
+images:
+- image: wp-content/uploads/2019/08/result-of-result-of-110619_si60x_514_tiff_fn_pax_attopha_002_sir_alx-1.jpg
+  caption: Human fibroblast stained for paxillin (green), actin (blue) and fibronectin (orange). Image
+    acquired using a structured illumination microscope.
+- image: wp-content/uploads/2019/08/rgb-neuron-1.png
+  caption: Rat neuron stained for actin (green), MAP2 (magenta) and DAPI (blue).
+- image: wp-content/uploads/2019/08/max_colored.png
+  caption: Osteosarcoma cell expressing Myosin-X-GFP were recorded live. A time projection is displayed.
+- image: wp-content/uploads/2019/08/vasp.jpg
+  caption: An osteosarcoma cell labelled to visualize the actin cytoskeleton (magenta) and VASP (green).
+- image: wp-content/uploads/2019/08/12g10-myo10-actin-rgb-2.jpg
+  caption: Breast cancer cell labelled for actin (red), Myosin-X (green) and DAPI (to visualise the nucleus,
+    blue).
+- image: wp-content/uploads/2019/08/max_dcis-mammary-fib-separated-3_xy1457682444_z0_t0_c0.jpg
+  caption: A mammary fibroblast stained for actin
+- image: wp-content/uploads/2019/08/monolayer-1.jpg
+  caption: Breast cancer cell monolayer stained for actin.
+- image: wp-content/uploads/2019/08/monolayer-2.jpg
+  caption: Breast cancer cell monolayer stained for actin.
+- image: wp-content/uploads/2019/08/spheroid-rgb.jpg
+  caption: Cancer cell spheroid stained for actin (magenta) and collagen (green).
+- image: wp-content/uploads/2019/08/rgb3.jpg
+  caption: Curly collagen (green and magenta) found in the proximity of a breast tumour.
+- image: wp-content/uploads/2019/08/cancer-cell-vasculature.jpg
+  caption: cancer cells (red) migrating inside the blood vessel of a living zebrafish embryo (green).
+    Credit Ilkka Paatero and Guillaume Jacquemet.
+- image: wp-content/uploads/2019/08/20x-fn-slide-1-p1-rgb.jpg
+  caption: 'Breast tumour stained for DAPI (blue), actin (red) and fibronectin (green). Credit: Emilia
+    Peuhu and Guillaume Jacquemet.'
+- image: wp-content/uploads/2019/08/20x-fn-slide-1-p1-rgb2.jpg
+  caption: 'Breast tumour stained for DAPI (blue), actin (red) and fibronectin (green). Credit: Emilia
+    Peuhu and Guillaume Jacquemet.'
+- image: wp-content/uploads/2019/08/cover3.jpg
+  caption: Breast cancer cells invading through collagen. The actin cytoskeleton (white) and the nuclei
+    (blue) are labelled.
+- image: wp-content/uploads/2019/08/cover4.jpg
+  caption: Breast cancer cells invading through collagen. The actin cytoskeleton (white) and the nuclei
+    (blue) are labelled.
+- image: wp-content/uploads/2019/08/cover6.jpg
+  caption: Breast cancer cells invading through collagen. The actin cytoskeleton (white) and the nuclei
+    (blue) are labelled.
+- image: wp-content/uploads/2019/08/cover8.jpg
+  caption: Breast cancer cells invading through collagen. The actin cytoskeleton (white) and the nuclei
+    (blue) are labelled.
+- image: wp-content/uploads/2019/08/cover9.jpg
+  caption: Breast cancer cells invading through collagen. The actin cytoskeleton (black) and the nuclei
+    (blue) are labelled.
+- image: wp-content/uploads/2019/08/ctrl.jpg
+  caption: Endothelial cells expressing paxillin-GFP were recorded live. A time projection is displayed.
+- image: wp-content/uploads/2019/08/sim-rgb4.jpg
+  caption: An osteosarcoma cell labelled to visualize the actin cytoskeleton (magenta) and paxillin (green).
+    Image acquired using a structured illumination microscope.
+- image: wp-content/uploads/2019/08/sim_rgb.jpg
+  caption: A fibroblast stained for active integrin (green) and Arp2/3 (magenta). Image acquired using
+    a structured illumination microscope.
+- image: wp-content/uploads/2019/08/g_jacquemet-1.jpg
+  caption: A breast cancer cell labelled for actin (green), Myosin-X (red) and Dapi (to visualise the
+    nucleus, blue).
+- image: wp-content/uploads/2019/08/image-2.jpg
+  caption: Breast cancer cells invading through collagen. The actin cytoskeleton (green) and the nuclei
+    (blue) are labelled.
+- image: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb-1.png
+- image: wp-content/uploads/2019/08/dtolcalwsaaaxoc.jpg
+  caption: An osteosarcoma cell stained for actin and imaged using structured illumination microscopy.
+    The color indicate the Z position.
+- image: wp-content/uploads/2019/08/dovfjnkxkaaw5sz.jpg
+  caption: Human embryonic stem cell stained for paxillin (green) and for actin (blue). Image taken using
+    a structured illumination microscope. Credit Aki Stubb and Guillaume Jacquemet.
+- image: wp-content/uploads/2019/08/dnsecwawsaeb1il.jpg
+  caption: Breast cancer cells plated on fibronectin, labelled to visualize the actin cytoskeleton and
+    imaged using structured illumination microscopy.
+- image: wp-content/uploads/2020/09/image-50-airyscan-processing-32.czi-c0.png
+- image: wp-content/uploads/2020/09/image-21-airyscan-processing-63.czi-c0.png
+- image: wp-content/uploads/2026/09/sicct8_ctrl_1-airyscan-processing-01-1.png
+- image: wp-content/uploads/2026/01/max_si8-6-processed.czi-rgb.png
+- image: wp-content/uploads/2023/10/max_220913-sitlnrd1-2.sld-si2-position-5-fav.jpg
