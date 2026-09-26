@@ -30,7 +30,6 @@ button (top right) that opens the right file.
 | Lab members | `data/members/<name>.yaml` (one per person), team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
 | Online talks | `data/talks.yaml` |
-| News | `data/news.yaml` (+ longer posts in `data/news/*.md`) |
 | About us | `docs/about-us.md` |
 | ZeroCostDL4Mic / deep learning | `docs/image-analysis.md` |
 | Colours, fonts, layout | `docs/assets/stylesheets/cellmig.css` |
@@ -95,9 +94,9 @@ them, edit `data/` instead.
      cellmigrationlab.github.io`. **Keep the `MX` records** (Google
      Workspace email).
 3. Old addresses keep working: every WordPress page (`/lab-members/`,
-   `/software/`, `/portfolio/<name>/`, `/2021/09/16/…`, images under
-   `/wp-content/uploads/`, the RSS feed at `/feed/`) exists at the same path.
-   A few archive pages redirect (see `redirects` in `mkdocs.yml`).
+   `/software/`, `/portfolio/<name>/`, images under `/wp-content/uploads/`,
+   the RSS feed at `/feed/`) exists at the same path. Removed pages (the old
+   news posts, archives) redirect (see `redirects` in `mkdocs.yml`).
 
 ## How it fits together
 

@@ -11,13 +11,11 @@ intro: >-
   environment. We use multiple microscopy approaches and continuously develop tools for image
   analysis.
 
-# Full-width microscopy images between the sections of the home page.
+# Full-width microscopy images between the sections of the home page (two are used).
 bands:
   - image: wp-content/uploads/2019/08/monolayer-1.jpg
     caption: Breast cancer cell monolayer stained for actin.
   - image: wp-content/uploads/2022/10/cover-3.jpg
-  - image: wp-content/uploads/2019/08/guillaume-drug-cdm-01-0006_aa02_03_p000001t00000023z001c01.jpg
-    caption: Breast cancer cells migrating on cell-derived matrices.
 
 contact:
   email: guillaume.jacquemet@abo.fi
