@@ -59,6 +59,21 @@ def thumb(site_path: str, width: int) -> str:
     return out_rel
 
 
+def share_jpeg(site_path: str, width: int = 1200) -> str:
+    """JPEG copy at most `width` px wide, for link previews (og:image): some
+    sites that show previews do not read WebP."""
+    src = source(site_path)
+    out_rel = f"{THUMBS}/share/{Path(site_path).with_suffix('.jpg').as_posix()}"
+    out = DOCS / out_rel
+    if _stale(out, src):
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with Image.open(src) as im:
+            im = ImageOps.exif_transpose(im).convert("RGB")
+            im.thumbnail((width, width * 4), Image.LANCZOS)
+            im.save(out, "JPEG", quality=82, optimize=True, progressive=True)
+    return out_rel
+
+
 def square_thumb(site_path: str, size: int = 480, position: str = "top") -> str:
     """Square WebP crop (member photos); `position` "top" keeps faces in frame,
     "center" crops evenly."""

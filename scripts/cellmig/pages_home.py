@@ -21,7 +21,8 @@ def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str]
     """Hero, newest featured papers, latest papers, funders; data/site.yaml
     `bands` (two pictures) go between the sections."""
     hero, bands = site["hero"], site["bands"]
-    p = Page("index.md", template="home.html", title="Home", description=site["intro"], image=hero["image"])
+    p = Page("index.md", template="home.html", title="Home", head_title=f'{site["name"]} – {site["motto"].rstrip(".")}',
+             description=site["intro"], image=hero["image"])
     p.add(
         '<section class="cm-hero">',
         '<div class="cm-hero__text">',
