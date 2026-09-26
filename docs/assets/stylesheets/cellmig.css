@@ -119,7 +119,6 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 /* Section titles: small caps with a hairline on both sides ("RECENT WORKS") */
 .md-typeset .cm-section-title { display: flex; align-items: center; gap: 1.2rem; margin: 3.6rem auto 1.6rem; max-width: 33.6rem; font-size: .64rem; font-weight: 500; letter-spacing: .35em; text-transform: uppercase; color: var(--cm-fg); text-align: center; }
 .md-typeset .cm-section-title::before, .md-typeset .cm-section-title::after { content: ""; flex: 1; height: 1px; background: var(--cm-line); }
-.md-typeset .cm-group-title { font-size: .624rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--cm-muted); margin: 2.4rem 0 .8rem; }
 
 .cm-button, .md-typeset .cm-button { display: inline-block; margin: .2rem .32rem .2rem 0; padding: .48rem .88rem; border: 1px solid var(--cm-strong); background: var(--cm-strong); color: #fff; font-size: .624rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background .15s, color .15s; }
 .md-typeset .cm-button:hover { background: #fff; color: var(--cm-strong); }
@@ -169,11 +168,8 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-card__media img, .cm-card__media video { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
 .cm-card:hover .cm-card__media img, .cm-card:hover .cm-card__media video { transform: scale(1.035); }
 .md-typeset .cm-card__title { margin: .64rem 0 0; font-size: .736rem; line-height: 1.45; color: var(--cm-strong); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; text-align: center; }
-.cm-card--story .cm-card__title { text-align: left; text-decoration: none; font-size: .816rem; font-weight: 500; }
-.cm-card--story:hover .cm-card__title { text-decoration: underline; }
 .md-typeset .cm-card__meta { margin: .64rem 0 0; font-size: .6rem; color: var(--cm-muted); }
 .md-typeset .cm-card__meta .cm-badge { margin-left: .16rem; }
-.md-typeset .cm-card__text { margin: .32rem 0 0; font-size: .68rem; line-height: 1.55; color: var(--cm-muted); }
 @media (max-width: 50rem) { .cm-cards--home { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; } }
 @media (max-width: 30rem) { .cm-cards--home { grid-template-columns: 1fr; } }
 
@@ -432,9 +428,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-lag__table table { display: table; width: 100%; font-size: .66rem; }
 .md-typeset .cm-lag__table td:nth-child(n+2), .md-typeset .cm-lag__table th:nth-child(n+2) { white-space: nowrap; font-variant-numeric: tabular-nums; }
 @media (max-width: 30rem) { .cm-lag__head { flex-direction: column; align-items: flex-start; gap: .4rem; } }
-.cm-lag__unit { text-anchor: end; }
 .md-typeset .cm-lag__table .md-typeset__table, .md-typeset .cm-lag__table table { display: block; max-width: 100%; overflow-x: auto; }
-.md-typeset .cm-collabs__papers { padding: .15rem 0; }
 @media (max-width: 40rem) { .cm-lag__tick, .cm-lag__label { font-size: 24px; } .cm-lag__dot { r: 8; } }
 
 @media (max-width: 64rem) { .cm-cards--home { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -468,7 +462,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 [dir] .md-typeset .cm-map__legend > li { display: flex; align-items: center; gap: .3rem; margin: 0; list-style: none; }
 .cm-map__legend span { width: .8rem; height: .8rem; border-radius: .15rem; }
 .md-typeset .cm-cloud { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: .15rem .7rem; margin: 1rem 0; line-height: 1.25; text-align: center; }
-.cm-cloud span { color: var(--cm-fg); font-weight: 400; white-space: nowrap; }
+.cm-cloud span { color: var(--cm-fg); font-weight: 400; white-space: nowrap; max-width: 100%; }
+@media (max-width: 30rem) { .cm-cloud span { white-space: normal; } }   /* the largest names are wider than a 320 px screen */
 .cm-cloud span.cm-cloud__lab, .cm-cloud__legend .cm-cloud__lab { color: #7a35c4; }
 .cm-cloud__legend { text-align: center; }
-.cm-alumni__years { font-variant-numeric: tabular-nums; color: #8a8a8a; }
