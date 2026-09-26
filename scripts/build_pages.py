@@ -331,8 +331,7 @@ class Ledger:
 
 def lab_names():
     names = set()
-    for f in (DATA / "members").glob("*.y*ml"):
-        m = load(f)
+    for m in load_members():
         for n in [m.get("name")] + list(m.get("also_known_as") or []):
             if n:
                 names.add(normalize_name(n))
@@ -394,11 +393,32 @@ def citation(rec, lab, ledger, featured_url=None, abstract=False, heading="h3"):
 # --------------------------------------------------------------------------- content
 
 def load_members():
-    members = []
-    for f in sorted((DATA / "members").glob("*.y*ml")):
-        m = load(f)
-        m["_file"] = f"data/members/{f.name}"
-        m["slug"] = m.get("slug") or f.stem
+    """People: who, role and years come from the things_done roster
+    (data/things_done/lab_members.yaml); photo, links and bio from
+    data/members/<name>.yaml and data/photos/<name>.jpg on this website."""
+    roster = DATA / "things_done" / "lab_members.yaml"
+    people = []
+    if roster.exists():
+        for i, r in enumerate(load(roster).get("records") or []):
+            person = dict(r)
+            person["slug"] = slugify(r["name"])
+            person["order"] = i
+            person["status"] = "alumni" if r.get("end_date") else "current"
+            extra = DATA / "members" / f"{person['slug']}.yaml"
+            if extra.exists():
+                for k, v in (load(extra) or {}).items():
+                    person.setdefault(k, v)
+            people.append(person)
+    else:  # no roster yet: the website's own files
+        for f in sorted((DATA / "members").glob("*.y*ml")):
+            person = load(f)
+            person["slug"] = person.get("slug") or f.stem
+            people.append(person)
+    for m in people:
+        m["_file"] = f"data/members/{m['slug']}.yaml"
+        start, end = year_of(m.get("start_date")), year_of(m.get("end_date"))
+        if m["status"] == "alumni" and start and end:
+            m.setdefault("years", f"{start}–{end}" if start != end else str(end))
         if not m.get("photo"):
             for ext in ("jpg", "jpeg", "png", "webp"):
                 p = DATA / "photos" / f"{m['slug']}.{ext}"
@@ -409,8 +429,7 @@ def load_members():
                         shutil.copy2(p, dest)
                     m["photo"] = f"assets/images/members/{p.name}"
                     break
-        members.append(m)
-    return members
+    return people
 
 
 def load_featured(ledger):
@@ -602,7 +621,7 @@ def page_members(members):
     alumni = [m for m in members if m.get("status") == "alumni"]
     order = {g: i for i, (g, _) in enumerate(GROUPS)}
     current.sort(key=lambda m: (order.get(m.get("group", "other"), 99), m.get("order", 999), m["name"]))
-    alumni.sort(key=lambda m: (m.get("order", 999), m["name"]))
+    alumni.sort(key=lambda m: (-(year_of(m.get("end_date")) or 0), m.get("order", 999)))
 
     p = Page("lab-members.md", title="Lab members", edit_url=f"{REPO}/tree/main/data/members",
              description="Meet the people of the Cell Migration Lab in Turku, Finland.")

@@ -27,7 +27,7 @@ button (top right) that opens the right file.
 | Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done (members count from `data/members/`) |
 | Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
-| Lab members (one grid, ordered by `group` then `order`) | `data/members/<name>.yaml` (one per person), team photos in `data/team.yaml` |
+| Lab members and alumni (who, title, years) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<name>.yaml`, team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
 | Online talks | `data/talks.yaml` |
 | About us | `docs/about-us.md` |
@@ -36,25 +36,25 @@ button (top right) that opens the right file.
 
 ### Lab members
 
-One YAML file per person in `data/members/`:
+**Who is in the lab, their title and their years come from things_done**
+(`ledger/profile/lab_members.yaml`): add a person there, and set `end_date`
+when they leave — they then move to Alumni with their years. The website only
+adds the look:
+
+- Photo: `data/photos/<name>.jpg` (file name = the person's name in lower case
+  with hyphens, e.g. `jane-doe.jpg`). Photos are cropped to a square
+  automatically; without a photo the initials are shown.
+- Optional `data/members/<name>.yaml` with links and a one-liner:
 
 ```yaml
-name: Jane Doe                 # as in papers: used to highlight lab members in publication lists
-role: PhD student              # shown under the name
-group: phd                     # pi, staff, postdoc, phd, student, other
-status: current                # current or alumni
-order: 3                       # position within the group (optional)
-orcid: 0000-0000-0000-0000     # optional: orcid, email, github, bluesky, scholar, website
-bio: Filopodia and cancer cell invasion   # optional one-liner
-also_known_as: [Jane A. Doe]   # optional other spellings used in papers
+orcid: 0000-0000-0000-0000     # also: email, github, bluesky, scholar, website
+bio: Filopodia and cancer cell invasion
+photo_position: center         # crop the photo from the centre instead of the top
+now: Postdoc at …              # alumni: where they are now
 ```
 
-Photo: `data/photos/<file name>.jpg` (same name as the YAML file). Photos are
-cropped to a square automatically (`photo_position: center` crops from the
-centre instead of the top). Without a photo the initials are shown.
-When someone leaves, set `status: alumni` (optional: `years: 2021–2025`,
-`now: Postdoc at …`). New members can send their details with the
-**Lab member profile** issue form linked at the bottom of the members page.
+New members can send their details with the **Lab member profile** issue form
+linked at the bottom of the members page.
 
 ### Pictures
 

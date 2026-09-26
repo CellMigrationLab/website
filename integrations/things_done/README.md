@@ -10,6 +10,7 @@ them. There is one place to maintain.
 things_done (private)                                   CellMigrationLab/website (public)
 ledger/publications/*.yaml ──────────────┐
 ledger/registries/{software,datasets}  ──┤
+ledger/profile/lab_members.yaml        ──┤
 report/generated/publications/           │  update_website.yml runs
   preprint_publication_crosswalk.json  ──┼─ scripts/sync_things_done.py ─▶ data/things_done/*.yaml ─▶ site
   preprint_lag.json                    ──┤  (copy only, public fields)
@@ -55,7 +56,7 @@ generated reports, after the ledger's own automation, and once a day.
 | Lab in numbers: preprint-to-paper lag | `preprint_lag.json` (Analyze Preprint-to-Publication Lag action) |
 | Lab in numbers: top collaborators, co-author cloud | `coauthor_network.json` |
 | Lab in numbers: co-author map | `coauthor_countries.json` (Export Co-author Countries action) |
-| Lab in numbers: lab members | this repo's `data/members/` |
+| Lab members, alumni years, member counts | `ledger/profile/lab_members.yaml` (photos and links stay in this repo) |
 
 ## Worth adding to the ledger
 
