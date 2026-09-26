@@ -35,7 +35,7 @@ nav:
   - Software: software.md
   - Datasets: datasets.md
   - Members: lab-members.md
-  - Collaborators: collaborators.md
+  - In numbers: lab-in-numbers.md
   - Gallery: gallery.md
   - Talks: online-lectures.md
   - About: about-us.md
@@ -46,6 +46,7 @@ plugins:
   - redirects:
       redirect_maps:
         portfolio/index.md: featured-research.md
+        collaborators.md: lab-in-numbers.md
         author/guijacquemet/index.md: about-us.md
         category/uncategorized/index.md: index.md
         news.md: index.md
