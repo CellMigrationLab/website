@@ -1,0 +1,148 @@
+# Copied by scripts/sync_things_done.py from things_done/ledger/profile/lab_members.yaml.
+# Do not edit by hand: change things_done instead, the website updates itself.
+records:
+- name: Guillaume Jacquemet
+  role: Professor in Bioimaging
+  group: pi
+  start_date: '2019'
+- name: Mario Del Rosario
+  role: University Researcher in Bioimaging
+  group: staff
+  start_date: 2026-04
+- name: Jaakko Lehtimäki
+  role: Postdoc
+  group: postdoc
+  start_date: 2025-01
+- name: Christine Touma
+  role: Postdoc
+  group: postdoc
+  start_date: 2025-10
+- name: Adán Olguín-Olguín
+  role: Postdoc
+  group: postdoc
+  start_date: 2025-11
+- name: Isabel Stötzel
+  role: Postdoc
+  group: postdoc
+  start_date: 2026-08
+- name: Léa Pechtimaldjian
+  role: Postdoc
+  group: postdoc
+- name: Ana Popović
+  role: PhD student
+  group: phd
+  start_date: 2019-01
+- name: Ana Gračanin
+  role: PhD student
+  group: phd
+- name: Sujan Ghimire
+  role: PhD student
+  group: phd
+  start_date: 2020-06
+- name: Sarah Massaad
+  role: PhD student
+  group: phd
+  start_date: 2022-01
+- name: Monika Vaitkevičiūtė
+  role: PhD student
+  group: phd
+  start_date: 2022-06
+- name: Marcela Rivera
+  role: PhD student
+  group: phd
+  start_date: 2024-09
+  also_known_as:
+  - Marcela Xiomara Rivera Pineda
+- name: Iván Hidalgo Cenalmor
+  role: PhD student
+  group: phd
+  start_date: 2025-01
+- name: Daniil Iukhtanov
+  role: PhD student
+  group: phd
+  start_date: 2025-06
+- name: Huy Nguyen
+  role: Master's student
+  group: student
+- name: Helene Helo
+  role: Research assistant
+  group: other
+  start_date: 2025-09
+  end_date: 2026-07
+- name: Marjaana Ojalill
+  role: Postdoc
+  group: postdoc
+  start_date: 2025-09
+  end_date: 2026-07
+- name: Gautier Follain
+  role: Postdoc
+  group: postdoc
+  start_date: 2020-01
+  end_date: 2026-03
+- name: Hiba Daafane
+  role: Research assistant
+  group: other
+  start_date: 2025-09
+  end_date: 2025-12
+- name: Hanna Grobe
+  role: Postdoc
+  group: postdoc
+  start_date: 2023-12
+  end_date: 2025-09
+- name: Joanna Pylvänäinen
+  role: PhD student, Postdoc
+  group: postdoc
+  start_date: 2024-01
+  end_date: 2025-09
+  also_known_as:
+  - Joanna W. Pylvänäinen
+  - Joanna W. Pylvanainen
+- name: Johanna Tammi
+  role: Research assistant, Master's student
+  group: student
+  start_date: 2023-06
+  end_date: 2025-04
+- name: Marie-Catherine Laisne
+  role: PhD student
+  group: phd
+  start_date: 2021-11
+  end_date: 2024-06
+- name: Ada Pajari
+  role: Master's student
+  group: student
+  start_date: 2022-01
+  end_date: 2022-12
+  also_known_as:
+  - Ada O. Pajari
+- name: Anna Nylund
+  role: Master's student
+  group: student
+  start_date: 2019-09
+  end_date: 2024-12
+  also_known_as:
+  - Anna S. Nylund
+- name: Theotime Dubois
+  role: Master's student
+  group: student
+  start_date: 2021-01
+  end_date: 2021-06
+- name: Johanna Jukkala
+  role: Master's student
+  group: student
+  start_date: 2019-09
+  end_date: 2020-03
+- name: Seyed Hosseini
+  role: Summer intern
+  group: other
+  start_date: 2021-06
+  end_date: 2021-08
+- name: Amin Rezaei
+  role: Summer intern
+  group: other
+  start_date: 2021-06
+  end_date: 2021-08
+- name: Diana Wurzinger
+  role: Intern
+  group: other
+  start_date: 2023-08
+  end_date: 2024-01

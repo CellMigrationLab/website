@@ -11,6 +11,7 @@ Reads (in the things_done checkout)                    Writes (data/things_done/
   ledger/publications/<year>.yaml                        publications.yaml
   ledger/registries/software.yaml                        software.yaml
   ledger/registries/datasets.yaml                        datasets.yaml
+  ledger/profile/lab_members.yaml                        lab_members.yaml
   report/generated/publications/
     preprint_publication_crosswalk.json  (pairs)         related_dois in publications.yaml
     preprint_lag.json                                    preprint_lag.yaml
@@ -124,6 +125,18 @@ def registry(ledger, name, fields):
     print(f"{name}: {len(out)} records")
 
 
+def lab_members(ledger):
+    """The public roster: name, website role, group, start/end dates."""
+    path = ledger / "ledger" / "profile" / "lab_members.yaml"
+    if not path.exists():
+        return
+    fields = ("name", "role", "group", "start_date", "end_date", "also_known_as")
+    records = [pick(r, fields) for r in load(path).get("records") or [] if r.get("name")]
+    dump("lab_members", {"records": records}, "ledger/profile/lab_members.yaml")
+    print(f"lab members: {sum(1 for r in records if not r.get('end_date'))} current, "
+          f"{sum(1 for r in records if r.get('end_date'))} alumni")
+
+
 def preprint_lag(ledger):
     data = load_json(ledger / REPORTS / "preprint_lag.json")
     if not data:
@@ -176,6 +189,7 @@ def main():
     publications(ledger)
     registry(ledger, "software", SOFTWARE_FIELDS)
     registry(ledger, "datasets", DATASET_FIELDS)
+    lab_members(ledger)
     preprint_lag(ledger)
     coauthors(ledger)
     metrics(ledger)
