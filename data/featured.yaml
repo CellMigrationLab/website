@@ -1,0 +1,106 @@
+# Featured research: the papers shown on the home page, newest first, each with
+# its own page at /portfolio/<slug>/.
+#
+# Title, authors, journal, abstract and links all come from the things_done
+# ledger (by DOI). Here you only choose the picture. To feature a paper, either
+# add it below, or set `featured: true` on it in the ledger (it then appears
+# automatically; add it here too if you want a picture).
+#
+#   doi:    the paper (journal version or preprint; a preprint's journal version
+#           is used automatically when the ledger links them)
+#   image:  picture or logo (a .gif plays as a short video)
+#   slug:   page address; kept from the old website - leave unchanged
+#   also:   other DOIs told by the same story (optional)
+
+
+- doi: 10.48550/arXiv.2603.10704
+  image: wp-content/uploads/2026/07/comic-e1782918385802.png
+  slug: packaging-jupyter-notebooks-as-installable-desktop-apps-using-labconstrictor
+- doi: 10.48550/arXiv.2601.08859
+  image: wp-content/uploads/2026/07/logo_white_bg.png
+  slug: ezinput-a-cross-environment-python-library-for-easy-ui-generation-in-scientific-computing
+- doi: 10.64898/2026.06.29.735028
+  image: wp-content/uploads/2026/07/gemini_generated_image_kc5ezfkc5ezfkc5e.png
+  slug: nucleisky-enables-cross-scale-multimodal-registration-of-microscopy-data-using-nuclei-constellations
+- doi: 10.1242/jcs.265183
+  image: wp-content/uploads/2026/07/logo-rxiv-maker.png
+  slug: rxiv-maker-an-automated-template-engine-for-streamlined-scientific-publications
+- doi: 10.64898/2026.02.09.703982
+  image: wp-content/uploads/2026/07/filopodia-1.png
+  slug: filopodia-mediated-trans-endocytosis
+- doi: 10.1038/s44318-025-00678-9
+  image: wp-content/uploads/2024/10/mia_n1_p2_3350_5600_bftracks-3-ezgif.com-video-to-gif-converter-1.gif
+  slug: fast-label-free-live-imaging-reveals-key-roles-of-flow-dynamics-and-cd44-ha-interaction-in-cancer-cell-arrest-on-endothelial-monolayers
+- doi: 10.64898/2025.12.03.691809
+  image: wp-content/uploads/2026/01/max_si8-6-processed.czi-rgb.png
+  slug: filopodome-proteomics-identifies-cct8-as-a-myo10-interactor-critical-for-filopodia-functions
+- doi: 10.1101/2025.11.24.689779
+  image: wp-content/uploads/2025/12/pasted-image.png
+  slug: customizable-fdm-based-zebrafish-embryomold-for-live-imaging
+- doi: 10.1002/1878-0261.70025
+  image: wp-content/uploads/2025/05/mol270025-fig-0001-m.jpg
+  slug: time-the-final-frontier
+- doi: 10.1242/jcs.263801
+  image: wp-content/uploads/2025/05/jcs26380101.png
+  slug: practical-considerations-for-data-exploration-in-quantitative-cell-biology
+- doi: 10.1101/2024.09.16.613204
+  image: wp-content/uploads/2024/10/logo_small-1122300031-e1728059917704.png
+  slug: structural-repetition-detector-multi-scale-quantitative-mapping-of-molecular-complexes-through-microscopy
+- doi: 10.1371/journal.pbio.3002740
+  image: wp-content/uploads/2024/01/celltrackscolab_logo.png
+  slug: celltrackscolab-a-platform-for-compiling-analyzing-and-exploring-tracking-data
+- doi: 10.1038/s41467-025-66209-6
+  image: wp-content/uploads/2024/08/photofitt-logo.png
+  slug: photofitt-a-quantitative-framework-for-assessing-phototoxicity-in-live-cell-microscopy-experiments
+- doi: 10.1083/jcb.202310030
+  image: wp-content/uploads/2023/10/max_220913-sitlnrd1-2.sld-si2-position-5-fav.jpg
+  slug: tlnrd1-is-a-ccm-complex-component-and-regulates-endothelial-barrier-integrity
+- doi: 10.1038/s41592-024-02295-6
+  image: wp-content/uploads/2024/01/dl4miceverywhere-logo.png
+  slug: dl4miceverywhere-deep-learning-for-microscopy-made-flexible-shareable-and-reproducible
+- doi: 10.1101/2022.08.22.504744
+  image: wp-content/uploads/2022/10/cover-3.jpg
+  slug: fast4dreg-fast-registration-of-4d-microscopy-datasets
+- doi: 10.1016/j.devcel.2022.09.016
+  image: wp-content/uploads/2019/08/cna35-merged-2.gif
+  slug: filopodia-mediated-basement-membrane-assembly-at-pre-invasive-tumor-boundaries
+- doi: 10.1242/jcs.260574
+  image: wp-content/uploads/2019/08/paxillin.jpg
+  slug: myosin-x-recruits-lamellipodin-to-filopodia-tips
+- doi: 10.1038/s41592-022-01507-1
+  image: wp-content/uploads/2021/09/trackmate-capture-of-becsctrl100xpaxillingfp-position3_xy1520360652_z0_t000_c0_tracks.gif
+  slug: bringing-trackmate-into-the-era-of-machine-learning-and-deep-learning
+- doi: 10.1083/jcb.202005214
+  image: wp-content/uploads/2020/09/image-50-airyscan-processing-32.czi-c0.png
+  slug: talin-rod-domain-containing-protein-1-tlnrd1-is-a-novel-actin-bundling-protein-which-promotes-filopodia-formation
+- doi: 10.1016/j.celrep.2021.109716
+  image: wp-content/uploads/2021/04/sem_filopodia.png
+  slug: myosin-x-and-talin-modulate-integrin-activity-at-filopodia-tips
+- doi: 10.1038/s41467-021-22518-0
+  image: wp-content/uploads/2020/03/giphy.gif
+  slug: zerocostdl4mic-an-open-platform-to-simplify-access-and-use-of-deep-learning-in-microscopy
+- doi: 10.1101/2020.09.22.306233
+  image: wp-content/uploads/2020/09/stardist_trackmate.gif
+  slug: automated-cell-tracking-using-stardist-and-trackmate
+- doi: 10.1042/EBC20190012
+  image: wp-content/uploads/2019/08/result-of-result-of-110619_si60x_514_tiff_fn_pax_attopha_002_sir_alx-1.jpg
+  slug: iac-review
+- doi: 10.1016/j.ceb.2015.06.007
+  image: wp-content/uploads/2020/03/merged-1.gif
+  slug: filopodia-cocb
+- doi: 10.1021/acs.nanolett.9b04083
+  image: wp-content/uploads/2019/09/screenshot-from-2023-02-25-11-37-35.png
+  slug: fluctuation-based-super-resolution-tractionforce-microscopy
+- doi: 10.1016/j.cub.2018.11.053
+  image: wp-content/uploads/2019/08/vasp.jpg
+  slug: filopodome
+- doi: 10.1038/ncomms13297
+  image: wp-content/uploads/2019/08/12g10-myo10-actin-rgb-2.jpg
+  slug: calcium-channel
+- doi: 10.1038/nprot.2017.107
+  image: wp-content/uploads/2019/08/guillaume-drug-cdm-01-0006_aa02_03_p000001t00000023z001c01.jpg
+  slug: cdm
+- doi: 10.1083/jcb.201704045
+  image: wp-content/uploads/2019/08/cover4.jpg
+  slug: filoquant
+  also: [10.1007/978-1-4939-9686-5_16]

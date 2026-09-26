@@ -31,11 +31,11 @@ theme:
 nav:
   - Home: index.md
   - Research: research.md
-  - Featured: featured-research.md
   - Publications: publications.md
   - Software: software.md
   - Datasets: datasets.md
   - Members: lab-members.md
+  - Collaborators: collaborators.md
   - Gallery: gallery.md
   - Talks: online-lectures.md
   - About: about-us.md
@@ -45,7 +45,8 @@ plugins:
   # Old WordPress addresses that have no page of their own any more.
   - redirects:
       redirect_maps:
-        portfolio/index.md: featured-research.md
+        portfolio/index.md: index.md
+        featured-research.md: index.md
         author/guijacquemet/index.md: about-us.md
         category/uncategorized/index.md: index.md
         news.md: index.md
