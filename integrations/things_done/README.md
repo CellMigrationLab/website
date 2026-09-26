@@ -56,7 +56,7 @@ generated reports, after the ledger's own automation, and once a day.
 | Lab in numbers: preprint-to-paper lag | `preprint_lag.json` (Analyze Preprint-to-Publication Lag action) |
 | Lab in numbers: top collaborators, co-author cloud | `coauthor_network.json` |
 | Lab in numbers: co-author map | `coauthor_countries.json` (Export Co-author Countries action) |
-| Lab members, alumni years, member counts | `ledger/profile/lab_members.yaml` (photos and links stay in this repo) |
+| Lab members, alumni and their roles, member counts | `ledger/profile/lab_members.yaml` (photos and links stay in this repo) |
 
 ## Worth adding to the ledger
 

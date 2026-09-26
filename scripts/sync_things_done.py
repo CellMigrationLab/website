@@ -126,15 +126,15 @@ def registry(ledger, name, fields):
 
 
 def lab_members(ledger):
-    """The public roster: name, website role, group, start/end dates."""
+    """The public roster: name, current/last role, earlier roles, group, status."""
     path = ledger / "ledger" / "profile" / "lab_members.yaml"
     if not path.exists():
         return
-    fields = ("name", "role", "group", "start_date", "end_date", "also_known_as")
+    fields = ("name", "role", "previous_roles", "group", "status", "also_known_as")
     records = [pick(r, fields) for r in load(path).get("records") or [] if r.get("name")]
     dump("lab_members", {"records": records}, "ledger/profile/lab_members.yaml")
-    print(f"lab members: {sum(1 for r in records if not r.get('end_date'))} current, "
-          f"{sum(1 for r in records if r.get('end_date'))} alumni")
+    print(f"lab members: {sum(1 for r in records if r.get('status') != 'alumni')} current, "
+          f"{sum(1 for r in records if r.get('status') == 'alumni')} alumni")
 
 
 def preprint_lag(ledger):

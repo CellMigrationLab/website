@@ -27,7 +27,7 @@ button (top right) that opens the right file.
 | Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done (members count from `data/members/`) |
 | Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
-| Lab members and alumni (who, title, years) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<name>.yaml`, team photos in `data/team.yaml` |
+| Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<name>.yaml`, team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
 | Online talks | `data/talks.yaml` |
 | About us | `docs/about-us.md` |
@@ -36,10 +36,11 @@ button (top right) that opens the right file.
 
 ### Lab members
 
-**Who is in the lab, their title and their years come from things_done**
-(`ledger/profile/lab_members.yaml`): add a person there, and set `end_date`
-when they leave — they then move to Alumni with their years. The website only
-adds the look:
+**Who is in the lab and their roles come from things_done**
+(`ledger/profile/lab_members.yaml`): add a person there with their `role`
+(and earlier roles in `previous_roles`), and set `status: alumni` when they
+leave — they then move to the Alumni list with their roles. No dates are
+shown. The website only adds the look:
 
 - Photo: `data/photos/<name>.jpg` (file name = the person's name in lower case
   with hyphens, e.g. `jane-doe.jpg`). Photos are cropped to a square

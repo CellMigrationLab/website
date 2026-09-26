@@ -4,145 +4,144 @@ records:
 - name: Guillaume Jacquemet
   role: Professor in Bioimaging
   group: pi
-  start_date: '2019'
+  status: current
 - name: Mario Del Rosario
   role: University Researcher in Bioimaging
   group: staff
-  start_date: 2026-04
+  status: current
 - name: Jaakko Lehtimäki
   role: Postdoc
   group: postdoc
-  start_date: 2025-01
+  status: current
 - name: Christine Touma
   role: Postdoc
   group: postdoc
-  start_date: 2025-10
+  status: current
 - name: Adán Olguín-Olguín
   role: Postdoc
   group: postdoc
-  start_date: 2025-11
+  status: current
 - name: Isabel Stötzel
   role: Postdoc
   group: postdoc
-  start_date: 2026-08
+  status: current
 - name: Léa Pechtimaldjian
   role: Postdoc
   group: postdoc
+  status: current
 - name: Ana Popović
   role: PhD student
   group: phd
-  start_date: 2019-01
+  status: current
 - name: Ana Gračanin
   role: PhD student
   group: phd
+  status: current
 - name: Sujan Ghimire
   role: PhD student
   group: phd
-  start_date: 2020-06
+  status: current
 - name: Sarah Massaad
   role: PhD student
   group: phd
-  start_date: 2022-01
+  status: current
 - name: Monika Vaitkevičiūtė
   role: PhD student
   group: phd
-  start_date: 2022-06
+  status: current
 - name: Marcela Rivera
   role: PhD student
   group: phd
-  start_date: 2024-09
+  status: current
   also_known_as:
   - Marcela Xiomara Rivera Pineda
 - name: Iván Hidalgo Cenalmor
   role: PhD student
   group: phd
-  start_date: 2025-01
+  status: current
 - name: Daniil Iukhtanov
   role: PhD student
+  previous_roles:
+  - Intern
+  - Master's student
   group: phd
-  start_date: 2025-06
+  status: current
 - name: Huy Nguyen
   role: Master's student
+  previous_roles:
+  - Summer intern
   group: student
+  status: current
 - name: Helene Helo
   role: Research assistant
   group: other
-  start_date: 2025-09
-  end_date: 2026-07
+  status: alumni
 - name: Marjaana Ojalill
   role: Postdoc
   group: postdoc
-  start_date: 2025-09
-  end_date: 2026-07
+  status: alumni
 - name: Gautier Follain
   role: Postdoc
   group: postdoc
-  start_date: 2020-01
-  end_date: 2026-03
+  status: alumni
 - name: Hiba Daafane
   role: Research assistant
   group: other
-  start_date: 2025-09
-  end_date: 2025-12
+  status: alumni
 - name: Hanna Grobe
   role: Postdoc
   group: postdoc
-  start_date: 2023-12
-  end_date: 2025-09
+  status: alumni
 - name: Joanna Pylvänäinen
-  role: PhD student, Postdoc
+  role: Postdoc
+  previous_roles:
+  - PhD student
   group: postdoc
-  start_date: 2024-01
-  end_date: 2025-09
+  status: alumni
   also_known_as:
   - Joanna W. Pylvänäinen
   - Joanna W. Pylvanainen
 - name: Johanna Tammi
-  role: Research assistant, Master's student
+  role: Master's student
+  previous_roles:
+  - Research assistant
   group: student
-  start_date: 2023-06
-  end_date: 2025-04
+  status: alumni
 - name: Marie-Catherine Laisne
   role: PhD student
   group: phd
-  start_date: 2021-11
-  end_date: 2024-06
+  status: alumni
 - name: Ada Pajari
   role: Master's student
   group: student
-  start_date: 2022-01
-  end_date: 2022-12
+  status: alumni
   also_known_as:
   - Ada O. Pajari
 - name: Anna Nylund
-  role: Master's student
+  role: Licentiate student
+  previous_roles:
+  - Master's student
   group: student
-  start_date: 2019-09
-  end_date: 2024-12
+  status: alumni
   also_known_as:
   - Anna S. Nylund
 - name: Theotime Dubois
   role: Master's student
   group: student
-  start_date: 2021-01
-  end_date: 2021-06
+  status: alumni
 - name: Johanna Jukkala
   role: Master's student
   group: student
-  start_date: 2019-09
-  end_date: 2020-03
+  status: alumni
 - name: Seyed Hosseini
   role: Summer intern
   group: other
-  start_date: 2021-06
-  end_date: 2021-08
+  status: alumni
 - name: Amin Rezaei
   role: Summer intern
   group: other
-  start_date: 2021-06
-  end_date: 2021-08
+  status: alumni
 - name: Diana Wurzinger
   role: Intern
   group: other
-  start_date: 2023-08
-  end_date: 2024-01
+  status: alumni
