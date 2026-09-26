@@ -12,7 +12,6 @@ Reads                                   Writes (git-ignored, rebuilt every time)
   data/things_done/datasets.yaml          docs/datasets.md
   data/gallery.yaml                       docs/gallery.md
   data/talks.yaml                         docs/online-lectures.md
-  data/news.yaml, data/news/*.md          docs/news.md, docs/<year>/<month>/<day>/<slug>.md
                                           docs/feed.xml, docs/feed/index.html (RSS)
                                           docs/assets/thumbs/  (resized images)
 
@@ -42,7 +41,7 @@ SITE_URL = "https://cellmig.org/"
 
 GENERATED = [
     "index.md", "research.md", "lab-members.md", "software.md", "featured-research.md",
-    "publications.md", "datasets.md", "gallery.md", "online-lectures.md", "news.md",
+    "publications.md", "datasets.md", "gallery.md", "online-lectures.md",
     "portfolio", "feed.xml", "feed", THUMBS,
 ]
 
@@ -484,10 +483,8 @@ def page_home(site, featured, ledger, lab):
         p.add(f'<li class="cm-pub">{citation(rec, lab, ledger, link, heading="h3")}</li>')
     p.add("</ol>", '<p class="cm-more-link"><a href="publications/">All publications</a></p>')
 
-    p.add(section_title("Affiliations"), logo_row(site["affiliations"]))
     band(1)
     p.add(section_title("Funding"), logo_row(site["funding"]))
-    band(2)
     p.write()
 
 
@@ -584,8 +581,7 @@ def page_members(members):
     p.add('<aside class="cm-join">',
           '<h2>Join us</h2>',
           '<p>Motivated students and researchers are always welcome to '
-          '<a href="mailto:guillaume.jacquemet@abo.fi">contact us</a>! See also our '
-          '<a href="news/">news</a> for open positions.</p>',
+          '<a href="mailto:guillaume.jacquemet@abo.fi">contact us</a>!</p>',
           f'<p class="cm-small">Lab member? <a href="{form}">Add yourself or update your profile</a>.</p>',
           "</aside>")
     p.write()
@@ -852,44 +848,6 @@ def page_talks(talks):
     p.write()
 
 
-def news_items():
-    items = load(DATA / "news.yaml") or []
-    for n in items:
-        n["date"] = str(n["date"])
-        n["path"] = n.get("path") or f'{n["date"].replace("-", "/")}/{slugify(n["title"])}'
-        if n.get("file"):
-            n["text"] = (DATA / n["file"]).read_text(encoding="utf-8")
-    items.sort(key=lambda n: n["date"], reverse=True)
-    return items
-
-
-def page_news(news):
-    p = Page("news.md", title="News", edit_url=edit_url("data/news.yaml"),
-             description="News from the Cell Migration Lab.")
-    p.add("# News", '<ul class="cm-news">')
-    for n in news:
-        d = datetime.strptime(n["date"], "%Y-%m-%d").strftime("%-d %B %Y")
-        closed = ' <span class="cm-badge">Closed</span>' if n.get("closed") else ""
-        teaser = re.sub(r"[*_#\[\]]|\(http[^)]*\)", "", n.get("text", "")).strip().split("\n")[0][:220]
-        p.add(f'<li><a href="{n["path"]}/"><time datetime="{n["date"]}">{d}</time>'
-              f'<strong>{esc(n["title"])}</strong>{closed}<span>{esc(teaser)}</span></a></li>')
-    p.add("</ul>")
-    p.write()
-    for n in news:
-        post = Page(f'{n["path"]}.md', title=n["title"], edit_url=edit_url(n.get("file") or "data/news.yaml"),
-                    description=re.sub(r"\s+", " ", re.sub(r"[*_#]", "", n.get("text", "")))[:250],
-                    image=n.get("image"))
-        d = datetime.strptime(n["date"], "%Y-%m-%d").strftime("%-d %B %Y")
-        post.add(f'# {esc(n["title"])}', f'<p class="cm-post__date"><time datetime="{n["date"]}">{d}</time></p>')
-        if n.get("closed"):
-            post.add('<p class="cm-notice">Applications for this position are closed.</p>')
-        if n.get("image"):
-            post.add(f'<figure>{media(n["image"], n["title"], 1400)}</figure>')
-        post.add(md(n.get("text", "")))
-        post.add('<p class="cm-small"><a href="news/">← All news</a></p>')
-        post.write()
-
-
 def write_footer(site):
     """Footer partial for overrides/main.html (links are made relative with the url filter)."""
     def u(path):
@@ -929,10 +887,8 @@ def write_footer(site):
     path.write_text(out, encoding="utf-8")
 
 
-def write_feed(site, news, featured):
+def write_feed(site, featured):
     entries = []
-    for n in news:
-        entries.append((n["date"], n["title"], f'{n["path"]}/', md(n.get("text", ""))))
     for f in featured:
         entries.append((f["date"], f["title"], f'portfolio/{f["slug"]}/', md(f.get("summary") or "")))
     entries.sort(key=lambda e: e[0], reverse=True)
@@ -963,9 +919,6 @@ def clean():
             shutil.rmtree(path)
         elif path.exists():
             path.unlink()
-    for n in DOCS.glob("[12][0-9][0-9][0-9]"):
-        if n.is_dir():
-            shutil.rmtree(n)
 
 
 def main():
@@ -975,7 +928,6 @@ def main():
     lab = lab_names()
     members = load_members()
     featured = load_featured(ledger)
-    news = news_items()
 
     page_home(site, featured, ledger, lab)
     page_research(load(DATA / "research.yaml"), ledger, lab)
@@ -986,8 +938,7 @@ def main():
     page_datasets(ledger, site)
     page_gallery(load(DATA / "gallery.yaml"))
     page_talks(load(DATA / "talks.yaml") or [])
-    page_news(news)
-    write_feed(site, news, featured)
+    write_feed(site, featured)
     write_footer(site)
     print(f"Generated pages: {len(featured)} stories, {len(ledger.grouped())} publications, "
           f"{len(ledger.datasets)} datasets, {len(members)} people.")

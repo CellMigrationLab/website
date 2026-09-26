@@ -38,7 +38,6 @@ nav:
   - Members: lab-members.md
   - Gallery: gallery.md
   - Talks: online-lectures.md
-  - News: news.md
   - About: about-us.md
 
 plugins:
@@ -48,7 +47,10 @@ plugins:
       redirect_maps:
         portfolio/index.md: featured-research.md
         author/guijacquemet/index.md: about-us.md
-        category/uncategorized/index.md: news.md
+        category/uncategorized/index.md: index.md
+        news.md: index.md
+        2021/09/16/phd-position-available.md: lab-members.md
+        2019/10/11/we-are-ready-to-move.md: about-us.md
         home-2/index.md: index.md
 
 markdown_extensions:
