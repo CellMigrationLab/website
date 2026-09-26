@@ -1,8 +1,5 @@
-name: Guillaume Jacquemet
-role: Professor in Bioimaging
-group: pi
-status: current
-order: 1
+# Guillaume Jacquemet: photo and links on the website. Name and roles come from
+# things_done (ledger/profile/lab_members.yaml).
 photo: wp-content/uploads/2019/12/img_20181014_121906_bokeh-1-e1575372412894.jpg
 email: guillaume.jacquemet@abo.fi
 orcid: 0000-0002-9286-920X

@@ -156,7 +156,31 @@
     });
   }
 
+  // Charts and map: tooltip on hover / keyboard focus
+  function initChartTips() {
+    document.querySelectorAll(".cm-lag__plot, .cm-bars, .cm-map").forEach((box) => {
+      const tip = box.querySelector(".cm-chart-tip");
+      if (!tip) return;
+      const show = (el) => {
+        const b = box.getBoundingClientRect(), r = el.getBoundingClientRect();
+        tip.textContent = el.dataset.tip;
+        tip.style.left = Math.min(Math.max(r.left + r.width / 2 - b.left, 90), b.width - 90) + "px";
+        tip.style.top = (r.top - b.top) + "px";
+        tip.hidden = false;
+      };
+      box.querySelectorAll("[data-tip]").forEach((el) => {
+        el.querySelector("title")?.remove();  // our tooltip replaces the browser's
+        const target = el.closest("a") || el;
+        el.addEventListener("mouseenter", () => show(el));
+        el.addEventListener("mouseleave", () => { tip.hidden = true; });
+        target.addEventListener("focus", () => show(el));
+        target.addEventListener("blur", () => { tip.hidden = true; });
+      });
+    });
+  }
+
   function init() {
+    initChartTips();
     initHeader();
     initVideos();
     initLoops();

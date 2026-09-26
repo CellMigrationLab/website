@@ -1,0 +1,291 @@
+# Copied by scripts/sync_things_done.py from things_done/report/generated/publications/preprint_lag.json.
+# Do not edit by hand: change things_done instead, the website updates itself.
+generated_at: '2026-09-26T16:58:56Z'
+pairs:
+- preprint_doi: 10.1101/055210
+  published_doi: 10.7554/elife.18124
+  published_title: Talin-KANK1 interaction controls the recruitment of cortical microtubule stabilizing
+    complexes to focal adhesions
+  preprint_date: '2016-05-24'
+  preprint_date_precision: day
+  published_date: '2016-07-13'
+  published_date_precision: day
+  gap_days: 50
+- preprint_doi: 10.1101/125047
+  published_doi: 10.1083/jcb.201704045
+  published_title: FiloQuant reveals increased filopodia density during breast cancer progression
+  preprint_date: '2017-04-06'
+  preprint_date_precision: day
+  published_date: '2017-08-01'
+  published_date_precision: day
+  gap_days: 117
+- preprint_doi: 10.1101/377879
+  published_doi: 10.1016/j.cub.2018.11.053
+  published_title: Filopodome Mapping Identifies p130Cas as a Mechanosensitive Regulator of Filopodia
+    Stability
+  preprint_date: '2018-07-26'
+  preprint_date_precision: day
+  published_date: '2019-01-01'
+  published_date_precision: month
+  gap_days: 159
+- preprint_doi: 10.1101/402305
+  published_doi: 10.1038/s41467-019-12611-w
+  published_title: Superresolution architecture of cornerstone focal adhesions in human pluripotent stem
+    cells
+  preprint_date: '2018-08-28'
+  preprint_date_precision: day
+  published_date: '2019-10-18'
+  published_date_precision: day
+  gap_days: 416
+- preprint_doi: 10.1101/772947
+  published_doi: 10.1021/acs.nanolett.9b04083
+  published_title: Fluctuation-Based Super-Resolution Traction Force Microscopy
+  preprint_date: '2019-09-18'
+  preprint_date_precision: day
+  published_date: '2020-03-06'
+  published_date_precision: day
+  gap_days: 170
+- preprint_doi: 10.1101/2020.05.05.078733
+  published_doi: 10.1016/j.celrep.2021.109716
+  published_title: Myosin-X and talin modulate integrin activity at filopodia tips
+  preprint_date: '2020-05-06'
+  preprint_date_precision: day
+  published_date: '2021-09-01'
+  published_date_precision: month
+  gap_days: 483
+- preprint_doi: 10.1101/2020.05.19.103606
+  published_doi: 10.1083/jcb.202005214
+  published_title: Talin rod domain–containing protein 1 (TLNRD1) is a novel actin-bundling protein which
+    promotes filopodia formation
+  preprint_date: '2020-05-19'
+  preprint_date_precision: day
+  published_date: '2021-07-15'
+  published_date_precision: day
+  gap_days: 422
+- preprint_doi: 10.1101/2020.09.22.306233
+  published_doi: 10.12688/f1000research.27019.2
+  published_title: Automated cell tracking using StarDist and TrackMate
+  preprint_date: '2020-09-22'
+  preprint_date_precision: day
+  published_date: '2020-12-21'
+  published_date_precision: day
+  gap_days: 90
+- preprint_doi: 10.1101/2020.10.05.323295
+  published_doi: 10.1038/s41556-021-00767-x
+  published_title: Cargo-specific recruitment in clathrin- and dynamin-independent endocytosis
+  preprint_date: '2020-10-05'
+  preprint_date_precision: day
+  published_date: '2021-10-01'
+  published_date_precision: month
+  gap_days: 361
+- preprint_doi: 10.1101/2020.11.12.379222
+  published_doi: 10.1016/j.cub.2021.09.022
+  published_title: SHANK3 conformation regulates direct actin binding and crosstalk with Rap1 signaling
+  preprint_date: '2020-11-12'
+  preprint_date_precision: day
+  published_date: '2021-11-01'
+  published_date_precision: month
+  gap_days: 354
+- preprint_doi: 10.1101/2020.03.20.000133
+  published_doi: 10.1038/s41467-021-22518-0
+  published_title: Democratising deep learning for microscopy with ZeroCostDL4Mic
+  preprint_date: '2020-03-20'
+  preprint_date_precision: day
+  published_date: '2021-04-15'
+  published_date_precision: day
+  gap_days: 391
+- preprint_doi: 10.1101/2021.03.19.436208
+  published_doi: 10.1016/j.jbc.2021.100837
+  published_title: Talin mechanosensitivity is modulated by a direct interaction with cyclin-dependent
+    kinase-1
+  preprint_date: '2021-03-20'
+  preprint_date_precision: day
+  published_date: '2021-07-01'
+  published_date_precision: month
+  gap_days: 103
+- preprint_doi: 10.1101/2021.10.22.464987
+  published_doi: 10.1016/j.devcel.2022.09.016
+  published_title: MYO10-filopodia support basement membranes at pre-invasive tumor boundaries
+  preprint_date: '2021-10-22'
+  preprint_date_precision: day
+  published_date: '2022-10-01'
+  published_date_precision: month
+  gap_days: 344
+- preprint_doi: 10.1101/2021.11.03.467152
+  published_doi: 10.1038/s42003-022-03634-z
+  published_title: DeepBacs for multi-task bacterial image analysis using open-source deep learning approaches
+  preprint_date: '2021-11-03'
+  preprint_date_precision: day
+  published_date: '2022-07-09'
+  published_date_precision: day
+  gap_days: 248
+- preprint_doi: 10.1101/2021.09.03.458852
+  published_doi: 10.1038/s41592-022-01507-1
+  published_title: 'TrackMate 7: integrating state-of-the-art segmentation algorithms into tracking pipelines'
+  preprint_date: '2021-09-03'
+  preprint_date_precision: day
+  published_date: '2022-06-02'
+  published_date_precision: day
+  gap_days: 272
+- preprint_doi: 10.1101/2022.03.15.484419
+  published_doi: 10.1016/j.isci.2025.111745
+  published_title: Nuclear talin-1 provides a bridge between cell adhesion and gene expression
+  preprint_date: '2022-03-15'
+  preprint_date_precision: day
+  published_date: '2025-02-01'
+  published_date_precision: month
+  gap_days: 1054
+- preprint_doi: 10.1101/2022.04.07.487490
+  published_doi: 10.1038/s41592-023-02057-w
+  published_title: High-fidelity 3D live-cell nanoscopy through data-driven enhanced super-resolution
+    radial fluctuation
+  preprint_date: '2022-04-08'
+  preprint_date_precision: day
+  published_date: '2023-11-13'
+  published_date_precision: day
+  gap_days: 584
+- preprint_doi: 10.1101/2022.07.12.498931
+  published_doi: 10.1083/jcb.202508155
+  published_title: Regulation of cell dynamics by rapid integrin transport through the biosynthetic pathway
+  preprint_date: '2022-07-12'
+  preprint_date_precision: day
+  published_date: '2025-12-02'
+  published_date_precision: day
+  gap_days: 1239
+- preprint_doi: 10.1101/2022.08.17.504298
+  published_doi: 10.1242/jcs.260574
+  published_title: Myosin-X recruits lamellipodin to filopodia tips
+  preprint_date: '2022-08-19'
+  preprint_date_precision: day
+  published_date: '2023-03-01'
+  published_date_precision: day
+  gap_days: 194
+- preprint_doi: 10.1101/2022.08.22.504744
+  published_doi: 10.1242/jcs.260728
+  published_title: Fast4DReg – fast registration of 4D microscopy datasets
+  preprint_date: '2022-08-23'
+  preprint_date_precision: day
+  published_date: '2023-02-15'
+  published_date_precision: day
+  gap_days: 176
+- preprint_doi: 10.1101/2022.09.21.508660
+  published_doi: 10.1038/s41467-024-52326-1
+  published_title: SHANK3 depletion leads to ERK signalling overdose and cell death in KRAS-mutant cancers
+  preprint_date: '2022-09-21'
+  preprint_date_precision: day
+  published_date: '2024-09-12'
+  published_date_precision: day
+  gap_days: 722
+- preprint_doi: 10.1101/2023.08.13.553080
+  published_doi: 10.1038/s41592-024-02562-6
+  published_title: Efficiently accelerated bioimage analysis with NanoPyx, a Liquid Engine-powered Python
+    framework
+  preprint_date: '2023-08-14'
+  preprint_date_precision: day
+  published_date: '2025-01-02'
+  published_date_precision: day
+  gap_days: 507
+- preprint_doi: 10.1101/2023.10.20.563252
+  published_doi: 10.1371/journal.pbio.3002740
+  published_title: CellTracksColab is a platform that enables compilation, analysis, and exploration of
+    cell tracking data
+  preprint_date: '2023-10-23'
+  preprint_date_precision: day
+  published_date: '2024-08-08'
+  published_date_precision: day
+  gap_days: 290
+- preprint_doi: 10.1101/2023.11.19.567606
+  published_doi: 10.1038/s41592-024-02295-6
+  published_title: 'DL4MicEverywhere: deep learning for microscopy made flexible, shareable and reproducible'
+  preprint_date: '2023-11-19'
+  preprint_date_precision: day
+  published_date: '2024-05-17'
+  published_date_precision: day
+  gap_days: 180
+- preprint_doi: 10.21203/rs.3.rs-3328438/v1
+  published_doi: 10.1038/s41592-024-02562-6
+  published_title: Efficiently accelerated bioimage analysis with NanoPyx, a Liquid Engine-powered Python
+    framework
+  preprint_date: '2023-09-20'
+  preprint_date_precision: day
+  published_date: '2025-01-02'
+  published_date_precision: day
+  gap_days: 470
+- preprint_doi: 10.1101/2023.09.29.559344
+  published_doi: 10.1083/jcb.202310030
+  published_title: TLNRD1 is a CCM complex component and regulates endothelial barrier integrity
+  preprint_date: '2023-09-29'
+  preprint_date_precision: day
+  published_date: '2024-07-16'
+  published_date_precision: day
+  gap_days: 291
+- preprint_doi: 10.1101/2024.07.16.603046
+  published_doi: 10.1038/s41467-025-66209-6
+  published_title: 'PhotoFiTT: a quantitative framework for assessing phototoxicity in live-cell microscopy
+    experiments'
+  preprint_date: '2024-07-16'
+  preprint_date_precision: day
+  published_date: '2025-12-13'
+  published_date_precision: day
+  gap_days: 515
+- preprint_doi: 10.1101/2024.09.16.613204
+  published_doi: 10.1038/s41467-025-60709-1
+  published_title: Structural Repetition Detector for multi-scale quantitative mapping of molecular complexes
+    through microscopy
+  preprint_date: '2024-09-16'
+  preprint_date_precision: day
+  published_date: '2025-07-01'
+  published_date_precision: day
+  gap_days: 288
+- preprint_doi: 10.21203/rs.3.rs-4809905/v1
+  published_doi: 10.1038/s41467-025-66209-6
+  published_title: 'PhotoFiTT: a quantitative framework for assessing phototoxicity in live-cell microscopy
+    experiments'
+  preprint_date: '2024-08-19'
+  preprint_date_precision: day
+  published_date: '2025-12-13'
+  published_date_precision: day
+  gap_days: 481
+- preprint_doi: 10.1101/2024.09.30.615654
+  published_doi: 10.1038/s44318-025-00678-9
+  published_title: Fast label-free live imaging with FlowVision reveals key principles of cancer cell
+    arrest on endothelial monolayers
+  preprint_date: '2024-10-01'
+  preprint_date_precision: day
+  published_date: '2026-01-06'
+  published_date_precision: day
+  gap_days: 462
+- preprint_doi: 10.1101/2025.11.24.689779
+  published_doi: 10.1242/bio.062406
+  published_title: Customizable FDM-based zebrafish larvae mold for live imaging
+  preprint_date: '2025-11-26'
+  preprint_date_precision: day
+  published_date: '2026-03-13'
+  published_date_precision: day
+  gap_days: 107
+- preprint_doi: 10.64898/2025.12.03.691809
+  published_doi: 10.1242/jcs.265278
+  published_title: CCT8 associates with the MYO10 motor domain and regulates filopodia and breast cancer
+    cell invasion
+  preprint_date: '2025-12-05'
+  preprint_date_precision: day
+  published_date: '2026-09-01'
+  published_date_precision: day
+  gap_days: 270
+- preprint_doi: 10.48550/arXiv.2508.00836
+  published_doi: 10.1242/jcs.265183
+  published_title: 'Rxiv-Maker: An automated template engine for streamlined scientific publications'
+  preprint_date: '2025-01-01'
+  preprint_date_precision: year
+  published_date: '2026-09-04'
+  published_date_precision: day
+  gap_days: 611
+- preprint_doi: 10.64898/2026.06.29.735028
+  published_doi: 10.1242/jcs.265152
+  published_title: NucleiSky enables cross-scale multimodal registration of microscopy data using nuclei
+    constellations
+  preprint_date: '2026-06-29'
+  preprint_date_precision: day
+  published_date: '2026-08-14'
+  published_date_precision: day
+  gap_days: 46
