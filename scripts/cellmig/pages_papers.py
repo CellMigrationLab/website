@@ -27,7 +27,8 @@ def page_featured(featured: list[Story], unlisted: list[Story], ledger: Ledger, 
 
 
 def _related(story: Story, ledger: Ledger, software: list[Record]) -> str:
-    """Aside listing software and datasets linked to any version of the story's papers."""
+    """Aside listing software and datasets linked to any version of the story's
+    papers; each heading and its list share one grid cell."""
     dois = set().union(*(ledger.family_dois(d) for d in story["papers"]))
     tools = [s for s in software if {d.lower() for d in s["dois"]} & dois]
     data = [d for d in ledger.datasets if {x.lower() for x in d.get("related_publication_dois") or []} & dois]
@@ -35,14 +36,14 @@ def _related(story: Story, ledger: Ledger, software: list[Record]) -> str:
         return ""
     out = ['<aside class="cm-related">']
     if tools:
-        out.append("<h2>Software</h2><ul>")
+        out.append("<div><h2>Software</h2><ul>")
         out += [f'<li><a href="software/#{slugify(s["title"])}">{esc(s["title"])}</a>'
                 + (f' · <a href="{esc(s["github"])}">code</a>' if s.get("github") else "") + "</li>" for s in tools]
-        out.append("</ul>")
+        out.append("</ul></div>")
     if data:
-        out.append("<h2>Data</h2><ul>")
+        out.append("<div><h2>Data</h2><ul>")
         out += [f'<li><a href="{esc(d["repository_url"])}">{esc(d["title"])}</a></li>' for d in data]
-        out.append("</ul>")
+        out.append("</ul></div>")
     out.append("</aside>")
     return "".join(out)
 
@@ -66,7 +67,7 @@ def page_story(story: Story, stories: list[Story], i: int, ledger: Ledger, lab: 
     image = story["image"]
     p = Page(f"portfolio/{story['slug']}.md", title=story["title"], edit_url=edit_url("data/featured.yaml"),
              description=one_line(story["summary"], 300),
-             image=image if image and not image.endswith(".gif") else None)
+             image=image)
     p.add(f'# {esc(story["title"])}')
     if image:
         p.add(f'<figure class="cm-story__media">{media(image, story["title"], 1600, eager=True, sizes="(max-width: 900px) 100vw, 900px")}</figure>')
