@@ -1,0 +1,14 @@
+title: 'TrackMate 7: integrating state-of-the-art segmentation algorithms into tracking pipelines'
+date: '2021-09-25'
+image: wp-content/uploads/2021/09/trackmate-capture-of-becsctrl100xpaxillingfp-position3_xy1520360652_z0_t000_c0_tracks.gif
+papers:
+- 10.1038/s41592-022-01507-1
+links:
+- label: Read the article
+  url: https://www.nature.com/articles/s41592-022-01507-1
+summary: >-
+  TrackMate is an automated tracking software used to analyze bioimages and is distributed as a Fiji plugin.
+  Here, we introduce a new version of TrackMate. TrackMate 7 is built to address the broad spectrum of
+  modern challenges researchers face by integrating state-of-the-art segmentation algorithms into tracking
+  pipelines. We illustrate qualitatively and quantitatively that these new capabilities function effectively
+  across a wide range of bio-imaging experiments.

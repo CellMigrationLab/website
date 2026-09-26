@@ -1,0 +1,24 @@
+title: Automated cell tracking using StarDist and TrackMate
+date: '2020-09-26'
+image: wp-content/uploads/2020/09/stardist_trackmate.gif
+papers:
+- 10.1101/2020.09.22.306233
+links:
+- label: Preprint
+  url: https://www.biorxiv.org/content/10.1101/2020.09.22.306233v1
+summary: >-
+  The ability of cells to migrate is a fundamental physiological process involved in embryonic development,
+  tissue homeostasis, immune surveillance, and wound healing. Therefore, the mechanisms governing cellular
+  locomotion have been under intense scrutiny over the last 50 years. One of the main tools of this scrutiny
+  is live-cell quantitative imaging, where researchers image cells over time to study their migration
+  and quantitatively analyze their dynamics by tracking them using the recorded images. Despite the availability
+  of computational tools, manual tracking remains widely used among researchers due to the difficulty
+  setting up robust automated cell tracking and large-scale analysis. Here we provide a detailed analysis
+  pipeline illustrating how the deep learning network StarDist can be combined with the popular tracking
+  software TrackMate to perform 2D automated cell tracking and provide fully quantitative readouts. Our
+  proposed protocol is compatible with both fluorescent and widefield images. It only requires freely
+  available and open-source software (ZeroCostDL4Mic and Fiji), and does not require any coding knowledge
+  from the users, making it a versatile and powerful tool for the field. We demonstrate this pipeline’s
+  usability by automatically tracking cancer cells and T cells using fluorescent and brightfield images.
+  Importantly, we provide, as supplementary information, a detailed step-by-step protocol to allow researchers
+  to implement it with their images.

@@ -1,0 +1,24 @@
+title: Democratising deep learning for microscopy with ZeroCostDL4Mic
+date: '2021-04-28'
+image: wp-content/uploads/2020/03/giphy.gif
+papers:
+- 10.1038/s41467-021-22518-0
+links:
+- label: Nature Communications
+  url: https://www.nature.com/articles/s41467-021-22518-0
+- label: Turku Bioscience website
+  url: https://bioscience.fi/news-and-events/zerocostdl4mic_nature_comm/
+- label: GitHub
+  url: https://github.com/HenriquesLab/ZeroCostDL4Mic
+summary: >-
+  Deep Learning (DL) methods are powerful analytical tools for microscopy and can outperform conventional
+  image processing pipelines. Despite the enthusiasm and innovations fuelled by DL technology, the need
+  to access powerful and compatible resources to train DL networks leads to an accessibility barrier that
+  novice users often find difficult to overcome. Here, we present ZeroCostDL4Mic, an entry-level platform
+  simplifying DL access by leveraging the free, cloud-based computational resources of Google Colab. ZeroCostDL4Mic
+  allows researchers with no coding expertise to train and apply key DL networks to perform tasks including
+  segmentation (using U-Net and StarDist), object detection (using YOLOv2), denoising (using CARE and
+  Noise2Void), super-resolution microscopy (using Deep-STORM), and image-to-image translation (using Label-free
+  prediction – fnet, pix2pix and CycleGAN). Importantly, we provide suitable quantitative tools for each
+  network to evaluate model performance, allowing model optimisation. We demonstrate the application of
+  the platform to study multiple biological processes.

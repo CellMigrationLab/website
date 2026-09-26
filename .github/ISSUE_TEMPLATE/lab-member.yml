@@ -1,0 +1,61 @@
+name: Lab member profile
+description: Join the Lab members page, or update your profile.
+title: "Lab member: "
+labels: ["lab member"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in what should appear on https://cellmig.org/lab-members/. Leave fields empty that you do
+        not want to show. **Attach your photo** (square, at least 600 × 600 px) by dragging it into the
+        "Photo" box. Guillaume or a lab member adds it to the website.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: As it should appear on the website (and in papers, so publications can be highlighted).
+    validations:
+      required: true
+  - type: dropdown
+    id: group
+    attributes:
+      label: Position
+      options:
+        - Group leader
+        - Researcher / staff scientist
+        - Postdoc
+        - PhD student
+        - Master's / Bachelor's student
+        - Intern / visiting researcher
+        - I have left the lab (move me to Alumni)
+    validations:
+      required: true
+  - type: input
+    id: role
+    attributes:
+      label: Title shown under your name
+      placeholder: "e.g. Postdoc, PhD student, University Researcher in Bioimaging"
+  - type: textarea
+    id: photo
+    attributes:
+      label: Photo
+      description: Drag and drop an image here.
+  - type: input
+    id: orcid
+    attributes:
+      label: ORCID iD
+      placeholder: 0000-0000-0000-0000
+  - type: input
+    id: links
+    attributes:
+      label: Other links (optional)
+      description: GitHub, Bluesky, Google Scholar or personal website, separated by spaces.
+  - type: input
+    id: bio
+    attributes:
+      label: One-line description (optional)
+      placeholder: "e.g. Filopodia and cancer cell invasion"
+  - type: input
+    id: now
+    attributes:
+      label: For alumni — where are you now? (optional)
