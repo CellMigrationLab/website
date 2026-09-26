@@ -1,40 +1,25 @@
 name: Lab member profile
-description: Join the Lab members page, or update your profile.
+description: Add or update your photo and links on the Lab members page.
 title: "Lab member: "
 labels: ["lab member"]
 body:
   - type: markdown
     attributes:
       value: |
-        Fill in what should appear on https://cellmig.org/lab-members/. Leave fields empty that you do
-        not want to show. **Attach your photo** (square, at least 600 × 600 px) by dragging it into the
-        "Photo" box. Guillaume or a lab member adds it to the website.
+        Your **name, role and whether you are a current member or alumni** come from the lab roster
+        (things_done, `ledger/profile/lab_members.yaml`), which Guillaume keeps up to date. If they are
+        wrong, say so under "Anything else".
+
+        This form is for what the website adds: your photo, links and a one-line description, stored
+        in `data/members/<your-name>.yaml` and `data/photos/`. Leave fields empty that you do not want
+        to show. **Attach your photo** (square, at least 600 × 600 px) by dragging it into the "Photo" box.
   - type: input
     id: name
     attributes:
       label: Name
-      description: As it should appear on the website (and in papers, so publications can be highlighted).
+      description: As on the Lab members page.
     validations:
       required: true
-  - type: dropdown
-    id: group
-    attributes:
-      label: Position
-      options:
-        - Group leader
-        - Researcher / staff scientist
-        - Postdoc
-        - PhD student
-        - Master's / Bachelor's student
-        - Intern / visiting researcher
-        - I have left the lab (move me to Alumni)
-    validations:
-      required: true
-  - type: input
-    id: role
-    attributes:
-      label: Title shown under your name
-      placeholder: "e.g. Postdoc, PhD student, University Researcher in Bioimaging"
   - type: textarea
     id: photo
     attributes:
@@ -49,7 +34,7 @@ body:
     id: links
     attributes:
       label: Other links (optional)
-      description: GitHub, Bluesky, Google Scholar or personal website, separated by spaces.
+      description: Email, GitHub, Bluesky, Google Scholar or personal website, separated by spaces.
   - type: input
     id: bio
     attributes:
@@ -59,3 +44,8 @@ body:
     id: now
     attributes:
       label: For alumni — where are you now? (optional)
+  - type: textarea
+    id: other
+    attributes:
+      label: Anything else
+      description: For example a wrong role or name spelling on the page.

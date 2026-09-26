@@ -22,9 +22,9 @@ button (top right) that opens the right file.
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
 | Research | `data/research.yaml` |
-| Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done; pictures in `data/featured.yaml` |
+| Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done; pictures and page addresses in `data/featured.yaml` (`show: true` / `hide: true` to add or remove a paper) |
 | Publications, latest papers | automatic, from things_done |
-| Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done (members count from `data/members/`) |
+| Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done |
 | Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
 | Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<name>.yaml`, team photos in `data/team.yaml` |
@@ -42,9 +42,11 @@ button (top right) that opens the right file.
 leave. Current members show their current role; alumni show all their
 roles. No dates are shown. The website only adds the look:
 
-- Photo: `data/photos/<name>.jpg` (file name = the person's name in lower case
-  with hyphens, e.g. `jane-doe.jpg`). Photos are cropped to a square
-  automatically; without a photo the initials are shown.
+- Photo: `data/photos/<name>.jpg` (file name = the person's name as in the
+  roster, in lower case without accents and with hyphens, e.g. `ivan-hidalgo-cenalmor.jpg`),
+  or `photo:` in `data/members/<name>.yaml` pointing to an image under `docs/`
+  (one or the other, not both). Photos are cropped to a square automatically;
+  without a photo the initials are shown.
 - Optional `data/members/<name>.yaml` with links and a one-liner:
 
 ```yaml
@@ -54,7 +56,12 @@ photo_position: center         # crop the photo from the centre instead of the t
 now: Postdoc at …              # alumni: where they are now
 ```
 
-New members can send their details with the **Lab member profile** issue form
+Only the keys above are allowed, and every file in `data/members/` and
+`data/photos/` must match someone in the roster: a typo or a leftover file
+stops the build with a message instead of being silently ignored (after a
+name change in the roster, rename the files too).
+
+Members can send a photo and links with the **Lab member profile** issue form
 linked at the bottom of the members page.
 
 ### Pictures
@@ -78,6 +85,12 @@ zensical serve                  # http://localhost:8000, reloads on changes
 
 Generated pages (listed in `.gitignore`) are rebuilt every time; do not edit
 them, edit `data/` instead.
+
+Tests (also run by the publish workflow):
+
+```bash
+PYTHONPATH=scripts python -m unittest discover -s tests
+```
 
 ## Hosting and the cellmig.org domain
 
@@ -110,8 +123,12 @@ overrides/ (layout), docs/assets/ (CSS, JS, fonts) ───┘
 ```
 
 - `scripts/build_pages.py` — turns `data/` into pages, makes thumbnails, the
-  RSS feed and the footer. Stops with a clear message if a DOI or picture is
-  missing.
+  RSS feed and the footer. The code lives in `scripts/cellmig/`, one module
+  per concern (see its `__init__.py` for a map; one module per page family).
+  There are no silent fallbacks: a missing file, a DOI that is not in the
+  ledger, an unknown key or colour, or a picture that does not exist stops
+  the build with a message naming the file to fix.
+- `tests/` — unit tests for the generator.
 - `scripts/sync_things_done.py` — copies the public part of the ledger into
   `data/things_done/` (run by things_done after each update).
 - `overrides/` — page layout (header, footer, home page).
