@@ -13,8 +13,8 @@ ledger/registries/datasets  ─┘   (runs scripts/sync_things_done.py)
 ```
 
 Only public fields are copied: title, authors, venue, year, DOI, abstract,
-open-access status, links between preprints and journal versions, and the
-software/dataset descriptions and links. Supervision, roles, notes and
+open-access status, links between preprints and journal versions, the
+`featured` flag, and the software/dataset descriptions and links. Supervision, roles, notes and
 everything else in the ledger is never read. The website never gets access to
 the private repository: the token below only allows things_done to *write* to
 this website repository.
@@ -44,6 +44,30 @@ this website repository.
   workflows),
 - once a day as a safety net,
 - or by hand (*Run workflow*).
+
+## What the website does with the ledger
+
+- **Publications** and **Latest papers**: every record; preprints are folded into
+  their journal version when `related_dois` links them.
+- **Featured research** (home page and `/portfolio/…` pages): records with
+  `featured: true`, plus those listed in `data/featured.yaml` (which also holds
+  the pictures). Title, authors, journal and abstract come from the record.
+- **From preprint to paper**: the lag between each linked preprint and its
+  journal version. The sync looks up exact dates from the DOIs once and caches
+  them in `data/things_done/dates.yaml`; an `issued_date: YYYY-MM-DD` on a
+  record takes precedence.
+- **Collaborators**: co-authors with three or more joint papers, with their
+  institution and country from OpenAlex (cached in
+  `data/things_done/authors.yaml`). Lab members are excluded.
+
+## Worth adding to the ledger
+
+| Add | Effect on the website |
+| --- | --- |
+| `featured: true` on a publication | it appears in Featured research, with its own page |
+| `related_dois` between every preprint and its journal version | the lag figure covers all papers (today 13 pairs are linked) and duplicates disappear from the list |
+| `related_publication_dois` on software and datasets | the paper's page lists its code and data |
+| `issued_date` (optional) | exact dates without an online lookup |
 
 ## Choosing what appears where
 

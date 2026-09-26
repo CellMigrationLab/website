@@ -21,13 +21,13 @@ button (top right) that opens the right file.
 | Page | Edit |
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
-| Recent works on the home page | `home: 1` … `home: 6` in `data/featured/*.yaml` |
 | Research | `data/research.yaml` |
-| Featured research + one page per story (`/portfolio/<name>/`) | `data/featured/<name>.yaml` |
-| Publications, latest papers | automatic, from things_done |
+| Featured research (home page) + one page per paper (`/portfolio/<name>/`) | `featured: true` in the things_done ledger, or a line in `data/featured.yaml` (DOI + picture); title, abstract and citation come from the ledger |
+| Publications, latest papers, preprint-to-paper lag | automatic, from things_done |
+| Collaborators | automatic: co-authors with ≥3 joint papers, affiliations from OpenAlex |
 | Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
-| Lab members | `data/members/<name>.yaml` (one per person), team photos in `data/team.yaml` |
+| Lab members (one grid, ordered by `group` then `order`) | `data/members/<name>.yaml` (one per person), team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
 | Online talks | `data/talks.yaml` |
 | About us | `docs/about-us.md` |

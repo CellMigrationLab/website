@@ -156,7 +156,39 @@
     });
   }
 
+  // Home page: "Show all featured papers"
+  function initShowMore() {
+    const btn = document.querySelector("[data-cm-show-more]");
+    const grid = document.querySelector("[data-cm-more]");
+    if (!btn || !grid) return;
+    btn.hidden = false;
+    btn.addEventListener("click", () => { grid.classList.add("is-open"); btn.parentElement.remove(); });
+  }
+
+  // Preprint lag chart: tooltip on hover / focus / tap
+  function initLagChart() {
+    const plot = document.querySelector(".cm-lag__plot");
+    if (!plot) return;
+    const tip = plot.querySelector(".cm-lag__tip");
+    const show = (dot) => {
+      const box = plot.getBoundingClientRect(), r = dot.getBoundingClientRect();
+      tip.textContent = dot.dataset.tip;
+      tip.style.left = Math.min(Math.max(r.left + r.width / 2 - box.left, 90), box.width - 90) + "px";
+      tip.style.top = (r.top - box.top) + "px";
+      tip.hidden = false;
+    };
+    plot.querySelectorAll(".cm-lag__dot").forEach((dot) => {
+      dot.querySelector("title")?.remove();  // our tooltip replaces the browser's
+      dot.addEventListener("mouseenter", () => show(dot));
+      dot.addEventListener("mouseleave", () => { tip.hidden = true; });
+      dot.parentElement.addEventListener("focus", () => show(dot));
+      dot.parentElement.addEventListener("blur", () => { tip.hidden = true; });
+    });
+  }
+
   function init() {
+    initShowMore();
+    initLagChart();
     initHeader();
     initVideos();
     initLoops();

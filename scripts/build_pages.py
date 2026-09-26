@@ -7,7 +7,7 @@ Reads                                   Writes (git-ignored, rebuilt every time)
   data/research.yaml                      docs/research.md
   data/members/*.yaml, data/photos/       docs/lab-members.md
   data/software.yaml  + ledger            docs/software.md
-  data/featured/*.yaml + ledger           docs/featured-research.md, docs/portfolio/<slug>.md
+  data/featured.yaml + ledger             featured papers on the home page, docs/portfolio/<slug>.md
   data/things_done/publications.yaml      docs/publications.md
   data/things_done/datasets.yaml          docs/datasets.md
   data/gallery.yaml                       docs/gallery.md
@@ -40,7 +40,7 @@ REPO = "https://github.com/CellMigrationLab/website"
 SITE_URL = "https://cellmig.org/"
 
 GENERATED = [
-    "index.md", "research.md", "lab-members.md", "software.md", "featured-research.md",
+    "index.md", "research.md", "lab-members.md", "software.md", "collaborators.md", "featured-research.md",
     "publications.md", "datasets.md", "gallery.md", "online-lectures.md",
     "portfolio", "feed.xml", "feed", THUMBS,
 ]
@@ -285,6 +285,8 @@ class Ledger:
         self.software = load(td / "software.yaml").get("records") or []
         self.datasets = load(td / "datasets.yaml").get("records") or []
         self.by_doi = {p["doi"].lower(): p for p in self.pubs}
+        dates = td / "dates.yaml"
+        self.dates = (load(dates).get("dates") or {}) if dates.exists() else {}
 
     def get(self, doi):
         return self.by_doi.get(str(doi).lower())
@@ -403,21 +405,31 @@ def load_members():
 
 
 def load_featured(ledger):
-    items = []
-    for f in sorted((DATA / "featured").glob("*.y*ml")):
-        item = load(f)
-        item["slug"] = f.stem
-        item["_file"] = f"data/featured/{f.name}"
-        item["date"] = str(item.get("date") or "")
-        recs = []
-        for d in item.get("papers") or []:
-            rec = ledger.get(d)
-            if not rec:
-                raise SystemExit(f"{item['_file']}: DOI {d} is not in the things_done ledger")
-            recs.append(ledger.published_version(rec))
-        item["_pubs"] = recs
+    """Featured papers: data/featured.yaml (with pictures) plus any paper marked
+    `featured: true` in the ledger. Everything but the picture comes from the ledger."""
+    items, seen = [], set()
+    listed = load(DATA / "featured.yaml") or []
+    flagged = [{"doi": r["doi"]} for r in ledger.pubs if r.get("featured")]
+    for pos, entry in enumerate(listed + flagged):
+        rec = ledger.get(entry["doi"])
+        if not rec:
+            raise SystemExit(f"data/featured.yaml: DOI {entry['doi']} is not in the things_done ledger")
+        main = ledger.published_version(rec)
+        if main["doi"].lower() in seen:
+            continue
+        seen.add(main["doi"].lower())
+        pubs = [main] + [ledger.published_version(ledger.get(d)) for d in entry.get("also") or [] if ledger.get(d)]
+        item = dict(entry)
+        item["papers"] = [entry["doi"]] + list(entry.get("also") or [])
+        item["_pubs"] = pubs
+        item["title"] = main["title"]
+        item["slug"] = entry.get("slug") or slugify(main["title"])[:90]
+        item["year"] = main.get("year") or 0
+        item["date"] = ledger.dates.get(main["doi"].lower()) or f"{item['year']}-01-01"
+        item["summary"] = "\n\n".join(p["abstract"] for p in pubs if p.get("abstract"))
+        item["_pos"] = pos
         items.append(item)
-    items.sort(key=lambda i: i["date"], reverse=True)
+    items.sort(key=lambda i: (-int(i["year"]), i["_pos"]))
     return items
 
 
@@ -455,15 +467,24 @@ def page_home(site, featured, ledger, lab):
         "</section>",
         f'<p class="cm-intro">{esc(site["intro"])}</p>',
     )
-    recent = sorted([f for f in featured if f.get("home")], key=lambda f: f["home"])[:6]
-    p.add(section_title("Recent works"), '<div class="cm-cards cm-cards--home">')
-    for item in recent:
+    shown = 6
+    p.add(section_title("Featured research", id_="featured"), '<div class="cm-cards cm-cards--home" data-cm-more>')
+    for i, item in enumerate(featured):
+        pub = item["_pubs"][0]
+        pic = (media(item["image"], "", 700) if item.get("image")
+               else f'<span class="cm-card__placeholder">{esc(pub.get("venue") or "")}</span>')
+        extra = " is-extra" if i >= shown else ""
         p.add(
-            f'<a class="cm-card" href="portfolio/{item["slug"]}/">',
-            f'<div class="cm-card__media">{media(item.get("image"), "", 700)}</div>',
-            f'<p class="cm-card__title">{esc(item.get("short_title") or item["title"])}</p></a>',
+            f'<a class="cm-card{extra}" href="portfolio/{item["slug"]}/">',
+            f'<div class="cm-card__media">{pic}</div>',
+            f'<p class="cm-card__title">{esc(item["title"])}</p>',
+            f'<p class="cm-card__meta">{esc(pub.get("venue") or "")} · {pub.get("year")}</p></a>',
         )
-    p.add("</div>", '<p class="cm-more-link"><a href="featured-research/">All featured research</a></p>')
+    p.add("</div>")
+    if len(featured) > shown:
+        p.add(f'<p class="cm-more-link"><button type="button" class="cm-show-more" data-cm-show-more hidden>'
+              f'Show all {len(featured)} featured papers</button></p>',
+              '<noscript><style>.cm-card.is-extra{display:block}</style></noscript>')
 
     bands = site.get("bands") or []
 
@@ -549,15 +570,11 @@ def page_members(members):
 
     p = Page("lab-members.md", title="Lab members", edit_url=f"{REPO}/tree/main/data/members",
              description="Meet the people of the Cell Migration Lab in Turku, Finland.")
-    p.add("# Lab members")
-    for gid, glabel in GROUPS:
-        group = [m for m in current if m.get("group", "other") == gid]
-        if not group:
-            continue
-        p.add(f'<h2 class="cm-group-title">{esc(glabel)}</h2>', '<ul class="cm-people">')
-        for m in group:
-            p.add(person_card(m))
-        p.add("</ul>")
+    # Everyone together in one grid (group leader first, then by position)
+    p.add("# Lab members", '<ul class="cm-people">')
+    for m in current:
+        p.add(person_card(m))
+    p.add("</ul>")
 
     team = load(DATA / "team.yaml") if (DATA / "team.yaml").is_file() else {}
     if team:
@@ -663,33 +680,14 @@ def page_software(ledger):
     p.write()
 
 
-def page_featured(featured, ledger, lab):
-    p = Page("featured-research.md", title="Featured Research", edit_url=f"{REPO}/tree/main/data/featured",
-             description="Stories behind our recent papers, preprints and tools.")
-    p.add("# Featured Research",
-          '<p class="cm-lead">The stories behind some of our papers. See <a href="publications/">all our publications</a>.</p>',
-          '<div class="cm-cards">')
-    for item in featured:
-        pub = item["_pubs"][0] if item["_pubs"] else None
-        meta = f'{esc(pub.get("venue") or "")} · {pub.get("year")}' if pub else item["date"][:4]
-        summary = re.sub(r"\s+", " ", str(item.get("summary") or "")).strip()
-        if len(summary) > 220:
-            summary = summary[:220].rsplit(" ", 1)[0] + "…"
-        p.add(f'<a class="cm-card cm-card--story" href="portfolio/{item["slug"]}/">',
-              f'<div class="cm-card__media">{media(item.get("image"), "", 700)}</div>',
-              f'<div class="cm-card__body"><p class="cm-card__meta">{meta} {badges(pub) if pub else ""}</p>',
-              f'<p class="cm-card__title">{esc(item["title"])}</p>',
-              f'<p class="cm-card__text">{esc(summary)}</p></div></a>')
-    p.add("</div>")
-    p.write()
-
+def page_stories(featured, ledger, lab):
     software = software_list(ledger)
     for i, item in enumerate(featured):
         page_story(item, featured, i, ledger, lab, software)
 
 
 def page_story(item, featured, i, ledger, lab, software):
-    p = Page(f"portfolio/{item['slug']}.md", title=item["title"], edit_url=edit_url(item["_file"]),
+    p = Page(f"portfolio/{item['slug']}.md", title=item["title"], edit_url=edit_url("data/featured.yaml"),
              description=re.sub(r"\s+", " ", str(item.get("summary") or ""))[:300],
              image=item.get("image") if item.get("image") and not item["image"].endswith(".gif") else None)
     p.add(f'# {esc(item["title"])}')
@@ -699,9 +697,7 @@ def page_story(item, featured, i, ledger, lab, software):
         p.add(f'<div class="cm-story__cite cm-pub">{citation(rec, lab, ledger, heading="p")}</div>')
     for para in re.split(r"\n\s*\n|\n", str(item.get("summary") or "").strip()):
         if para.strip():
-            p.add(md(para))
-    for fig in item.get("figures") or []:
-        p.add(f'<figure class="cm-story__figure">{media(fig, "", 1600)}</figure>')
+            p.add(f"<p>{esc(para.strip())}</p>")
 
     all_dois = set()
     for d in item.get("papers") or []:
@@ -709,7 +705,11 @@ def page_story(item, featured, i, ledger, lab, software):
         all_dois.add(d.lower())
         all_dois.update(x.lower() for x in rec.get("related_dois") or [])
         all_dois.add(ledger.published_version(rec)["doi"].lower())
-    links = list(item.get("links") or [])
+    main = item["_pubs"][0]
+    links = [{"label": "Read the paper", "url": f"https://doi.org/{main['doi']}"}]
+    pre = ledger.preprint_of(main)
+    if pre:
+        links.append({"label": "Preprint", "url": f"https://doi.org/{pre['doi']}"})
     if links:
         p.add('<p class="cm-story__links">' + " ".join(
             f'<a class="cm-button{" cm-button--ghost" if j else ""}" href="{esc(l["url"])}">{esc(l["label"])}</a>'
@@ -761,6 +761,7 @@ def page_publications(ledger, featured, lab):
           "</div>",
           '<p class="cm-filter__count" data-cm-count aria-live="polite"></p>',
           "</form>")
+    p.add(lag_figure(ledger))
     for y in years:
         p.add(f'<section class="cm-year" data-cm-year><h2 id="y{y}">{y}</h2><ol class="cm-pubs">')
         for rec in [r for r in records if r.get("year") == y]:
@@ -776,6 +777,163 @@ def page_publications(ledger, featured, lab):
           'Also on <a href="https://scholar.google.com/citations?user=dnBWtfsAAAAJ&hl=en">Google Scholar</a> and '
           '<a href="https://orcid.org/0000-0002-9286-920X">ORCID</a>.</p>')
     p.write()
+
+
+COUNTRIES = {
+    "AU": "Australia", "AT": "Austria", "BE": "Belgium", "BR": "Brazil", "CA": "Canada",
+    "CH": "Switzerland", "CN": "China", "CZ": "Czechia", "DE": "Germany", "DK": "Denmark",
+    "EE": "Estonia", "ES": "Spain", "FI": "Finland", "FR": "France", "GB": "United Kingdom",
+    "GR": "Greece", "IE": "Ireland", "IL": "Israel", "IN": "India", "IT": "Italy", "JP": "Japan",
+    "KR": "South Korea", "NL": "Netherlands", "NO": "Norway", "NZ": "New Zealand", "PL": "Poland",
+    "PT": "Portugal", "RU": "Russia", "SE": "Sweden", "SG": "Singapore", "US": "United States",
+}
+
+
+def collaborators(ledger, lab, min_papers=3):
+    """External co-authors with at least `min_papers` joint papers, from the
+    OpenAlex affiliations that the sync stores in data/things_done/authors.yaml."""
+    path = DATA / "things_done" / "authors.yaml"
+    works = (load(path).get("works") or {}) if path.exists() else {}
+    shown = {r["doi"].lower(): r for r in ledger.grouped()}
+    people, all_people, countries, institutions = {}, set(), set(), set()
+    for doi, authors in works.items():
+        rec = shown.get(doi)
+        if not rec:
+            continue
+        year = int(rec.get("year") or 0)
+        spelled = rec.get("authors") or []
+        for idx, a in enumerate(authors):
+            # Prefer the ledger's spelling (same author order) over OpenAlex's
+            name = spelled[idx] if len(spelled) == len(authors) else a["name"]
+            if normalize_name(name) in lab or is_lab_member(name, lab):
+                continue
+            key = a.get("orcid") or normalize_name(name)
+            all_people.add(key)
+            inst = (a.get("institutions") or [None])[0]
+            if inst:
+                institutions.add(inst["name"])
+                if inst.get("country"):
+                    countries.add(inst["country"])
+            p = people.setdefault(key, {"name": name, "papers": 0, "first": year, "last": 0, "inst": None, "inst_year": 0})
+            p["papers"] += 1
+            p["first"] = min(p["first"], year)
+            if year >= p["last"]:
+                p["last"], p["name"] = year, name
+            if inst and year >= p["inst_year"]:
+                p["inst"], p["inst_year"] = inst, year
+            if a.get("orcid"):
+                p["orcid"] = a["orcid"]
+    top = [p for p in people.values() if p["papers"] >= min_papers]
+    top.sort(key=lambda p: (-p["papers"], p["name"]))
+    return top, len(all_people), len(countries), len(institutions)
+
+
+def is_lab_member(name, lab):
+    """Match "Joanna W. Pylvänäinen" to "Joanna Pylvänäinen" (first + last name)."""
+    parts = name.split()
+    return len(parts) > 2 and normalize_name(parts[0] + parts[-1]) in lab
+
+
+def flag(code):
+    return "".join(chr(0x1F1E6 + ord(c) - 65) for c in code.upper()) if code and len(code) == 2 else ""
+
+
+def page_collaborators(ledger, lab):
+    top, n_people, n_countries, n_inst = collaborators(ledger, lab)
+    p = Page("collaborators.md", title="Collaborators",
+             description="The researchers and institutions the Cell Migration Lab works with.")
+    p.add("# Collaborators",
+          '<p class="cm-lead">Science is a team effort. These are the researchers we publish with most often.</p>',
+          '<div class="cm-stats">',
+          f'<div><strong>{n_people}</strong><span>co-authors</span></div>',
+          f'<div><strong>{n_inst}</strong><span>institutions</span></div>',
+          f'<div><strong>{n_countries}</strong><span>countries</span></div>',
+          "</div>")
+    by_country = {}
+    for c in top:
+        code = (c["inst"] or {}).get("country") or ""
+        by_country.setdefault(code, []).append(c)
+    order = sorted(by_country, key=lambda k: (-len(by_country[k]), COUNTRIES.get(k, k or "~")))
+    for code in order:
+        label = COUNTRIES.get(code, code) if code else "Other"
+        p.add(f'<h2 class="cm-country"><span aria-hidden="true">{flag(code)}</span> {esc(label)}</h2>', '<ul class="cm-collabs">')
+        for c in by_country[code]:
+            years = f'{c["first"]}–{c["last"]}' if c["first"] != c["last"] else str(c["last"])
+            inst = esc((c["inst"] or {}).get("name", ""))
+            q = esc(c["name"].split()[-1])
+            name = esc(c["name"])
+            if c.get("orcid"):
+                name = f'<a href="https://orcid.org/{esc(c["orcid"])}">{name}</a>'
+            p.add(f'<li><span class="cm-collabs__name">{name}</span>'
+                  f'<span class="cm-collabs__inst">{inst}</span>'
+                  f'<a class="cm-collabs__papers" href="publications/?q={q}">{c["papers"]} papers · {years}</a></li>')
+        p.add("</ul>")
+    p.add('<p class="cm-small cm-source">Generated automatically from our publications (co-authors with three or more '
+          'joint papers) and their affiliations on the most recent joint paper, from '
+          '<a href="https://openalex.org">OpenAlex</a>.</p>')
+    p.write()
+
+
+def lag_figure(ledger):
+    """Preprint-to-publication lag: a dot histogram, one dot per paper."""
+    rows = []
+    for rec in ledger.pubs:
+        if rec.get("status") != "preprint":
+            continue
+        pub = ledger.published_version(rec)
+        if pub is rec:
+            continue
+        d1, d2 = ledger.dates.get(rec["doi"].lower()), ledger.dates.get(pub["doi"].lower())
+        if not (d1 and d2):
+            continue
+        days = (datetime.strptime(d2, "%Y-%m-%d") - datetime.strptime(d1, "%Y-%m-%d")).days
+        if days < 0:
+            continue
+        rows.append({"title": pub["title"], "venue": pub.get("venue") or "", "months": days / 30.44,
+                     "posted": d1, "published": d2, "doi": pub["doi"]})
+    if len(rows) < 3:
+        return ""
+    rows.sort(key=lambda r: r["months"])
+    months = [r["months"] for r in rows]
+    mid = len(months) // 2
+    median = months[mid] if len(months) % 2 else (months[mid - 1] + months[mid]) / 2
+    top = max(12, int((max(months) + 5.99) // 6 * 6))
+    W, left, right, r, gap = 640, 16, 16, 5, 12
+    x = lambda m: left + (W - left - right) * m / top
+    bins = {}
+    for row in rows:
+        row["bin"] = int(row["months"])
+        bins.setdefault(row["bin"], []).append(row)
+    tallest = max(len(v) for v in bins.values())
+    base = 24 + tallest * gap
+    H = base + 34
+    parts = [f'<svg class="cm-lag__chart" viewBox="0 0 {W} {H}" role="img" '
+             f'aria-label="Months from preprint to journal publication for {len(rows)} papers; median {median:.0f} months">']
+    for t in range(0, top, 6):
+        parts.append(f'<line class="cm-lag__grid" x1="{x(t):.1f}" x2="{x(t):.1f}" y1="12" y2="{base}"/>'
+                     f'<text class="cm-lag__tick" x="{x(t):.1f}" y="{base + 18}">{t}</text>')
+    parts.append(f'<line class="cm-lag__axis" x1="{left}" x2="{W - right}" y1="{base}" y2="{base}"/>')
+    parts.append(f'<line class="cm-lag__median" x1="{x(median):.1f}" x2="{x(median):.1f}" y1="4" y2="{base}"/>'
+                 f'<text class="cm-lag__label" x="{x(median) + 6:.1f}" y="14">median {median:.1f} months</text>')
+    for b, items in bins.items():
+        for k, row in enumerate(items):
+            cx, cy = x(b + 0.5), base - 10 - k * gap
+            tip = f'{row["title"]} — {row["venue"]}: {row["months"]:.1f} months ({row["posted"]} → {row["published"]})'
+            parts.append(f'<a href="https://doi.org/{esc(row["doi"])}"><circle class="cm-lag__dot" cx="{cx:.1f}" cy="{cy:.1f}" r="{r}" '
+                         f'data-tip="{esc(tip)}"><title>{esc(tip)}</title></circle></a>')
+    parts.append(f'<text class="cm-lag__tick cm-lag__unit" x="{W - right}" y="{base + 18}">months</text>')
+    parts.append("</svg>")
+    table = "".join(f'<tr><td>{esc(r["title"])}</td><td>{r["posted"]}</td><td>{r["published"]}</td>'
+                    f'<td>{r["months"]:.1f}</td></tr>' for r in sorted(rows, key=lambda r: r["published"], reverse=True))
+    return (f'<section class="cm-lag" aria-labelledby="lag-title">'
+            f'<div class="cm-lag__head"><p class="cm-lag__hero"><strong>{median:.0f}</strong> months</p>'
+            f'<p><span id="lag-title" class="cm-lag__title">From preprint to paper</span>'
+            f'Median time between posting a preprint and its journal publication, for {len(rows)} papers. '
+            f'Each dot is a paper; hover or tap for details.</p></div>'
+            f'<div class="cm-lag__plot">{"".join(parts)}<div class="cm-lag__tip" hidden></div></div>'
+            f'<details class="cm-lag__table"><summary>Show as table</summary><table><thead><tr><th>Paper</th>'
+            f'<th>Preprint</th><th>Journal</th><th>Months</th></tr></thead><tbody>{table}</tbody></table></details>'
+            f'</section>')
 
 
 def page_datasets(ledger, site):
@@ -933,7 +1091,8 @@ def main():
     page_research(load(DATA / "research.yaml"), ledger, lab)
     page_members(members)
     page_software(ledger)
-    page_featured(featured, ledger, lab)
+    page_stories(featured, ledger, lab)
+    page_collaborators(ledger, lab)
     page_publications(ledger, featured, lab)
     page_datasets(ledger, site)
     page_gallery(load(DATA / "gallery.yaml"))
