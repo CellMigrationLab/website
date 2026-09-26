@@ -1,16 +1,21 @@
-# Featured research: the papers shown on the home page, newest first, each with
+# Pictures (and page addresses) for Featured research. The 8 newest featured
+# papers are on the home page, all of them on /featured-research/, and each has
 # its own page at /portfolio/<slug>/.
 #
 # Title, authors, journal, abstract and links all come from the things_done
-# ledger (by DOI). Here you only choose the picture. To feature a paper, either
-# add it below, or set `featured: true` on it in the ledger (it then appears
-# automatically; add it here too if you want a picture).
+# ledger (by DOI). Here you only choose the picture.
 #
 #   doi:    the paper (journal version or preprint; a preprint's journal version
 #           is used automatically when the ledger links them)
 #   image:  picture or logo (a .gif plays as a short video)
 #   slug:   page address; kept from the old website - leave unchanged
 #   also:   other DOIs told by the same story (optional)
+#   show:   true to feature a paper that is not corresponding-author
+#   hide:   true to leave a corresponding-author paper out of the grid
+#
+# Featured research is every paper where Guillaume is (co-)corresponding author
+# in the ledger. Papers without a picture show the journal name instead: add
+# them below with an image to make the grid look nice.
 
 
 - doi: 10.48550/arXiv.2603.10704
@@ -103,4 +108,9 @@
 - doi: 10.1083/jcb.201704045
   image: wp-content/uploads/2019/08/cover4.jpg
   slug: filoquant
-  also: [10.1007/978-1-4939-9686-5_16]
+- doi: 10.1007/978-1-4939-9686-5_16
+  image: wp-content/uploads/2019/08/cover9.jpg
+- doi: 10.1007/978-1-0716-2887-4_4
+  image: wp-content/uploads/2019/08/vasp.jpg
+- doi: 10.1042/bio_2021_167
+  image: wp-content/uploads/2020/09/max_predicted_12.png

@@ -22,7 +22,7 @@ button (top right) that opens the right file.
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
 | Research | `data/research.yaml` |
-| Featured research (home page) + one page per paper (`/portfolio/<name>/`) | `featured: true` in the things_done ledger, or a line in `data/featured.yaml` (DOI + picture); title, abstract and citation come from the ledger |
+| Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done; pictures in `data/featured.yaml` |
 | Publications, latest papers, preprint-to-paper lag | automatic, from things_done |
 | Collaborators | automatic: co-authors with ≥3 joint papers, affiliations from OpenAlex |
 | Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |

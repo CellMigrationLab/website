@@ -45,8 +45,7 @@ plugins:
   # Old WordPress addresses that have no page of their own any more.
   - redirects:
       redirect_maps:
-        portfolio/index.md: index.md
-        featured-research.md: index.md
+        portfolio/index.md: featured-research.md
         author/guijacquemet/index.md: about-us.md
         category/uncategorized/index.md: index.md
         news.md: index.md
