@@ -1,0 +1,60 @@
+{#- Cell Migration Lab layout: slim header with the lab name and a top menu,
+    centred content, dark footer. Footer content is generated from
+    data/site.yaml by scripts/build_pages.py (partials/cm-footer.html). -#}
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <link rel="preload" href="{{ 'assets/fonts/inter-latin-wght-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'assets/fonts/bodoni-moda-latin-wght-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="alternate" type="application/rss+xml" title="{{ config.site_name }}" href="{{ 'feed.xml' | url }}">
+  {% set title = page.meta.title if page.meta and page.meta.title else (page.title | striptags) %}
+  {% set description = page.meta.description if page.meta and page.meta.description else config.site_description %}
+  {% set image = page.meta.image if page.meta and page.meta.image else "wp-content/uploads/2019/08/cover4.jpg" %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:title" content="{{ title if not page.is_homepage else config.site_name }}">
+  <meta property="og:description" content="{{ description | e }}">
+  <meta property="og:url" content="{{ page.canonical_url }}">
+  <meta property="og:image" content="{{ config.site_url }}{{ image }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#ffffff">
+{% endblock %}
+
+{% block header %}
+<header class="cm-header" data-md-component="header">
+  <nav class="cm-header__inner" aria-label="Main">
+    <a class="cm-brand" href="{{ nav.homepage.url | url }}">{{ config.site_name }}</a>
+    <input class="cm-menu-toggle" type="checkbox" id="cm-menu" aria-hidden="true" tabindex="-1">
+    <ul class="cm-menu" id="cm-menu-list">
+      {% for item in nav.items %}
+        {% if not item.is_index %}
+          <li><a href="{{ item.url | url }}"{% if item.active %} class="is-active" aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="cm-header__tools">
+      {% include "partials/search.html" %}
+      <label class="cm-burger" for="cm-menu" aria-label="Menu" role="button" tabindex="0" aria-controls="cm-menu-list">
+        <span></span><span></span>
+      </label>
+    </div>
+  </nav>
+</header>
+{% endblock %}
+
+{% block tabs %}{% endblock %}
+{% block site_nav %}{% endblock %}
+
+{% block container %}
+  <div class="md-content cm-content" data-md-component="content">
+    <article class="md-content__inner md-typeset" id="__skip">
+      {% block content %}
+        {% include "partials/content.html" %}
+      {% endblock %}
+    </article>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {% include "partials/cm-footer.html" %}
+{% endblock %}

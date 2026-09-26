@@ -1,0 +1,91 @@
+# Site-wide content: home page, footer, contact details.
+
+name: Cell Migration Lab
+motto: We study cell migration in health and diseases.
+tagline: Cell biology, microscopy, and image analysis.
+welcome: Welcome to our lab website.
+hero:
+  image: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb.png
+intro: >-
+  Our research aims to elucidate the mechanisms by which cells move and interact with their
+  environment. We use multiple microscopy approaches and continuously develop tools for image
+  analysis.
+
+# Full-width microscopy images between the sections of the home page (two are used).
+bands:
+  - image: wp-content/uploads/2019/08/monolayer-1.jpg
+    caption: Breast cancer cell monolayer stained for actin.
+  - image: wp-content/uploads/2022/10/cover-3.jpg
+
+contact:
+  email: guillaume.jacquemet@abo.fi
+  address:
+    - Cell Migration Lab
+    - Turku Bioscience Centre, BioCity
+    - Tykistökatu 6
+    - 20520 Turku, Finland
+  map: https://www.openstreetmap.org/?mlat=60.4499&mlon=22.2720#map=16/60.4499/22.2720
+
+social:
+  - label: Bluesky
+    icon: bluesky
+    url: https://bsky.app/profile/guijacquemet.bsky.social
+  - label: GitHub
+    icon: github
+    url: https://github.com/CellMigrationLab
+  - label: Google Scholar
+    icon: scholar
+    url: https://scholar.google.com/citations?user=dnBWtfsAAAAJ&hl=en
+  - label: Mail
+    icon: mail
+    url: mailto:guillaume.jacquemet@abo.fi
+
+# Logos: `logo` is shown on white (home page), `logo_dark` in the dark footer.
+affiliations:
+  - name: Åbo Akademi University
+    url: https://www.abo.fi/en/
+    logo: wp-content/uploads/2023/02/aboakademi-logo-914629676-e1677354803399.png
+    logo_dark: wp-content/uploads/2023/02/aboakademi-logo_black-300x300-1.png
+  - name: InFLAMES Flagship
+    url: https://inflames.utu.fi/
+    logo: wp-content/uploads/2023/02/inflames_logo_color.png
+    logo_dark: wp-content/uploads/2023/02/inflames_logo_color2.png
+  - name: Turku Bioscience Centre
+    url: https://bioscience.fi/
+    logo: wp-content/uploads/2023/02/turku_bioscience_logo_rgb-300x78-1.png
+    logo_dark: wp-content/uploads/2023/02/turku_bioscience_logo_white_rgb-300x78-1.png
+  - name: Turku BioImaging
+    url: https://www.bioimaging.fi/
+    logo: wp-content/uploads/2023/02/logo-turku-biomaging_1000px.jpg
+    logo_dark: wp-content/uploads/2023/02/logo-turku-biomaging_1000px.png
+
+funding:
+  - name: Åbo Akademi University
+    url: https://www.abo.fi/en/
+    logo: wp-content/uploads/2023/02/aboakademi-logo-914629676-e1677354803399.png
+  - name: Research Council of Finland
+    url: https://www.aka.fi/en/
+    logo: wp-content/uploads/2019/08/index.png
+  - name: Sigrid Jusélius Foundation
+    url: https://www.sigridjuselius.fi/
+    logo: wp-content/uploads/2019/08/sigrid.png
+  - name: Cancer Foundation Finland
+    url: https://syopasaatio.fi/en/homepage/
+    logo: wp-content/uploads/2021/04/finnish_cancer_society.png
+  - name: InFLAMES Flagship
+    url: https://inflames.utu.fi/
+    logo: wp-content/uploads/2023/02/inflames_logo_color.png
+
+footer_logo: wp-content/uploads/2023/02/g2198-8.png
+
+# Links at the top of https://cellmig.org/datasets/
+resources:
+  - title: Deep learning models and training data
+    text: Our model zoo on GitHub
+    url: https://github.com/CellMigrationLab/ModelZoo
+  - title: Plasmids at Addgene
+    text: Request our constructs
+    url: https://www.addgene.org/Guillaume_Jacquemet/
+  - title: Datasets repository
+    text: All our datasets on GitHub
+    url: https://github.com/CellMigrationLab/Datasets
