@@ -22,8 +22,10 @@ report/generated/publications/           │  update_website.yml runs
 Only public fields are copied: title, authors, venue, year, DOI, abstract,
 open-access status, preprint/journal pairs, whether Guillaume is corresponding
 author, software/dataset descriptions, co-author names, joint-paper counts and
-countries. Supervision, roles, notes and conflict-of-interest data are never
-read. The website never gets access to the private repository: the token
+countries, and the public lab roster (names, roles in the lab, current or
+alumni). Supervision records, notes and conflict-of-interest data are never
+read. Every input file is required: if one is missing the sync fails (and the
+workflow run turns red) instead of quietly leaving part of the site stale. The website never gets access to the private repository: the token
 below only lets things_done *write* to this repository.
 
 ## Setup (once, about 5 minutes)
@@ -47,13 +49,13 @@ generated reports, after the ledger's own automation, and once a day.
 
 | On the website | things_done source |
 | --- | --- |
-| Publications, latest papers | `ledger/publications/`, paired by the crosswalk report |
+| Publications, latest papers | `ledger/publications/`, paired by the crosswalk report; `display_overrides.yaml` `force_preprint_bucket` keeps a preprint listed on its own |
 | Featured research (which papers, text) | publications with `me.corresponding_author: true`; pictures are in this repo's `data/featured.yaml` |
 | Software (which projects, years, links) | `ledger/registries/software.yaml`; colours/pictures/long text in `data/software.yaml` here |
 | Datasets | `ledger/registries/datasets.yaml` |
 | Lab in numbers: papers, preprints | publications |
 | Lab in numbers: citations, h-index | `.cache/scholar_metrics.json` (Diagnose Scholar Fetch action) |
-| Lab in numbers: preprint-to-paper lag | `preprint_lag.json` (Analyze Preprint-to-Publication Lag action) |
+| Lab in numbers: preprint-to-paper lag | `preprint_lag.json` (Analyze Preprint-to-Publication Lag action); the median shown is its `summary` |
 | Lab in numbers: top collaborators, co-author cloud | `coauthor_network.json` |
 | Lab in numbers: co-author map | `coauthor_countries.json` (Export Co-author Countries action) |
 | Lab members, alumni and their roles, member counts | `ledger/profile/lab_members.yaml` (photos and links stay in this repo) |
@@ -65,6 +67,7 @@ generated reports, after the ledger's own automation, and once a day.
 | `related_publication_dois` on software and datasets | the paper's page lists its code and data |
 | `report/config/preprint_links_overrides.yaml` entries for missed pairs | the paper appears once, and the lag covers it |
 | `video_url` on talks (future) | the Talks page could be generated from the ledger |
+| the full issue date of each publication (`fetch_publications.py` already reads CSL `issued`, but keeps only the year) | featured papers ordered exactly within a year, and dated in the RSS feed (today only papers with a preprint have a known date) |
 
 To refresh by hand from local checkouts:
 `python scripts/sync_things_done.py --ledger ../things_done`
