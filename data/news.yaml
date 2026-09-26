@@ -1,0 +1,13 @@
+# News posts. Each post gets its own page; `path` keeps the address of posts
+# from the old WordPress site. New posts only need title, date and text.
+
+- title: PhD position available
+  date: 2021-09-16
+  path: 2021/09/16/phd-position-available
+  closed: true
+  file: news/phd-position-available.md
+- title: We are ready to move!
+  date: 2019-10-11
+  path: 2019/10/11/we-are-ready-to-move
+  image: wp-content/uploads/2019/10/img-20191005-wa0001.jpg
+  text: Our new lab space is ready! Stay tuned for more pictures.

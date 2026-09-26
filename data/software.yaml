@@ -1,0 +1,205 @@
+# How each software project looks on https://cellmig.org/software/
+#
+# The list of projects, their names, years, GitHub links and paper DOIs come
+# from the things_done ledger (data/things_done/software.yaml, synced
+# automatically). This file only adds the website presentation:
+#
+#   id:      the project id in the ledger (ledger/registries/software.yaml)
+#   color:   tile colour: purple, orange, blue, black, white, sky, grey, mint,
+#            red, green, amber, pink, light
+#   image:   picture or logo shown next to the text (a .gif is played as a video)
+#   video:   short video file instead of a picture (in docs/assets/media/)
+#   text:    longer description for the website (the ledger's one-line
+#            description is used when this is missing)
+#   paper:   link to the paper, when the ledger has no related DOI
+#   links:   extra links shown under the text
+#
+# The order of the page follows the ledger (newest first). A project that is
+# in the ledger but not here is still shown, with its ledger description and a
+# neutral colour. A project that is only here (no ledger id) needs `title`,
+# `year` and `github`/`paper` itself.
+
+- id: nucleisky
+  color: purple
+  image: wp-content/uploads/2026/07/gemini_generated_image_kc5ezfkc5ezfkc5e.png
+  text: >-
+    NucleiSky is a constellation-based registration tool for microscopy images in 2D and 3D. It
+    aligns partial fields of view, ROIs, or tissue subvolumes to larger reference images by matching
+    the spatial geometry of segmented nuclei, rather than relying on pixel-intensity similarity.
+    NucleiSky supports browser-based Colab workflows, a no-code desktop GUI, and Python-based analysis
+    pipelines.
+
+- id: labconstrictor
+  color: orange
+  image: wp-content/uploads/2026/07/comic-e1782918385802.png
+  paper: https://arxiv.org/abs/2603.10704
+  text: >-
+    LabConstrictor turns Jupyter notebooks into installable desktop applications. It helps
+    researchers share analysis workflows as user-friendly apps that can be launched without Python,
+    pip, or terminal commands, while keeping the underlying project versioned and reproducible.
+    LabConstrictor can package notebooks, build cross-platform installers, and provide a simple
+    welcome dashboard for end users.
+
+- id: ezinput
+  color: blue
+  image: wp-content/uploads/2026/07/logo_white_bg.png
+  paper: https://arxiv.org/abs/2601.08859
+  text: >-
+    EZInput is a Python library for building interactive user interfaces for scientific computing
+    workflows. It lets developers define inputs once and reuse the same interface logic across
+    Jupyter notebooks, Google Colab, and terminal environments. EZInput supports validated inputs,
+    session persistence, and shareable parameter files, helping make computational tools easier to
+    run and reproduce.
+
+- id: rxiv-maker
+  title: Rxiv-Maker
+  color: black
+  image: wp-content/uploads/2026/07/logo-rxiv-maker.png
+  paper: https://arxiv.org/abs/2508.00836
+  text: >-
+    Rxiv-Maker is a framework for writing scientific manuscripts in Markdown and converting them
+    into publication-ready PDFs. It supports automated figure generation, citation management, LaTeX
+    typesetting, executable code blocks, DOCX export, and preprint submission packages, helping
+    researchers keep manuscripts synchronized with their data, code, and version history.
+
+- id: sred
+  title: SReD
+  color: white
+  image: wp-content/uploads/2026/07/logo_small.png
+  text: >-
+    SReD, the Structural Repetition Detector, is an ImageJ/Fiji plugin for detecting and quantifying
+    repetitive structures in microscopy images. It generates repetition maps using local texture
+    similarity, enabling unbiased analysis of recurring biological structures across scales and
+    imaging modalities without requiring labelled training data.
+
+- id: photofitt
+  color: sky
+  image: wp-content/uploads/2024/08/photofitt-logo.png
+  text: >-
+    PhotoFiTT (Phototoxicity Fitness Time Trial) is an integrated framework combining a standardised
+    experimental protocol with advanced image analysis to quantify light-induced cellular stress in
+    label-free settings. PhotoFiTT leverages machine learning and cell cycle dynamics to analyse
+    mitotic timing, cell size changes, and overall cellular activity in response to controlled light
+    exposure.
+
+- id: celltrackscolab
+  color: white
+  image: wp-content/uploads/2024/01/celltrackscolab_logo.png
+  github: https://github.com/CellMigrationLab/CellTracksColab
+  text: >-
+    CellTracksColab is an online platform tailored to simplify the exploration and analysis of
+    tracking data by leveraging the free, cloud-based computational resources of Google Colab.
+    CellTracksColab facilitates the amalgamation and analysis of results across multiple fields of
+    view, conditions, and repeats, ensuring a holistic dataset overview. It also harnesses
+    high-dimensional data reduction and clustering, enabling researchers to identify distinct
+    behavioral patterns and trends without bias, and includes specialized modules for spatial
+    analyses (clustering, proximity to specific regions of interest).
+
+- id: nanopyx
+  color: grey
+  image: wp-content/uploads/2024/01/259983552-ef7aa814-16ba-4947-a69f-1f096d70370e.png
+  paper: https://www.biorxiv.org/content/10.1101/2023.08.13.553080v2
+  text: >-
+    NanoPyx is a library specialized in the analysis of light microscopy and super-resolution data.
+    It is a successor to [NanoJ](https://github.com/HenriquesLab/NanoJ-Core), a Java library for the
+    analysis of super-resolution microscopy data. NanoPyx focuses on performance, by heavily
+    exploiting Cython-aided multiprocessing, and simplicity. It implements methods for the bioimage
+    analysis field, with a special emphasis on those developed by the
+    [Henriques Laboratory](https://henriqueslab.github.io/), and is distributed as a Python library,
+    as [codeless Jupyter notebooks](https://github.com/HenriquesLab/NanoPyx#codeless-jupyter-notebooks-available)
+    that run locally or on Google Colab, and as a
+    [napari plugin](https://github.com/HenriquesLab/NanoPyx#napari-plugin).
+
+- id: dl4miceverywhere
+  color: mint
+  image: wp-content/uploads/2024/01/dl4miceverywhere-logo.png
+  paper: https://doi.org/10.1038/s41592-024-02295-6
+  text: >-
+    DL4MicEverywhere is a platform that offers researchers an easy-to-use gateway to cutting-edge
+    deep learning techniques for bioimage analysis. It features interactive Jupyter notebooks with
+    user-friendly graphical interfaces that require no coding skills, and uses Docker
+    [containers](https://hub.docker.com/repository/docker/henriqueslab/dl4miceverywhere) to ensure
+    portability and reproducibility across computing environments. DL4MicEverywhere extends
+    [ZeroCostDL4Mic](https://github.com/HenriquesLab/ZeroCostDL4Mic) by running notebooks locally on
+    laptops or remotely on workstations, high-performance computing (HPC) and cloud systems.
+
+- id: esrrf
+  color: red
+  video: assets/media/esrrf.mp4
+  text: >-
+    eSRRF provides an accessible super-resolution approach, maximizing information extraction across
+    varied experimental conditions while minimizing artifacts. Its optimal parameter prediction
+    strategy is generalizable, moving toward unbiased and optimized analyses in super-resolution
+    microscopy.
+
+- id: fast4dreg
+  color: green
+  video: assets/media/fast4dreg-drift.mp4
+  paper: https://doi.org/10.1242/jcs.260728
+  text: >-
+    Fast4DReg is a Fiji plugin for 2D and 3D video that corrects drift in all x-, y-, and
+    z-directions. Fast4DReg creates intensity projections along both axes, estimates their drift
+    using cross-correlation-based drift correction, and then translates the video frame by frame.
+    It can also align multi-channel 2D or 3D images, which is particularly useful for instruments
+    that suffer from a misalignment of channels.
+
+- id: trackmate
+  color: sky
+  video: assets/media/fast4dreg-glioblastoma.mp4
+  paper: https://doi.org/10.1038/s41592-022-01507-1
+  text: >-
+    TrackMate is your buddy for your everyday tracking.
+    [TrackMate](https://imagej.net/plugins/trackmate/index) is an automated tracking software that
+    analyzes bioimages and is distributed as a Fiji plugin. Read about TrackMate 7, which integrates
+    state-of-the-art segmentation algorithms into tracking pipelines, and about
+    [automated cell tracking using StarDist and TrackMate](https://f1000research.com/articles/9-1279/v2).
+  links:
+    - label: TrackMate documentation
+      url: https://imagej.net/plugins/trackmate/index
+
+- id: zerocostdl4mic
+  title: ZeroCostDL4Mic
+  color: amber
+  video: assets/media/zerocostdl4mic.mp4
+  text: >-
+    [ZeroCostDL4Mic](https://github.com/HenriquesLab/ZeroCostDL4Mic/wiki) allows the use of popular
+    deep learning neural networks for image segmentation and object detection (U-Net, StarDist,
+    YOLOv2), image denoising and restoration (CARE, Noise2Void), super-resolution microscopy
+    (Deep-STORM) and image-to-image translation (label-free prediction fnet, pix2pix, CycleGAN), all
+    running for free in Google Colab.
+  links:
+    - label: More about deep learning for microscopy
+      url: image-analysis/
+
+- title: SRRF TFM
+  year: 2020
+  color: pink
+  video: assets/media/srrf-tfm.mp4
+  paper: https://doi.org/10.1021/acs.nanolett.9b04083
+  text: >-
+    A simplified protocol and imaging strategy that enhances the output of traction force microscopy
+    by increasing the achievable bead density and the accuracy of bead tracking. The approach relies
+    on super-resolution microscopy enabled by fluorescence fluctuation analysis, can be used on
+    spinning-disk confocal or widefield microscopes, and is compatible with available analysis
+    software.
+
+- id: filomap
+  title: FiloMap
+  color: light
+  image: wp-content/uploads/2019/08/vasp.jpg
+  paper: https://doi.org/10.1016/j.cub.2018.11.053
+  text: >-
+    ImageJ and R scripts used to map the localization of proteins within filopodia and generate
+    filopodia maps. Step-by-step protocols explain how to use FiloMap to compare the localization of
+    multiple proteins within filopodia.
+
+- id: filoquant
+  color: orange
+  video: assets/media/filomap-dcis-collagen.mp4
+  paper: https://doi.org/10.1083/jcb.201704045
+  text: >-
+    The filopodia quantification plugin. FiloQuant is a user-friendly tool for the automated
+    detection and quantification of filopodia properties such as length and density, developed as a
+    plugin for Fiji. A step-by-step
+    [methods chapter](https://doi.org/10.1007/978-1-4939-9686-5_16) explains how to quantify
+    filopodia and filopodia-like protrusions from microscopy images.

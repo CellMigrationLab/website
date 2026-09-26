@@ -1,0 +1,93 @@
+# Research themes on https://cellmig.org/research/ (one coloured tile each).
+#
+#   color:   purple, orange, blue, black, white, sky, grey, mint, red, green,
+#            amber, pink, light
+#   image:   picture next to the text (a .gif is played as a short video)
+#   lead:    first sentence, shown larger
+#   text:    paragraphs (Markdown allowed)
+#   credit:  image caption
+#   papers:  (optional) DOIs from the ledger to list under "Selected papers"
+
+videos:
+  - title: Cancer in motion
+    youtube: RzZWaxkfT8k
+    start: 13
+  - title: Research in the Cell Migration Lab
+    youtube: 6itvJlRl5YE
+    start: 13
+
+themes:
+  - title: Cancer metastasis
+    color: grey
+    image: wp-content/uploads/2019/08/cna35-merged-2.gif
+    lead: Our research aims to elucidate the mechanisms by which cancer cells spread through the body.
+    text:
+      - Cancer is a leading cause of death worldwide and accounts for 8.2 million deaths per year.
+      - The formation of metastases is responsible for 90% of deaths in patients with solid tumors.
+    credit: "Video: Cancer cells (purple) invade through collagen (green). Credit: Guillaume Jacquemet and Emilia Peuhu"
+    papers:
+      - 10.1038/s44318-025-00678-9
+      - 10.1016/j.devcel.2022.09.016
+      - 10.1038/ncomms13297
+
+  - title: Cell migration
+    color: mint
+    image: wp-content/uploads/2020/03/merged-1.gif
+    lead: Our research aims to elucidate the molecular mechanisms by which cells move.
+    text:
+      - Cell migration is a fundamental physiological process involved in embryonic development,
+        tissue homeostasis, immune surveillance, and wound healing.
+      - For cells to migrate, they must interact with their environment using adhesion receptors,
+        such as integrins, and form specialized adhesion complexes that mediate responses to
+        different extracellular cues.
+    credit: "Video: Cancer cell (green) migrating on cell-derived matrices (magenta). Credit: Guillaume Jacquemet"
+    papers:
+      - 10.1016/j.celrep.2021.109716
+      - 10.1042/EBC20190012
+      - 10.1038/nprot.2017.107
+
+  - title: How cancer cells and immune cells interact with the vasculature
+    color: sky
+    image: wp-content/uploads/2024/08/rgb.jpg
+    lead: We study how cancer cells and immune cells interact with blood vessels because these
+      encounters strongly influence how tumors grow, spread, and respond to treatment.
+    text:
+      - Using microfluidic “vessel-on-a-chip” systems, we can recreate tiny blood vessels in the lab
+        and watch cells move and communicate in a controlled, lifelike environment. With transparent
+        zebrafish embryos, we can observe these same processes inside a living body in real time.
+      - As part of the Center of Excellence
+        [IMMENs](https://www.helsinki.fi/en/researchgroups/immune-endothelial-interfaces), we also
+        study lymphatics.
+    credit: "Picture: A cancer cell (magenta) inside the vasculature of a zebrafish embryo. Credit: Guillaume Jacquemet"
+    papers:
+      - 10.1083/jcb.202310030
+      - 10.1101/2025.11.24.689779
+
+  - title: Filopodia
+    color: orange
+    image: wp-content/uploads/2019/08/dnsecwawsaeb1il.jpg
+    lead: Our research aims to unravel how cells can sense their environment.
+    text:
+      - Filopodia are actin-rich “antenna-like” protrusions that are responsible for constantly
+        probing the cellular environment.
+      - In cancer cells, filopodia contribute to single-cell migration and invasion, and
+        filopodia-like structures have been implicated in cancer cell survival at metastatic sites.
+    credit: "Picture: Cancer cell labeled for F-actin. Credit: Guillaume Jacquemet"
+    papers:
+      - 10.64898/2026.02.09.703982
+      - 10.64898/2025.12.03.691809
+      - 10.1016/j.cub.2018.11.053
+
+  - title: Image analysis
+    color: amber
+    image: wp-content/uploads/2019/08/ctrl.jpg
+    lead: We use multiple microscopy approaches in our work and continuously develop tools for image
+      analysis.
+    text:
+      - Check out [our software](software/) and our work on
+        [deep learning for microscopy](image-analysis/).
+    credit: "Image: Time projection illustrating the dynamics of focal adhesions in human endothelial cells. Credit: Martina Lerche and Guillaume Jacquemet"
+    papers:
+      - 10.1371/journal.pbio.3002740
+      - 10.1038/s41592-024-02295-6
+      - 10.1038/s41467-021-22518-0

@@ -1,0 +1,8 @@
+{#- Home page: full-width sections (hero, bands); content from docs/index.md,
+    generated from data/site.yaml by scripts/build_pages.py. -#}
+{% extends "main.html" %}
+{% block container %}
+  <div class="md-content cm-home" data-md-component="content">
+    <article class="md-typeset" id="__skip">{{ page.content }}</article>
+  </div>
+{% endblock %}

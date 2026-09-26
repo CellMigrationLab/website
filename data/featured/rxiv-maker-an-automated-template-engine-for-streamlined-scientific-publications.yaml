@@ -1,0 +1,19 @@
+title: 'Rxiv-Maker: an automated template engine for streamlined scientific publications'
+date: '2026-07-01'
+image: wp-content/uploads/2026/07/logo-rxiv-maker.png
+papers:
+- 10.1242/jcs.265183
+links:
+- label: Preprint
+  url: https://arxiv.org/abs/2508.00836
+summary: >-
+  The rapid growth of preprint servers has accelerated scientific dissemination but has also shifted the
+  technical burden of manuscript preparation to authors. This challenge is particularly acute in computational
+  research, where manuscripts must remain synchronised with evolving data and code. We present Rxiv-Maker,
+  a framework that resolves this by converting simple Markdown files into professionally typeset, publication-ready
+  PDFs. Its core feature is the ability to execute embedded code, creating a self-updating manuscript
+  where figures and statistical values are generated directly from source data during compilation. This
+  ensures that the final document is always current and fully reproducible. By integrating with standard
+  tools like Git and Visual Studio (VS) Code, Rxiv-Maker provides an efficient, transparent, and collaborative
+  authoring experience, applying principles of software engineering to academic writing to foster open
+  and verifiable science.

@@ -1,0 +1,17 @@
+title: Customizable FDM-based zebrafish embryo mold for live imaging
+date: '2025-12-08'
+image: wp-content/uploads/2025/12/pasted-image.png
+papers:
+- 10.1101/2025.11.24.689779
+links:
+- label: Preprint
+  url: https://www.biorxiv.org/content/10.1101/2025.11.24.689779v1.full.pdf
+summary: >-
+  Accurate and reproducible orientation of zebrafish embryos is crucial for high-resolution live imaging
+  but remains challenging with standard agarose mounting. Here, we introduce an orientation tool made
+  using fused deposition modeling (FDM), enhanced with a thin resin coating to improve surface smoothness
+  and performance. This design creates reproducible, embryo-shaped wells that hold larvae in a dorsoventral
+  orientation. The molds, designed to fit standard glass-bottom imaging dishes, are inexpensive to produce
+  on common desktop 3D printers and can be easily modified to fit different imaging setups using the open-source
+  design files. This method enables consistent, long-term live imaging of multiple embryos and broadens
+  the use of low-cost additive manufacturing in zebrafish imaging workflows.

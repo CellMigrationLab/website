@@ -1,0 +1,21 @@
+title: 'Structural Repetition Detector: multi-scale quantitative mapping of molecular complexes through
+  microscopy'
+date: '2024-10-04'
+image: wp-content/uploads/2024/10/logo_small-1122300031-e1728059917704.png
+papers:
+- 10.1101/2024.09.16.613204
+links:
+- label: Preprint
+  url: https://www.biorxiv.org/content/10.1101/2024.09.16.613204v1
+summary: >-
+  From molecules to organelles, cells exhibit recurring structural motifs across multiple scales. Understanding
+  these structures provides insights into their functional roles. While super-resolution microscopy can
+  visualise such patterns, manual detection in large datasets is challenging and biased. We present the
+  Structural Repetition Detector (SReD), an unsupervised computational framework that identifies repetitive
+  biological structures by exploiting local texture repetition. SReD formulates structure detection as
+  a similarity-matching problem between local image regions. It detects recurring patterns without prior
+  knowledge or constraints on the imaging modality. We demonstrate SReD’s capabilities on various fluorescence
+  microscopy images. Quantitative analyses of three datasets highlight SReD’s utility: estimating the
+  periodicity of spectrin rings in neurons, detecting HIV-1 viral assembly, and evaluating microtubule
+  dynamics modulated by EB3. Our open-source ImageJ and Fiji plugin enables unbiased analysis of repetitive
+  structures across imaging modalities in diverse biological contexts.

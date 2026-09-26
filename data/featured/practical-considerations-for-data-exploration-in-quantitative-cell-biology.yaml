@@ -1,0 +1,17 @@
+title: Practical considerations for data exploration in quantitative cell biology
+date: '2025-05-29'
+image: wp-content/uploads/2025/05/jcs26380101.png
+papers:
+- 10.1242/jcs.263801
+links:
+- label: Read the article
+  url: https://journals.biologists.com/jcs/article/138/7/jcs263801/367617
+summary: >-
+  Data exploration is an essential step in quantitative cell biology, bridging raw data and scientific
+  insights. Unlike polished, published figures, effective data exploration requires a flexible, hands-on
+  approach that reveals trends, identifies outliers and refines hypotheses. This Opinion offers simple,
+  practical advice for building a structured data exploration workflow, drawing on the authors’ personal
+  experience in analyzing bioimage datasets. In addition, the increasing availability of generative artificial
+  intelligence and large language models makes coding and improving data workflows easier than ever before.
+  By embracing these practices, researchers can streamline their workflows, produce more reliable conclusions
+  and foster a collaborative, transparent approach to data analysis in cell biology.
