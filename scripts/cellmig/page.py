@@ -5,7 +5,21 @@ import re
 import yaml
 
 from .config import DOCS
+from .images import gif_video, share_jpeg
 from .text import is_external
+
+
+def share_image(site_path: str | None) -> str | None:
+    """A link-preview image: a 1200 px JPEG still (a GIF's poster frame); None
+    when there is no still, so the template's default image is used."""
+    if not site_path:
+        return None
+    if site_path.lower().endswith(".gif"):
+        twin = gif_video(site_path)
+        return share_jpeg(twin[1]) if twin and twin[1] else None
+    if site_path.lower().endswith(".svg"):
+        return None
+    return share_jpeg(site_path)
 
 
 class Page:
@@ -18,6 +32,7 @@ class Page:
 
     def __init__(self, path: str, **meta: object) -> None:
         self.path = path                      # e.g. "portfolio/cdm.md"
+        meta["image"] = share_image(meta.get("image"))
         self.meta = {k: v for k, v in meta.items() if v not in (None, "", [])}
         self.parts: list[str] = []
         # Zensical rewrites href/src in raw HTML as paths relative to the

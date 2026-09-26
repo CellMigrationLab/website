@@ -3,7 +3,14 @@
     data/site.yaml by scripts/build_pages.py (partials/cm-footer.html). -#}
 {% extends "base.html" %}
 
+{% block htmltitle %}
+  {#- Zensical does not set page.is_homepage, so the home page passes head_title. -#}
+  {%- if page.meta and page.meta.head_title %}<title>{{ page.meta.head_title }}</title>
+  {%- else %}{{ super() }}{% endif %}
+{% endblock %}
+
 {% block extrahead %}
+  <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | url }}">
   <link rel="preload" href="{{ 'assets/fonts/inter-latin-wght-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ 'assets/fonts/bodoni-moda-latin-wght-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
   <link rel="alternate" type="application/rss+xml" title="{{ config.site_name }}" href="{{ 'feed.xml' | url }}">
@@ -12,7 +19,7 @@
   {% set image = page.meta.image if page.meta and page.meta.image else "wp-content/uploads/2019/08/cover4.jpg" %}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ config.site_name }}">
-  <meta property="og:title" content="{{ title if not page.is_homepage else config.site_name }}">
+  <meta property="og:title" content="{{ page.meta.head_title if page.meta and page.meta.head_title else title }}">
   <meta property="og:description" content="{{ description | e }}">
   <meta property="og:url" content="{{ page.canonical_url }}">
   <meta property="og:image" content="{{ config.site_url }}{{ image }}">

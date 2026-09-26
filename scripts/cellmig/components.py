@@ -125,5 +125,9 @@ def person_card(m: Person) -> str:
 
 
 def one_line(text: str, limit: int) -> str:
-    """Whitespace collapsed to single spaces, cut at `limit` characters."""
-    return re.sub(r"\s+", " ", text).strip()[:limit]
+    """Whitespace collapsed to single spaces; longer text is cut at the last
+    word that fits and ends with "…" (at most `limit` characters)."""
+    text = re.sub(r"\s+", " ", text).strip()
+    if len(text) <= limit:
+        return text
+    return text[: limit - 1].rsplit(" ", 1)[0].rstrip(",;:.") + "…"
