@@ -1,0 +1,2207 @@
+# Copied by scripts/sync_things_done.py from things_done/report/generated/publications/coauthor_network.json + coauthor_countries.json.
+# Do not edit by hand: change things_done instead, the website updates itself.
+generated_at: '2026-09-21T17:10:59Z'
+coauthors:
+- name: Johanna Ivaska
+  papers: 28
+  first_year: 2015
+  last_year: 2026
+  country: FI
+- name: Ricardo Henriques
+  papers: 23
+  first_year: 2020
+  last_year: 2026
+  country: PT
+- name: Hellyeh Hamidi
+  papers: 10
+  first_year: 2015
+  last_year: 2026
+  country: FI
+- name: Joanna W. Pylvänäinen
+  papers: 10
+  first_year: 2022
+  last_year: 2026
+  country: FI
+- name: Bruno M. Saraiva
+  papers: 9
+  first_year: 2023
+  last_year: 2026
+  country: PT
+- name: Estibaliz Gómez-de-Mariscal
+  papers: 9
+  first_year: 2022
+  last_year: 2026
+  country: PT
+- name: Gautier Follain
+  papers: 9
+  first_year: 2020
+  last_year: 2026
+  country: FI
+- name: Martin J. Humphries
+  papers: 9
+  first_year: 2013
+  last_year: 2021
+  country: GB
+- name: Mitro Miihkinen
+  papers: 9
+  first_year: 2017
+  last_year: 2026
+  country: FI
+- name: Romain F. Laine
+  papers: 9
+  first_year: 2020
+  last_year: 2023
+  country: GB
+- name: Benjamin T. Goult
+  papers: 8
+  first_year: 2016
+  last_year: 2026
+  country: GB
+- name: Camilo Guzmán
+  papers: 7
+  first_year: 2017
+  last_year: 2026
+  country: FI
+- name: Iván Hidalgo-Cenalmor
+  papers: 7
+  first_year: 2024
+  last_year: 2026
+  country: FI
+- name: Sujan Ghimire
+  papers: 7
+  first_year: 2023
+  last_year: 2026
+  country: FI
+- name: Emilia Peuhu
+  papers: 6
+  first_year: 2016
+  last_year: 2026
+  country: FI
+- name: James R. W. Conway
+  papers: 6
+  first_year: 2019
+  last_year: 2026
+  country: FI
+- name: Christophe Leterrier
+  papers: 5
+  first_year: 2020
+  last_year: 2025
+  country: FR
+- name: Ilkka Paatero
+  papers: 5
+  first_year: 2017
+  last_year: 2026
+  country: FI
+- name: Jonathan D. Humphries
+  papers: 5
+  first_year: 2013
+  last_year: 2021
+  country: GB
+- name: Maria Georgiadou
+  papers: 5
+  first_year: 2016
+  last_year: 2022
+  country: FI
+- name: Martina Lerche
+  papers: 5
+  first_year: 2017
+  last_year: 2026
+  country: FI
+- name: Patrick T. Caswell
+  papers: 5
+  first_year: 2013
+  last_year: 2015
+  country: GB
+- name: Aki Stubb
+  papers: 4
+  first_year: 2019
+  last_year: 2023
+  country: FI
+- name: Johanna Lilja
+  papers: 4
+  first_year: 2017
+  last_year: 2024
+  country: FI
+- name: Mario Del Rosario
+  papers: 4
+  first_year: 2024
+  last_year: 2026
+  country: PT
+- name: Marko Salmi
+  papers: 4
+  first_year: 2017
+  last_year: 2026
+  country: FI
+- name: Michal Dibus
+  papers: 4
+  first_year: 2024
+  last_year: 2026
+  country: FI
+- name: Monika Vaitkevičiūtė
+  papers: 4
+  first_year: 2024
+  last_year: 2026
+  country: FI
+- name: Adam Byron
+  papers: 3
+  first_year: 2013
+  last_year: 2015
+  country: GB
+- name: Aleksi Isomursu
+  papers: 3
+  first_year: 2021
+  last_year: 2026
+  country: FI
+- name: Alexandre F. Carisey
+  papers: 3
+  first_year: 2017
+  last_year: 2023
+  country: US
+- name: Ana Popović
+  papers: 3
+  first_year: 2021
+  last_year: 2026
+  country: FI
+- name: António D. Brito
+  papers: 3
+  first_year: 2025
+  last_year: 2026
+  country: PT
+- name: Arrate Muñoz-Barrutia
+  papers: 3
+  first_year: 2022
+  last_year: 2026
+  country: ES
+- name: Elena Kremneva
+  papers: 3
+  first_year: 2017
+  last_year: 2021
+  country: FI
+- name: Florian Jug
+  papers: 3
+  first_year: 2021
+  last_year: 2024
+  country: IT
+- name: Hanna Grobe
+  papers: 3
+  first_year: 2024
+  last_year: 2026
+  country: FI
+- name: Ignacio Arganda-Carreras
+  papers: 3
+  first_year: 2021
+  last_year: 2026
+  country: ES
+- name: Ilpo Vattulainen
+  papers: 3
+  first_year: 2021
+  last_year: 2026
+  country: FI
+- name: Jean-Yves Tinevez
+  papers: 3
+  first_year: 2020
+  last_year: 2024
+  country: FR
+- name: Lucas von Chamier
+  papers: 3
+  first_year: 2020
+  last_year: 2022
+  country: GB
+- name: Marcela Xiomara Rivera Pineda
+  papers: 3
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Marie-Catherine Laisne
+  papers: 3
+  first_year: 2022
+  last_year: 2026
+  country: FI
+- name: Markku Saari
+  papers: 3
+  first_year: 2015
+  last_year: 2019
+  country: FI
+- name: Megan R. Chastney
+  papers: 3
+  first_year: 2024
+  last_year: 2026
+  country: FI
+- name: Neil J. Ball
+  papers: 3
+  first_year: 2023
+  last_year: 2026
+  country: GB
+- name: Omkar Joshi
+  papers: 3
+  first_year: 2025
+  last_year: 2026
+  country: FI
+- name: Pedro M. Pereira
+  papers: 3
+  first_year: 2022
+  last_year: 2025
+  country: PT
+- name: Pipsa Saharinen
+  papers: 3
+  first_year: 2015
+  last_year: 2026
+  country: FI
+- name: Riina Kaukonen
+  papers: 3
+  first_year: 2015
+  last_year: 2017
+  country: FI
+- name: Wei Ouyang
+  papers: 3
+  first_year: 2022
+  last_year: 2026
+  country: SE
+- name: Yoav Shechtman
+  papers: 3
+  first_year: 2021
+  last_year: 2026
+  country: IL
+- name: Afonso Mendes
+  papers: 2
+  first_year: 2024
+  last_year: 2025
+  country: PT
+- name: Alana R. Cowell
+  papers: 2
+  first_year: 2021
+  last_year: 2024
+  country: GB
+- name: Alexander Krull
+  papers: 2
+  first_year: 2021
+  last_year: 2021
+  country: GB
+- name: Anna Akhmanova
+  papers: 2
+  first_year: 2016
+  last_year: 2021
+  country: NL
+- name: Chang Liu
+  papers: 2
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Christoph Spahn
+  papers: 2
+  first_year: 2021
+  last_year: 2022
+  country: DE
+- name: Christopher S. Chen
+  papers: 2
+  first_year: 2013
+  last_year: 2015
+  country: US
+- name: Colin K. Choi
+  papers: 2
+  first_year: 2013
+  last_year: 2015
+  country: US
+- name: Constantin Pape
+  papers: 2
+  first_year: 2022
+  last_year: 2024
+  country: DE
+- name: Damián Martínez
+  papers: 2
+  first_year: 2023
+  last_year: 2026
+  country: PT
+- name: Daniel Sage
+  papers: 2
+  first_year: 2022
+  last_year: 2026
+  country: CH
+- name: David Knight
+  papers: 2
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: David M. Green
+  papers: 2
+  first_year: 2013
+  last_year: 2015
+  country: GB
+- name: Diana Wurzinger
+  papers: 2
+  first_year: 2024
+  last_year: 2026
+  country: FI
+- name: Eija Jokitalo
+  papers: 2
+  first_year: 2021
+  last_year: 2026
+  country: FI
+- name: Elias Nehme
+  papers: 2
+  first_year: 2021
+  last_year: 2026
+  country: IL
+- name: Emma Lundberg
+  papers: 2
+  first_year: 2022
+  last_year: 2024
+  country: US
+- name: Fatemeh Hassani Nia
+  papers: 2
+  first_year: 2017
+  last_year: 2021
+  country: DE
+- name: Helena Vihinen
+  papers: 2
+  first_year: 2021
+  last_year: 2026
+  country: FI
+- name: Hongbo Zhang
+  papers: 2
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Igor L. Barsukov
+  papers: 2
+  first_year: 2017
+  last_year: 2024
+  country: GB
+- name: Inês Cunha
+  papers: 2
+  first_year: 2025
+  last_year: 2026
+  country: SE
+- name: Jeroen Pouwels
+  papers: 2
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Jessica M. Rosenholm
+  papers: 2
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: John E. Eriksson
+  papers: 2
+  first_year: 2020
+  last_year: 2022
+  country: FI
+- name: Joni Vuorio
+  papers: 2
+  first_year: 2021
+  last_year: 2024
+  country: FI
+- name: Laura Hakanpaa
+  papers: 2
+  first_year: 2015
+  last_year: 2018
+  country: FI
+- name: Lauri Eklund
+  papers: 2
+  first_year: 2015
+  last_year: 2018
+  country: FI
+- name: Mariana G. Ferreira
+  papers: 2
+  first_year: 2024
+  last_year: 2024
+  country: PT
+- name: Marjaana Ojalill
+  papers: 2
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Matthew C. Jones
+  papers: 2
+  first_year: 2015
+  last_year: 2021
+  country: GB
+- name: Max L.B. Grönloh
+  papers: 2
+  first_year: 2021
+  last_year: 2023
+  country: FI
+- name: Mike Heilemann
+  papers: 2
+  first_year: 2021
+  last_year: 2022
+  country: DE
+- name: Nathan H. Roy
+  papers: 2
+  first_year: 2020
+  last_year: 2022
+  country: US
+- name: Nicola De Franceschi
+  papers: 2
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Nikki R. Paul
+  papers: 2
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Oliver Koivisto
+  papers: 2
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Pauliina Hartiala
+  papers: 2
+  first_year: 2022
+  last_year: 2026
+  country: FI
+- name: Pauliina Kronqvist
+  papers: 2
+  first_year: 2016
+  last_year: 2021
+  country: FI
+- name: Pekka Lappalainen
+  papers: 2
+  first_year: 2017
+  last_year: 2021
+  country: FI
+- name: Pia Boström
+  papers: 2
+  first_year: 2022
+  last_year: 2026
+  country: FI
+- name: Pieta K. Mattila
+  papers: 2
+  first_year: 2021
+  last_year: 2023
+  country: FI
+- name: Rafael Saup
+  papers: 2
+  first_year: 2019
+  last_year: 2023
+  country: FI
+- name: Raquel Portela
+  papers: 2
+  first_year: 2025
+  last_year: 2025
+  country: PT
+- name: Rita Carlota
+  papers: 2
+  first_year: 2026
+  last_year: 2026
+  country: PT
+- name: Rosemarie E. Gough
+  papers: 2
+  first_year: 2016
+  last_year: 2021
+  country: GB
+- name: Sara Hernández-Pérez
+  papers: 2
+  first_year: 2021
+  last_year: 2023
+  country: FI
+- name: Siiri I. Salomaa
+  papers: 2
+  first_year: 2017
+  last_year: 2021
+  country: FI
+- name: Stacey Warwood
+  papers: 2
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Séamus Holden
+  papers: 2
+  first_year: 2021
+  last_year: 2022
+  country: GB
+- name: Thomas Zacharchenko
+  papers: 2
+  first_year: 2017
+  last_year: 2021
+  country: GB
+- name: Xiaoyu Xu
+  papers: 2
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: York-Christoph Ammon
+  papers: 2
+  first_year: 2016
+  last_year: 2021
+  country: NL
+- name: AF Maarten Altelaar
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: NL
+- name: AI4Life Horizon Europe Program Consortium
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+- name: Abhimanyu K. Singh
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: GB
+- name: Ada O. Pajari
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: FI
+- name: Adam Hurlstone
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Adán Olguín-Olguín
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Ahmet Can Solak
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: US
+- name: Aitor González-Marfil
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Albert JR Heck
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: NL
+- name: Alejandro J. Da Silva
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Alexander Minin
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: RU
+- name: Alexander von Kriegsheim
+  papers: 1
+  first_year: 2013
+  last_year: 2013
+  country: IE
+- name: Alon Saguy
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: IL
+- name: Andoni Rodríguez
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Andrea Disanza
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: IT
+- name: Andrea Mattevi
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: IT
+- name: Andreas Brech
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: 'NO'
+- name: Angélique Jimenez
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: FR
+- name: Anja Mai
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: FI
+- name: Anna Aakula
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Anna Chapman
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Anna Kreshuk
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: DE
+- name: Anna Nylund
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Anna S. Nylund
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Anna-Mari Haapanen-Saaristo
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Anne Pink
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Anni Wärri
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Antoni Homs-Corbera
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Anu Prakash
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Arafath K. Najumudeen
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: GB
+- name: Arlo Sheridan
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Arthur Charles-Orszag
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FR
+- name: Artur Padzik
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Artur Yakimovich
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Arun P. Venu
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Asta Laiho
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Audrey Salles
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: FR
+- name: Aurelien Dauphin
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: FR
+- name: Aydogan Ozcan
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Aykut Argun
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Barbora Špačková
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Bart Marlon Herwig Bruininks
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Bassam Hajj
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: FR
+- name: Beatriz Serrano-Solano
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+- name: Ben Stutchbury
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: GB
+- name: Bence Berki
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: FI
+- name: Benjamin Midtvedt
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Benjamin P Bouchet
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: NL
+- name: Beth A. Cimini
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Bijie Bai
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Bruno Goud
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: FR
+- name: Camilla Tallgren
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: FI
+- name: Carlo Manzo
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Carlos Garcia-López-de-Haro
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: ES
+- name: Carolina Prieto
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: PT
+- name: Carolina Wählby
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Caroline Beck Adiels
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Caterina Fuster Barcelo
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: ES
+- name: Charlotte Alibert
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FR
+- name: Christian Sommer
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Christine Touma
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Christoph Ballestrem
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: GB
+- name: Christoph Langhammer
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Christopher A. Metzler
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Claus Jørgensen
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: GB
+- name: Colinda L.G.J. Scheele
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: NL
+- name: Craig Russell
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: GB
+- name: Craig T. Russell
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: GB
+- name: Cristina de-la-Torre-Gutiérrez
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: ES
+- name: Damian Matuszewski
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Daniel Abankwa
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: LU
+- name: Daniel Brunner
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Daniel Krentzel
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: GB
+- name: Daniel Midtvedt
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Daqi Wang
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: CN
+- name: Daria Bonazzi
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FR
+- name: David G. Brown
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: GB
+- name: Deborah Schmidt
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: DE
+- name: Dieudonnée van de Willige
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: NL
+- name: Diogo M. Cunha
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: FI
+- name: Dmitry Ershov
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FR
+- name: Dominik Kutra
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: DE
+- name: Dániel Veréb
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Ebba Josefson Lindqvist
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Edward R. Horton
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: GB
+- name: Eero Mervaala
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: FI
+- name: Egor Zindy
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Eleanor T. Coffey
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Elena Ceccacci
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: US
+- name: Elena Tcarenkova
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Eleni Karinou
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: GB
+- name: Elina A. Kiss
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: FI
+- name: Elina Mattila
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Elisa Närvä
+  papers: 1
+  first_year: 2019
+  last_year: 2019
+  country: FI
+- name: Elisabeth Ehler
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Elnaz Fazeli
+  papers: 1
+  first_year: 2020
+  last_year: 2020
+  country: FI
+- name: Emily Wang
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: GB
+- name: Erik Selander
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Erika Sundström
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Ermei Mäkilä
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Eva Henriksson
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Evgenia Gerasimovskaya
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: US
+- name: Ewa J. Koper
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Fabio Giavazzi
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: IT
+- name: Fang Cheng
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Franck Perez
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FR
+- name: Frank Cichos
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Frédéric Fercoq
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: GB
+- name: Fynn Beuttenmueller
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: DE
+- name: Gaelle Boncompain
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FR
+- name: Gennady G. Yegutkin
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: FI
+- name: Giorgio R. Scita
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: IT
+- name: Giorgio Scita
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: IT
+- name: Giovanni Volpe
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Giulia Sultana
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Gorka Azkune
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Guillaume Duménil
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FR
+- name: Gustaf Kylberg
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Habib Baghirov
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: FI
+- name: Halina Rubinsztein-Dunlop
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Hanna Parkkola
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: FI
+- name: Hannah S. Heil
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: PT
+- name: Hans-Juergen Kreienkamp
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: DE
+- name: Hans-Jürgen Kreienkamp
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Hao Wang
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Harm Post
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: NL
+- name: Harri Nurmi
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: FI
+- name: Harri Sihto
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: FI
+- name: Harshith Bachimanchi
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Heikki Joensuu
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: FI
+- name: Helene Helo
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Hendrik S.E. Hästbacka
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Henrik K. Moberg
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Henrik Zauber
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Hussein Al-Akhrass
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Ida-Maria Sintorn
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Ilkka Miinalainen
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: FI
+- name: Isaac C. D. Lenton
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Itziar Martinez D. Posada
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: FI
+- name: Ivo F. Sbalzarini
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Jaakko Lehtimäki
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Jacco van Rheenen
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: NL
+- name: James Rae
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: AU
+- name: Janet A. Askari
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Jasmin Kaivola
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: FI
+- name: Jason T. Smith
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Jean-Baptiste Manneville
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FR
+- name: Jenna Villman
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Jennifer L. Allen
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Jenny C. Pessa
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Jenny Pessa
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Jens C. Luoto
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Jesse Aaron
+  papers: 1
+  first_year: 2019
+  last_year: 2019
+  country: US
+- name: Jesse Goyette
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: AU
+- name: Jesse Kamila
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Jesus Pineda
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Jie Yan
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: SG
+- name: Jim C. Norman
+  papers: 1
+  first_year: 2013
+  last_year: 2013
+  country: GB
+- name: Joakim Edman
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: GB
+- name: Joakim Lindblad
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Joana B. Pereira
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Joanna Pylvänäinen
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Joanna W. Pylvanainen
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Johanna Bergman
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Johanna Englund
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Johanna Jukkala
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Johanna Tammi
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Johannes Kumra Ahnlide
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: SE
+- name: Johannes Merilahti
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: John P Sundberg
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: US
+- name: Jonatan Caroli
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: IT
+- name: Jonathan D. Howe
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Jonathon Nixon-Abell
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: US
+- name: Jonna Alanko
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: FI
+- name: Joran Deschamps
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: IT
+- name: Jordan S. Orange
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: US
+- name: Joseph Robertson
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Jouni Harkonen
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Jouni Härkönen
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: João I. Mamede
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: US
+- name: João Mamede
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: US
+- name: Juan C. Caicedo
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Jukka Westermarck
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Julian N. Selley
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Juliette Griffié
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Junnian Zhou
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Kari Alitalo
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: FI
+- name: Karolina Losenkova
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: FI
+- name: Kathleen A Silva
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: US
+- name: Kerstin Thol
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Kevin W Eliceiri
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: US
+- name: Kevin Zhang
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Kevin de Haan
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Kirsi Rilla
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Konstantin Kogan
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Kourosh Hayatigolkhatmi
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: US
+- name: Kristina Monakhova
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Kristine Schauer
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: FR
+- name: Lars Hubatsch
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Laura Fernandez del Ama
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Laura L. Elo
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Laura Waller
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Laura Xénard
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: FR
+- name: Laure Le Blanc
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FR
+- name: Lea Sistonen
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Leena M. Koskinen
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Lei Tian
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Leila Rato
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Lene Malerød
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: 'NO'
+- name: Leo M. Carlin
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: GB
+- name: Leonor Morgado
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: PT
+- name: Leticia Oliveira-Ferrer
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Li-Yu Yu
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Lina Antenucci
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Lorena Varela
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: GB
+- name: Louise Régnier
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: FR
+- name: Loïc A. Royer
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: US
+- name: Lucy Collinson
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: GB
+- name: Lucía Moya-Sans
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: ES
+- name: Luqman O. Awoniyi
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: FI
+- name: Maksim Novikov
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: DE
+- name: Malte Beifuss
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: DE
+- name: Marco De Donatis
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: GB
+- name: Margarida Barroso
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Maria Morlan-Mairal
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Maria Rafaeva
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Mariachiara Zuccarini
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: FI
+- name: Mariana G. Pinho
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: PT
+- name: Marien Ochoa
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Marie‐Ange Deugnier
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FR
+- name: Mark R. Morgan
+  papers: 1
+  first_year: 2013
+  last_year: 2013
+  country: GB
+- name: Martin Aepfelbacher
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Martin Fränzl
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Martin L. Jones
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: GB
+- name: Martin Weigert
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: CH
+- name: Mathilde Mathieu
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Matthew Hartley
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: GB
+- name: Matthew J. Stroud
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Matthias Selbach
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Matti Nykter
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Maxim A. Ziatdinov
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Mayank Kumar Modi
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Megan Chastney
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Mehdi Seifi
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: IT
+- name: Meraj H. Khan
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Merja Perälä
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: FI
+- name: Mia Conduit
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: GB
+- name: Miao Yu
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: SG
+- name: Michael Hecht
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Mikael C. Puustinen
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Mikko Helenius
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: FI
+- name: Mingyang Xie
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Minh-Son Phan
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FR
+- name: Mite Mijalkov
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Monika Vaitkeviciute
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Mukund Sharma
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Muyinatu A. Lediju Bell
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Nataša Sladoje
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Nermina Ferizovic
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: GB
+- name: Niklas Z. Jäntti
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Nina Marie Pedersen
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: 'NO'
+- name: Nobuyuki Matoba
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: US
+- name: Ofri Goldenberg
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Otto Kauko
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Owen J. Sansom
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: GB
+- name: Oxana V. Denisova
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Pablo Alonso
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Pasquale Cervero
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Patrik Hollos
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Paulina Moreno-Layseca
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Peiru Yang
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Pekka E. Hänninen
+  papers: 1
+  first_year: 2020
+  last_year: 2020
+  country: FI
+- name: Pekka Roivas
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: FI
+- name: Pere Roca-Cusachs
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: ES
+- name: Peter Bankhead
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: GB
+- name: Pia Rantakari
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Pierre Cettour-Janet
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: FI
+- name: Pontus Nordenfelt
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: SE
+- name: Pranshu Sahgal
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Prson Gautam
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: FI
+- name: Rashmi Godbole
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: IN
+- name: Rebecca E. Bridgewater
+  papers: 1
+  first_year: 2013
+  last_year: 2013
+  country: GB
+- name: Reetta Nätkin
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Reetta Virtakoivu
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Riikka Huhtaniemi
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: FI
+- name: Robert G. Parton
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: AU
+- name: Robert Haase
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: DE
+- name: Roberta Noberini
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: US
+- name: Roosa E. Kallionpää
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Saga Helgadottir
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Samantha Webster
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: AU
+- name: Sanna Oikari
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Sara A. Wickström
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Satu Koskinen
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FI
+- name: Satyajit Mayor
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: IN
+- name: Saverio Minucci
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+- name: Sergei V. Kalinin
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Shimin Le
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: SG
+- name: Shreyas Kaptan
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Simao Coelho
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: PT
+- name: Simon T. Barry
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: GB
+- name: Sirpa Jalkanen
+  papers: 1
+  first_year: 2018
+  last_year: 2018
+  country: FI
+- name: Sixian You
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Siân Culley
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: GB
+- name: Ste P. Muench
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: GB
+- name: Stefan Linder
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Stefan Veltel
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Stefania Marcotti
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: GB
+- name: Stefano Bo
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Stéphane U. Rigaud
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: FR
+- name: Stéphanie Miserey
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FR
+- name: Takahiro Deguchi
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Tao He
+  papers: 1
+  first_year: 2016
+  last_year: 2016
+  country: FI
+- name: Taru Varila
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: FI
+- name: Tayla Shakespeare
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Teng-Leong Chew
+  papers: 1
+  first_year: 2019
+  last_year: 2019
+  country: US
+- name: Teresa Zulueta-Coarasa
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: GB
+- name: Theresa Wiesner
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: FR
+- name: Tim-Oliver Buchholz
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: DE
+- name: Timo Betz
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FR
+- name: Tiziana Bonaldi
+  papers: 1
+  first_year: 2025
+  last_year: 2025
+  country: IT
+- name: Tobias Boeckers
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: DE
+- name: Tobias Thalheim
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Tom Burke
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: DE
+- name: Tomi P. Mäkelä
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Tommaso Galgani
+  papers: 1
+  first_year: 2023
+  last_year: 2023
+  country: FR
+- name: Tong Qiu
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Tongyu Li
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Trang Le
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Tuomas Sipila
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: FI
+- name: Ujjwal Aryal
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: US
+- name: Ulla Pentikäinen
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: FI
+- name: Umar Butt
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Uri Manor
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Uwe Schmidt
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+- name: Vanessa Stuve
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: FI
+- name: Veli-Matti Leppanen
+  papers: 1
+  first_year: 2015
+  last_year: 2015
+  country: FI
+- name: Vera Galinova
+  papers: 1
+  first_year: 2024
+  last_year: 2024
+  country: IT
+- name: Victoria Martens
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: DE
+- name: Wenhui Zhou
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: FI
+- name: Xavier Intes
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Yair Rivenson
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Yaming Jiu
+  papers: 1
+  first_year: 2022
+  last_year: 2022
+  country: CN
+- name: Yan Yan
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FI
+- name: Yilai Shu
+  papers: 1
+  first_year: 2021
+  last_year: 2021
+  country: CN
+- name: Yongtao Liu
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Youmna Attieh
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: FR
+- name: Yu-Wei Chang
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Yuichiro Sato
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: JP
+- name: Yuming Liu
+  papers: 1
+  first_year: 2017
+  last_year: 2017
+  country: US
+- name: Zofia Korczak
+  papers: 1
+  first_year: 2026
+  last_year: 2026

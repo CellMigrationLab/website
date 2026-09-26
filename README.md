@@ -21,13 +21,13 @@ button (top right) that opens the right file.
 | Page | Edit |
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
-| Recent works on the home page | `home: 1` … `home: 6` in `data/featured/*.yaml` |
 | Research | `data/research.yaml` |
-| Featured research + one page per story (`/portfolio/<name>/`) | `data/featured/<name>.yaml` |
+| Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done; pictures in `data/featured.yaml` |
 | Publications, latest papers | automatic, from things_done |
+| Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done (members count from `data/members/`) |
 | Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
-| Lab members | `data/members/<name>.yaml` (one per person), team photos in `data/team.yaml` |
+| Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<name>.yaml`, team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
 | Online talks | `data/talks.yaml` |
 | About us | `docs/about-us.md` |
@@ -36,25 +36,26 @@ button (top right) that opens the right file.
 
 ### Lab members
 
-One YAML file per person in `data/members/`:
+**Who is in the lab and their roles come from things_done**
+(`ledger/profile/lab_members.yaml`): add a person there with their `role`
+(and earlier roles in `previous_roles`), and set `status: alumni` when they
+leave. Current members show their current role; alumni show all their
+roles. No dates are shown. The website only adds the look:
+
+- Photo: `data/photos/<name>.jpg` (file name = the person's name in lower case
+  with hyphens, e.g. `jane-doe.jpg`). Photos are cropped to a square
+  automatically; without a photo the initials are shown.
+- Optional `data/members/<name>.yaml` with links and a one-liner:
 
 ```yaml
-name: Jane Doe                 # as in papers: used to highlight lab members in publication lists
-role: PhD student              # shown under the name
-group: phd                     # pi, staff, postdoc, phd, student, other
-status: current                # current or alumni
-order: 3                       # position within the group (optional)
-orcid: 0000-0000-0000-0000     # optional: orcid, email, github, bluesky, scholar, website
-bio: Filopodia and cancer cell invasion   # optional one-liner
-also_known_as: [Jane A. Doe]   # optional other spellings used in papers
+orcid: 0000-0000-0000-0000     # also: email, github, bluesky, scholar, website
+bio: Filopodia and cancer cell invasion
+photo_position: center         # crop the photo from the centre instead of the top
+now: Postdoc at …              # alumni: where they are now
 ```
 
-Photo: `data/photos/<file name>.jpg` (same name as the YAML file). Photos are
-cropped to a square automatically (`photo_position: center` crops from the
-centre instead of the top). Without a photo the initials are shown.
-When someone leaves, set `status: alumni` (optional: `years: 2021–2025`,
-`now: Postdoc at …`). New members can send their details with the
-**Lab member profile** issue form linked at the bottom of the members page.
+New members can send their details with the **Lab member profile** issue form
+linked at the bottom of the members page.
 
 ### Pictures
 

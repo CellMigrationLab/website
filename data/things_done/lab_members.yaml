@@ -1,0 +1,145 @@
+# Copied by scripts/sync_things_done.py from things_done/ledger/profile/lab_members.yaml.
+# Do not edit by hand: change things_done instead, the website updates itself.
+records:
+- name: Guillaume Jacquemet
+  role: Professor in Bioimaging
+  group: pi
+  status: current
+- name: Mario Del Rosario
+  role: University Researcher in Bioimaging
+  group: staff
+  status: current
+- name: Jaakko Lehtimäki
+  role: Postdoc
+  group: postdoc
+  status: current
+- name: Christine Touma
+  role: Postdoc
+  group: postdoc
+  status: current
+- name: Adán Olguín-Olguín
+  role: Postdoc
+  group: postdoc
+  status: current
+- name: Isabel Stötzel
+  role: Postdoc
+  group: postdoc
+  status: current
+- name: Léa Pechtimaldjian
+  role: Postdoc
+  group: postdoc
+  status: current
+- name: Ana Popović
+  role: PhD student
+  group: phd
+  status: current
+  also_known_as:
+  - Ana Gračanin
+- name: Sujan Ghimire
+  role: PhD student
+  group: phd
+  status: current
+- name: Sarah Massaad
+  role: PhD student
+  group: phd
+  status: current
+- name: Monika Vaitkevičiūtė
+  role: PhD student
+  group: phd
+  status: current
+- name: Marcela Rivera
+  role: PhD student
+  group: phd
+  status: current
+  also_known_as:
+  - Marcela Xiomara Rivera Pineda
+- name: Iván Hidalgo Cenalmor
+  role: PhD student
+  group: phd
+  status: current
+- name: Daniil Iukhtanov
+  role: PhD student
+  previous_roles:
+  - Intern
+  - Master's student
+  group: phd
+  status: current
+- name: Huy Nguyen
+  role: Master's student
+  previous_roles:
+  - Summer intern
+  group: student
+  status: current
+- name: Helene Helo
+  role: Research assistant
+  group: other
+  status: alumni
+- name: Marjaana Ojalill
+  role: Postdoc
+  group: postdoc
+  status: alumni
+- name: Gautier Follain
+  role: Postdoc
+  group: postdoc
+  status: alumni
+- name: Hiba Daafane
+  role: Research assistant
+  group: other
+  status: alumni
+- name: Hanna Grobe
+  role: Postdoc
+  group: postdoc
+  status: alumni
+- name: Joanna Pylvänäinen
+  role: Postdoc
+  previous_roles:
+  - PhD student
+  group: postdoc
+  status: alumni
+  also_known_as:
+  - Joanna W. Pylvänäinen
+  - Joanna W. Pylvanainen
+- name: Johanna Tammi
+  role: Master's student
+  previous_roles:
+  - Research assistant
+  group: student
+  status: alumni
+- name: Marie-Catherine Laisne
+  role: PhD student
+  group: phd
+  status: alumni
+- name: Ada Pajari
+  role: Master's student
+  group: student
+  status: alumni
+  also_known_as:
+  - Ada O. Pajari
+- name: Anna Nylund
+  role: Licentiate student
+  previous_roles:
+  - Master's student
+  group: student
+  status: alumni
+  also_known_as:
+  - Anna S. Nylund
+- name: Theotime Dubois
+  role: Master's student
+  group: student
+  status: alumni
+- name: Johanna Jukkala
+  role: Master's student
+  group: student
+  status: alumni
+- name: Seyed Hosseini
+  role: Summer intern
+  group: other
+  status: alumni
+- name: Amin Rezaei
+  role: Summer intern
+  group: other
+  status: alumni
+- name: Diana Wurzinger
+  role: Intern
+  group: other
+  status: alumni

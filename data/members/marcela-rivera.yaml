@@ -1,8 +1,3 @@
-name: Marcela Rivera
-role: PhD student
-group: phd
-status: current
-order: 12
+# Marcela Rivera: photo and links on the website. Name and roles come from
+# things_done (ledger/profile/lab_members.yaml).
 photo: wp-content/uploads/2024/08/marcela-rivera-e1723478055484.jpeg
-also_known_as:
-- Marcela Xiomara Rivera Pineda

@@ -1,63 +1,70 @@
-# Connecting things_done to the website
+# How things_done feeds the website
 
-Papers, software and datasets on the website come from the
-[things_done](https://github.com/guijacquemet/things_done) ledger. Every time
-the ledger changes, things_done pushes the public part of it to this
-repository (`data/things_done/`) and the website rebuilds itself.
+[things_done](https://github.com/guijacquemet/things_done) is the single source
+of truth for papers, software, datasets and the lab's numbers. It computes
+everything (preprint pairs, preprint-to-publication lag, co-author network and
+countries, citation metrics) and commits the results; the website only copies
+them. There is one place to maintain.
 
 ```
-things_done (private)                    CellMigrationLab/website (public)
-ledger/publications/*.yaml  ─┐
-ledger/registries/software   ├─ update-website.yml ─▶ data/things_done/*.yaml ─▶ publish.yml ─▶ cellmig.org
-ledger/registries/datasets  ─┘   (runs scripts/sync_things_done.py)
+things_done (private)                                   CellMigrationLab/website (public)
+ledger/publications/*.yaml ──────────────┐
+ledger/registries/{software,datasets}  ──┤
+ledger/profile/lab_members.yaml        ──┤
+report/generated/publications/           │  update_website.yml runs
+  preprint_publication_crosswalk.json  ──┼─ scripts/sync_things_done.py ─▶ data/things_done/*.yaml ─▶ site
+  preprint_lag.json                    ──┤  (copy only, public fields)
+  coauthor_network.json                ──┤
+  coauthor_countries.json              ──┤
+.cache/scholar_metrics.json            ──┘
 ```
 
 Only public fields are copied: title, authors, venue, year, DOI, abstract,
-open-access status, links between preprints and journal versions, and the
-software/dataset descriptions and links. Supervision, roles, notes and
-everything else in the ledger is never read. The website never gets access to
-the private repository: the token below only allows things_done to *write* to
-this website repository.
+open-access status, preprint/journal pairs, whether Guillaume is corresponding
+author, software/dataset descriptions, co-author names, joint-paper counts and
+countries. Supervision, roles, notes and conflict-of-interest data are never
+read. The website never gets access to the private repository: the token
+below only lets things_done *write* to this repository.
 
 ## Setup (once, about 5 minutes)
 
+The workflow is `.github/workflows/update_website.yml` in things_done. It skips
+with a notice until the token exists.
+
 1. **Create a token.** GitHub → your avatar → Settings → Developer settings →
    Personal access tokens → Fine-grained tokens → *Generate new token*.
-   - Resource owner: **CellMigrationLab** (the organisation may need to allow
-     fine-grained tokens: Organisation settings → Personal access tokens).
-   - Repository access: *Only select repositories* → **CellMigrationLab/website**.
-   - Permissions: **Contents: Read and write**. Nothing else.
-   - Expiration: up to one year (GitHub emails you before it expires).
-2. **Store it in things_done.** things_done → Settings → Secrets and variables →
-   Actions → *New repository secret*: name `WEBSITE_TOKEN`, value = the token.
-3. **Add the workflow.** Copy [`update-website.yml`](update-website.yml) to
-   `.github/workflows/update-website.yml` in things_done and commit it.
-4. **Test it.** things_done → Actions → *Update lab website* → *Run workflow*.
-   A commit "Update publications, software and datasets from things_done"
-   appears here when something changed; the site is rebuilt a minute later.
+   Resource owner **CellMigrationLab** (the organisation may need to allow
+   fine-grained tokens), repository access *Only select repositories* →
+   **CellMigrationLab/website**, permission **Contents: Read and write**.
+2. **Store it in things_done.** Settings → Secrets and variables → Actions →
+   *New repository secret*: `WEBSITE_TOKEN`.
+3. **Test it.** things_done → Actions → *Update lab website* → *Run workflow*.
 
-## When does the website update?
+It then runs after every change to publications, software, datasets or the
+generated reports, after the ledger's own automation, and once a day.
 
-- on every push to things_done that changes publications, software or datasets
-  (including merged ORCID pull requests),
-- after the ledger's own cleanup workflow (its commits do not trigger other
-  workflows),
-- once a day as a safety net,
-- or by hand (*Run workflow*).
+## Where each thing on the website comes from
 
-## Choosing what appears where
+| On the website | things_done source |
+| --- | --- |
+| Publications, latest papers | `ledger/publications/`, paired by the crosswalk report |
+| Featured research (which papers, text) | publications with `me.corresponding_author: true`; pictures are in this repo's `data/featured.yaml` |
+| Software (which projects, years, links) | `ledger/registries/software.yaml`; colours/pictures/long text in `data/software.yaml` here |
+| Datasets | `ledger/registries/datasets.yaml` |
+| Lab in numbers: papers, preprints | publications |
+| Lab in numbers: citations, h-index | `.cache/scholar_metrics.json` (Diagnose Scholar Fetch action) |
+| Lab in numbers: preprint-to-paper lag | `preprint_lag.json` (Analyze Preprint-to-Publication Lag action) |
+| Lab in numbers: top collaborators, co-author cloud | `coauthor_network.json` |
+| Lab in numbers: co-author map | `coauthor_countries.json` (Export Co-author Countries action) |
+| Lab members, alumni and their roles, member counts | `ledger/profile/lab_members.yaml` (photos and links stay in this repo) |
 
-| On the website | Comes from | Edit |
-| --- | --- | --- |
-| Publications page, "Latest papers" on the home page | `ledger/publications/*.yaml` | things_done |
-| Citations on featured research pages | ledger, by DOI | `data/featured/*.yaml` lists the DOIs |
-| Software page: which projects, names, years, GitHub, paper DOI | `ledger/registries/software.yaml` | things_done |
-| Software page: colours, pictures, longer text | `data/software.yaml` | this repository |
-| Datasets page | `ledger/registries/datasets.yaml` | things_done |
+## Worth adding to the ledger
 
-Adding `related_publication_dois` to software and datasets in the ledger links
-them to their paper: the paper's featured research page then lists the code
-and data automatically.
+| Add | Effect on the website |
+| --- | --- |
+| `related_publication_dois` on software and datasets | the paper's page lists its code and data |
+| `report/config/preprint_links_overrides.yaml` entries for missed pairs | the paper appears once, and the lag covers it |
+| `video_url` on talks (future) | the Talks page could be generated from the ledger |
 
-To refresh by hand from a local checkout:
+To refresh by hand from local checkouts:
 `python scripts/sync_things_done.py --ledger ../things_done`
