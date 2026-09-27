@@ -18,7 +18,7 @@ Reads                                        Writes (git-ignored, rebuilt every 
                                                docs/feed.xml, docs/feed/index.html (RSS)
                                                overrides/partials/cm-footer.html, cm-jsonld.html
   data/previews.yaml                           link previews (title, text, picture) of every page
-  content/*.md                                 docs/about-us.md, docs/image-analysis.md
+  content/*.md                                 docs/about-us.md, docs/join-us.md
   (all of the above)                           docs/llms.txt, docs/llms-full.txt (Markdown for LLMs)
                                                docs/assets/thumbs/ (resized images, kept)
 
@@ -91,7 +91,6 @@ def main() -> None:
     page_talks(ledger, today)
     leader = next(m for m in members if m["group"] == "pi" and m["status"] == "current")
     page_handwritten("about-us", extra=pi_profile(ledger.profile, leader))
-    page_handwritten("image-analysis")
     page_handwritten("join-us")
     page_news(news)
     write_feed(site, news)
