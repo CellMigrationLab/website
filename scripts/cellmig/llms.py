@@ -62,7 +62,7 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
            "## Affiliations", ""]
     out += [f"- {a['organization']} ({a['title']})" for a in affiliations]
     prof = ledger.profile
-    out += ["", f"## Group leader: {prof['name']}", "", prof.get("summary") or "", ""]
+    out += ["", f"## Group leader: {prof['name']}", "", prof["short_bio"], ""]
     for heading, key in (("Positions", "appointments"), ("Editorial roles", "editorial"),
                          ("Service and leadership", "service")):
         out += [f"### {heading}", "", *(f"- {r['title']}, {r['organization']}" for r in prof.get(key) or []), ""]
