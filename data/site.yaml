@@ -42,22 +42,30 @@ social:
 
 # Logos: `logo` is shown on white (home page), `logo_dark` in the dark footer.
 affiliations:
-  - name: Åbo Akademi University
+  # Which affiliations are shown comes from things_done
+  # (ledger/profile/affiliations.yaml, current ones); this list adds the logo
+  # and link for each, matched by the ledger `id`. The build stops if the two
+  # disagree. logo_dark is used on the dark footer.
+  - id: aau-professor-bioimaging-affiliation
+    name: Åbo Akademi University
     url: https://www.abo.fi/en/
     logo: wp-content/uploads/2023/02/aboakademi-logo-914629676-e1677354803399.png
     logo_dark: wp-content/uploads/2023/02/aboakademi-logo_black-300x300-1.png
-  - name: InFLAMES Flagship
-    url: https://inflames.utu.fi/
-    logo: wp-content/uploads/2023/02/inflames_logo_color.png
-    logo_dark: wp-content/uploads/2023/02/inflames_logo_color2.png
-  - name: Turku Bioscience Centre
+  - id: turku-bioscience-centre-utuaau-affiliation
+    name: Turku Bioscience Centre
     url: https://bioscience.fi/
     logo: wp-content/uploads/2023/02/turku_bioscience_logo_rgb-300x78-1.png
     logo_dark: wp-content/uploads/2023/02/turku_bioscience_logo_white_rgb-300x78-1.png
-  - name: Turku BioImaging
-    url: https://www.bioimaging.fi/
-    logo: wp-content/uploads/2023/02/logo-turku-biomaging_1000px.jpg
-    logo_dark: wp-content/uploads/2023/02/logo-turku-biomaging_1000px.png
+  - id: inflames-research-flagship-centre-affiliation
+    name: InFLAMES Flagship
+    url: https://inflames.utu.fi/
+    logo: wp-content/uploads/2023/02/inflames_logo_color.png
+    logo_dark: wp-content/uploads/2023/02/inflames_logo_color2.png
+  - id: foundation-finnish-cancer-institute-affiliation
+    name: Finnish Cancer Institute
+    url: https://www.syopainstituutti.com/
+    logo: assets/images/logos/finnish-cancer-institute.png
+    logo_dark: assets/images/logos/finnish-cancer-institute-white.png
 
 funding:
   - name: Åbo Akademi University

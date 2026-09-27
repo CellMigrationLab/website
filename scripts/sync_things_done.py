@@ -12,6 +12,7 @@ Reads (in the things_done checkout)                    Writes (data/things_done/
   ledger/registries/software.yaml                        software.yaml
   ledger/registries/datasets.yaml                        datasets.yaml
   ledger/profile/lab_members.yaml                        lab_members.yaml
+  ledger/profile/affiliations.yaml  (current ones)       affiliations.yaml
   report/generated/publications/
     preprint_publication_crosswalk.json  (pairs)         related_dois in publications.yaml
     preprint_lag.json                                    preprint_lag.yaml
@@ -21,7 +22,7 @@ Reads (in the things_done checkout)                    Writes (data/things_done/
 Only fields that are already public are copied (title, authors, venue, DOI,
 abstract, links, whether Guillaume is corresponding author, descriptions,
 co-author countries, the public lab roster: names, roles in the lab and
-current/alumni). Supervision records, notes and conflict-of-interest data are
+current/alumni, and Guillaume's current affiliations). Supervision records, notes and conflict-of-interest data are
 never read. Every input is required: a missing file stops the sync rather
 than leaving part of the website stale without anyone noticing.
 """
@@ -30,6 +31,7 @@ import argparse
 import html
 import json
 import re
+from datetime import date
 from pathlib import Path
 
 import yaml
@@ -159,6 +161,15 @@ def lab_members(ledger: Path) -> None:
           f"{sum(1 for r in records if r.get('status') == 'alumni')} alumni")
 
 
+def affiliations(ledger: Path, today: str) -> None:
+    """Guillaume's current affiliations: no end date, or one not yet passed."""
+    path = ledger / "ledger" / "profile" / "affiliations.yaml"
+    records = [pick(r, ("id", "organization", "title")) for r in load(path).get("records") or []
+               if str(r.get("end_date") or "9999") >= today]
+    dump("affiliations", {"records": records}, "ledger/profile/affiliations.yaml (current)")
+    print(f"affiliations: {len(records)} current")
+
+
 def preprint_lag(ledger: Path) -> None:
     """Resolved preprint/journal pairs and things_done's summary (median etc.)."""
     data = load_json(ledger / REPORTS / "preprint_lag.json")
@@ -210,6 +221,7 @@ def main() -> None:
     registry(ledger, "software", SOFTWARE_FIELDS)
     registry(ledger, "datasets", DATASET_FIELDS)
     lab_members(ledger)
+    affiliations(ledger, date.today().isoformat())
     preprint_lag(ledger)
     coauthors(ledger)
     metrics(ledger)
