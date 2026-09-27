@@ -4,6 +4,8 @@ title: About us
 
 # About us
 
+<p class="cm-toc-inline" markdown>[Gallery](gallery.md) · [Online talks](online-lectures.md) · [ZeroCostDL4Mic](image-analysis.md) · [Join us](join-us.md)</p>
+
 The Cell Migration Lab is located in [Turku, Finland](https://en.wikipedia.org/wiki/Turku). The lab started
 in 2019 and is part of the Research Council of Finland
 [Centre of Excellence in Immune – Endothelial Interfaces (IMMENs)](https://www.helsinki.fi/en/researchgroups/immune-endothelial-interfaces).

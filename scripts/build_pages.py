@@ -76,7 +76,8 @@ def main() -> None:
     affiliations = affiliation_list(site["affiliations"], ledger)
     funding = funding_list(site["funding"], ledger, date.today().isoformat())
 
-    page_home(site, featured, ledger, lab, affiliations, funding)
+    news = build_news(ledger, featured)
+    page_home(site, featured, ledger, lab, affiliations, funding, news)
     page_research(ledger)
     page_members(members)
     page_software(ledger)
@@ -91,7 +92,6 @@ def main() -> None:
     page_handwritten("about-us", extra=pi_profile(ledger.profile, leader))
     page_handwritten("image-analysis")
     page_handwritten("join-us")
-    news = build_news(ledger, featured)
     page_news(news)
     write_feed(site, news)
     write_footer(site, affiliations)
