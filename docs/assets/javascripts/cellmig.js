@@ -54,7 +54,10 @@
       loops.forEach((v) => { v.removeAttribute("autoplay"); v.pause(); v.controls = true; });
       return;
     }
-    if (!("IntersectionObserver" in window)) return;
+    if (!("IntersectionObserver" in window)) {   // old browsers: just play (the HTML has no autoplay)
+      loops.forEach((v) => v.play().catch(() => {}));
+      return;
+    }
     const io = new IntersectionObserver((entries) => {
       entries.forEach((en) => {
         if (en.isIntersecting) en.target.play().catch(() => {});

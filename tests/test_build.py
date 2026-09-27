@@ -133,14 +133,16 @@ class AffiliationTests(unittest.TestCase):
                                  {"id": "fci", "organization": "Finnish Cancer Institute", "title": "Research Professor"}]
 
     def test_merged_in_website_order(self):
-        out = ledger.affiliation_list([{"id": "fci", "name": "FCI", "logo": "f.png"},
-                                       {"id": "aau", "name": "ÅA", "logo": "a.png"}], self.led)
+        out = ledger.affiliation_list([{"id": "fci", "name": "FCI", "logo": "f.png", "relation": "leader"},
+                                       {"id": "aau", "name": "ÅA", "logo": "a.png", "relation": "parent"}], self.led)
         self.assertEqual([a["name"] for a in out], ["FCI", "ÅA"])
         self.assertEqual(out[0]["title"], "Research Professor")
 
     def test_missing_or_stale_entries_stop_the_build(self):
-        for presentation in ([{"id": "aau"}],                               # fci has no logo entry
-                             [{"id": "aau"}, {"id": "fci"}, {"id": "old"}]):  # old is not current
+        for presentation in ([{"id": "aau", "relation": "parent"}],          # fci has no logo entry
+                             [{"id": "aau", "relation": "parent"}, {"id": "fci", "relation": "leader"},
+                              {"id": "old", "relation": "member"}],           # old is not current
+                             [{"id": "aau", "relation": "boss"}, {"id": "fci", "relation": "leader"}]):  # bad relation
             with self.subTest(presentation=presentation), self.assertRaises(SystemExit):
                 ledger.affiliation_list(presentation, self.led)
 

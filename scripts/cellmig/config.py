@@ -14,6 +14,7 @@ THUMBS = "assets/thumbs"             # resized images, relative to docs/
 REPO = "https://github.com/CellMigrationLab/website"
 CONTENT = ROOT / "content"            # hand-written pages, copied into docs/ by the build
 HOME_FEATURED = 8                    # featured papers shown on the home page
+LAB_FOUNDED = 2019                   # publications before this are Guillaume's PhD/postdoc work
 
 def _site_url() -> str:
     """`site_url` from mkdocs.yml, ending in a slash: the one place the site's
