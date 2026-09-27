@@ -6,14 +6,18 @@ summary: Fundamental quantitative cell biologist focused on microscopy and dynam
   with research centered on cancer cell adaptation and migration across the metastatic cascade. Leads
   integrated experimental and computational work, including image and data analysis tool development,
   with lab information hosted at https://cellmig.org.
-short_bio: Guillaume Jacquemet is Professor in Bioimaging at Åbo Akademi University and K. Albin Johansson
-  Research Professor of the Finnish Cancer Institute. Trained as a cell biologist in Reims, France, he
-  did his PhD with Martin Humphries at the University of Manchester and his postdoctoral work with Johanna
-  Ivaska in Turku, before starting the Cell Migration Lab in 2019. His group studies how cancer cells
-  move, use filopodia to sense their surroundings, and attach to and cross blood vessel walls during metastasis.
-  Along the way, the lab builds open-source microscopy and deep-learning tools, such as ZeroCostDL4Mic,
-  that are used by labs worldwide. He is an Associate Editor at Journal of Cell Science and heads the
-  Doctoral Programme in Biosciences and Drug Research at Åbo Akademi.
+short_bio: Guillaume Jacquemet is Professor in Bioimaging at [Åbo Akademi University](https://www.abo.fi/en/),
+  where his lab is part of [Cell Biology](https://www.abo.fi/en/subject/cell-biology/) and of [Turku Bioscience
+  Centre](https://bioscience.fi/). He holds a [K. Albin Johansson Research Professorship](https://www.syopainstituutti.com/researcher-positions/granted-positions)
+  of the Finnish Cancer Institute, and the lab is part of the Research Council of Finland Centre of Excellence
+  [IMMENs](https://www.helsinki.fi/en/researchgroups/immune-endothelial-interfaces). Guillaume did his
+  PhD with Martin Humphries at the University of Manchester, working on integrin signalling, and his postdoc
+  with Johanna Ivaska at the University of Turku, where he studied filopodia. He is an Associate Editor
+  at [Journal of Cell Science](https://journals.biologists.com/jcs), handling image analysis and microscopy
+  papers, one of the heads of [AIC-Turku](https://bioscience.fi/aic/), the Advanced Imaging Core of Turku
+  Bioscience Centre ([microscopy dashboard](https://aic-turku.github.io/AIC-Turku-database/)), and head
+  of the [Doctoral Programme in Biosciences and Drug Research](https://www.abo.fi/en/research-at-aau/postgraduate-and-doctoral-studies/doctoral-programmes-at-abo-akademi-university/doctoral-programme-in-bio-drug-research/)
+  at Åbo Akademi ([programme website](https://aaugs-dp-biosciences-and-drug-research.github.io/Home/)).
 appointments:
 - title: Professor in Bioimaging
   organization: Åbo Akademi University

@@ -8,7 +8,7 @@ from .icons import ICONS
 from .images import square_thumb
 from .ledger import Ledger, Record
 from .people import Person
-from .text import esc
+from .text import esc, md
 
 RECENT_TALK_DAYS = 730   # "recent talks": the last two years
 TALK_KINDS = {           # ledger talk_kind -> label (None: no label); others are not listed
@@ -28,7 +28,7 @@ def month_year(value: str) -> str:
 
 def pi_profile(profile: Record, leader: Person) -> str:
     """About-us section on the group leader: photo, name, title, profile links
-    and the short bio (things_done person.yaml `short_bio`)."""
+    and the short bio (things_done person.yaml `short_bio`, Markdown links allowed)."""
     photo = ""
     if leader.get("photo"):
         img = square_thumb(leader["photo"], 480, leader.get("photo_position", "top"))
@@ -39,7 +39,7 @@ def pi_profile(profile: Record, leader: Person) -> str:
             f'<div class="cm-profile__head">{photo}<div><h2 class="cm-profile__name">{esc(profile["name"])}</h2>'
             f'<p class="cm-profile__title">{esc(profile["title"])}</p>'
             f'<p class="cm-profile__links">{links}</p></div></div>'
-            f'<p class="cm-profile__bio">{esc(profile["short_bio"])}</p></section>')
+            f'<p class="cm-profile__bio">{md(profile["short_bio"], inline=True)}</p></section>')
 
 
 def recent_talks(ledger: Ledger, today: date) -> list[Record]:
