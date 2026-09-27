@@ -90,13 +90,12 @@ def main() -> None:
     today = date.today()
     page_talks(ledger, today)
     leader = next(m for m in members if m["group"] == "pi" and m["status"] == "current")
-    page_handwritten("about-us", extra=pi_profile(ledger.profile, leader, site.get("group_leader_bio")))
+    page_handwritten("about-us", extra=pi_profile(ledger.profile, leader))
     page_handwritten("join-us")
     page_news(news)
     write_feed(site, news)
     write_footer(site, affiliations)
-    write_jsonld(site, affiliations, members,
-                 plain(site.get("group_leader_bio") or ledger.profile["short_bio"]))
+    write_jsonld(site, affiliations, members, plain(ledger.profile["short_bio"]))
     write_llms(site, featured, ledger, members, affiliations)
     check_all_used()
     print(f"Generated pages: {len(featured)} featured papers, {len(ledger.grouped())} publications, "
