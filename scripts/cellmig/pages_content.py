@@ -81,7 +81,8 @@ def page_software(ledger: Ledger) -> None:
     projects = software_list(ledger)
     p.meta["jsonld"] = to_json(item_list("Software from the Cell Migration Lab", [
         software_item(s, f"{p.url}#{slugify(s['title'])}") for s in projects]))
-    p.add("# Software", '<p class="cm-lead">Here are the software we have developed or contributed to</p>', '<div class="cm-wide">')
+    p.add("# Software", '<p class="cm-lead">Here are the software we have developed or contributed to. '
+          'Looking for data? See <a href="datasets/">our datasets, models and materials</a>.</p>', '<div class="cm-wide">')
     for i, s in enumerate(projects):
         pic = media(s.get("video") or s.get("image"), f'{s["title"]} logo' if s.get("image") else "", 900)
         p.add(tile(s.get("color", "light"), pic, _software_body(s), media_right=i % 2 == 0))
@@ -113,7 +114,8 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     p.meta["jsonld"] = to_json(item_list("Datasets shared by the Cell Migration Lab",
                                          [dataset_item(d) for d in ledger.datasets]))
     p.add("# Datasets",
-          '<p class="cm-lead">We share our data. Here are the datasets, models and materials that accompany our papers.</p>')
+          '<p class="cm-lead">We share our data. Here are the datasets, models and materials that accompany our papers. '
+          'The tools we build are on <a href="software/">Software</a>.</p>')
     p.add('<ul class="cm-resources">', *(
         f'<li><a href="{esc(r["url"])}"><strong>{esc(r["title"])}</strong><span>{esc(r.get("text", ""))}</span></a></li>'
         for r in site["resources"]), "</ul>")

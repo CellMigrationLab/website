@@ -4,7 +4,7 @@ title: About us
 
 # About us
 
-<p class="cm-toc-inline" markdown>[Gallery](gallery.md) · [Online talks](online-lectures.md) · [ZeroCostDL4Mic](image-analysis.md) · [Join us](join-us.md)</p>
+<p class="cm-toc-inline" markdown>[Join us](join-us.md) · [Online talks](online-lectures.md) · [Gallery](gallery.md)</p>
 
 The Cell Migration Lab is located in [Turku, Finland](https://en.wikipedia.org/wiki/Turku). The lab started
 in 2019 and is part of the Research Council of Finland

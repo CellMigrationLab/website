@@ -36,7 +36,6 @@ button (top right) that opens the right file.
 | Gallery | `data/gallery.yaml` |
 | Online talks | `data/talks.yaml` |
 | About us | `content/about-us.md` |
-| ZeroCostDL4Mic / deep learning | `content/image-analysis.md` |
 | What a pasted link shows (title, sentence, picture) for every page | `data/previews.yaml` |
 | Colours, fonts, layout | `docs/assets/stylesheets/cellmig.css` |
 

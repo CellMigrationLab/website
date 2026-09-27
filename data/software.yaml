@@ -167,9 +167,6 @@
     YOLOv2), image denoising and restoration (CARE, Noise2Void), super-resolution microscopy
     (Deep-STORM) and image-to-image translation (label-free prediction fnet, pix2pix, CycleGAN), all
     running for free in Google Colab.
-  links:
-    - label: More about deep learning for microscopy
-      url: image-analysis/
 
 - title: SRRF TFM
   year: 2020
