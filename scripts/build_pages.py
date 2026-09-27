@@ -16,7 +16,10 @@ Reads                                        Writes (git-ignored, rebuilt every 
   data/gallery.yaml                            docs/gallery.md
   data/talks.yaml                              docs/online-lectures.md
                                                docs/feed.xml, docs/feed/index.html (RSS)
-                                               overrides/partials/cm-footer.html
+                                               overrides/partials/cm-footer.html, cm-jsonld.html
+  data/previews.yaml                           link previews (title, text, picture) of every page
+  content/*.md                                 docs/about-us.md, docs/image-analysis.md
+  (all of the above)                           docs/llms.txt, docs/llms-full.txt (Markdown for LLMs)
                                                docs/assets/thumbs/ (resized images, kept)
 
 data/things_done/ is copied from the things_done ledger by
@@ -31,9 +34,11 @@ import shutil
 from cellmig.config import DATA, DOCS, GENERATED, load
 from cellmig.featured import load_featured
 from cellmig.ledger import Ledger, affiliation_list
+from cellmig.llms import write_llms
 from cellmig.pages_content import (
     page_datasets,
     page_gallery,
+    page_handwritten,
     page_research,
     page_software,
     page_talks,
@@ -43,7 +48,8 @@ from cellmig.pages_numbers import page_numbers
 from cellmig.pages_papers import page_featured, page_publications
 from cellmig.pages_people import page_members
 from cellmig.people import lab_names, load_members
-from cellmig.site_files import write_feed, write_footer
+from cellmig.previews import check_all_used
+from cellmig.site_files import write_feed, write_footer, write_jsonld
 
 
 def clean() -> None:
@@ -76,8 +82,13 @@ def main() -> None:
     page_datasets(ledger, site)
     page_gallery()
     page_talks()
+    page_handwritten("about-us")
+    page_handwritten("image-analysis")
     write_feed(site, featured)
     write_footer(site, affiliations)
+    write_jsonld(site, affiliations, members)
+    write_llms(site, featured, ledger, members, affiliations)
+    check_all_used()
     print(f"Generated pages: {len(featured)} featured papers, {len(ledger.grouped())} publications, "
           f"{len(ledger.datasets)} datasets, {len(members)} people.")
 

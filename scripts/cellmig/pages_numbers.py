@@ -6,6 +6,7 @@ from .components import section_title
 from .ledger import Ledger, Record, software_list
 from .page import Page
 from .people import Person, is_lab_member
+from .previews import preview
 from .text import esc, flag, fmt
 from .worldmap import world_map
 
@@ -71,9 +72,7 @@ def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
     for c in ledger.coauthors:
         if c.get("country"):
             countries[c["country"]] = countries.get(c["country"], 0) + 1
-    p = Page("lab-in-numbers.md", title="Lab in numbers",
-             description="The Cell Migration Lab in numbers: papers, citations, people, collaborators "
-                         "and how long it takes a preprint to become a paper.")
+    p = Page("lab-in-numbers.md", title="Lab in numbers", **preview("lab-in-numbers"))
     p.add("# Lab in numbers", '<p class="cm-lead">Generated automatically from our activity ledger.</p>',
           _tiles(ledger, members, countries),
           section_title("Papers per year"), papers_per_year(ledger.grouped()),

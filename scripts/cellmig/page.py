@@ -4,7 +4,7 @@ import re
 
 import yaml
 
-from .config import DOCS
+from .config import DOCS, SITE_URL
 from .images import gif_video, share_jpeg
 from .text import is_external
 
@@ -43,6 +43,12 @@ class Page:
         stem = path[:-3]
         self.depth_url = self.depth_file + (0 if stem == "index" or stem.endswith("/index") else 1)
 
+    @property
+    def url(self) -> str:
+        """The page's absolute address ("https://.../portfolio/cdm/")."""
+        stem = self.path[:-3]
+        return SITE_URL if stem == "index" else f"{SITE_URL}{stem}/"
+
     def u(self, target: str, final_url: bool = False) -> str:
         """Site path -> path relative to this page (external URLs unchanged)."""
         target = str(target or "")
@@ -77,6 +83,6 @@ class Page:
         """Write docs/<path> (front matter + body)."""
         out = DOCS / self.path
         out.parent.mkdir(parents=True, exist_ok=True)
-        front = yaml.safe_dump(self.meta, allow_unicode=True, sort_keys=False, width=1000).strip()
+        front = yaml.safe_dump(self.meta, allow_unicode=True, sort_keys=False, width=10**9).strip()
         body = self.fix_links("\n".join(self.parts))
         out.write_text(f"---\n{front}\n---\n\n{body}\n", encoding="utf-8")

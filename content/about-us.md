@@ -1,7 +1,5 @@
 ---
 title: About us
-description: The Cell Migration Lab is located in Turku, Finland, at Åbo Akademi University and Turku Bioscience Centre.
-image: wp-content/uploads/2019/08/p1080272-1-e1566674878737.jpg
 ---
 
 # About us

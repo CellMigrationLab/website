@@ -2,18 +2,20 @@
 
 
 from .components import citation, feature_card, one_line
-from .config import edit_url
+from .config import SITE_URL, edit_url
 from .featured import Story, story_by_doi
 from .images import media
 from .ledger import Ledger, Record, software_list
 from .page import Page
+from .previews import paper_image, preview
+from .structured import article, item_list, publication_item, scholar_tags, to_json
 from .text import esc, slugify
 
 
 def page_featured(featured: list[Story], ledger: Ledger, lab: set[str]) -> None:
     """docs/featured-research.md (the grid) and docs/portfolio/<slug>.md for each story."""
     p = Page("featured-research.md", title="Featured Research", edit_url=edit_url("data/featured.yaml"),
-             description="Our main papers: every paper led by the Cell Migration Lab, with its abstract.")
+             **preview("featured-research"))
     p.add("# Featured Research",
           '<p class="cm-lead">Papers led by our lab, newest first. See <a href="publications/">all our publications</a>.</p>',
           '<div class="cm-cards cm-cards--grid">', *(feature_card(s) for s in featured), "</div>")
@@ -64,7 +66,9 @@ def page_story(story: Story, stories: list[Story], i: int, ledger: Ledger, lab: 
     image = story["image"]
     p = Page(f"portfolio/{story['slug']}.md", title=story["title"], edit_url=edit_url("data/featured.yaml"),
              description=one_line(story["summary"], 300),
-             image=image)
+             image=image or paper_image(), og_type="article")
+    p.meta["jsonld"] = to_json(article(story, p.url, SITE_URL + p.meta["image"] if p.meta.get("image") else None))
+    p.meta["citation"] = scholar_tags(story)
     p.add(f'# {esc(story["title"])}')
     if image:
         p.add(f'<figure class="cm-story__media">{media(image, story["title"], 1600, eager=True, sizes="(max-width: 900px) 100vw, 900px")}</figure>')
@@ -87,8 +91,8 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str]) -> N
     stories = story_by_doi(featured, ledger)
     years = sorted({r["year"] for r in records}, reverse=True)
     n_pre = sum(1 for r in records if r.get("status") == "preprint")
-    p = Page("publications.md", title="Publications",
-             description="All publications and preprints of the Cell Migration Lab, updated automatically.")
+    p = Page("publications.md", title="Publications", **preview("publications"))
+    p.meta["jsonld"] = to_json(item_list("Publications of the Cell Migration Lab", [publication_item(r) for r in records]))
     p.add("# Publications",
           f'<p class="cm-lead">{len(records)} papers and preprints, newest first. Lab members are '
           '<span class="cm-author--lab">highlighted</span>; preprints are merged with their journal version.</p>',

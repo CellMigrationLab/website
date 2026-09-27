@@ -17,13 +17,20 @@
   {% set title = page.meta.title if page.meta and page.meta.title else (page.title | striptags) %}
   {% set description = page.meta.description if page.meta and page.meta.description else config.site_description %}
   {% set image = page.meta.image if page.meta and page.meta.image else "wp-content/uploads/2019/08/cover4.jpg" %}
-  <meta property="og:type" content="website">
+  {#- Link previews: description, image and share_title come from data/previews.yaml. -#}
+  {% set share_title = page.meta.share_title or page.meta.head_title or title if page.meta else title %}
+  <meta property="og:type" content="{{ page.meta.og_type if page.meta and page.meta.og_type else 'website' }}">
   <meta property="og:site_name" content="{{ config.site_name }}">
-  <meta property="og:title" content="{{ page.meta.head_title if page.meta and page.meta.head_title else title }}">
+  <meta property="og:title" content="{{ share_title | e }}">
   <meta property="og:description" content="{{ description | e }}">
   <meta property="og:url" content="{{ page.canonical_url }}">
   <meta property="og:image" content="{{ config.site_url }}{{ image }}">
   <meta name="twitter:card" content="summary_large_image">
+  {#- Structured data (scripts/cellmig/structured.py): the lab on every page, plus this page's own. -#}
+  {% include "partials/cm-jsonld.html" %}
+  {% if page.meta and page.meta.jsonld %}<script type="application/ld+json">{{ page.meta.jsonld }}</script>{% endif %}
+  {% if page.meta and page.meta.citation %}{% for tag in page.meta.citation %}
+  <meta name="{{ tag[0] }}" content="{{ tag[1] | e }}">{% endfor %}{% endif %}
   <meta name="theme-color" content="#ffffff">
 {% endblock %}
 
