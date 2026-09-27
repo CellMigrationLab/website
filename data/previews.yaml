@@ -67,6 +67,18 @@ pages:
       Recorded talks, webinars and interviews about cell migration, filopodia and deep learning for
       microscopy.
     image: wp-content/uploads/2022/10/cover-3.jpg
+  news:
+    title: News – Cell Migration Lab
+    description: >-
+      New papers, preprints, talks, events and funding of the Cell Migration Lab, generated
+      automatically from our activity ledger.
+    image: wp-content/uploads/2019/08/max_colored.png
+  join-us:
+    title: Join the Cell Migration Lab
+    description: >-
+      How to join the Cell Migration Lab in Turku, Finland, as a postdoc (with a fellowship), PhD
+      student, Master's student or intern.
+    image: wp-content/uploads/2025/01/img_3147.jpg
   about-us:
     title: About the Cell Migration Lab
     description: >-

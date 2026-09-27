@@ -22,6 +22,8 @@ button (top right) that opens the right file.
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
 | Funding logos (home page) | which ones: things_done `ledger/registries/grants.yaml` (funders of active/awarded grants not yet ended); logo and link per ledger `funder` in `data/site.yaml` `funding` — the build stops if the two disagree |
+| News (and the RSS feed) | automatic, from things_done: papers, preprints, keynotes, events, funding, positions and software since 2024 (`scripts/cellmig/news.py`) |
+| Join us (recruitment) | `content/join-us.md` |
 | Group leader profile (About us), recent talks and teaching (Online talks) | automatic, from things_done (`ledger/profile/`, `ledger/roles/`, `ledger/activities/`) |
 | Affiliations (home page and footer) | which ones: things_done `ledger/profile/affiliations.yaml` (current = no end date, or one not yet passed); logo and link per ledger `id` in `data/site.yaml` `affiliations` — the build stops if the two disagree |
 | Research | `data/research.yaml` |
