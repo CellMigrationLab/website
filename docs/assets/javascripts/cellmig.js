@@ -1,6 +1,6 @@
 // Cell Migration Lab – small enhancements. The site works without JavaScript;
-// this adds click-to-play videos, the gallery lightbox, the publication filter,
-// before/after sliders and a few niceties.
+// this adds click-to-play videos, the gallery lightbox, the publication filter
+// and a few niceties.
 (function () {
   "use strict";
 
@@ -142,24 +142,6 @@
   }
 
   // Before/after image sliders (image analysis page)
-  function initCompare() {
-    document.querySelectorAll(".cm-compare").forEach((fig) => {
-      const imgs = fig.querySelectorAll("img");
-      if (imgs.length < 2 || fig.classList.contains("is-ready")) return;
-      fig.classList.add("is-ready");
-      const range = document.createElement("input");
-      range.type = "range"; range.min = "0"; range.max = "100"; range.value = "50";
-      range.setAttribute("aria-label", "Compare input and result");
-      const handle = document.createElement("span");
-      handle.className = "cm-compare__handle";
-      const box = imgs[0].closest("p") || fig;
-      box.style.position = "relative";
-      box.append(handle, range);
-      range.addEventListener("input", () => fig.style.setProperty("--pos", range.value + "%"));
-    });
-  }
-
-  // Charts and map: tooltip on hover / keyboard focus
   function initChartTips() {
     document.querySelectorAll(".cm-lag__plot, .cm-bars, .cm-map").forEach((box) => {
       const tip = box.querySelector(".cm-chart-tip");
@@ -189,7 +171,6 @@
     initLoops();
     initLightbox();
     initPublications();
-    initCompare();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

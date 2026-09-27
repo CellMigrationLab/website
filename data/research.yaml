@@ -85,8 +85,7 @@ themes:
     lead: We use multiple microscopy approaches in our work and continuously develop tools for image
       analysis.
     text:
-      - Check out [our software](software/) and our work on
-        [deep learning for microscopy](image-analysis/).
+      - Check out [our software](software/) and [the datasets and models we share](datasets/).
     credit: "Image: Time projection illustrating the dynamics of focal adhesions in human endothelial cells. Credit: Martina Lerche and Guillaume Jacquemet"
     papers:
       - 10.1371/journal.pbio.3002740
