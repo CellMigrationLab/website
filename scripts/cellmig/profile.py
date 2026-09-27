@@ -26,9 +26,9 @@ def month_year(value: str) -> str:
     return f"{MONTHS[int(parts[1]) - 1]} {parts[0]}" if len(parts) > 1 else parts[0]
 
 
-def pi_profile(profile: Record, leader: Person, bio: str | None = None) -> str:
+def pi_profile(profile: Record, leader: Person) -> str:
     """About-us section on the group leader: photo, name, title, profile links
-    and a website bio, falling back to the ledger short bio."""
+    and the public short bio from Things Done."""
     photo = ""
     if leader.get("photo"):
         img = square_thumb(leader["photo"], 480, leader.get("photo_position", "top"))
@@ -39,7 +39,7 @@ def pi_profile(profile: Record, leader: Person, bio: str | None = None) -> str:
             f'<div class="cm-profile__head">{photo}<div><h2 class="cm-profile__name">{esc(profile["name"])}</h2>'
             f'<p class="cm-profile__title">{esc(profile["title"])}</p>'
             f'<p class="cm-profile__links">{links}</p></div></div>'
-            f'<div class="cm-profile__bio">{md(bio or profile["short_bio"])}</div></section>')
+            f'<div class="cm-profile__bio">{md(profile["short_bio"])}</div></section>')
 
 
 def recent_talks(ledger: Ledger, today: date) -> list[Record]:
