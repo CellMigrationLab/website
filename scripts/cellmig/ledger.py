@@ -32,6 +32,7 @@ class Ledger:
         self.talks: list[Record] = _records("talks")
         self.teaching: list[Record] = _records("teaching")
         self.grants: list[Record] = _records("grants")
+        self.events: list[Record] = _records("conference_organization")
         self.profile: Record = load(LEDGER_DATA / "profile.yaml")
         for key in ("name", "title", "short_bio", "appointments", "education"):
             if not self.profile.get(key):
