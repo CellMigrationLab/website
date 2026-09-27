@@ -17,9 +17,10 @@ def band(b: Record) -> str:
     return f'<figure class="cm-band">{media(b["image"], b.get("caption", ""), 2400, sizes="100vw")}{cap}</figure>'
 
 
-def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str]) -> None:
-    """Hero, newest featured papers, latest papers, funders; data/site.yaml
-    `bands` (two pictures) go between the sections."""
+def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str],
+              affiliations: list[Record]) -> None:
+    """Hero, newest featured papers, latest papers, affiliations, funders;
+    data/site.yaml `bands` (two pictures) go between the sections."""
     hero, bands = site["hero"], site["bands"]
     p = Page("index.md", template="home.html", title="Home", head_title=f'{site["name"]} – {site["motto"].rstrip(".")}',
              description=site["intro"], image=hero["image"])
@@ -46,5 +47,6 @@ def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str]
         p.add(f'<li class="cm-pub">{citation(rec, lab, ledger, link)}</li>')
     p.add("</ol>", '<p class="cm-more-link"><a href="publications/">All publications</a></p>')
 
-    p.add(band(bands[1]), section_title("Funding"), logo_row(site["funding"]))
+    p.add(band(bands[1]), section_title("Affiliations"), logo_row(affiliations),
+          section_title("Funding"), logo_row(site["funding"]))
     p.write()

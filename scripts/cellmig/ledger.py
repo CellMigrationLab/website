@@ -28,6 +28,7 @@ class Ledger:
         self.software: list[Record] = _records("software")
         self.datasets: list[Record] = _records("datasets")
         self.coauthors: list[Record] = _records("coauthors", "coauthors")
+        self.affiliations: list[Record] = _records("affiliations")
         lag = load(LEDGER_DATA / "preprint_lag.yaml")
         self.lag_pairs: list[Record] = [p for p in lag.get("pairs") or [] if "gap_days" in p]
         self.lag_summary: Record = lag.get("summary") or fail(
@@ -111,3 +112,21 @@ def software_list(ledger: Ledger) -> list[Record]:
             out.append({"dois": [], **s, "_pos": pos})
     out.sort(key=lambda s: (-(s.get("year") or 0), s["_pos"], s["title"].casefold()))
     return out
+
+
+def affiliation_list(presentation: list[Record], ledger: Ledger) -> list[Record]:
+    """Guillaume's current affiliations (things_done) with their logo and link
+    from data/site.yaml `affiliations` (matched by ledger `id`), in the order
+    of data/site.yaml. Strict both ways: a current affiliation without a logo
+    entry, or an entry for an affiliation that is not current, stops the build."""
+    current = {a["id"]: a for a in ledger.affiliations}
+    listed = [a.get("id") for a in presentation]
+    missing = sorted(set(current) - set(listed))
+    stale = sorted({str(i) for i in listed} - set(current))
+    if missing:
+        fail(f"data/site.yaml affiliations: add an entry (id, name, url, logo) for {missing} "
+             "(current in things_done ledger/profile/affiliations.yaml)")
+    if stale:
+        fail(f"data/site.yaml affiliations: {stale} are not current affiliations in things_done; "
+             "remove them or fix the id")
+    return [{**current[a["id"]], **a} for a in presentation]

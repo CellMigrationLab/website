@@ -13,9 +13,10 @@ from .text import esc, is_external, md
 FEED_ITEMS = 30
 
 
-def write_footer(site: Record) -> None:
-    """overrides/partials/cm-footer.html from data/site.yaml (links go through
-    the template's url filter, so they work from every page)."""
+def write_footer(site: Record, affiliations: list[Record]) -> None:
+    """overrides/partials/cm-footer.html from data/site.yaml and the current
+    affiliations (links go through the template's url filter, so they work
+    from every page)."""
     def u(path: str) -> str:
         return path if is_external(path) else "{{ '" + path + "' | url }}"
 
@@ -24,7 +25,7 @@ def write_footer(site: Record) -> None:
             fail(f"data/site.yaml social {s['label']!r}: icon must be one of {sorted(ICONS)}")
     logos = "".join(
         f'<li><a href="{esc(a["url"])}" title="{esc(a["name"])}"><img src="{u(thumb(a.get("logo_dark") or a["logo"], 300))}" '
-        f'alt="{esc(a["name"])}" loading="lazy"></a></li>' for a in site["affiliations"])
+        f'alt="{esc(a["name"])}" loading="lazy"></a></li>' for a in affiliations)
     social = "".join(f'<li><a href="{esc(s["url"])}">{ICONS[s["icon"]]}<span>{esc(s["label"])}</span></a></li>'
                      for s in site["social"])
     address = "<br>".join(esc(x) for x in site["contact"]["address"])

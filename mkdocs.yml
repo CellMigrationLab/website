@@ -46,6 +46,11 @@ plugins:
   - redirects:
       redirect_maps:
         portfolio/index.md: featured-research.md
+        portfolio/structural-repetition-detector-multi-scale-quantitative-mapping-of-molecular-complexes-through-microscopy.md: publications.md
+        portfolio/photofitt-a-quantitative-framework-for-assessing-phototoxicity-in-live-cell-microscopy-experiments.md: publications.md
+        portfolio/talin-rod-domain-containing-protein-1-tlnrd1-is-a-novel-actin-bundling-protein-which-promotes-filopodia-formation.md: publications.md
+        portfolio/filopodia-cocb.md: publications.md
+        portfolio/cdm.md: publications.md
         collaborators.md: lab-in-numbers.md
         author/guijacquemet/index.md: about-us.md
         category/uncategorized/index.md: index.md

@@ -10,9 +10,8 @@ from .page import Page
 from .text import esc, slugify
 
 
-def page_featured(featured: list[Story], unlisted: list[Story], ledger: Ledger, lab: set[str]) -> None:
-    """docs/featured-research.md (the grid) and docs/portfolio/<slug>.md for each
-    story; unlisted stories get their page too (old addresses) but no grid card."""
+def page_featured(featured: list[Story], ledger: Ledger, lab: set[str]) -> None:
+    """docs/featured-research.md (the grid) and docs/portfolio/<slug>.md for each story."""
     p = Page("featured-research.md", title="Featured Research", edit_url=edit_url("data/featured.yaml"),
              description="Our main papers: every paper led by the Cell Migration Lab, with its abstract.")
     p.add("# Featured Research",
@@ -22,8 +21,6 @@ def page_featured(featured: list[Story], unlisted: list[Story], ledger: Ledger, 
     software = software_list(ledger)
     for i, story in enumerate(featured):
         page_story(story, featured, i, ledger, lab, software)
-    for story in unlisted:
-        page_story(story, [story], 0, ledger, lab, software)
 
 
 def _related(story: Story, ledger: Ledger, software: list[Record]) -> str:
