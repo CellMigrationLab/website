@@ -95,7 +95,8 @@ def main() -> None:
     page_news(news)
     write_feed(site, news)
     write_footer(site, affiliations)
-    write_jsonld(site, affiliations, members, plain(ledger.profile["short_bio"]))
+    write_jsonld(site, affiliations, members,
+                 plain(site.get("group_leader_bio") or ledger.profile["short_bio"]))
     write_llms(site, featured, ledger, members, affiliations)
     check_all_used()
     print(f"Generated pages: {len(featured)} featured papers, {len(ledger.grouped())} publications, "
