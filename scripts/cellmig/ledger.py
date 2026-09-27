@@ -137,10 +137,14 @@ def affiliation_list(presentation: list[Record], ledger: Ledger) -> list[Record]
     if stale:
         fail(f"data/site.yaml affiliations: {stale} are not current affiliations in things_done; "
              "remove them or fix the id")
+    bad = [a["id"] for a in presentation if a.get("relation") not in AFFILIATION_RELATIONS]
+    if bad:
+        fail(f"data/site.yaml affiliations {bad}: relation must be one of {AFFILIATION_RELATIONS}")
     return [{**current[a["id"]], **a} for a in presentation]
 
 
 CURRENT_GRANT = ("active", "awarded")
+AFFILIATION_RELATIONS = ("parent", "member", "leader")
 
 
 def funding_list(presentation: list[Record], ledger: Ledger, today: str) -> list[Record]:

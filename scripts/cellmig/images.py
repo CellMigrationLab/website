@@ -126,7 +126,8 @@ def media(site_path: str | None, alt: str = "", width: int = 900, cls: str = "",
         mp4, poster = twin
         p = f' poster="{poster}"' if poster else ""
         label = f' aria-label="{esc(alt)}"' if alt else ""
-        return (f'<video class="{cls} cm-loop" autoplay muted loop playsinline preload="metadata"{p}{label}>'
+        # No autoplay: cellmig.js plays loops only while they are on screen.
+        return (f'<video class="{cls} cm-loop" muted loop playsinline preload="none"{p}{label}>'
                 f'<source src="{mp4}" type="video/mp4"></video>')
     src = thumb(site_path, width)
     size = image_size(src)
@@ -157,3 +158,9 @@ def lite_video(youtube: str | None = None, vimeo: str | None = None, title: str 
     return (f'<div class="cm-video" data-embed="{esc(embed)}" style="--thumb: url(\'{thumb_url}\')">'
             f'<a class="cm-video__play" href="{esc(link)}" aria-label="Play video: {esc(title)}">'
             f'<span class="cm-video__icon" aria-hidden="true"></span></a></div>')
+
+
+def dims(site_path: str) -> str:
+    """ width="…" height="…" for an image (empty for SVG), to reserve its space."""
+    size = image_size(site_path)
+    return f' width="{size[0]}" height="{size[1]}"' if size else ""

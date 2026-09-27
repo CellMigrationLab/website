@@ -46,22 +46,29 @@ affiliations:
   # (ledger/profile/affiliations.yaml, current ones); this list adds the logo
   # and link for each, matched by the ledger `id`. The build stops if the two
   # disagree. logo_dark is used on the dark footer.
+  # relation (for search engines and LLMs): parent = the lab is part of this
+  # organisation; member = the lab belongs to this centre or network;
+  # leader = an affiliation of the group leader, not of the lab.
   - id: aau-professor-bioimaging-affiliation
+    relation: parent
     name: Åbo Akademi University
     url: https://www.abo.fi/en/
     logo: wp-content/uploads/2023/02/aboakademi-logo-914629676-e1677354803399.png
     logo_dark: wp-content/uploads/2023/02/aboakademi-logo_black-300x300-1.png
   - id: turku-bioscience-centre-utuaau-affiliation
+    relation: member
     name: Turku Bioscience Centre
     url: https://bioscience.fi/
     logo: wp-content/uploads/2023/02/turku_bioscience_logo_rgb-300x78-1.png
     logo_dark: wp-content/uploads/2023/02/turku_bioscience_logo_white_rgb-300x78-1.png
   - id: inflames-research-flagship-centre-affiliation
+    relation: member
     name: InFLAMES Flagship
     url: https://inflames.utu.fi/
     logo: wp-content/uploads/2023/02/inflames_logo_color.png
     logo_dark: wp-content/uploads/2023/02/inflames_logo_color2.png
   - id: foundation-finnish-cancer-institute-affiliation
+    relation: leader
     name: Finnish Cancer Institute
     url: https://www.syopainstituutti.com/
     logo: assets/images/logos/finnish-cancer-institute.png

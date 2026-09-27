@@ -23,7 +23,7 @@ from .page import Page
 from .previews import preview
 from .profile import talks_section, teaching_section
 from .structured import dataset_item, item_list, software_item, to_json
-from .text import esc, md, slugify, year_of
+from .text import esc, is_external, md, slugify, year_of
 
 BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our publications</a>'
 
@@ -174,5 +174,19 @@ def page_handwritten(name: str, extra: str = "") -> None:
         fail(f"content/{name}.md: front matter must be only `title` "
              "(description and image go in data/previews.yaml)")
     p = Page(f"{name}.md", title=front["title"], edit_url=edit_url(f"content/{name}.md"), **preview(name))
-    p.add(m.group(2).strip(), extra)
+    p.add(_local_images(m.group(2).strip()), extra)
     p.write()
+
+
+MD_IMAGE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)\)(\{[^}]*\})?")
+
+
+def _local_images(markdown_text: str) -> str:
+    """Markdown images of files under docs/ -> resized, lazy <img> with width,
+    height and srcset (like every generated page); external images unchanged."""
+    def repl(m: re.Match) -> str:
+        alt, path = m.group(1), m.group(2)
+        if is_external(path):
+            return m.group(0)
+        return media(path, alt, 900, sizes="(max-width: 900px) 100vw, 900px")
+    return MD_IMAGE.sub(repl, markdown_text)

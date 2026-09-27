@@ -46,7 +46,7 @@ class StructuredDataTests(unittest.TestCase):
         data = json.loads(text)
         work, crumbs = data["@graph"]
         self.assertEqual(work["@type"], "ScholarlyArticle")
-        self.assertEqual(work["datePublished"], "2025")          # year when no exact date
+        self.assertNotIn("datePublished", work)                  # no year-only dates in schema.org
         self.assertEqual(work["abstract"], "Line one. Line two.")
         self.assertEqual([i["position"] for i in crumbs["itemListElement"]], [1, 2, 3])
 
