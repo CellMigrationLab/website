@@ -69,7 +69,7 @@ def citation(rec: Record, lab: set[str], ledger: Ledger, story_url: str | None =
 def feature_card(story: Story) -> str:
     """Picture card linking to a featured paper's page (venue name when no picture)."""
     pub = story["pubs"][0]
-    pic = (media(story["image"], "", 700) if story["image"]
+    pic = (media(story["image"], story["title"], 700) if story["image"]
            else f'<span class="cm-card__placeholder">{esc(pub.get("venue") or "")}</span>')
     return (f'<a class="cm-card" href="portfolio/{story["slug"]}/">'
             f'<div class="cm-card__media">{pic}</div>'
@@ -111,7 +111,7 @@ def person_card(m: Person) -> str:
     """Member photo (or initials), name, current role, bio and profile links."""
     if m.get("photo"):
         img = square_thumb(m["photo"], 480, m.get("photo_position", "top"))
-        pic = f'<img src="{img}" alt="" width="480" height="480" loading="lazy">'
+        pic = f'<img src="{img}" alt="{esc(m["name"])}" width="480" height="480" loading="lazy">'
     else:
         initials = "".join(w[0] for w in m["name"].split()[:2]).upper()
         pic = f'<span class="cm-person__initials" aria-hidden="true">{esc(initials)}</span>'

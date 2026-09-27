@@ -21,3 +21,11 @@ docs/feed/
 docs/assets/thumbs/
 docs/assets/images/members/
 overrides/partials/cm-footer.html
+
+# Hand-written pages copied from content/ with their link preview
+docs/about-us.md
+docs/image-analysis.md
+# Plain-text versions of the site for LLMs
+docs/llms.txt
+docs/llms-full.txt
+overrides/partials/cm-jsonld.html

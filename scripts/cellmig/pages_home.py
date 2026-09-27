@@ -1,11 +1,12 @@
 """The home page (docs/index.md, rendered with overrides/home.html)."""
 
 from .components import citation, feature_card, logo_row, section_title
-from .config import HOME_FEATURED
+from .config import HOME_FEATURED, UNCAPTIONED_ALT
 from .featured import Story, story_by_doi
 from .images import media
 from .ledger import Ledger, Record
 from .page import Page
+from .previews import preview
 from .text import esc
 
 LATEST_PAPERS = 5
@@ -14,7 +15,7 @@ LATEST_PAPERS = 5
 def band(b: Record) -> str:
     """Full-width picture between sections."""
     cap = f'<figcaption>{esc(b["caption"])}</figcaption>' if b.get("caption") else ""
-    return f'<figure class="cm-band">{media(b["image"], b.get("caption", ""), 2400, sizes="100vw")}{cap}</figure>'
+    return f'<figure class="cm-band">{media(b["image"], b.get("caption") or UNCAPTIONED_ALT, 2400, sizes="100vw")}{cap}</figure>'
 
 
 def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str],
@@ -23,14 +24,14 @@ def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str]
     data/site.yaml `bands` (two pictures) go between the sections."""
     hero, bands = site["hero"], site["bands"]
     p = Page("index.md", template="home.html", title="Home", head_title=f'{site["name"]} – {site["motto"].rstrip(".")}',
-             description=site["intro"], image=hero["image"])
+             **preview("index"))
     p.add(
         '<section class="cm-hero">',
         '<div class="cm-hero__text">',
         f'<h1 class="cm-hero__title">{esc(site["tagline"])}</h1>',
         f'<p class="cm-hero__welcome">{esc(site["welcome"])}</p>',
         "</div>",
-        f'<figure class="cm-hero__image">{media(hero["image"], hero.get("caption", ""), 2400, eager=True, sizes="100vw")}</figure>',
+        f'<figure class="cm-hero__image">{media(hero["image"], hero.get("caption") or UNCAPTIONED_ALT, 2400, eager=True, sizes="100vw")}</figure>',
         "</section>",
         f'<p class="cm-intro">{esc(site["intro"])}</p>',
     )

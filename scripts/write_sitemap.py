@@ -14,17 +14,10 @@ import re
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-ROOT = Path(__file__).resolve().parent.parent
+from cellmig.config import ROOT, SITE_URL
+
 SITE = ROOT / "site"
 REDIRECT = re.compile(r'<meta[^>]+http-equiv="refresh"', re.I)
-
-
-def site_url() -> str:
-    """`site_url` from mkdocs.yml, ending in a slash; stops if it is missing."""
-    m = re.search(r"^site_url:\s*(\S+)", (ROOT / "mkdocs.yml").read_text(encoding="utf-8"), re.M)
-    if not m:
-        raise SystemExit("write_sitemap: mkdocs.yml has no site_url")
-    return m.group(1).rstrip("/") + "/"
 
 
 def page_paths(site: Path) -> list[str]:
@@ -56,7 +49,7 @@ def main() -> None:
     """Replace Zensical's sitemap.xml and write robots.txt in site/."""
     if not (SITE / "index.html").is_file():
         raise SystemExit("write_sitemap: run `zensical build` first (no site/index.html)")
-    base, paths = site_url(), page_paths(SITE)
+    base, paths = SITE_URL, page_paths(SITE)
     (SITE / "sitemap.xml").write_text(sitemap(base, paths), encoding="utf-8")
     (SITE / "robots.txt").write_text(robots(base), encoding="utf-8")
     print(f"sitemap.xml: {len(paths)} pages")

@@ -1,5 +1,6 @@
 """Paths, site-wide constants, and loading data files."""
 
+import re
 from pathlib import Path
 from typing import Any, NoReturn
 
@@ -11,16 +12,32 @@ LEDGER_DATA = DATA / "things_done"   # copied from things_done; never edited her
 DOCS = ROOT / "docs"
 THUMBS = "assets/thumbs"             # resized images, relative to docs/
 REPO = "https://github.com/CellMigrationLab/website"
-SITE_URL = "https://cellmig.org/"
+CONTENT = ROOT / "content"            # hand-written pages, copied into docs/ by the build
 HOME_FEATURED = 8                    # featured papers shown on the home page
+
+def _site_url() -> str:
+    """`site_url` from mkdocs.yml, ending in a slash: the one place the site's
+    address is set (canonical links, sitemap, RSS, structured data, llms.txt)."""
+    m = re.search(r"^site_url:\s*(\S+)", (ROOT / "mkdocs.yml").read_text(encoding="utf-8"), re.M)
+    if not m:
+        raise SystemExit("build_pages: mkdocs.yml has no site_url")
+    return m.group(1).rstrip("/") + "/"
+
+
+SITE_URL = _site_url()
 
 # Everything build_pages.py writes into docs/ (deleted and rebuilt on every
 # run, except the thumbnail cache). All git-ignored.
 GENERATED = [
     "index.md", "research.md", "lab-members.md", "software.md", "lab-in-numbers.md",
     "featured-research.md", "publications.md", "datasets.md", "gallery.md",
-    "online-lectures.md", "portfolio", "feed.xml", "feed",
+    "online-lectures.md", "about-us.md", "image-analysis.md", "portfolio", "feed.xml", "feed",
+    "llms.txt", "llms-full.txt",
 ]
+
+# Alt text for a picture that has no caption in its data file (add a caption
+# to describe it better).
+UNCAPTIONED_ALT = "Microscopy image from the Cell Migration Lab"
 
 # Background colours a tile may use (cm-tile--<colour> in cellmig.css).
 COLORS = {"purple", "orange", "blue", "black", "white", "sky", "grey", "mint", "red",
