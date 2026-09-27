@@ -19,7 +19,7 @@ def band(b: Record) -> str:
 
 
 def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str],
-              affiliations: list[Record]) -> None:
+              affiliations: list[Record], funding: list[Record]) -> None:
     """Hero, newest featured papers, latest papers, affiliations, funders;
     data/site.yaml `bands` (two pictures) go between the sections."""
     hero, bands = site["hero"], site["bands"]
@@ -49,5 +49,5 @@ def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str]
     p.add("</ol>", '<p class="cm-more-link"><a href="publications/">All publications</a></p>')
 
     p.add(band(bands[1]), section_title("Affiliations"), logo_row(affiliations),
-          section_title("Funding"), logo_row(site["funding"]))
+          section_title("Funding"), logo_row(funding))
     p.write()

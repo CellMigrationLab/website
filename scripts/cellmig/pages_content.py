@@ -2,6 +2,7 @@
 Gallery, Online talks, and the hand-written pages in content/."""
 
 import re
+from datetime import date
 
 import yaml
 
@@ -20,6 +21,7 @@ from .images import lite_video, media, thumb
 from .ledger import Ledger, Record, software_list
 from .page import Page
 from .previews import preview
+from .profile import talks_section, teaching_section
 from .structured import dataset_item, item_list, software_item, to_json
 from .text import esc, md, slugify, year_of
 
@@ -145,8 +147,9 @@ def page_gallery() -> None:
     p.write()
 
 
-def page_talks() -> None:
-    """docs/online-lectures.md from data/talks.yaml."""
+def page_talks(ledger: Ledger, today: date) -> None:
+    """docs/online-lectures.md: recorded talks (data/talks.yaml), then recent
+    talks and this year's teaching from things_done."""
     p = Page("online-lectures.md", title="Online talks", edit_url=edit_url("data/talks.yaml"),
              **preview("online-lectures"))
     p.add("# Online talks", '<div class="cm-talks">')
@@ -154,14 +157,14 @@ def page_talks() -> None:
         meta = " · ".join(str(x) for x in (t.get("event"), t.get("year")) if x)
         p.add(f'<figure class="cm-talk">{lite_video(t.get("youtube"), t.get("vimeo"), t["title"], t.get("start"))}'
               f'<figcaption><strong>{esc(t["title"])}</strong><span>{esc(meta)}</span></figcaption></figure>')
-    p.add("</div>")
+    p.add("</div>", talks_section(ledger, today), teaching_section(ledger, today))
     p.write()
 
 
-def page_handwritten(name: str) -> None:
+def page_handwritten(name: str, extra: str = "") -> None:
     """docs/<name>.md from the hand-written content/<name>.md (front matter:
-    only `title`), with its link preview from data/previews.yaml and an edit
-    link to the file in content/."""
+    only `title`), with its link preview from data/previews.yaml, an edit link
+    to the file in content/, and `extra` (generated HTML) at the end."""
     source = CONTENT / f"{name}.md"
     m = re.match(r"---\n(.*?)\n---\n(.*)", source.read_text(encoding="utf-8"), re.S)
     if not m:
@@ -171,5 +174,5 @@ def page_handwritten(name: str) -> None:
         fail(f"content/{name}.md: front matter must be only `title` "
              "(description and image go in data/previews.yaml)")
     p = Page(f"{name}.md", title=front["title"], edit_url=edit_url(f"content/{name}.md"), **preview(name))
-    p.add(m.group(2).strip())
+    p.add(m.group(2).strip(), extra)
     p.write()

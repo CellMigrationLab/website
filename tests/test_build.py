@@ -4,12 +4,14 @@
 """
 
 import unittest
+from datetime import date
 from unittest.mock import patch
 
 from cellmig import featured, ledger
 from cellmig.charts import lag_section
 from cellmig.page import Page
 from cellmig.people import is_lab_member, lab_names
+from cellmig.profile import month_year, recent_talks
 from cellmig.text import fmt, is_external, normalize_name, plural, slugify
 from cellmig.worldmap import color
 
@@ -141,6 +143,31 @@ class AffiliationTests(unittest.TestCase):
                              [{"id": "aau"}, {"id": "fci"}, {"id": "old"}]):  # old is not current
             with self.subTest(presentation=presentation), self.assertRaises(SystemExit):
                 ledger.affiliation_list(presentation, self.led)
+
+
+class FundingTests(unittest.TestCase):
+    def test_current_funders_only_and_strict(self):
+        led = fake_ledger([])
+        led.grants = [{"funder": "Wellcome Trust", "status": "active", "end_date": "2027-12-31"},
+                      {"funder": "EMBO", "status": "completed", "end_date": "2016-12-31"},
+                      {"funder": "Old", "status": "active", "end_date": "2020-01-01"}]
+        ok = [{"funder": "Wellcome Trust", "name": "Wellcome", "logo": "w.svg"}]
+        self.assertEqual(ledger.funding_list(ok, led, "2026-09-27"), ok)
+        with self.assertRaises(SystemExit):            # EMBO no longer funds anything
+            ledger.funding_list(ok + [{"funder": "EMBO"}], led, "2026-09-27")
+        with self.assertRaises(SystemExit):            # Wellcome has no logo entry
+            ledger.funding_list([], led, "2026-09-27")
+
+
+class TalkTests(unittest.TestCase):
+    def test_month_year_and_recent_talks(self):
+        self.assertEqual(month_year("2026-08"), "Aug 2026")
+        self.assertEqual(month_year("2026-09-18"), "Sep 2026")
+        led = fake_ledger([])
+        led.talks = [{"date": "2026-09-01", "title": "New", "talk_kind": "keynote"},
+                     {"date": "2026-06-01", "title": "Panel", "talk_kind": "panel_participation"},
+                     {"date": "2020-01-01", "title": "Old", "talk_kind": "invited_talk"}]
+        self.assertEqual([t["title"] for t in recent_talks(led, date(2026, 9, 27))], ["New"])
 
 
 class PeopleTests(unittest.TestCase):

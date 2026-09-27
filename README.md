@@ -21,6 +21,8 @@ button (top right) that opens the right file.
 | Page | Edit |
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
+| Funding logos (home page) | which ones: things_done `ledger/registries/grants.yaml` (funders of active/awarded grants not yet ended); logo and link per ledger `funder` in `data/site.yaml` `funding` — the build stops if the two disagree |
+| Group leader profile (About us), recent talks and teaching (Online talks) | automatic, from things_done (`ledger/profile/`, `ledger/roles/`, `ledger/activities/`) |
 | Affiliations (home page and footer) | which ones: things_done `ledger/profile/affiliations.yaml` (current = no end date, or one not yet passed); logo and link per ledger `id` in `data/site.yaml` `affiliations` — the build stops if the two disagree |
 | Research | `data/research.yaml` |
 | Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done, and only those; pictures and page addresses in `data/featured.yaml` (`hide: true` to leave one out) |
