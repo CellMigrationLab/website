@@ -1,0 +1,81 @@
+# What a link to each page shows when it is pasted somewhere (Slack, Teams,
+# LinkedIn, WhatsApp, email...) and what search engines show under the title.
+#
+#   title:        optional; the preview title (default: the page title)
+#   description:  one or two sentences (about 150 characters reads best)
+#   image:        a picture under docs/ (resized to a 1200 px JPEG for previews)
+#
+# Every page must be listed here, and every entry must be a page: the build
+# stops otherwise. Featured-paper pages (/portfolio/...) use their paper's
+# title, abstract and picture; `paper_image` is used when a paper has no picture.
+
+paper_image: wp-content/uploads/2019/08/cover4.jpg
+
+pages:
+  index:
+    description: >-
+      The Cell Migration Lab (Jacquemet lab) in Turku, Finland, studies how cells move and interact
+      with their environment, using microscopy and open image analysis tools.
+    image: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb.png
+  research:
+    description: >-
+      Our research: cancer metastasis, cell migration, filopodia, the vasculature and deep-learning
+      image analysis.
+    image: wp-content/uploads/2019/08/cna35-merged-2.gif
+  featured-research:
+    title: Featured research – Cell Migration Lab
+    description: >-
+      Papers led by the Cell Migration Lab, with pictures and abstracts, newest first.
+    image: wp-content/uploads/2019/08/max_colored.png
+  publications:
+    title: Publications – Cell Migration Lab
+    description: >-
+      All papers and preprints of the Cell Migration Lab, searchable and updated automatically from
+      our activity ledger.
+    image: wp-content/uploads/2023/02/m_jcb_216_10_cover.png
+  software:
+    title: Open-source software – Cell Migration Lab
+    description: >-
+      Free, open-source tools for microscopy and image analysis from the Cell Migration Lab, including
+      ZeroCostDL4Mic, DL4MicEverywhere, TrackMate integrations and FiloQuant.
+    image: assets/media/zerocostdl4mic.jpg
+  datasets:
+    title: Open datasets – Cell Migration Lab
+    description: >-
+      Microscopy datasets, trained deep-learning models and materials shared by the Cell Migration Lab.
+    image: wp-content/uploads/2019/08/spheroid-rgb.jpg
+  lab-members:
+    title: Lab members – Cell Migration Lab
+    description: >-
+      Meet the people of the Cell Migration Lab at Åbo Akademi University and Turku Bioscience Centre
+      in Turku, Finland.
+    image: wp-content/uploads/2025/01/img_3147.jpg
+  lab-in-numbers:
+    title: The Cell Migration Lab in numbers
+    description: >-
+      Papers, citations, people, collaborators around the world and how long a preprint takes to
+      become a paper, generated from our activity ledger.
+    image: wp-content/uploads/2019/08/rgb3.jpg
+  gallery:
+    title: Gallery – Cell Migration Lab
+    description: >-
+      Microscopy images and journal covers from the Cell Migration Lab.
+    image: wp-content/uploads/2019/08/result-of-result-of-110619_si60x_514_tiff_fn_pax_attopha_002_sir_alx-1.jpg
+  online-lectures:
+    title: Online talks – Cell Migration Lab
+    description: >-
+      Recorded talks, webinars and interviews about cell migration, filopodia and deep learning for
+      microscopy.
+    image: wp-content/uploads/2022/10/cover-3.jpg
+  about-us:
+    title: About the Cell Migration Lab
+    description: >-
+      The Cell Migration Lab is at Åbo Akademi University and Turku Bioscience Centre in Turku,
+      Finland; how to find us and how to join.
+    image: wp-content/uploads/2019/08/p1080272-1-e1566674878737.jpg
+  image-analysis:
+    title: ZeroCostDL4Mic – deep learning for microscopy
+    description: >-
+      Deep learning to analyse microscopy images, and how ZeroCostDL4Mic makes it free and accessible
+      to every lab.
+    image: wp-content/uploads/2020/09/max_predicted_12.png

@@ -1,7 +1,5 @@
 ---
 title: ZeroCostDL4Mic
-description: Deep learning to analyse microscopy images, and how ZeroCostDL4Mic makes it accessible to every lab.
-image: wp-content/uploads/2020/09/max_predicted_12.png
 ---
 
 # ZeroCostDL4Mic
