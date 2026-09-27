@@ -466,3 +466,26 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 @media (max-width: 30rem) { .cm-cloud span { white-space: normal; } }   /* the largest names are wider than a 320 px screen */
 .cm-cloud span.cm-cloud__lab, .cm-cloud__legend .cm-cloud__lab { color: #7a35c4; }
 .cm-cloud__legend { text-align: center; }
+
+/* Group leader profile (About us) and talk/teaching lists (Online talks), generated from things_done */
+.md-typeset .cm-profile { margin: 1.2rem 0 2rem; }
+.cm-profile__head { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; }
+.cm-profile__photo { width: 7.2rem; height: 7.2rem; border-radius: 50%; object-fit: cover; flex: none; }
+.md-typeset .cm-profile__name { margin: 0; font-size: 1rem; }
+.md-typeset .cm-profile__title { margin: .2rem 0 .4rem; color: var(--cm-muted); }
+.cm-profile__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); gap: .4rem 2rem; }
+.md-typeset .cm-profile__cols h3 { margin: .8rem 0 .3rem; font-size: .576rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--cm-muted); }
+.md-typeset .cm-profile__cols ul { margin: 0; padding: 0; list-style: none; }
+.md-typeset .cm-profile__cols li { margin: 0 0 .4rem; font-size: .72rem; line-height: 1.4; }
+.md-typeset .cm-profile__cols li span { display: block; color: var(--cm-muted); font-size: .64rem; }
+[dir] .md-typeset .cm-profile__cols li { margin-left: 0; }
+.md-typeset .cm-profile__links { display: flex; gap: .1rem; margin: 0 0 0 -.3rem; }
+.md-typeset .cm-profile__links a { display: inline-flex; padding: .3rem; color: var(--cm-fg); opacity: .8; }
+.md-typeset .cm-profile__links a:hover { opacity: 1; }
+.cm-profile__links svg { width: .8rem; height: .8rem; fill: currentColor; display: block; }
+.md-typeset ul.cm-talklist { margin: .6rem 0 1rem; padding: 0; list-style: none; }
+.md-typeset ul.cm-talklist li { display: grid; grid-template-columns: 6rem 1fr; gap: .8rem; margin: 0; padding: .5rem 0; border-bottom: 1px solid var(--cm-line); font-size: .72rem; line-height: 1.45; }
+.md-typeset .cm-talklist__where { display: block; color: var(--cm-muted); font-size: .64rem; }
+.md-typeset .cm-talklist .cm-badge { margin-left: .4rem; vertical-align: .1em; }
+.cm-talklist__date { color: var(--cm-muted); font-variant-numeric: tabular-nums; font-size: .64rem; padding-top: .1rem; }
+@media (max-width: 30rem) { .md-typeset ul.cm-talklist li { grid-template-columns: 1fr; gap: .1rem; } }

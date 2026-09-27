@@ -60,6 +60,9 @@ generated reports, after the ledger's own automation, and once a day.
 | Lab in numbers: top collaborators, co-author cloud | `coauthor_network.json` |
 | Lab in numbers: co-author map | `coauthor_countries.json` (Export Co-author Countries action) |
 | Lab members, alumni and their roles, member counts | `ledger/profile/lab_members.yaml` (photos and links stay in this repo) |
+| Funding logos (home page) | funders of current grants in `ledger/registries/grants.yaml` (no amounts are copied) |
+| Group leader profile (About us) | `ledger/profile/person.yaml`, `education.yaml`, current records of `ledger/roles/*.yaml` |
+| Recent talks and teaching (Online talks) | `ledger/activities/*/talks.yaml`, `teaching.yaml` |
 | Affiliations (home page, footer) | current records of `ledger/profile/affiliations.yaml` (logos and links in `data/site.yaml` here, by `id`) |
 
 ## Worth adding to the ledger

@@ -30,10 +30,11 @@ The code is in scripts/cellmig/ (see its __init__.py for a map).
 """
 
 import shutil
+from datetime import date
 
 from cellmig.config import DATA, DOCS, GENERATED, load
 from cellmig.featured import load_featured
-from cellmig.ledger import Ledger, affiliation_list
+from cellmig.ledger import Ledger, affiliation_list, funding_list
 from cellmig.llms import write_llms
 from cellmig.pages_content import (
     page_datasets,
@@ -49,6 +50,7 @@ from cellmig.pages_papers import page_featured, page_publications
 from cellmig.pages_people import page_members
 from cellmig.people import lab_names, load_members
 from cellmig.previews import check_all_used
+from cellmig.profile import pi_profile
 from cellmig.site_files import write_feed, write_footer, write_jsonld
 
 
@@ -71,8 +73,9 @@ def main() -> None:
     lab = lab_names(members)
     featured = load_featured(ledger)
     affiliations = affiliation_list(site["affiliations"], ledger)
+    funding = funding_list(site["funding"], ledger, date.today().isoformat())
 
-    page_home(site, featured, ledger, lab, affiliations)
+    page_home(site, featured, ledger, lab, affiliations, funding)
     page_research(ledger)
     page_members(members)
     page_software(ledger)
@@ -81,8 +84,10 @@ def main() -> None:
     page_publications(ledger, featured, lab)
     page_datasets(ledger, site)
     page_gallery()
-    page_talks()
-    page_handwritten("about-us")
+    today = date.today()
+    page_talks(ledger, today)
+    leader = next(m for m in members if m["group"] == "pi" and m["status"] == "current")
+    page_handwritten("about-us", extra=pi_profile(ledger.profile, leader))
     page_handwritten("image-analysis")
     write_feed(site, featured)
     write_footer(site, affiliations)
