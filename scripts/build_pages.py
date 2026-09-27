@@ -90,7 +90,7 @@ def main() -> None:
     today = date.today()
     page_talks(ledger, today)
     leader = next(m for m in members if m["group"] == "pi" and m["status"] == "current")
-    page_handwritten("about-us", extra=pi_profile(ledger.profile, leader))
+    page_handwritten("about-us", extra=pi_profile(ledger.profile, leader, site.get("group_leader_bio")))
     page_handwritten("join-us")
     page_news(news)
     write_feed(site, news)
