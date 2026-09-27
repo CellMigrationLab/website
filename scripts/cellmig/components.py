@@ -5,7 +5,7 @@ import re
 from .config import COLORS, fail
 from .featured import Story
 from .icons import ICONS
-from .images import media, square_thumb, thumb
+from .images import dims, media, square_thumb, thumb
 from .ledger import Ledger, Record
 from .people import Person, is_lab_member
 from .text import esc, md
@@ -80,7 +80,7 @@ def feature_card(story: Story) -> str:
 def logo_row(items: list[Record]) -> str:
     """Row of linked logos (funders)."""
     lis = "".join(f'<li><a href="{esc(it["url"])}" title="{esc(it["name"])}">'
-                  f'<img src="{thumb(it["logo"], 400)}" alt="{esc(it["name"])}" loading="lazy"></a></li>'
+                  f'<img src="{thumb(it["logo"], 400)}"{dims(thumb(it["logo"], 400))} alt="{esc(it["name"])}" loading="lazy"></a></li>'
                   for it in items)
     return f'<ul class="cm-logos">{lis}</ul>'
 

@@ -2,7 +2,7 @@
 
 
 from .components import citation, feature_card, one_line
-from .config import SITE_URL, edit_url
+from .config import LAB_FOUNDED, SITE_URL, edit_url
 from .featured import Story, story_by_doi
 from .images import media
 from .ledger import Ledger, Record, software_list
@@ -92,7 +92,11 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str]) -> N
     years = sorted({r["year"] for r in records}, reverse=True)
     n_pre = sum(1 for r in records if r.get("status") == "preprint")
     p = Page("publications.md", title="Publications", **preview("publications"))
-    p.meta["jsonld"] = to_json(item_list("Publications of the Cell Migration Lab", [publication_item(r) for r in records]))
+    p.meta["jsonld"] = to_json(item_list(
+        "Publications of Guillaume Jacquemet and the Cell Migration Lab",
+        [publication_item(r, ledger.dates.get(r["doi"].lower())) for r in records],
+        f"All publications of Guillaume Jacquemet, who founded the Cell Migration Lab in {LAB_FOUNDED}; "
+        f"papers before {LAB_FOUNDED} are from his PhD and postdoctoral work."))
     p.add("# Publications",
           f'<p class="cm-lead">{len(records)} papers and preprints, newest first. Lab members are '
           '<span class="cm-author--lab">highlighted</span>; preprints are merged with their journal version.</p>',
