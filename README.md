@@ -31,8 +31,9 @@ button (top right) that opens the right file.
 | Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<name>.yaml`, team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
 | Online talks | `data/talks.yaml` |
-| About us | `docs/about-us.md` |
-| ZeroCostDL4Mic / deep learning | `docs/image-analysis.md` |
+| About us | `content/about-us.md` |
+| ZeroCostDL4Mic / deep learning | `content/image-analysis.md` |
+| What a pasted link shows (title, sentence, picture) for every page | `data/previews.yaml` |
 | Colours, fonts, layout | `docs/assets/stylesheets/cellmig.css` |
 
 ### Lab members
@@ -121,7 +122,7 @@ PYTHONPATH=scripts python -m unittest discover -s tests
 data/*.yaml ──┐
 data/things_done/*.yaml ◀── things_done (automatic)
               ├─ scripts/build_pages.py ─▶ docs/*.md ─┐
-docs/about-us.md, docs/image-analysis.md ─────────────┼─ zensical build ─▶ site/ ─▶ GitHub Pages
+content/*.md (hand-written pages) ────────────────────┼─ zensical build ─▶ site/ ─▶ GitHub Pages
 overrides/ (layout), docs/assets/ (CSS, JS, fonts) ───┘
 ```
 
@@ -134,6 +135,11 @@ overrides/ (layout), docs/assets/ (CSS, JS, fonts) ───┘
 - `scripts/write_sitemap.py` — after `zensical build`, writes `site/sitemap.xml`
   (every page, including the featured-paper pages that are not in the menu)
   and `site/robots.txt` pointing to it, both from `site_url` in `mkdocs.yml`.
+- For search engines and LLMs the build also writes, from the same data:
+  schema.org JSON-LD (the lab and its leader on every page; each featured
+  paper as a ScholarlyArticle; publications, software, datasets and people
+  as lists), Google Scholar `citation_*` tags on paper pages, and
+  `/llms.txt` + `/llms-full.txt` (the whole site as Markdown).
 - `tests/` — unit tests for the generator.
 - `scripts/sync_things_done.py` — copies the public part of the ledger into
   `data/things_done/` (run by things_done after each update).

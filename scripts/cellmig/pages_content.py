@@ -1,11 +1,26 @@
-"""Pages built mostly from the website's own data files: Research, Software,
-Datasets, Gallery and Online talks."""
+"""Pages built mostly from the website's own files: Research, Software, Datasets,
+Gallery, Online talks, and the hand-written pages in content/."""
+
+import re
+
+import yaml
 
 from .components import section_title, tile
-from .config import DATA, DATASET_TYPES, OTHER_DATA, edit_url, load
+from .config import (
+    CONTENT,
+    DATA,
+    DATASET_TYPES,
+    OTHER_DATA,
+    UNCAPTIONED_ALT,
+    edit_url,
+    fail,
+    load,
+)
 from .images import lite_video, media, thumb
 from .ledger import Ledger, Record, software_list
 from .page import Page
+from .previews import preview
+from .structured import dataset_item, item_list, software_item, to_json
 from .text import esc, md, slugify, year_of
 
 BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our publications</a>'
@@ -32,9 +47,7 @@ def _theme(t: Record, ledger: Ledger) -> str:
 def page_research(ledger: Ledger) -> None:
     """docs/research.md from data/research.yaml: videos, then one tile per theme."""
     research = load(DATA / "research.yaml")
-    p = Page("research.md", title="Research", edit_url=edit_url("data/research.yaml"),
-             description="Our research interests: cancer metastasis, cell migration, the vasculature, filopodia and image analysis.",
-             image=research["themes"][0]["image"])
+    p = Page("research.md", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
     p.add("# Research", '<p class="cm-lead">Our research interests</p>', '<div class="cm-videos">')
     p.add(*(f'<figure>{lite_video(v.get("youtube"), v.get("vimeo"), v["title"], v.get("start"))}'
             f'<figcaption>{esc(v["title"])}</figcaption></figure>' for v in research.get("videos") or []))
@@ -62,10 +75,12 @@ def _software_body(s: Record) -> str:
 
 def page_software(ledger: Ledger) -> None:
     """docs/software.md: one tile per project (things_done + data/software.yaml)."""
-    p = Page("software.md", title="Software", edit_url=edit_url("data/software.yaml"),
-             description="Open-source software for microscopy and image analysis developed or co-developed by the Cell Migration Lab.")
+    p = Page("software.md", title="Software", edit_url=edit_url("data/software.yaml"), **preview("software"))
+    projects = software_list(ledger)
+    p.meta["jsonld"] = to_json(item_list("Software from the Cell Migration Lab", [
+        software_item(s, f"{p.url}#{slugify(s['title'])}") for s in projects]))
     p.add("# Software", '<p class="cm-lead">Here are the software we have developed or contributed to</p>', '<div class="cm-wide">')
-    for i, s in enumerate(software_list(ledger)):
+    for i, s in enumerate(projects):
         pic = media(s.get("video") or s.get("image"), f'{s["title"]} logo' if s.get("image") else "", 900)
         p.add(tile(s.get("color", "light"), pic, _software_body(s), media_right=i % 2 == 0))
     p.add("</div>", f'<p class="cm-cta">{BROWSE_PUBLICATIONS} '
@@ -92,8 +107,9 @@ def _dataset(d: Record, ledger: Ledger) -> str:
 
 def page_datasets(ledger: Ledger, site: Record) -> None:
     """docs/datasets.md: shared resources (data/site.yaml), then datasets by type."""
-    p = Page("datasets.md", title="Datasets",
-             description="Open datasets, deep learning models and materials shared by the Cell Migration Lab.")
+    p = Page("datasets.md", title="Datasets", **preview("datasets"))
+    p.meta["jsonld"] = to_json(item_list("Datasets shared by the Cell Migration Lab",
+                                         [dataset_item(d) for d in ledger.datasets]))
     p.add("# Datasets",
           '<p class="cm-lead">We share our data. Here are the datasets, models and materials that accompany our papers.</p>')
     p.add('<ul class="cm-resources">', *(
@@ -115,9 +131,7 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
 def page_gallery() -> None:
     """docs/gallery.md from data/gallery.yaml: journal covers and images (lightbox)."""
     gallery = load(DATA / "gallery.yaml")
-    p = Page("gallery.md", title="Gallery", edit_url=edit_url("data/gallery.yaml"),
-             description="Microscopy images and journal covers from the Cell Migration Lab.",
-             image=gallery["images"][0]["image"])
+    p = Page("gallery.md", title="Gallery", edit_url=edit_url("data/gallery.yaml"), **preview("gallery"))
     p.add("# Gallery", section_title("Journal covers"), '<ul class="cm-covers">')
     for c in gallery["covers"]:
         cap = esc(c.get("caption", ""))
@@ -126,7 +140,7 @@ def page_gallery() -> None:
     p.add("</ul>", section_title("Images"), '<ul class="cm-gallery">')
     for g in gallery["images"]:
         p.add(f'<li><a href="{thumb(g["image"], 2000)}" data-cm-lightbox data-caption="{esc(g.get("caption", ""))}">'
-              f'{media(g["image"], g.get("caption", ""), 600)}</a></li>')
+              f'{media(g["image"], g.get("caption") or UNCAPTIONED_ALT, 600)}</a></li>')
     p.add("</ul>")
     p.write()
 
@@ -134,11 +148,28 @@ def page_gallery() -> None:
 def page_talks() -> None:
     """docs/online-lectures.md from data/talks.yaml."""
     p = Page("online-lectures.md", title="Online talks", edit_url=edit_url("data/talks.yaml"),
-             description="Recorded talks, webinars and interviews from the Cell Migration Lab.")
+             **preview("online-lectures"))
     p.add("# Online talks", '<div class="cm-talks">')
     for t in load(DATA / "talks.yaml"):
         meta = " · ".join(str(x) for x in (t.get("event"), t.get("year")) if x)
         p.add(f'<figure class="cm-talk">{lite_video(t.get("youtube"), t.get("vimeo"), t["title"], t.get("start"))}'
               f'<figcaption><strong>{esc(t["title"])}</strong><span>{esc(meta)}</span></figcaption></figure>')
     p.add("</div>")
+    p.write()
+
+
+def page_handwritten(name: str) -> None:
+    """docs/<name>.md from the hand-written content/<name>.md (front matter:
+    only `title`), with its link preview from data/previews.yaml and an edit
+    link to the file in content/."""
+    source = CONTENT / f"{name}.md"
+    m = re.match(r"---\n(.*?)\n---\n(.*)", source.read_text(encoding="utf-8"), re.S)
+    if not m:
+        fail(f"content/{name}.md must start with front matter (---, title: ..., ---)")
+    front = yaml.safe_load(m.group(1)) or {}
+    if set(front) != {"title"}:
+        fail(f"content/{name}.md: front matter must be only `title` "
+             "(description and image go in data/previews.yaml)")
+    p = Page(f"{name}.md", title=front["title"], edit_url=edit_url(f"content/{name}.md"), **preview(name))
+    p.add(m.group(2).strip())
     p.write()

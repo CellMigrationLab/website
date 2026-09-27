@@ -14,5 +14,8 @@ scripts/build_pages.py is the entry point; the modules here are:
   charts      SVG charts (papers per year, preprint lag)
   worldmap    SVG world map of co-author countries
   pages_*     one function per generated page
-  site_files  footer partial and RSS feed
+  previews    link previews (title, text, picture) from data/previews.yaml
+  structured  schema.org JSON-LD and Google Scholar tags
+  llms        /llms.txt and /llms-full.txt
+  site_files  footer and JSON-LD partials, RSS feed
 """

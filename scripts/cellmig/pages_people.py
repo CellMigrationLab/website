@@ -5,6 +5,8 @@ from .config import DATA, GROUPS, REPO, load
 from .images import lite_video, media
 from .page import Page
 from .people import Person
+from .previews import preview
+from .structured import item_list, person_item, to_json
 from .text import esc, md
 
 CONTACT = "guillaume.jacquemet@abo.fi"
@@ -36,7 +38,8 @@ def page_members(members: list[Person]) -> None:
                      key=lambda m: (GROUPS.index(m["group"]), m["order"]))
     alumni = [m for m in members if m["status"] == "alumni"]
     p = Page("lab-members.md", title="Lab members", edit_url=f"{REPO}/tree/main/data/members",
-             description="Meet the people of the Cell Migration Lab in Turku, Finland.")
+             **preview("lab-members"))
+    p.meta["jsonld"] = to_json(item_list("Members of the Cell Migration Lab", [person_item(m) for m in current]))
     p.add("# Lab members", '<ul class="cm-people">', *(person_card(m) for m in current), "</ul>")
     p.add(_team_media())
     if alumni:
