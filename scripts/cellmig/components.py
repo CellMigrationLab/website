@@ -36,7 +36,7 @@ def badges(rec: Record) -> str:
         out.append('<span class="cm-badge cm-badge--preprint">Preprint</span>')
     elif rec.get("status") == "in_press":
         out.append('<span class="cm-badge">In press</span>')
-    if rec.get("open_access_status") not in (None, "closed"):
+    if rec.get("open_access_status") in {"gold", "hybrid", "green", "bronze"}:
         out.append('<span class="cm-badge cm-badge--oa" title="Open access">Open access</span>')
     return "".join(out)
 
