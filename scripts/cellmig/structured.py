@@ -16,7 +16,7 @@ import json
 import re
 from typing import Any
 
-from .config import SITE_URL
+from .config import LAB_FOUNDED, SITE_URL
 from .featured import Story
 from .ledger import Record
 from .people import Person
@@ -45,11 +45,18 @@ def _person_links(m: Person) -> list[str]:
     return [link for link in links if link]
 
 
+def _org(a: Record) -> Json:
+    return {"@type": "Organization", "name": a["name"], "url": a["url"]}
+
+
 def organization(site: Record, affiliations: list[Record], members: list[Person], logo: str,
                  leader_bio: str) -> Json:
-    """The lab: name, address, leader (with affiliations and profiles), parent
-    organisations and social links."""
+    """The lab: name, founding year, address and contact, leader (with
+    affiliations and profiles), and how it relates to each affiliation
+    (data/site.yaml `relation`: parent -> parentOrganization, member ->
+    memberOf, leader -> only the leader's affiliation)."""
     leader = next(m for m in members if m["group"] == "pi" and m["status"] == "current")
+    by_relation = {r: [_org(a) for a in affiliations if a["relation"] == r] for r in ("parent", "member")}
     return {
         "@context": "https://schema.org",
         "@type": "ResearchOrganization",
@@ -59,8 +66,13 @@ def organization(site: Record, affiliations: list[Record], members: list[Person]
         "url": SITE_URL,
         "logo": SITE_URL + logo,
         "description": site["intro"],
+        "foundingDate": str(LAB_FOUNDED),
         "address": ", ".join(site["contact"]["address"][1:]),
-        "parentOrganization": [{"@type": "Organization", "name": a["name"], "url": a["url"]} for a in affiliations],
+        "email": leader["email"],
+        "contactPoint": {"@type": "ContactPoint", "contactType": "enquiries", "email": leader["email"],
+                         "url": f"{SITE_URL}join-us/"},
+        "parentOrganization": by_relation["parent"],
+        "memberOf": by_relation["member"],
         "founder": {
             "@type": "Person",
             "@id": f"{SITE_URL}#{leader['slug']}",
@@ -75,7 +87,7 @@ def organization(site: Record, affiliations: list[Record], members: list[Person]
 
 
 def _date(story_date: str | None, year: int) -> str:
-    """ISO date when known, else the year."""
+    """ISO date when known, else the year (Scholar tags accept a year)."""
     return story_date or str(year)
 
 
@@ -88,7 +100,6 @@ def article(story: Story, page_url: str, image_url: str | None) -> Json:
         "headline": pub["title"],
         "name": pub["title"],
         "author": [{"@type": "Person", "name": a} for a in pub.get("authors") or []],
-        "datePublished": _date(story["date"], story["year"]),
         "isPartOf": {"@type": "Periodical", "name": pub.get("venue") or ""},
         "identifier": {"@type": "PropertyValue", "propertyID": "DOI", "value": pub["doi"]},
         "sameAs": f"https://doi.org/{pub['doi']}",
@@ -96,6 +107,8 @@ def article(story: Story, page_url: str, image_url: str | None) -> Json:
         "abstract": " ".join(story["summary"].split()),
         "sourceOrganization": {"@id": LAB_ID},
     }
+    if story["date"]:   # schema.org Date is a full ISO date: no year-only values
+        work["datePublished"] = story["date"]
     if image_url:
         work["image"] = image_url
     crumbs = [("Home", SITE_URL), ("Featured research", f"{SITE_URL}featured-research/"), (pub["title"], page_url)]
@@ -117,25 +130,32 @@ def scholar_tags(story: Story) -> list[list[str]]:
     return [t for t in tags if t[1]]
 
 
-def item_list(name: str, items: list[Json]) -> Json:
+def item_list(name: str, items: list[Json], description: str | None = None) -> Json:
     """schema.org ItemList of the given items, in order."""
-    return {"@context": "https://schema.org", "@type": "ItemList", "name": name,
+    extra = {"description": description} if description else {}
+    return {"@context": "https://schema.org", "@type": "ItemList", "name": name, **extra,
             "itemListElement": [{"@type": "ListItem", "position": i, "item": item}
                                 for i, item in enumerate(items, 1)]}
 
 
-def publication_item(rec: Record) -> Json:
-    """A publication as a short ScholarlyArticle."""
-    return {"@type": "ScholarlyArticle", "name": rec["title"],
-            "author": [{"@type": "Person", "name": a} for a in rec.get("authors") or []],
-            "datePublished": str(rec["year"]), "isPartOf": {"@type": "Periodical", "name": rec.get("venue") or ""},
-            "sameAs": f"https://doi.org/{rec['doi']}"}
+def publication_item(rec: Record, date: str | None) -> Json:
+    """A publication as a short ScholarlyArticle; datePublished only when the
+    full date is known (`date`), never a bare year."""
+    item: Json = {"@type": "ScholarlyArticle", "name": rec["title"],
+                  "author": [{"@type": "Person", "name": a} for a in rec.get("authors") or []],
+                  "isPartOf": {"@type": "Periodical", "name": rec.get("venue") or ""},
+                  "sameAs": f"https://doi.org/{rec['doi']}"}
+    if date:
+        item["datePublished"] = date
+    return item
 
 
 def software_item(s: Record, anchor_url: str) -> Json:
-    """A software project as SoftwareSourceCode."""
+    """A software project as SoftwareSourceCode. The lab is a `contributor`:
+    some projects are the lab's own, others were built with partners, and
+    the ledger does not record who the authors are."""
     item: Json = {"@type": "SoftwareSourceCode", "name": s["title"], "url": anchor_url,
-                  "description": plain(s.get("text")), "author": {"@id": LAB_ID}}
+                  "description": plain(s.get("text")), "contributor": {"@id": LAB_ID}}
     if s.get("github"):
         item["codeRepository"] = s["github"]
     if s["dois"]:
@@ -144,9 +164,10 @@ def software_item(s: Record, anchor_url: str) -> Json:
 
 
 def dataset_item(d: Record) -> Json:
-    """A dataset as schema.org Dataset."""
+    """A dataset as schema.org Dataset, with the lab as `contributor` (many
+    datasets are shared with collaborators)."""
     item: Json = {"@type": "Dataset", "name": d["title"], "url": d["repository_url"],
-                  "description": d.get("description") or d["title"], "creator": {"@id": LAB_ID}}
+                  "description": d.get("description") or d["title"], "contributor": {"@id": LAB_ID}}
     if d.get("archive_doi"):
         item["identifier"] = f"https://doi.org/{d['archive_doi']}"
     if d.get("related_publication_dois"):

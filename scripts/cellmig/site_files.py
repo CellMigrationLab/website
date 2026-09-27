@@ -7,7 +7,7 @@ from email.utils import format_datetime
 
 from .config import DOCS, ROOT, SITE_URL, fail
 from .icons import ICONS
-from .images import thumb
+from .images import dims, thumb
 from .ledger import Record
 from .news import KIND_LABELS, NewsItem
 from .people import Person
@@ -28,7 +28,7 @@ def write_footer(site: Record, affiliations: list[Record]) -> None:
         if s["icon"] not in ICONS:
             fail(f"data/site.yaml social {s['label']!r}: icon must be one of {sorted(ICONS)}")
     logos = "".join(
-        f'<li><a href="{esc(a["url"])}" title="{esc(a["name"])}"><img src="{u(thumb(a.get("logo_dark") or a["logo"], 300))}" '
+        f'<li><a href="{esc(a["url"])}" title="{esc(a["name"])}"><img src="{u(thumb(a.get("logo_dark") or a["logo"], 300))}"{dims(thumb(a.get("logo_dark") or a["logo"], 300))} '
         f'alt="{esc(a["name"])}" loading="lazy"></a></li>' for a in affiliations)
     social = "".join(f'<li><a href="{esc(s["url"])}">{ICONS[s["icon"]]}<span>{esc(s["label"])}</span></a></li>'
                      for s in site["social"])

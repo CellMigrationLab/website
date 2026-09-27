@@ -7,9 +7,10 @@ so a model can read the lab in one file. Both are rebuilt from the same data
 as the pages on every build.
 """
 
+import re
 from datetime import date
 
-from .config import DATA, DOCS, SITE_URL, load
+from .config import CONTENT, DATA, DOCS, LAB_FOUNDED, SITE_URL, load
 from .featured import Story
 from .ledger import Ledger, Record, software_list
 from .people import Person
@@ -30,17 +31,33 @@ def _cite(rec: Record) -> str:
     return f"{rec.get('venue') or ''}, {rec['year']}. https://doi.org/{rec['doi']}"
 
 
-def llms_txt(site: Record, featured: list[Story]) -> str:
+def leader_email(members: list[Person]) -> str:
+    """The group leader's email (data/members/<slug>.yaml)."""
+    return next(m["email"] for m in members if m["group"] == "pi" and m["status"] == "current")
+
+
+def _join_us_text() -> str:
+    """content/join-us.md without its front matter and title (already Markdown)."""
+    text = (CONTENT / "join-us.md").read_text(encoding="utf-8").split("---", 2)[2]
+    lines = [ln for ln in text.strip().splitlines() if not ln.startswith("# ")]
+    return re.sub(r"<[^>]+>", "", "\n".join(lines)).strip().replace("## ", "### ") + "\n"
+
+
+def llms_txt(site: Record, featured: list[Story], members: list[Person]) -> str:
     """The short llms.txt: summary, main pages, featured papers."""
     lines = [f"# {site['name']} (Jacquemet Lab)", "", f"> {preview_text('index')}", "", site["intro"], "",
              "## Pages", ""]
     lines += [f"- [{title}]({SITE_URL}{path}): {preview_text(path.strip('/'))}" for title, path in PAGES]
     lines += ["", "## Featured papers", ""]
     lines += [f"- [{s['title']}]({SITE_URL}portfolio/{s['slug']}/): {_cite(s['pubs'][0])}" for s in featured]
+    lines += ["", "## Contact", "",
+              f"- Email: {leader_email(members)} (Guillaume Jacquemet, group leader)",
+              f"- [How to join the lab]({SITE_URL}join-us/): no funded positions at the moment; fellowship applicants welcome",
+              f"- Address: {', '.join(site['contact']['address'])}"]
     lines += ["", "## Optional", "",
               f"- [Everything above as one Markdown file]({SITE_URL}llms-full.txt): people, research, "
               "papers with abstracts, software, datasets and talks",
-              f"- [RSS feed of featured papers]({SITE_URL}feed.xml)", ""]
+              f"- [News feed (RSS)]({SITE_URL}feed.xml): papers, talks, events and funding", ""]
     return "\n".join(lines)
 
 
@@ -77,7 +94,9 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
         pub = s["pubs"][0]
         out += [f"### {s['title']}", "", f"{', '.join(pub.get('authors') or [])}. {_cite(pub)}",
                 f"Page: {SITE_URL}portfolio/{s['slug']}/", "", " ".join(s["summary"].split()), ""]
-    out += ["## All publications", ""]
+    out += ["## All publications", "",
+            f"Publications of Guillaume Jacquemet and the Cell Migration Lab. The lab was founded in {LAB_FOUNDED}; "
+            f"papers from before {LAB_FOUNDED} come from his PhD and postdoctoral work.", ""]
     out += [f"- {r['title']}. {', '.join(r.get('authors') or [])}. {_cite(r)}"
             + (" (preprint)" if r.get("status") == "preprint" else "") for r in ledger.grouped()]
     out += ["", "## Software", ""]
@@ -86,6 +105,11 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
         out += [f"- {s['title']}" + (f" ({s['year']})" if s.get("year") else "") + f": {plain(s.get('text'))}{code}"]
     out += ["", "## Datasets", ""]
     out += [f"- {d['title']}: {d.get('description') or ''} {d['repository_url']}" for d in ledger.datasets]
+    out += ["", "## Contact", "",
+            f"- Email: {ledger.profile['name']}, {leader_email(members)}",
+            f"- Address: {', '.join(site['contact']['address'])}",
+            f"- How to join: {SITE_URL}join-us/", ""]
+    out += ["## Join the lab", "", _join_us_text()]
     out += ["", "## Talks (last two years)", ""]
     out += [f"- {month_year(t['date'])}: {t['title']}" + "".join(f", {x}" for x in (t.get("event_name"), t.get("location")) if x)
             for t in recent_talks(ledger, date.today())]
@@ -99,5 +123,5 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
 def write_llms(site: Record, featured: list[Story], ledger: Ledger, members: list[Person],
                affiliations: list[Record]) -> None:
     """Write docs/llms.txt and docs/llms-full.txt (copied to the site root)."""
-    (DOCS / "llms.txt").write_text(llms_txt(site, featured), encoding="utf-8")
+    (DOCS / "llms.txt").write_text(llms_txt(site, featured, members), encoding="utf-8")
     (DOCS / "llms-full.txt").write_text(llms_full(site, featured, ledger, members, affiliations), encoding="utf-8")
