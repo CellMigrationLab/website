@@ -21,8 +21,9 @@ button (top right) that opens the right file.
 | Page | Edit |
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
+| Affiliations (home page and footer) | which ones: things_done `ledger/profile/affiliations.yaml` (current = no end date, or one not yet passed); logo and link per ledger `id` in `data/site.yaml` `affiliations` — the build stops if the two disagree |
 | Research | `data/research.yaml` |
-| Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done; pictures and page addresses in `data/featured.yaml` (`show: true` / `hide: true` to add or remove a paper) |
+| Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done, and only those; pictures and page addresses in `data/featured.yaml` (`hide: true` to leave one out) |
 | Publications, latest papers | automatic, from things_done |
 | Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done |
 | Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |

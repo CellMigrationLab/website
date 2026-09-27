@@ -30,7 +30,7 @@ import shutil
 
 from cellmig.config import DATA, DOCS, GENERATED, load
 from cellmig.featured import load_featured
-from cellmig.ledger import Ledger
+from cellmig.ledger import Ledger, affiliation_list
 from cellmig.pages_content import (
     page_datasets,
     page_gallery,
@@ -63,20 +63,21 @@ def main() -> None:
     ledger = Ledger()
     members = load_members()
     lab = lab_names(members)
-    featured, unlisted = load_featured(ledger)
+    featured = load_featured(ledger)
+    affiliations = affiliation_list(site["affiliations"], ledger)
 
-    page_home(site, featured, ledger, lab)
+    page_home(site, featured, ledger, lab, affiliations)
     page_research(ledger)
     page_members(members)
     page_software(ledger)
-    page_featured(featured, unlisted, ledger, lab)
+    page_featured(featured, ledger, lab)
     page_numbers(ledger, lab, members)
     page_publications(ledger, featured, lab)
     page_datasets(ledger, site)
     page_gallery()
     page_talks()
     write_feed(site, featured)
-    write_footer(site)
+    write_footer(site, affiliations)
     print(f"Generated pages: {len(featured)} featured papers, {len(ledger.grouped())} publications, "
           f"{len(ledger.datasets)} datasets, {len(members)} people.")
 

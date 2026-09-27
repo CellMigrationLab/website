@@ -1,0 +1,15 @@
+# Copied by scripts/sync_things_done.py from things_done/ledger/profile/affiliations.yaml (current).
+# Do not edit by hand: change things_done instead, the website updates itself.
+records:
+- id: turku-bioscience-centre-utuaau-affiliation
+  organization: Turku Bioscience Centre, University of Turku and Åbo Akademi University
+  title: Affiliated Researcher
+- id: aau-professor-bioimaging-affiliation
+  organization: Faculty of Science and Engineering, Cell Biology, Åbo Akademi University
+  title: Professor in Bioimaging
+- id: inflames-research-flagship-centre-affiliation
+  organization: InFLAMES Research Flagship Centre, University of Turku
+  title: Affiliated Researcher
+- id: foundation-finnish-cancer-institute-affiliation
+  organization: Finnish Cancer Institute
+  title: K. Albin Johansson Research Professor
