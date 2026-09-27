@@ -217,7 +217,7 @@ def grants(ledger: Path) -> None:
     """Public grant metadata (amounts are not copied)."""
     data = load(ledger / "ledger" / "registries" / "grants.yaml")
     fields = (
-        "id", "title", "funder", "program", "funding_organizations", "grant_identifiers",
+        "id", "title", "funders", "program", "program_cofunders",
         "role", "status", "start_date", "end_date",
     )
     records = [pick(r, fields) for r in data.get("records") or []]
