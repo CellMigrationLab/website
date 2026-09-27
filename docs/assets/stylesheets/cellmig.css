@@ -484,3 +484,6 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-talklist .cm-badge { margin-left: .4rem; vertical-align: .1em; }
 .cm-talklist__date { color: var(--cm-muted); font-variant-numeric: tabular-nums; font-size: .64rem; padding-top: .1rem; }
 @media (max-width: 30rem) { .md-typeset ul.cm-talklist li { grid-template-columns: 1fr; gap: .1rem; } }
+
+/* News (generated from things_done) */
+.md-typeset .cm-talklist .cm-news__kind { margin: 0 .35rem 0 0; vertical-align: .1em; }

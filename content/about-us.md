@@ -15,7 +15,7 @@ research. In particular, we have access to state-of-the-art platforms related to
 [zebrafish](https://bioscience.fi/services/zebrafish/services/),
 [proteomics](https://bioscience.fi/services/proteomics/services/),
 [bioimaging](https://bioscience.fi/services/cell-imaging/services/), genome editing, and bioinformatics.
-Motivated students are always welcome to [contact us](mailto:guillaume.jacquemet@abo.fi)!
+Motivated students and researchers are always welcome: see [Join us](join-us.md).
 
 <figure markdown>
 ![The Aura river in Turku, with a sailing ship moored along the riverbank](wp-content/uploads/2019/08/p1080272-1-e1566674878737.jpg){ loading=lazy }

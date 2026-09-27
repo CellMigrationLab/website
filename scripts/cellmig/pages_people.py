@@ -9,8 +9,6 @@ from .previews import preview
 from .structured import item_list, person_item, to_json
 from .text import esc, md
 
-CONTACT = "guillaume.jacquemet@abo.fi"
-
 
 def _team_media() -> str:
     """Team photos and videos from data/team.yaml."""
@@ -46,7 +44,8 @@ def page_members(members: list[Person]) -> None:
         p.add(section_title("Alumni"), '<ul class="cm-alumni">', *(_alumnus(m) for m in alumni), "</ul>")
     p.add('<aside class="cm-join">',
           '<h2>Join us</h2>',
-          f'<p>Motivated students and researchers are always welcome to <a href="mailto:{CONTACT}">contact us</a>!</p>',
+          '<p>Motivated students and researchers are always welcome: we host fellowship applicants. '
+          '<a href="join-us/">How to join us</a>.</p>',
           f'<p class="cm-small">Lab member? <a href="{REPO}/issues/new?template=lab-member.yml">'
           'Add or update your photo and links</a>.</p>',
           "</aside>")
