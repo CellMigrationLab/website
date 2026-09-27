@@ -91,7 +91,7 @@ def main() -> None:
     page_handwritten("image-analysis")
     write_feed(site, featured)
     write_footer(site, affiliations)
-    write_jsonld(site, affiliations, members)
+    write_jsonld(site, affiliations, members, ledger.profile["short_bio"])
     write_llms(site, featured, ledger, members, affiliations)
     check_all_used()
     print(f"Generated pages: {len(featured)} featured papers, {len(ledger.grouped())} publications, "

@@ -33,7 +33,7 @@ class Ledger:
         self.teaching: list[Record] = _records("teaching")
         self.grants: list[Record] = _records("grants")
         self.profile: Record = load(LEDGER_DATA / "profile.yaml")
-        for key in ("name", "title", "appointments", "education"):
+        for key in ("name", "title", "short_bio", "appointments", "education"):
             if not self.profile.get(key):
                 fail(f"data/things_done/profile.yaml has no {key}; re-run scripts/sync_things_done.py")
         lag = load(LEDGER_DATA / "preprint_lag.yaml")

@@ -6,6 +6,14 @@ summary: Fundamental quantitative cell biologist focused on microscopy and dynam
   with research centered on cancer cell adaptation and migration across the metastatic cascade. Leads
   integrated experimental and computational work, including image and data analysis tool development,
   with lab information hosted at https://cellmig.org.
+short_bio: Guillaume Jacquemet is Professor in Bioimaging at Åbo Akademi University and K. Albin Johansson
+  Research Professor of the Finnish Cancer Institute. Trained as a cell biologist in Reims, France, he
+  did his PhD with Martin Humphries at the University of Manchester and his postdoctoral work with Johanna
+  Ivaska in Turku, before starting the Cell Migration Lab in 2019. His group studies how cancer cells
+  move, use filopodia to sense their surroundings, and attach to and cross blood vessel walls during metastasis.
+  Along the way, the lab builds open-source microscopy and deep-learning tools, such as ZeroCostDL4Mic,
+  that are used by labs worldwide. He is an Associate Editor at Journal of Cell Science and heads the
+  Doctoral Programme in Biosciences and Drug Research at Åbo Akademi.
 appointments:
 - title: Professor in Bioimaging
   organization: Åbo Akademi University

@@ -182,8 +182,8 @@ def current(records: list[dict], today: str) -> list[dict]:
 
 
 def profile(ledger: Path, today: str) -> None:
-    """Guillaume's public profile: title, summary, current appointments,
-    editorial and service roles, and education."""
+    """Guillaume's public profile: title, short bio, summary, current
+    appointments, editorial and service roles, and education."""
     person = load(ledger / "ledger" / "profile" / "person.yaml")
     roles = ledger / "ledger" / "roles"
     role_fields = ("title", "organization", "start_date")
@@ -191,6 +191,7 @@ def profile(ledger: Path, today: str) -> None:
         "name": person["preferred_name"],
         "title": person["primary_title"],
         "summary": person.get("summary"),
+        "short_bio": " ".join(str(person.get("short_bio") or "").split()),
         "appointments": [pick(r, role_fields) for r in current(load(roles / "appointments.yaml")["records"], today)],
         "editorial": [pick(r, role_fields) for r in current(load(roles / "editorial_roles.yaml")["records"], today)],
         "service": [pick(r, role_fields) for r in current(load(roles / "service_and_leadership.yaml")["records"], today)],
