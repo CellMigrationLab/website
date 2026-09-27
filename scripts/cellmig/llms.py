@@ -7,11 +7,14 @@ so a model can read the lab in one file. Both are rebuilt from the same data
 as the pages on every build.
 """
 
+from datetime import date
+
 from .config import DATA, DOCS, SITE_URL, load
 from .featured import Story
 from .ledger import Ledger, Record, software_list
 from .people import Person
 from .previews import preview_text
+from .profile import month_year, recent_talks
 from .structured import plain
 
 PAGES = [  # (title, path) in the order of the menu
@@ -58,7 +61,14 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
            f"Website: {SITE_URL}", f"Address: {', '.join(site['contact']['address'])}", "",
            "## Affiliations", ""]
     out += [f"- {a['organization']} ({a['title']})" for a in affiliations]
-    out += [""] + _people(members)
+    prof = ledger.profile
+    out += ["", f"## Group leader: {prof['name']}", "", prof.get("summary") or "", ""]
+    for heading, key in (("Positions", "appointments"), ("Editorial roles", "editorial"),
+                         ("Service and leadership", "service")):
+        out += [f"### {heading}", "", *(f"- {r['title']}, {r['organization']}" for r in prof.get(key) or []), ""]
+    out += ["### Education", "", *(f"- {e['degree']}, {e['organization']}" + (f" ({str(e['end_date'])[:4]})" if e.get("end_date") else "")
+                                   for e in prof["education"]), ""]
+    out += _people(members)
     out += ["## Research", ""]
     for t in research["themes"]:
         out += [f"### {t['title']}", "", *(plain(x) for x in t.get("text") or []), ""]
@@ -76,7 +86,10 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
         out += [f"- {s['title']}" + (f" ({s['year']})" if s.get("year") else "") + f": {plain(s.get('text'))}{code}"]
     out += ["", "## Datasets", ""]
     out += [f"- {d['title']}: {d.get('description') or ''} {d['repository_url']}" for d in ledger.datasets]
-    out += ["", "## Online talks", ""]
+    out += ["", "## Talks (last two years)", ""]
+    out += [f"- {month_year(t['date'])}: {t['title']}" + "".join(f", {x}" for x in (t.get("event_name"), t.get("location")) if x)
+            for t in recent_talks(ledger, date.today())]
+    out += ["", "## Recorded talks", ""]
     for t in load(DATA / "talks.yaml"):
         link = f"https://www.youtube.com/watch?v={t['youtube']}" if t.get("youtube") else f"https://vimeo.com/{t['vimeo']}"
         out += [f"- {t['title']}" + "".join(f", {x}" for x in (t.get("event"), t.get("year")) if x) + f". {link}"]

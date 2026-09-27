@@ -17,5 +17,6 @@ scripts/build_pages.py is the entry point; the modules here are:
   previews    link previews (title, text, picture) from data/previews.yaml
   structured  schema.org JSON-LD and Google Scholar tags
   llms        /llms.txt and /llms-full.txt
+  profile     group leader profile, recent talks and teaching
   site_files  footer and JSON-LD partials, RSS feed
 """

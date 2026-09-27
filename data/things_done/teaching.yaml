@@ -1,0 +1,153 @@
+# Copied by scripts/sync_things_done.py from things_done/ledger/activities/*/teaching.yaml.
+# Do not edit by hand: change things_done instead, the website updates itself.
+records:
+- title: Structure and Function of the Cytoskeleton (5 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2026-01-01'
+  end_date: '2026-12-31'
+  teaching_kind: course_director
+- title: Advanced Microscopy (5 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2026-01-01'
+  end_date: '2026-12-31'
+  teaching_kind: course_director
+- title: Structure and Function of the Cytoskeleton (5 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2025-01-01'
+  end_date: '2025-12-31'
+  teaching_kind: course_director
+- title: Advanced Microscopy A (2 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2025-01-01'
+  end_date: '2025-12-31'
+  teaching_kind: course_director
+- title: Advanced Microscopy B (3 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2025-01-01'
+  end_date: '2025-12-31'
+  teaching_kind: course_director
+- title: 'Microscopy Data Analysis: Machine Learning and the BioImage Archive at EMBL'
+  organization: EMBL training / partner course delivery
+  start_date: '2025-01-01'
+  end_date: '2025-12-31'
+  teaching_kind: guest_lecturer
+- title: Cell Signalling course
+  organization: Åbo Akademi University
+  start_date: '2025-01-01'
+  end_date: '2025-12-31'
+  teaching_kind: course_lecturer
+- title: One Week-Long Course on Image Analysis (2 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2024-01-01'
+  end_date: '2024-12-31'
+  teaching_kind: course_director
+- title: Applied Bioinformatics Course (Bioimage Analysis module)
+  organization: Åbo Akademi University
+  start_date: '2024-01-01'
+  end_date: '2024-12-31'
+  teaching_kind: course_lecturer
+- title: 'Microscopy Data Analysis: Machine Learning and the BioImage Archive at EMBL'
+  organization: EMBL training / partner course delivery
+  start_date: '2024-01-01'
+  end_date: '2024-12-31'
+  teaching_kind: workshop_teacher
+- title: Structure and Function of the Cytoskeleton (5 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2024-01-01'
+  end_date: '2024-12-31'
+  teaching_kind: course_director
+- title: Advanced Microscopy (5 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2024-01-01'
+  end_date: '2024-12-31'
+  teaching_kind: course_director
+- title: Cell signalling course
+  organization: Åbo Akademi University
+  start_date: '2024-01-01'
+  end_date: '2024-12-31'
+  teaching_kind: course_lecturer
+- title: TMED-103 - Cancer from Biology to Research (guest lecture)
+  organization: Åbo Akademi University
+  start_date: '2024-01-01'
+  end_date: '2024-12-31'
+  teaching_kind: guest_lecturer
+- title: TMED-103 - Cancer from Biology to Research (guest lecture)
+  organization: Åbo Akademi University
+  start_date: '2023-01-26'
+  end_date: '2023-01-26'
+  teaching_kind: guest_lecturer
+- title: One Week-Long Course on Expansion Microscopy (2 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2023-01-01'
+  end_date: '2023-12-31'
+  teaching_kind: course_director
+- title: Structure and Function of the Cytoskeleton (5 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2023-01-01'
+  end_date: '2023-12-31'
+  teaching_kind: course_director
+- title: Advanced Microscopy (5 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2023-01-01'
+  end_date: '2023-12-31'
+  teaching_kind: course_director
+- title: 'Microscopy Data Analysis: Machine Learning and the BioImage Archive at EMBL'
+  organization: EMBL training / partner course delivery
+  start_date: '2023-01-01'
+  end_date: '2023-12-31'
+  teaching_kind: workshop_teacher
+- title: TMED-103 - Cancer from Biology to Research (guest lecture)
+  organization: Åbo Akademi University
+  start_date: '2022-01-26'
+  end_date: '2022-01-26'
+  teaching_kind: guest_lecturer
+- title: Structure and Function of the Cytoskeleton (5 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2022-01-01'
+  end_date: '2022-12-31'
+  teaching_kind: course_director
+- title: Advanced Microscopy (5 ECTS)
+  organization: Åbo Akademi University
+  start_date: '2022-01-01'
+  end_date: '2022-12-31'
+  teaching_kind: course_director
+- title: 'Microscopy Data Analysis: Machine Learning and the BioImage Archive at EMBL'
+  organization: EMBL training / partner course delivery
+  start_date: '2022-01-01'
+  end_date: '2022-12-31'
+  teaching_kind: workshop_teacher
+- title: 'Boost your science: Modern methods in life sciences'
+  organization: University of Turku and Åbo Akademi University
+  start_date: '2018-01-01'
+  end_date: '2018-12-31'
+  teaching_kind: module_lead
+- title: Cell signalling course
+  organization: Åbo Akademi University
+  start_date: '2018-01-01'
+  end_date: '2018-12-31'
+  teaching_kind: guest_lecturer
+- title: Advanced microscopy course
+  organization: University of Turku
+  start_date: '2018-01-01'
+  end_date: '2018-12-31'
+  teaching_kind: guest_lecturer
+- title: Structure and Function of the Cytoskeleton
+  organization: Åbo Akademi University
+  start_date: '2018-01-01'
+  end_date: '2018-12-31'
+  teaching_kind: guest_lecturer
+- title: Biocenter Finland Career Workshop 2017
+  organization: Biocenter Finland
+  start_date: '2017-01-01'
+  end_date: '2017-12-31'
+  teaching_kind: guest_lecturer
+- title: 'Boost your science: Modern methods in life sciences'
+  organization: University of Turku and Åbo Akademi University
+  start_date: '2017-01-01'
+  end_date: '2017-12-31'
+  teaching_kind: module_lead
+- title: Advanced microscopy course
+  organization: University of Turku
+  start_date: '2017-01-01'
+  end_date: '2017-12-31'
+  teaching_kind: guest_lecturer
