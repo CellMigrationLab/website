@@ -82,6 +82,7 @@ keep their old addresses, so existing links to them keep working.
 pip install -r requirements.txt
 python scripts/build_pages.py   # generates the pages from data/
 zensical serve                  # http://localhost:8000, reloads on changes
+# the publish workflow then runs: zensical build && python scripts/write_sitemap.py
 ```
 
 Generated pages (listed in `.gitignore`) are rebuilt every time; do not edit
@@ -98,7 +99,8 @@ PYTHONPATH=scripts python -m unittest discover -s tests
 1. **Turn on GitHub Pages:** repository Settings → Pages → Source: **GitHub
    Actions**. The site is then live at https://cellmigrationlab.github.io/website/.
 2. **Point cellmig.org here** (when the new site is ready):
-   - in `mkdocs.yml`, set `site_url: https://cellmig.org/`;
+   - in `mkdocs.yml`, set `site_url: https://cellmig.org/` (canonical links,
+     sitemap and robots.txt follow);
    - Settings → Pages → Custom domain: `cellmig.org`; after the check, tick
      *Enforce HTTPS*;
    - verify the domain for the organisation (Organisation settings → Pages)
@@ -129,6 +131,9 @@ overrides/ (layout), docs/assets/ (CSS, JS, fonts) ───┘
   There are no silent fallbacks: a missing file, a DOI that is not in the
   ledger, an unknown key or colour, or a picture that does not exist stops
   the build with a message naming the file to fix.
+- `scripts/write_sitemap.py` — after `zensical build`, writes `site/sitemap.xml`
+  (every page, including the featured-paper pages that are not in the menu)
+  and `site/robots.txt` pointing to it, both from `site_url` in `mkdocs.yml`.
 - `tests/` — unit tests for the generator.
 - `scripts/sync_things_done.py` — copies the public part of the ledger into
   `data/things_done/` (run by things_done after each update).
