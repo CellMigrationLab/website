@@ -46,6 +46,10 @@ jobs:
       - name: Build site
         run: zensical build --strict
 
+      # Zensical's sitemap lists only menu pages; list every page instead.
+      - name: Sitemap and robots.txt
+        run: python scripts/write_sitemap.py
+
       - name: Upload preview (pull requests)
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
