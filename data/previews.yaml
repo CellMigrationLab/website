@@ -85,9 +85,3 @@ pages:
       The Cell Migration Lab is at Åbo Akademi University and Turku Bioscience Centre in Turku,
       Finland; how to find us and how to join.
     image: wp-content/uploads/2019/08/p1080272-1-e1566674878737.jpg
-  image-analysis:
-    title: ZeroCostDL4Mic – deep learning for microscopy
-    description: >-
-      Deep learning to analyse microscopy images, and how ZeroCostDL4Mic makes it free and accessible
-      to every lab.
-    image: wp-content/uploads/2020/09/max_predicted_12.png
