@@ -17,6 +17,7 @@ Reads (in the things_done checkout)                    Writes (data/things_done/
     ledger/roles/*.yaml  (current roles)
   ledger/activities/*/talks.yaml                         talks.yaml
   ledger/activities/*/teaching.yaml                      teaching.yaml
+  ledger/activities/*/conference_organization.yaml       conference_organization.yaml
   ledger/registries/grants.yaml  (no amounts)            grants.yaml
   report/generated/publications/
     preprint_publication_crosswalk.json  (pairs)         related_dois in publications.yaml
@@ -28,7 +29,7 @@ Only fields that are already public are copied (title, authors, venue, DOI,
 abstract, links, whether Guillaume is corresponding author, descriptions,
 co-author countries, the public lab roster: names, roles in the lab and
 current/alumni, Guillaume's current affiliations, roles and education, talks,
-teaching, and grant titles and funders without amounts). Supervision records, notes and conflict-of-interest data are
+teaching, events organised, and grant titles and funders without amounts). Supervision records, notes and conflict-of-interest data are
 never read. Every input is required: a missing file stops the sync rather
 than leaving part of the website stale without anyone noticing.
 """
@@ -277,6 +278,7 @@ def main() -> None:
     profile(ledger, today)
     activities(ledger, "talks", ("date", "title", "event_name", "location", "talk_kind"))
     activities(ledger, "teaching", ("title", "organization", "start_date", "end_date", "teaching_kind"))
+    activities(ledger, "conference_organization", ("title", "event_name", "location", "start_date", "conference_role"))
     grants(ledger)
     preprint_lag(ledger)
     coauthors(ledger)

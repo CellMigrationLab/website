@@ -36,6 +36,7 @@ from cellmig.config import DATA, DOCS, GENERATED, load
 from cellmig.featured import load_featured
 from cellmig.ledger import Ledger, affiliation_list, funding_list
 from cellmig.llms import write_llms
+from cellmig.news import build_news, page_news
 from cellmig.pages_content import (
     page_datasets,
     page_gallery,
@@ -89,7 +90,10 @@ def main() -> None:
     leader = next(m for m in members if m["group"] == "pi" and m["status"] == "current")
     page_handwritten("about-us", extra=pi_profile(ledger.profile, leader))
     page_handwritten("image-analysis")
-    write_feed(site, featured)
+    page_handwritten("join-us")
+    news = build_news(ledger, featured)
+    page_news(news)
+    write_feed(site, news)
     write_footer(site, affiliations)
     write_jsonld(site, affiliations, members, ledger.profile["short_bio"])
     write_llms(site, featured, ledger, members, affiliations)

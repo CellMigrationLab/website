@@ -1,16 +1,18 @@
 """Files other than pages: the footer and structured-data partials, and the RSS feed."""
 
+import html
+import re
 from datetime import datetime, timezone
 from email.utils import format_datetime
 
 from .config import DOCS, ROOT, SITE_URL, fail
-from .featured import Story
 from .icons import ICONS
 from .images import thumb
 from .ledger import Record
+from .news import KIND_LABELS, NewsItem
 from .people import Person
 from .structured import organization, to_json
-from .text import esc, is_external, md
+from .text import esc, is_external
 
 FEED_ITEMS = 30
 
@@ -58,20 +60,22 @@ def write_footer(site: Record, affiliations: list[Record]) -> None:
     (ROOT / "overrides" / "partials" / "cm-footer.html").write_text(out, encoding="utf-8")
 
 
-def write_feed(site: Record, featured: list[Story]) -> None:
-    """RSS of the newest featured papers: docs/feed.xml, and docs/feed/index.html
-    (the old WordPress feed address). pubDate only when the exact date is known."""
+def write_feed(site: Record, news: list[NewsItem]) -> None:
+    """RSS of the newest news items: docs/feed.xml, and docs/feed/index.html
+    (the old WordPress feed address). pubDate only when the day is known."""
     items = []
-    for s in featured[:FEED_ITEMS]:
-        url = SITE_URL + f'portfolio/{s["slug"]}/'
+    for n in news[:FEED_ITEMS]:
+        url = n["url"] if n["url"] and n["url"].startswith("http") else SITE_URL + (n["url"] or f"news/#y{n['date'][:4]}")
         when = ""
-        if s["date"]:
-            day = datetime.strptime(s["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        if n["precision"] == "day":
+            day = datetime.strptime(n["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
             when = f"<pubDate>{format_datetime(day)}</pubDate>"
-        items.append(f"<item><title>{esc(s['title'])}</title><link>{url}</link><guid>{url}</guid>"
-                     f"{when}<description>{esc(md(s['summary']))}</description></item>")
+        text = re.sub(r"<[^>]+>", "", n["html"])
+        items.append(f"<item><title>{esc(KIND_LABELS[n['kind']] + ': ' + n['title'])}</title><link>{esc(url)}</link>"
+                     f"<guid isPermaLink=\"false\">{esc(n['kind'] + ':' + n['date'] + ':' + n['title'])}</guid>"
+                     f"{when}<description>{esc(html.unescape(text))}</description></item>")
     rss = ('<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>'
-           f'<title>{esc(site["name"])}</title><link>{SITE_URL}</link>'
+           f'<title>{esc(site["name"])}: news</title><link>{SITE_URL}news/</link>'
            f'<atom:link href="{SITE_URL}feed.xml" rel="self" type="application/rss+xml"/>'
            f'<description>{esc(site["motto"])}</description><language>en</language>'
            + "".join(items) + "</channel></rss>\n")
