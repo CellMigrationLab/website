@@ -33,7 +33,7 @@ def to_json(data: Json) -> str:
 
 def plain(markdown_text: str | None) -> str:
     """Markdown -> plain text on one line (for descriptions)."""
-    text = re.sub(r"<[^>]+>", " ", md(markdown_text or ""))
+    text = re.sub(r"<[^>]+>", "", md(markdown_text or ""))   # paragraphs keep their newline
     return " ".join(html.unescape(text).split())
 
 

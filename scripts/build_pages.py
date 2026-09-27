@@ -53,6 +53,7 @@ from cellmig.people import lab_names, load_members
 from cellmig.previews import check_all_used
 from cellmig.profile import pi_profile
 from cellmig.site_files import write_feed, write_footer, write_jsonld
+from cellmig.structured import plain
 
 
 def clean() -> None:
@@ -95,7 +96,7 @@ def main() -> None:
     page_news(news)
     write_feed(site, news)
     write_footer(site, affiliations)
-    write_jsonld(site, affiliations, members, ledger.profile["short_bio"])
+    write_jsonld(site, affiliations, members, plain(ledger.profile["short_bio"]))
     write_llms(site, featured, ledger, members, affiliations)
     check_all_used()
     print(f"Generated pages: {len(featured)} featured papers, {len(ledger.grouped())} publications, "
