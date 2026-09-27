@@ -1,0 +1,389 @@
+# Copied by scripts/sync_things_done.py from things_done/ledger/activities/*/talks.yaml.
+# Do not edit by hand: change things_done instead, the website updates itself.
+records:
+- date: '2026-09-18'
+  title: Taming the Publication Monster – Opportunities for Euro-BioImaging Nodes
+  event_name: 'Euro-BioImaging All Hands Nodes Meeting: Connecting the Communities'
+  location: Mauno Koivisto Centre, BioCity, Turku, Finland
+  talk_kind: invited_talk
+- date: '2026-09-07'
+  title: How I use LLMs in my research
+  event_name: Åbo Akademi University Research Services talk
+  location: Turku, Finland
+  talk_kind: seminar
+- date: '2026-09-02'
+  title: Attaching to and Crossing Endothelial Monolayers
+  event_name: 'Local and International Immunological Research Today: Minisymposium'
+  location: Lauren 1, Medisiina D, Turku, Finland
+  talk_kind: invited_talk
+- date: '2026-08-19'
+  title: IMMENs overview and introduction
+  event_name: IMMENs Kick-off Symposium
+  location: Hanaholmen, Finland
+  talk_kind: invited_talk
+- date: 2026-08
+  title: Attaching to and Crossing Endothelial Monolayers
+  event_name: University of Oslo research seminar
+  location: Oslo, Norway
+  talk_kind: seminar
+- date: '2026-06-11'
+  title: 'Panel Discussion 3: Scientific Publishing, Open Science and AI in the Biomedical Era'
+  event_name: Sigrid Jusélius Symposium 2026
+  location: Finland
+  talk_kind: panel_participation
+- date: '2026-06-10'
+  title: Studying Cancer Cell Metastasis in the Era of Deep Learning for Microscopy
+  event_name: 'Sigrid Jusélius Symposium 2026: AI Foundations, Technologies and Opportunities in Biomedical
+    Science'
+  location: Finland
+  talk_kind: invited_talk
+- date: '2026-06-09'
+  title: Attaching and breaking through endothelial barriers
+  event_name: 'EACR 2026 Congress: Innovative Cancer Science (Symposium: Mechanisms of Tumour Metastasis)'
+  location: Budapest, Hungary
+  talk_kind: invited_talk
+- date: '2026-06-09'
+  title: 'TABLE 1: Working at the interface between basic research and method development'
+  event_name: 'EACR 2026 Congress: Career Development Session 1A'
+  location: Budapest, Hungary
+  talk_kind: panel_participation
+- date: '2026-06-08'
+  title: Networking Event - Table hosts
+  event_name: 'EACR 2026 Congress: Networking Event for Early-Career Researchers'
+  location: Budapest, Hungary
+  talk_kind: panel_participation
+- date: '2026-05-12'
+  title: Cell-cell communications using filopodia
+  event_name: Imaging Cell Dynamics (#JCSimaging)
+  location: Montanyà Hotel, Catalonia, Spain
+  talk_kind: invited_talk
+- date: '2026-05-08'
+  title: Biovision lunch seminar
+  event_name: Biovision Center Lunch Seminar Series
+  location: Online
+  talk_kind: seminar
+- date: '2026-05-07'
+  title: Studying cancer cell metastasis in the era of deep learning for microscopy
+  event_name: 9th Danish BioImaging Symposium
+  location: Online
+  talk_kind: keynote
+- date: '2026-04-09'
+  title: Attaching to and Crossing Endothelial Barriers
+  event_name: 2026 Annual Meeting of CSCB ICCB & APOCB Joint Meeting (S07 Cell Migration and Cytoskeleton)
+  location: Hefei, China
+  talk_kind: invited_talk
+- date: '2026-04-07'
+  title: Cell-cell communications using filopodia
+  event_name: 'Architecting Life: A Mini-Symposium on Cellular Construction and Function'
+  location: Beijing, China
+  talk_kind: invited_talk
+- date: '2026-03-26'
+  title: Attaching to and Crossing Endothelial Monolayers
+  event_name: Biomedicum Helsinki Seminar
+  location: Biomedicum Helsinki, Finland
+  talk_kind: seminar
+- date: '2026-03-19'
+  title: Studying cancer cell metastasis in the era of Deep Learning for Microscopy
+  event_name: ITQB NOVA Microscopy Symposium
+  location: Lisbon, Portugal
+  talk_kind: keynote
+- date: '2025-11-06'
+  title: 'AI & Smart Microscopy: Studying Cancer Cell Metastasis in the Era of Deep Learning for Microscopy'
+  event_name: SPAOM Meeting 2025
+  location: Forum Braga, Braga, Portugal
+  talk_kind: plenary
+- date: '2025-10-23'
+  title: Studying cancer cell metastasis in the era of deep learning for microscopy
+  event_name: Eindhoven University of Technology (TU/e)
+  location: Eindhoven, Netherlands
+  talk_kind: seminar
+- date: '2025-10-06'
+  title: Attaching to and Crossing Endothelial Barriers
+  event_name: 5th Crick International Cancer Conference
+  location: London, UK
+  talk_kind: invited_talk
+- date: '2025-09-26'
+  title: Studying cancer cell metastasis in the era of deep learning for microscopy
+  event_name: ABCD 2025 (Italian Association of Cell Biology and Differentiation)
+  location: Paestum, Italy
+  talk_kind: invited_talk
+- date: '2025-09-11'
+  title: 'Keynote 1: The Metastatic Cascade: How Cancer Cells Sense, Connect, and Cross'
+  event_name: HiLIFE Science Days 2025
+  location: Paasitorni, Helsinki, Finland
+  talk_kind: keynote
+- date: '2025-06-16'
+  title: Attaching to and Crossing Endothelial Barriers
+  event_name: EACR 2025 Congress / Cancer Researchers to Watch (Early Career showcase-associated session)
+  location: Lisbon, Portugal
+  talk_kind: invited_talk
+- date: '2025-06-10'
+  title: Monitoring circulating cells - endothelial cells interactions under flow
+  event_name: '5th EVBO Summer School (Advances in Cardiovascular Biology: Forces, Dynamics and Molecular
+    Mapping of Vascular Cells)'
+  location: Biomedicum Helsinki, Finland
+  talk_kind: invited_talk
+- date: '2025-05-22'
+  title: Studying cancer cell metastasis in the era of deep learning for microscopy
+  event_name: BioImage Informatics Finland Network Symposium (BIIF2025; 4th BIIF Network Symposium)
+  location: Seili island (Turku Archipelago), Finland
+  talk_kind: invited_talk
+- date: '2025-03-26'
+  title: Attaching to and Crossing Endothelial Barriers
+  event_name: Biologists @ 100 (The Company of Biologists Centenary)
+  location: Liverpool, UK
+  talk_kind: chair_and_speaker
+- date: '2024-10-24'
+  title: Studying cancer cell metastasis in the era of deep learning for microscopy
+  event_name: University College London seminar
+  location: London, UK
+  talk_kind: seminar
+- date: '2024-10-01'
+  title: Invited seminar
+  event_name: University of Liverpool seminar
+  location: Liverpool, UK
+  talk_kind: seminar
+- date: '2024-09-19'
+  title: The challenges and benefits of becoming a team leader
+  event_name: EACR networking event
+  location: Europe
+  talk_kind: webinar
+- date: '2024-08-26'
+  title: Trends in AI for super-resolution microscopy
+  event_name: AI4Life Hackathon / SMLMS 2024
+  location: Lisbon, Portugal
+  talk_kind: invited_talk
+- date: '2024-06-22'
+  title: Metastasis Research Society 20th Biennial Congress
+  event_name: MRS meeting 2024
+  location: London, UK
+  talk_kind: invited_talk
+- date: '2024-06-20'
+  title: The challenges and benefits of becoming a team leader
+  event_name: EACR networking event
+  location: Europe
+  talk_kind: webinar
+- date: '2024-06-01'
+  title: Invited seminar
+  event_name: University of Nice seminar
+  location: Nice, France
+  talk_kind: seminar
+- date: '2024-05-07'
+  title: Self-marketing and using social media to your advantage
+  event_name: EACR networking event
+  location: Europe
+  talk_kind: webinar
+- date: '2024-04-19'
+  title: Studying cancer cell metastases in the era of deep learning for microscopy
+  event_name: University of Sheffield seminar
+  location: Sheffield, UK
+  talk_kind: seminar
+- date: '2024-04-09'
+  title: 3rd Bridging Nordic Microscopy Infrastructure Symposium
+  event_name: BNMI meeting 2024
+  location: Geilo, Norway
+  talk_kind: invited_talk
+- date: 2024-04
+  title: Invited speaker contribution
+  event_name: BSMB/ECF 2024 meeting on cell migration
+  location: Birmingham, UK
+  talk_kind: invited_talk
+- date: '2024-01-01'
+  title: Invited talk
+  event_name: FNT Academy of Finland event 2024
+  location: Finland
+  talk_kind: invited_talk
+- date: '2024-01-01'
+  title: What Can Data Science Do For Cell Biology?
+  event_name: ASCB event
+  location: International
+  talk_kind: invited_talk
+- date: '2023-09-01'
+  title: Studying cancer cell metastasis in the era of deep learning for microscopy
+  event_name: Integrative Physiology and Pharmacology seminar
+  location: Turku, Finland
+  talk_kind: seminar
+- date: '2023-08-29'
+  title: Invited speaker contribution
+  event_name: Bridging Cancer Frontiers 2023
+  location: Finland
+  talk_kind: invited_talk
+- date: 2023-06
+  title: Invited chair contribution
+  event_name: EACR Congress 2023
+  location: Torino, Italy
+  talk_kind: session_chair
+- date: '2023-05-14'
+  title: Imaging Cell Dynamics
+  event_name: Journal of Cell Science meeting 2023
+  location: Lisbon, Portugal
+  talk_kind: contributed_talk
+- date: '2023-05-11'
+  title: Novel technologies to improve human health
+  event_name: InFLAMES corporate corner
+  location: Turku, Finland
+  talk_kind: invited_talk
+- date: '2023-04-04'
+  title: Improving the academic experience through open data, software, and publications practices
+  event_name: InFLAMES open data workshop
+  location: Turku, Finland
+  talk_kind: invited_talk
+- date: '2023-03-29'
+  title: Field of View Workshop “From Image Acquisition to Analysis and Data Storage”
+  event_name: Biocenter Finland workshop on AI and image analysis
+  location: Finland
+  talk_kind: invited_talk
+- date: '2023-03-14'
+  title: Studying cancer metastases in the age of deep learning for microscopy
+  event_name: InFLAMES workshop
+  location: Turku, Finland
+  talk_kind: invited_talk
+- date: '2023-01-01'
+  title: Invited seminar
+  event_name: University of Lund seminar
+  location: Lund, Sweden
+  talk_kind: seminar
+- date: '2022-10-02'
+  title: EMBO Course on Super-Resolution in Light Microscopy in Central and East Europe
+  event_name: EMBO course on computational imaging
+  location: Portugal
+  talk_kind: invited_talk
+- date: '2022-05-07'
+  title: Invited speaker contribution
+  event_name: ECTS 2022
+  location: Helsinki, Finland
+  talk_kind: invited_talk
+- date: '2022-04-05'
+  title: Studying cancer cell metastases in the era of Deep Learning for microscopy
+  event_name: TCRS meeting
+  location: Alhopuro Hall, Turku, Finland
+  talk_kind: invited_talk
+- date: '2022-01-01'
+  title: Invited seminar
+  event_name: Pasteur Institute seminar
+  location: France
+  talk_kind: seminar
+- date: '2022-01-01'
+  title: Invited super-resolution microscopy lecture
+  event_name: Merck lecture event
+  talk_kind: invited_talk
+- date: '2022-01-01'
+  title: Invited speaker contribution
+  event_name: University of Manchester seminar
+  location: Manchester, UK
+  talk_kind: seminar
+- date: '2021-06-15'
+  title: NEUBIAS webinar on ZeroCostDL4Mic
+  event_name: NEUBIAS webinar
+  location: Online
+  talk_kind: webinar
+- date: '2021-06-14'
+  title: Filopodia and the metastatic cascade
+  event_name: Remote seminar to Manchester
+  location: Online
+  talk_kind: seminar
+- date: '2021-06-09'
+  title: Filopodia and the metastatic cascade
+  event_name: Remote seminar to SUNY Upstate
+  location: Online
+  talk_kind: seminar
+- date: '2021-03-16'
+  title: Filopodia and the metastatic cascade
+  event_name: Remote seminar to Kent
+  location: Online
+  talk_kind: seminar
+- date: 2020-12
+  title: Cell adhesion and mechanotransduction at filopodia tips
+  event_name: ASCB 2020
+  location: Online
+  talk_kind: contributed_talk
+- date: '2020-11-09'
+  title: Invited talk for ITN networks on secretion, cancer and autophagy
+  event_name: ITN training lecture
+  location: Online (Zoom)
+  talk_kind: invited_talk
+- date: '2020-01-01'
+  title: ZeroCostDL4Mic talk
+  event_name: Åbo Akademi bioseminar
+  location: Turku, Finland
+  talk_kind: seminar
+- date: '2020-01-01'
+  title: ZeroCostDL4Mic talk
+  event_name: Biocity breakfast talk
+  location: Turku, Finland
+  talk_kind: invited_talk
+- date: '2019-03-14'
+  title: Invited speaker contribution
+  event_name: Joint Nordic Matrix Conference 2019
+  location: Panum Institute, University of Copenhagen, Copenhagen, Denmark
+  talk_kind: invited_talk
+- date: '2018-06-24'
+  title: Poster presentation
+  event_name: Gordon Research Conference on Signaling by Adhesion Receptors
+  location: University of New England, Biddeford, Maine, USA
+  talk_kind: contributed_talk
+- date: '2018-01-01'
+  title: Invited speaker contribution
+  event_name: Just see it!
+  location: Turku, Finland
+  talk_kind: invited_talk
+- date: '2017-01-01'
+  title: Poster presentation
+  event_name: ASCB-EMBO meeting
+  location: Philadelphia, USA
+  talk_kind: contributed_talk
+- date: '2017-01-01'
+  title: Selected oral and poster presentation
+  event_name: Gordon Research Conference Fibronectin, Integrins & Related Molecules
+  location: Ventura, CA, USA
+  talk_kind: contributed_talk
+- date: '2016-01-01'
+  title: Poster presentation
+  event_name: Building the Cell 2016
+  location: Institut Pasteur, Paris, France
+  talk_kind: contributed_talk
+- date: '2016-01-01'
+  title: Poster presentation
+  event_name: Gordon Research Conference on Signaling by Adhesion Receptors
+  location: Bates College, Lewiston, ME, USA
+  talk_kind: contributed_talk
+- date: '2015-01-01'
+  title: Selected oral and poster presentation
+  event_name: Beatson International Cancer Conference
+  location: Glasgow, UK
+  talk_kind: contributed_talk
+- date: '2015-01-01'
+  title: Invited presentation
+  event_name: 8th Finnish Cell Biology Symposium
+  location: Lammi, Finland
+  talk_kind: invited_talk
+- date: '2015-01-01'
+  title: Invited presentation
+  event_name: Bridging Nordic Imaging Seminar
+  location: Turku, Finland
+  talk_kind: invited_talk
+- date: '2014-01-01'
+  title: Invited presentation
+  event_name: Faculty of Life Sciences Symposium
+  location: Manchester, UK
+  talk_kind: invited_talk
+- date: '2014-01-01'
+  title: Poster presentation
+  event_name: Gordon Research Conference on Signaling by Adhesion Receptors
+  location: Bates College, Lewiston, ME, USA
+  talk_kind: contributed_talk
+- date: '2013-01-01'
+  title: Selected oral and poster presentation
+  event_name: Actin Meeting
+  location: Bristol, UK
+  talk_kind: contributed_talk
+- date: '2012-01-01'
+  title: Poster presentation
+  event_name: Gordon Research Conference on Signaling by Adhesion Receptors
+  location: Colby College, Waterville, ME, USA
+  talk_kind: contributed_talk
+- date: '2012-01-01'
+  title: Selected oral and poster presentation
+  event_name: Gordon Research Seminar on Signaling by Adhesion Receptors
+  location: Colby College, Waterville, ME, USA
+  talk_kind: contributed_talk

@@ -1,0 +1,93 @@
+# Copied by scripts/sync_things_done.py from things_done/ledger/registries/grants.yaml (no amounts).
+# Do not edit by hand: change things_done instead, the website updates itself.
+records:
+- id: research-council-finland-centre-of-excellence-immens-2026-2030
+  title: IMMENs, Research Council of Finland Centre of Excellence
+  funder: Research Council of Finland
+  status: awarded
+  start_date: '2026-01-01'
+  end_date: '2030-12-31'
+- id: finnish-cancer-foundation-project-grant-2026-2028
+  title: Finnish Cancer Foundation grant
+  funder: Finnish Cancer Foundation
+  status: awarded
+  start_date: '2026-01-01'
+  end_date: '2028-12-31'
+- id: research-council-finland-project-grant-2026-2029
+  title: Academy of Finland Project Grant
+  funder: Research Council of Finland
+  status: awarded
+  start_date: '2026-01-01'
+  end_date: '2029-12-31'
+- id: sigrid-juselius-foundation-grant-2023-2026
+  title: Sigrid Juselius Foundation grant
+  funder: Sigrid Juselius Foundation
+  status: active
+  start_date: '2023-01-01'
+  end_date: '2026-12-31'
+- id: wellcome-trust-grant-2025-2027
+  title: Wellcome Trust grant
+  funder: Wellcome Trust
+  status: active
+  start_date: '2025-01-01'
+  end_date: '2027-12-31'
+- id: finnish-cancer-foundation-grant-2020-2025
+  title: Finnish Cancer Foundation grant
+  funder: Finnish Cancer Foundation
+  status: completed
+  start_date: '2020-01-01'
+  end_date: '2025-12-31'
+- id: academy-of-finland-research-fellowship-2021-2026
+  title: Academy of Finland Research Fellowship
+  funder: Research Council of Finland
+  status: active
+  start_date: '2021-01-01'
+  end_date: '2026-12-31'
+- id: sigrid-juselius-foundation-grant-2019-2022
+  title: Sigrid Juselius Foundation grant
+  funder: Sigrid Juselius Foundation
+  status: completed
+  start_date: '2019-01-01'
+  end_date: '2022-12-31'
+- id: biocity-grant-2021-2023
+  title: BioCity grant
+  funder: BioCity Turku
+  status: completed
+  start_date: '2021-01-01'
+  end_date: '2023-12-31'
+- id: finnish-heart-foundation-grant-2020
+  title: Finnish Heart Foundation grant
+  funder: Finnish Heart Foundation
+  status: completed
+  start_date: '2020-01-01'
+  end_date: '2020-12-31'
+- id: academy-of-finland-postdoctoral-fellowship-2017-2020
+  title: Academy of Finland Postdoctoral Fellowship
+  funder: Academy of Finland
+  status: completed
+  start_date: '2017-01-01'
+  end_date: '2020-12-31'
+- id: embo-long-term-fellowship-2015-2016
+  title: EMBO Long-Term Fellowship
+  funder: EMBO
+  status: completed
+  start_date: '2015-01-01'
+  end_date: '2016-12-31'
+- id: university-of-turku-foundation-stipend-2017
+  title: University of Turku Foundation stipend for a master's student
+  funder: University of Turku Foundation
+  status: completed
+  start_date: '2017-01-01'
+  end_date: '2017-12-31'
+- id: cancer-society-of-finland-travel-grant-2016
+  title: Travel grant
+  funder: Cancer Society of Finland
+  status: completed
+  start_date: '2016-01-01'
+  end_date: '2016-12-31'
+- id: university-of-turku-foundation-travel-grant-2016
+  title: Travel grant
+  funder: University of Turku Foundation
+  status: completed
+  start_date: '2016-01-01'
+  end_date: '2016-12-31'

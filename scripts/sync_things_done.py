@@ -13,6 +13,11 @@ Reads (in the things_done checkout)                    Writes (data/things_done/
   ledger/registries/datasets.yaml                        datasets.yaml
   ledger/profile/lab_members.yaml                        lab_members.yaml
   ledger/profile/affiliations.yaml  (current ones)       affiliations.yaml
+  ledger/profile/person.yaml, education.yaml,            profile.yaml
+    ledger/roles/*.yaml  (current roles)
+  ledger/activities/*/talks.yaml                         talks.yaml
+  ledger/activities/*/teaching.yaml                      teaching.yaml
+  ledger/registries/grants.yaml  (no amounts)            grants.yaml
   report/generated/publications/
     preprint_publication_crosswalk.json  (pairs)         related_dois in publications.yaml
     preprint_lag.json                                    preprint_lag.yaml
@@ -22,7 +27,8 @@ Reads (in the things_done checkout)                    Writes (data/things_done/
 Only fields that are already public are copied (title, authors, venue, DOI,
 abstract, links, whether Guillaume is corresponding author, descriptions,
 co-author countries, the public lab roster: names, roles in the lab and
-current/alumni, and Guillaume's current affiliations). Supervision records, notes and conflict-of-interest data are
+current/alumni, Guillaume's current affiliations, roles and education, talks,
+teaching, and grant titles and funders without amounts). Supervision records, notes and conflict-of-interest data are
 never read. Every input is required: a missing file stops the sync rather
 than leaving part of the website stale without anyone noticing.
 """
@@ -170,6 +176,50 @@ def affiliations(ledger: Path, today: str) -> None:
     print(f"affiliations: {len(records)} current")
 
 
+def current(records: list[dict], today: str) -> list[dict]:
+    """Records without an end date, or whose end date has not passed."""
+    return [r for r in records if str(r.get("end_date") or "9999") >= today]
+
+
+def profile(ledger: Path, today: str) -> None:
+    """Guillaume's public profile: title, summary, current appointments,
+    editorial and service roles, and education."""
+    person = load(ledger / "ledger" / "profile" / "person.yaml")
+    roles = ledger / "ledger" / "roles"
+    role_fields = ("title", "organization", "start_date")
+    data = {
+        "name": person["preferred_name"],
+        "title": person["primary_title"],
+        "summary": person.get("summary"),
+        "appointments": [pick(r, role_fields) for r in current(load(roles / "appointments.yaml")["records"], today)],
+        "editorial": [pick(r, role_fields) for r in current(load(roles / "editorial_roles.yaml")["records"], today)],
+        "service": [pick(r, role_fields) for r in current(load(roles / "service_and_leadership.yaml")["records"], today)],
+        "education": [pick(r, ("degree", "organization", "end_date", "thesis_title"))
+                      for r in load(ledger / "ledger" / "profile" / "education.yaml")["records"]],
+    }
+    dump("profile", data, "ledger/profile/person.yaml, education.yaml and ledger/roles/ (current)")
+    print(f"profile: {len(data['appointments'])} appointments, {len(data['editorial'])} editorial, "
+          f"{len(data['service'])} service roles, {len(data['education'])} education")
+
+
+def activities(ledger: Path, kind: str, fields: tuple[str, ...]) -> None:
+    """All records of ledger/activities/<year>/<kind>.yaml, newest first."""
+    records = [pick(r, fields) for path in sorted((ledger / "ledger" / "activities").glob(f"*/{kind}.yaml"))
+               for r in load(path).get("records") or []]
+    records.sort(key=lambda r: str(r.get("date") or r.get("start_date") or ""), reverse=True)
+    dump(kind, {"records": records}, f"ledger/activities/*/{kind}.yaml")
+    print(f"{kind}: {len(records)} records")
+
+
+def grants(ledger: Path) -> None:
+    """Grant titles, funders, status and dates (amounts are not copied)."""
+    data = load(ledger / "ledger" / "registries" / "grants.yaml")
+    records = [pick(r, ("id", "title", "funder", "status", "start_date", "end_date"))
+               for r in data.get("records") or []]
+    dump("grants", {"records": records}, "ledger/registries/grants.yaml (no amounts)")
+    print(f"grants: {len(records)} records")
+
+
 def preprint_lag(ledger: Path) -> None:
     """Resolved preprint/journal pairs and things_done's summary (median etc.)."""
     data = load_json(ledger / REPORTS / "preprint_lag.json")
@@ -221,7 +271,12 @@ def main() -> None:
     registry(ledger, "software", SOFTWARE_FIELDS)
     registry(ledger, "datasets", DATASET_FIELDS)
     lab_members(ledger)
-    affiliations(ledger, date.today().isoformat())
+    today = date.today().isoformat()
+    affiliations(ledger, today)
+    profile(ledger, today)
+    activities(ledger, "talks", ("date", "title", "event_name", "location", "talk_kind"))
+    activities(ledger, "teaching", ("title", "organization", "start_date", "end_date", "teaching_kind"))
+    grants(ledger)
     preprint_lag(ledger)
     coauthors(ledger)
     metrics(ledger)
