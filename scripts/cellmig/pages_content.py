@@ -21,7 +21,6 @@ from .images import lite_video, media, thumb
 from .ledger import Ledger, Record, software_list
 from .page import Page
 from .previews import preview
-from .profile import talks_section, teaching_section
 from .structured import dataset_item, item_list, software_item, to_json
 from .text import esc, is_external, md, slugify, year_of
 
@@ -155,8 +154,7 @@ def page_gallery() -> None:
 
 
 def page_talks(ledger: Ledger, today: date) -> None:
-    """docs/online-lectures.md: recorded talks (data/talks.yaml), then recent
-    talks and this year's teaching from things_done."""
+    """docs/online-lectures.md: recorded talks from data/talks.yaml."""
     p = Page("online-lectures.md", title="Online talks", edit_url=edit_url("data/talks.yaml"),
              **preview("online-lectures"))
     p.add("# Online talks", '<div class="cm-talks">')
