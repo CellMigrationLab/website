@@ -79,4 +79,5 @@ def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
           section_title("From preprint to paper"), lag_section(ledger.lag_pairs, ledger.lag_summary),
           section_title("Top collaborators", id_="collaborators"), _top_collaborators(ledger.coauthors, lab),
           section_title("Where our co-authors are", id_="map"), world_map(countries),
-          section_title("Co-authors"), _cloud(ledger.coauthors, lab))    p.write()
+          section_title("Co-authors"), _cloud(ledger.coauthors, lab))
+    p.write()
