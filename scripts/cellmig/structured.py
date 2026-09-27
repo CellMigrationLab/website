@@ -45,7 +45,8 @@ def _person_links(m: Person) -> list[str]:
     return [link for link in links if link]
 
 
-def organization(site: Record, affiliations: list[Record], members: list[Person], logo: str) -> Json:
+def organization(site: Record, affiliations: list[Record], members: list[Person], logo: str,
+                 leader_bio: str) -> Json:
     """The lab: name, address, leader (with affiliations and profiles), parent
     organisations and social links."""
     leader = next(m for m in members if m["group"] == "pi" and m["status"] == "current")
@@ -65,6 +66,7 @@ def organization(site: Record, affiliations: list[Record], members: list[Person]
             "@id": f"{SITE_URL}#{leader['slug']}",
             "name": leader["name"],
             "jobTitle": leader["role"],
+            "description": leader_bio,
             "affiliation": [{"@type": "Organization", "name": a["organization"]} for a in affiliations],
             "sameAs": _person_links(leader),
         },

@@ -473,12 +473,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-profile__photo { width: 7.2rem; height: 7.2rem; border-radius: 50%; object-fit: cover; flex: none; }
 .md-typeset .cm-profile__name { margin: 0; font-size: 1rem; }
 .md-typeset .cm-profile__title { margin: .2rem 0 .4rem; color: var(--cm-muted); }
-.cm-profile__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); gap: .4rem 2rem; }
-.md-typeset .cm-profile__cols h3 { margin: .8rem 0 .3rem; font-size: .576rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--cm-muted); }
-.md-typeset .cm-profile__cols ul { margin: 0; padding: 0; list-style: none; }
-.md-typeset .cm-profile__cols li { margin: 0 0 .4rem; font-size: .72rem; line-height: 1.4; }
-.md-typeset .cm-profile__cols li span { display: block; color: var(--cm-muted); font-size: .64rem; }
-[dir] .md-typeset .cm-profile__cols li { margin-left: 0; }
+.md-typeset .cm-profile__bio { max-width: 38rem; margin: 0; line-height: 1.65; }
 .md-typeset .cm-profile__links { display: flex; gap: .1rem; margin: 0 0 0 -.3rem; }
 .md-typeset .cm-profile__links a { display: inline-flex; padding: .3rem; color: var(--cm-fg); opacity: .8; }
 .md-typeset .cm-profile__links a:hover { opacity: 1; }
