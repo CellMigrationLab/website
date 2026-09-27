@@ -214,10 +214,13 @@ def activities(ledger: Path, kind: str, fields: tuple[str, ...]) -> None:
 
 
 def grants(ledger: Path) -> None:
-    """Grant titles, funders, status and dates (amounts are not copied)."""
+    """Public grant metadata (amounts are not copied)."""
     data = load(ledger / "ledger" / "registries" / "grants.yaml")
-    records = [pick(r, ("id", "title", "funder", "status", "start_date", "end_date"))
-               for r in data.get("records") or []]
+    fields = (
+        "id", "title", "funder", "program", "funding_organizations", "grant_identifiers",
+        "role", "status", "start_date", "end_date",
+    )
+    records = [pick(r, fields) for r in data.get("records") or []]
     dump("grants", {"records": records}, "ledger/registries/grants.yaml (no amounts)")
     print(f"grants: {len(records)} records")
 
