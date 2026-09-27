@@ -19,7 +19,7 @@ def fake_ledger(pubs, lag_pairs=()):
     led = object.__new__(ledger.Ledger)
     led.pubs = pubs
     led.by_doi = {p["doi"].lower(): p for p in pubs}
-    led.software, led.datasets = [], []
+    led.software, led.datasets, led.affiliations = [], [], []
     led.dates = {p["published_doi"].lower(): p["published_date"] for p in lag_pairs}
     return led
 
@@ -99,28 +99,48 @@ class FeaturedTests(unittest.TestCase):
     def test_corresponding_author_papers_are_featured_newest_first(self):
         a = {"doi": "10.1/a", "year": 2024, "status": "published", "title": "A", "corresponding": True}
         b = {"doi": "10.1/b", "year": 2024, "status": "published", "title": "B", "corresponding": True}
-        c = {"doi": "10.1/c", "year": 2025, "status": "published", "title": "C"}
+        c = {"doi": "10.1/c", "year": 2025, "status": "published", "title": "C", "corresponding": True}
+        d = {"doi": "10.1/d", "year": 2026, "status": "published", "title": "D"}   # not corresponding
         lag = [{"published_doi": "10.1/b", "published_date": "2024-03-01"}]
-        items, unlisted = self.run_featured([a, b, c], [{"doi": "10.1/c", "show": True}], lag)
+        items = self.run_featured([a, b, c, d], [{"doi": "10.1/c", "image": "c.png"}], lag)
         # 2025 first; in 2024 the dated paper comes before the undated one
         self.assertEqual([i["title"] for i in items], ["C", "B", "A"])
+        self.assertEqual(items[0]["image"], "c.png")
         self.assertIsNone(items[2]["date"])        # no made-up dates
-        self.assertEqual(unlisted, [])
 
-    def test_hidden_paper_keeps_its_page_but_is_not_listed(self):
+    def test_hidden_paper_is_left_out(self):
         a = {"doi": "10.1/a", "year": 2024, "status": "published", "title": "A", "corresponding": True}
-        items, unlisted = self.run_featured([a], [{"doi": "10.1/a", "hide": True, "slug": "old"}])
-        self.assertEqual(items, [])
-        self.assertEqual(unlisted[0]["slug"], "old")
+        self.assertEqual(self.run_featured([a], [{"doi": "10.1/a", "hide": True}]), [])
 
     def test_bad_entries_stop_the_build(self):
-        a = {"doi": "10.1/a", "year": 2024, "status": "published", "title": "A"}
+        a = {"doi": "10.1/a", "year": 2024, "status": "published", "title": "A", "corresponding": True}
+        b = {"doi": "10.1/b", "year": 2024, "status": "published", "title": "B"}
         for entry in ({"doi": "10.1/a", "imgae": "x.png"},          # typo in a key
                       {"doi": "10.9/missing"},                      # not in the ledger
                       {"doi": "10.1/a", "also": ["10.9/missing"]},  # `also` not in the ledger
-                      {"doi": "10.1/a", "show": True, "hide": True}):
+                      {"doi": "10.1/b", "image": "b.png"},          # not corresponding-author
+                      {"doi": "10.1/a", "show": True}):             # `show` no longer exists
             with self.subTest(entry=entry), self.assertRaises(SystemExit):
-                self.run_featured([a], [entry])
+                self.run_featured([a, b], [entry])
+
+
+class AffiliationTests(unittest.TestCase):
+    def setUp(self):
+        self.led = fake_ledger([])
+        self.led.affiliations = [{"id": "aau", "organization": "Åbo Akademi", "title": "Professor"},
+                                 {"id": "fci", "organization": "Finnish Cancer Institute", "title": "Research Professor"}]
+
+    def test_merged_in_website_order(self):
+        out = ledger.affiliation_list([{"id": "fci", "name": "FCI", "logo": "f.png"},
+                                       {"id": "aau", "name": "ÅA", "logo": "a.png"}], self.led)
+        self.assertEqual([a["name"] for a in out], ["FCI", "ÅA"])
+        self.assertEqual(out[0]["title"], "Research Professor")
+
+    def test_missing_or_stale_entries_stop_the_build(self):
+        for presentation in ([{"id": "aau"}],                               # fci has no logo entry
+                             [{"id": "aau"}, {"id": "fci"}, {"id": "old"}]):  # old is not current
+            with self.subTest(presentation=presentation), self.assertRaises(SystemExit):
+                ledger.affiliation_list(presentation, self.led)
 
 
 class PeopleTests(unittest.TestCase):

@@ -10,11 +10,10 @@
 #   image:  picture or logo (a .gif plays as a short video)
 #   slug:   page address; kept from the old website - leave unchanged
 #   also:   other DOIs told by the same story (optional)
-#   show:   true to feature a paper that is not corresponding-author
-#   hide:   true to leave a corresponding-author paper out of the grid
+#   hide:   true to leave a corresponding-author paper out
 #
 # Featured research is every paper where Guillaume is (co-)corresponding author
-# in the ledger. Papers without a picture show the journal name instead: add
+# in the ledger, and only those: an entry for any other paper stops the build. Papers without a picture show the journal name instead: add
 # them below with an image to make the grid look nice.
 
 
@@ -48,15 +47,9 @@
 - doi: 10.1242/jcs.263801
   image: wp-content/uploads/2025/05/jcs26380101.png
   slug: practical-considerations-for-data-exploration-in-quantitative-cell-biology
-- doi: 10.1101/2024.09.16.613204
-  image: wp-content/uploads/2024/10/logo_small-1122300031-e1728059917704.png
-  slug: structural-repetition-detector-multi-scale-quantitative-mapping-of-molecular-complexes-through-microscopy
 - doi: 10.1371/journal.pbio.3002740
   image: wp-content/uploads/2024/01/celltrackscolab_logo.png
   slug: celltrackscolab-a-platform-for-compiling-analyzing-and-exploring-tracking-data
-- doi: 10.1038/s41467-025-66209-6
-  image: wp-content/uploads/2024/08/photofitt-logo.png
-  slug: photofitt-a-quantitative-framework-for-assessing-phototoxicity-in-live-cell-microscopy-experiments
 - doi: 10.1083/jcb.202310030
   image: wp-content/uploads/2023/10/max_220913-sitlnrd1-2.sld-si2-position-5-fav.jpg
   slug: tlnrd1-is-a-ccm-complex-component-and-regulates-endothelial-barrier-integrity
@@ -75,9 +68,6 @@
 - doi: 10.1038/s41592-022-01507-1
   image: wp-content/uploads/2021/09/trackmate-capture-of-becsctrl100xpaxillingfp-position3_xy1520360652_z0_t000_c0_tracks.gif
   slug: bringing-trackmate-into-the-era-of-machine-learning-and-deep-learning
-- doi: 10.1083/jcb.202005214
-  image: wp-content/uploads/2020/09/image-50-airyscan-processing-32.czi-c0.png
-  slug: talin-rod-domain-containing-protein-1-tlnrd1-is-a-novel-actin-bundling-protein-which-promotes-filopodia-formation
 - doi: 10.1016/j.celrep.2021.109716
   image: wp-content/uploads/2021/04/sem_filopodia.png
   slug: myosin-x-and-talin-modulate-integrin-activity-at-filopodia-tips
@@ -90,9 +80,6 @@
 - doi: 10.1042/EBC20190012
   image: wp-content/uploads/2019/08/result-of-result-of-110619_si60x_514_tiff_fn_pax_attopha_002_sir_alx-1.jpg
   slug: iac-review
-- doi: 10.1016/j.ceb.2015.06.007
-  image: wp-content/uploads/2020/03/merged-1.gif
-  slug: filopodia-cocb
 - doi: 10.1021/acs.nanolett.9b04083
   image: wp-content/uploads/2019/09/screenshot-from-2023-02-25-11-37-35.png
   slug: fluctuation-based-super-resolution-tractionforce-microscopy
@@ -102,9 +89,6 @@
 - doi: 10.1038/ncomms13297
   image: wp-content/uploads/2019/08/12g10-myo10-actin-rgb-2.jpg
   slug: calcium-channel
-- doi: 10.1038/nprot.2017.107
-  image: wp-content/uploads/2019/08/guillaume-drug-cdm-01-0006_aa02_03_p000001t00000023z001c01.jpg
-  slug: cdm
 - doi: 10.1083/jcb.201704045
   image: wp-content/uploads/2019/08/cover4.jpg
   slug: filoquant

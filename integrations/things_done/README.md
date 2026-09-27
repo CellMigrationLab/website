@@ -11,6 +11,7 @@ things_done (private)                                   CellMigrationLab/website
 ledger/publications/*.yaml ──────────────┐
 ledger/registries/{software,datasets}  ──┤
 ledger/profile/lab_members.yaml        ──┤
+ledger/profile/affiliations.yaml       ──┤
 report/generated/publications/           │  update_website.yml runs
   preprint_publication_crosswalk.json  ──┼─ scripts/sync_things_done.py ─▶ data/things_done/*.yaml ─▶ site
   preprint_lag.json                    ──┤  (copy only, public fields)
@@ -59,6 +60,7 @@ generated reports, after the ledger's own automation, and once a day.
 | Lab in numbers: top collaborators, co-author cloud | `coauthor_network.json` |
 | Lab in numbers: co-author map | `coauthor_countries.json` (Export Co-author Countries action) |
 | Lab members, alumni and their roles, member counts | `ledger/profile/lab_members.yaml` (photos and links stay in this repo) |
+| Affiliations (home page, footer) | current records of `ledger/profile/affiliations.yaml` (logos and links in `data/site.yaml` here, by `id`) |
 
 ## Worth adding to the ledger
 
