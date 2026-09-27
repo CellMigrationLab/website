@@ -1,15 +1,28 @@
 # Site-wide content: home page, footer, contact details.
 
 name: Cell Migration Lab
-motto: We study cell migration in health and diseases.
+motto: We study cell migration in health and disease.
 tagline: Cell biology, microscopy, and image analysis.
-welcome: Welcome to our lab website.
 hero:
   image: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb.png
 intro: >-
-  Our research aims to elucidate the mechanisms by which cells move and interact with their
-  environment. We use multiple microscopy approaches and continuously develop tools for image
-  analysis.
+  We study how cells move, interact with their surroundings, and cross tissue barriers. We combine
+  cell biology with microscopy and quantitative image analysis, and we develop tools that make
+  complex imaging experiments easier to analyse and share.
+
+group_leader_bio: |-
+  Guillaume Jacquemet is Professor in Bioimaging at [Åbo Akademi University](https://www.abo.fi/en/)
+  and leads the Cell Migration Lab at [Turku Bioscience Centre](https://bioscience.fi/). His research
+  focuses on cell migration, cancer-cell interactions with the vasculature, filopodia and quantitative
+  microscopy. He trained with Martin Humphries at the University of Manchester and Johanna Ivaska at
+  the University of Turku.
+
+  He holds a [K. Albin Johansson Research Professorship](https://www.syopainstituutti.com/researcher-positions/granted-positions)
+  of the Finnish Cancer Institute and is an Associate Editor at
+  [Journal of Cell Science](https://journals.biologists.com/jcs) for bioimaging and image-analysis
+  papers. He is also one of the heads of [AIC-Turku](https://bioscience.fi/aic/) and heads the
+  [Doctoral Programme in Biosciences and Drug Research](https://www.abo.fi/en/research-at-aau/postgraduate-and-doctoral-studies/doctoral-programmes-at-abo-akademi-university/doctoral-programme-in-bio-drug-research/)
+  at Åbo Akademi University.
 
 # Full-width microscopy images between the sections of the home page (two are used).
 bands:
