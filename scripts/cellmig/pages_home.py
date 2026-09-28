@@ -1,5 +1,6 @@
 """The home page (docs/index.md, rendered with overrides/home.html)."""
 
+from . import rights
 from .components import citation, feature_card, logo_row, section_title, support_row
 from .config import HOME_FEATURED, UNCAPTIONED_ALT
 from .featured import Story, story_by_doi
@@ -14,7 +15,8 @@ LATEST_PAPERS = 5
 
 def band(b: Record) -> str:
     """Full-width picture between sections."""
-    cap = f'<figcaption>{esc(b["caption"])}</figcaption>' if b.get("caption") else ""
+    text = " ".join(x for x in (b.get("caption"), rights.credit(b["image"])) if x)
+    cap = f'<figcaption>{esc(text)}</figcaption>' if text else ""
     return f'<figure class="cm-band">{media(b["image"], b.get("caption") or UNCAPTIONED_ALT, 2400, sizes="100vw")}{cap}</figure>'
 
 

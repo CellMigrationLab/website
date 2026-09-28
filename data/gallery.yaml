@@ -40,13 +40,10 @@ images:
   caption: Curly collagen (green and magenta) found in the proximity of a breast tumour.
 - image: wp-content/uploads/2019/08/cancer-cell-vasculature.jpg
   caption: Cancer cells (red) migrating inside a blood vessel in a living zebrafish embryo (green).
-    Credit Ilkka Paatero and Guillaume Jacquemet.
 - image: wp-content/uploads/2019/08/20x-fn-slide-1-p1-rgb.jpg
-  caption: 'Breast tumour stained for DAPI (blue), actin (red) and fibronectin (green). Credit: Emilia
-    Peuhu and Guillaume Jacquemet.'
+  caption: 'Breast tumour stained for DAPI (blue), actin (red) and fibronectin (green).'
 - image: wp-content/uploads/2019/08/20x-fn-slide-1-p1-rgb2.jpg
-  caption: 'Breast tumour stained for DAPI (blue), actin (red) and fibronectin (green). Credit: Emilia
-    Peuhu and Guillaume Jacquemet.'
+  caption: 'Breast tumour stained for DAPI (blue), actin (red) and fibronectin (green).'
 - image: wp-content/uploads/2019/08/cover3.jpg
   caption: Breast cancer cells invading through collagen. The actin cytoskeleton (white) and the nuclei
     (blue) are labelled.
@@ -81,7 +78,7 @@ images:
     Colour indicates the z-position.
 - image: wp-content/uploads/2019/08/dovfjnkxkaaw5sz.jpg
   caption: Human embryonic stem cell labelled for paxillin (green) and actin (blue), imaged using
-    structured illumination microscopy. Credit Aki Stubb and Guillaume Jacquemet.
+    structured illumination microscopy.
 - image: wp-content/uploads/2019/08/dnsecwawsaeb1il.jpg
   caption: Breast cancer cells plated on fibronectin, labelled to visualise the actin cytoskeleton and
     imaged using structured illumination microscopy.

@@ -19,5 +19,6 @@ scripts/build_pages.py is the entry point; the modules here are:
   llms        /llms.txt and /llms-full.txt
   profile     group leader profile and recent talks
   outputs     research outputs (RSS): papers, preprints, software, datasets
+  rights      image copyright and credits (data/media.yaml), checked for every image shown
   site_files  footer and JSON-LD partials, RSS feed
 """
