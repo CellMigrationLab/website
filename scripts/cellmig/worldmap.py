@@ -10,7 +10,7 @@ import math
 from .config import DATA, fail
 from .text import esc, plural
 
-W, H = 960, 440
+W = 960   # projection width (px); the height follows the drawn countries (Bounds)
 # Colour steps (inclusive ranges of co-authors) and a light -> dark purple ramp.
 STEPS = [(1, 1), (2, 4), (5, 9), (10, 24), (25, 99), (100, math.inf)]
 RAMP = ["#e9ddf7", "#d2b8ef", "#b48ae3", "#9560d3", "#733cb3", "#4f2182"]
@@ -46,9 +46,30 @@ def decode_arcs(topo: dict) -> list[list[tuple[float, float]]]:
     return arcs
 
 
-def ring_path(indexes: list[int], arcs: list[list[tuple[float, float]]]) -> str:
+PAD = 6   # px of margin around the drawn countries
+
+
+class Bounds:
+    """Smallest box around every projected point drawn (#18: the SVG viewBox
+    hugs the countries instead of the full, partly empty 960x440 canvas)."""
+
+    def __init__(self) -> None:
+        self.x0 = self.y0 = math.inf
+        self.x1 = self.y1 = -math.inf
+
+    def add(self, x: float, y: float) -> None:
+        self.x0, self.x1 = min(self.x0, x), max(self.x1, x)
+        self.y0, self.y1 = min(self.y0, y), max(self.y1, y)
+
+    def view_box(self, pad: float = PAD) -> str:
+        return (f"{self.x0 - pad:.0f} {self.y0 - pad:.0f} "
+                f"{self.x1 - self.x0 + 2 * pad:.0f} {self.y1 - self.y0 + 2 * pad:.0f}")
+
+
+def ring_path(indexes: list[int], arcs: list[list[tuple[float, float]]], bounds: Bounds | None = None) -> str:
     """SVG path data for one polygon ring. A jump across the map means the ring
-    crosses the antimeridian, so a new subpath starts there."""
+    crosses the antimeridian, so a new subpath starts there. Every point is
+    added to `bounds`."""
     pts: list[tuple[float, float]] = []
     for i in indexes:
         arc = arcs[i] if i >= 0 else arcs[~i][::-1]
@@ -58,6 +79,8 @@ def ring_path(indexes: list[int], arcs: list[list[tuple[float, float]]]) -> str:
     for lon, lat in pts:
         x, y = equal_earth(lon, lat)
         px, py = cx + k * x, cy - k * y
+        if bounds is not None:
+            bounds.add(px, py)
         out.append(f"{'M' if prev is None or abs(px - prev) > W / 3 else 'L'}{px:.1f},{py:.1f}")
         prev = px
     return "".join(out) + "Z"
@@ -74,12 +97,12 @@ def world_map(counts: dict[str, int]) -> str:
     iso = json.loads((DATA / "world" / "iso-alpha2-to-numeric.json").read_text(encoding="utf-8"))
     alpha2 = {num: a2 for a2, num in iso.items()}
     arcs = decode_arcs(topo)
-    paths, drawn = [], set()
+    paths, drawn, bounds = [], set(), Bounds()
     for g in topo["objects"]["countries"]["geometries"]:
         if g.get("id") == ANTARCTICA or g["type"] not in ("Polygon", "MultiPolygon"):
             continue
         polys = g["arcs"] if g["type"] == "MultiPolygon" else [g["arcs"]]
-        d = "".join(ring_path(r, arcs) for poly in polys for r in poly)
+        d = "".join(ring_path(r, arcs, bounds) for poly in polys for r in poly)
         n = counts.get(alpha2.get(g.get("id"), ""), 0)
         if n:
             drawn.add(alpha2[g["id"]])
@@ -97,7 +120,7 @@ def world_map(counts: dict[str, int]) -> str:
     legend = "".join(
         f'<li><span style="background:{c}"></span>{lo if lo == hi else (f"{lo}+" if hi == math.inf else f"{lo}–{hi}")}</li>'
         for (lo, hi), c in zip(STEPS, RAMP, strict=True) if lo <= top)
-    return (f'<div class="cm-map"><svg class="cm-map__svg" viewBox="0 0 {W} {H}" role="img" '
+    return (f'<div class="cm-map"><svg class="cm-map__svg" viewBox="{bounds.view_box()}" role="img" '
             f'aria-label="World map of co-authors by country">{"".join(paths)}</svg>'
             f'<div class="cm-chart-tip" hidden></div></div>'
             f'<ul class="cm-map__legend" aria-label="Co-authors per country">{legend}</ul>{note}')
