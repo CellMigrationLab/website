@@ -30,7 +30,7 @@ records:
     This systematic assessment of SISR approaches will provide a more comprehensive understanding of these
     methods' performance and contribute to standardising SISR methods in microscopy.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.20944/preprints202607.1414.v1
   year: 2026
   status: preprint
@@ -59,7 +59,7 @@ records:
     datasets, benchmarks, and interpretability work this gap demands, and on underexplored fates such
     as migration and senescence.'
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.1242/jcs.265278
   year: 2026
   status: in_press
@@ -89,7 +89,7 @@ records:
     cells. These findings establish CCT8 as a TRiC-independent regulator of MYO10 filopodia across diverse
     cancer cell types.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.64898/2025.12.03.691809
   corresponding: true
@@ -134,7 +134,7 @@ records:
     layer that auto-generates validated user interfaces for Jupyter, Colab, and terminal environments
     while persisting configurations via YAML.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
 - doi: 10.1038/s44318-025-00678-9
   year: 2026
@@ -212,7 +212,7 @@ records:
     and can traffic to lysosomes. These findings define a protrusion-driven, curvature-dependent uptake
     pathway at cell–cell interfaces and identify filopodia as exchange organelles in epithelial collectives.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
 - doi: 10.64898/2026.06.29.735028
   year: 2026
@@ -231,7 +231,7 @@ records:
   abstract: NucleiSky is a microscopy image registration framework that uses the spatial arrangement of
     nuclei or other landmarks as constellations to support cross-scale, multimodal registration.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1242/jcs.265152
   corresponding: true
@@ -252,7 +252,7 @@ records:
   abstract: NucleiSky is a microscopy image registration framework that uses the spatial arrangement of
     nuclei or other landmarks as constellations to support cross-scale, multimodal registration.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.64898/2026.06.29.735028
   corresponding: true
@@ -272,7 +272,7 @@ records:
     packaging workflow that turns Jupyter notebooks into installable desktop applications with version
     checks and an app-like interface, improving reproducibility and software reuse.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
 - doi: 10.64898/2026.09.02.749041
   year: 2026
@@ -314,7 +314,7 @@ records:
     via mechanistically distinct routes, suggesting that effective anti-metastatic strategies may need
     to target multiple modes of endothelial barrier breach rather than a single pathway.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
 - doi: 10.1083/jcb.202508155
   year: 2026
@@ -353,7 +353,7 @@ records:
     pathway. Thus, spatial plasma membrane-targeting of new integrins rapidly alters adhesion receptor
     availability, providing cells with added plasticity to respond to their environment.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.1101/2022.07.12.498931
 - doi: 10.1088/2515-7647/ae0fd1
@@ -449,6 +449,7 @@ records:
     limitations of ML for microscopy. It will be of interest to a wide cross-disciplinary audience in
     the physical sciences and life sciences.
   peer_reviewed: true
+  open_access_status: gold
 - doi: 10.1242/jcs.265183
   year: 2026
   status: published
@@ -475,7 +476,7 @@ records:
     analysis, filopodia proteomics, and zebrafish live imaging, showing it supports reproducible reporting
     of genuine biological findings.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.48550/arXiv.2508.00836
   corresponding: true
@@ -518,7 +519,7 @@ records:
     in the developing retina. Overall, we demonstrate that SHANK3 plays a role in endothelial cell motility
     and tissue mechanics, with implications for vascular processes during development.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.1101/2025.11.24.689779
   year: 2025
   status: preprint
@@ -537,7 +538,7 @@ records:
     setups using the open-source design files. This method enables consistent, long-term live imaging
     of multiple embryos and broadens the use of low-cost additive manufacturing in zebrafish imaging workflows.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
   related_dois:
   - 10.1242/bio.062406
@@ -563,7 +564,7 @@ records:
     and hardware. This data-driven optimization achieves considerably faster processing, becoming broadly
     relevant to reactive microscopy and computing fields requiring efficiency.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.1101/2023.08.13.553080
   - 10.21203/rs.3.rs-3328438/v1
@@ -598,7 +599,7 @@ records:
     the surprising cell-type-specificity of filopodia composition, and provide a strategy and resource
     for studying filopodia in various biological contexts.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1242/jcs.265278
   corresponding: true
@@ -632,7 +633,7 @@ records:
   abstract: This preprint reports that LSD1 serine 166 phosphorylation acts as a molecular switch linking
     chromatin regulation to transcriptional activation and tissue remodeling programs.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.1016/j.isci.2025.111745
   year: 2025
   status: published
@@ -711,7 +712,7 @@ records:
     more reliable conclusions and foster a collaborative, transparent approach to data analysis in cell
     biology.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   corresponding: true
 - doi: 10.1242/jcs.263711
   year: 2025
@@ -733,7 +734,7 @@ records:
     gap between software developers and biologists, fostering wider adoption of the software and enabling
     further scientific discovery.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
 - doi: 10.48550/arXiv.2508.00836
   year: 2025
   status: preprint
@@ -750,7 +751,7 @@ records:
     It supports executable embedded code so figures and statistical values can be regenerated from source
     data during compilation, helping keep manuscripts synchronized with evolving data and code.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1242/jcs.265183
 - doi: 10.1038/s41467-025-60709-1
@@ -877,7 +878,7 @@ records:
     as segmentation, object detection, denoising, super-resolution microscopy and image-to-image translation.
     Here, we introduce DL4MicEverywhere, an advancement of the ZeroCostDL4Mic framework.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.1101/2023.11.19.567606
   corresponding: true
@@ -918,7 +919,7 @@ records:
     cancer and immune cells share both common and unique features in endothelial adhesion under flow,
     and identify CD44 and HA as key mediators of PDAC cell arrest.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
   related_dois:
   - 10.1038/s44318-025-00678-9
@@ -946,7 +947,7 @@ records:
     merely pushing technical limits. Our approach is aimed towards gentle acquisition and observation
     of undisturbed living systems, aligning with the essence of live-cell fluorescence microscopy.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
 - doi: 10.1242/jcs.263575
   year: 2024
   status: published
@@ -983,7 +984,7 @@ records:
     for acceptable levels of photodamage, facilitating the optimisation of imaging protocols that balance
     image quality with sample health.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1038/s41467-025-66209-6
   - 10.21203/rs.3.rs-4809905/v1
@@ -1012,7 +1013,7 @@ records:
     for acceptable levels of photodamage, facilitating the optimisation of imaging protocols that balance
     image quality with sample health.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1038/s41467-025-66209-6
   - 10.1101/2024.07.16.603046
@@ -1084,7 +1085,7 @@ records:
     and evaluating microtubule dynamics modulated by EB3. Our open-source ImageJ and Fiji plugin enables
     unbiased analysis of repetitive structures across imaging modalities in diverse biological contexts.'
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.21203/rs.3.rs-5182329/v1
   - 10.1038/s41467-025-60709-1
@@ -1113,7 +1114,7 @@ records:
     and evaluating microtubule dynamics modulated by EB3. Our open-source ImageJ and Fiji plugin enables
     unbiased analysis of repetitive structures across imaging modalities in diverse biological contexts.'
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1101/2024.09.16.613204
 - doi: 10.1083/jcb.202310030
@@ -1146,7 +1147,7 @@ records:
     Based on these results, we propose a new pathway by which the CCM complex modulates the actin cytoskeleton
     and vascular integrity.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   corresponding: true
   related_dois:
   - 10.1101/2023.09.29.559344
@@ -1176,7 +1177,7 @@ records:
     use cases, including T-cells and cancer cell migration, as well as filopodia dynamics. CellTracksColab
     is available for the broader scientific community at https://github.com/CellMigrationLab/CellTracksColab.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
   related_dois:
   - 10.1371/journal.pbio.3002740
@@ -1206,7 +1207,7 @@ records:
     via automated build pipelines. DL4MicEverywhere empowers participatory innovation and aims to democratise
     deep learning for bioimage analysis.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1038/s41592-024-02295-6
   corresponding: true
@@ -1236,7 +1237,7 @@ records:
     Altogether, Fast4DReg provides a quick and easy-to-use method to correct 3D imaging data before further
     visualization and analysis.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   corresponding: true
   related_dois:
   - 10.1101/2022.08.22.504744
@@ -1277,7 +1278,7 @@ records:
     across varied experimental conditions while minimizing artifacts. Its optimal parameter prediction
     strategy is generalizable, moving toward unbiased and optimized analyses in super-resolution microscopy.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.1101/2022.04.07.487490
 - doi: 10.1016/j.ceb.2023.102271
@@ -1299,7 +1300,7 @@ records:
     and carrying out key tasks such as drift correction, denoising, super-resolution imaging, artificial
     labeling, tracking, and time series analysis. We also cover recent advances in self-driving microscopy.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   corresponding: true
 - doi: 10.1007/978-1-0716-2887-4_4
   year: 2023
@@ -1319,7 +1320,7 @@ records:
     proteins within filopodia. Notably, while FiloMap was written to analyze filopodia, the analysis pipeline
     described here can also analyze and compile any line intensity profiles.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: closed
   corresponding: true
 - doi: 10.1242/jcs.260574
   year: 2023
@@ -1348,7 +1349,7 @@ records:
     filopodia tips. Taken together, our data indicate a feed-forward mechanism whereby MYO10 filopodia
     are positively regulated by MYO10-mediated transport of RAPH1 to the filopodium tip.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.1101/2022.08.17.504298
   corresponding: true
@@ -1381,7 +1382,7 @@ records:
     by the Liquid Engine have broader implications, extending their applicability to various high-performance
     computing fields.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.21203/rs.3.rs-3328438/v1
   - 10.1038/s41592-024-02562-6
@@ -1407,7 +1408,7 @@ records:
     optimisation achieves over 10x faster processing, becoming broadly relevant to reactive microscopy
     and computing fields requiring efficiency.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1101/2023.08.13.553080
   - 10.1038/s41592-024-02562-6
@@ -1440,7 +1441,7 @@ records:
     study early B cell activation by surface-bound antigens as well as unveil several novel proteins and
     pathways suggestive of new functional aspects in the IS.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.1101/2023.09.29.559344
   year: 2023
   status: preprint
@@ -1472,7 +1473,7 @@ records:
     CCM complex modulates the actin cytoskeleton and vascular integrity by controlling TLNRD1 bundling
     activity.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
   related_dois:
   - 10.1083/jcb.202310030
@@ -1502,7 +1503,7 @@ records:
     localizing at the plasma membrane and cytoplasm, TLN1 also resides in the nucleus where it functions
     in the regulation of gene expression.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1016/j.isci.2025.111745
 - doi: 10.1101/2022.06.07.495102
@@ -1538,7 +1539,7 @@ records:
     far from sufficient. Several tools have recently risen to the challenge of democratizing deep learning
     by providing user-friendly interfaces to analyze new data with pre-trained or fine-tuned models.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.1038/s42003-022-03634-z
   year: 2022
   status: published
@@ -1600,7 +1601,7 @@ records:
     a quick and easy-to-use method to correct 3D imaging data before further visualization and analysis.
     Fast4DReg is available on GitHub.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1242/jcs.260728
 - doi: 10.1101/2022.04.07.487490
@@ -1636,7 +1637,7 @@ records:
     microscopy by combining it with multi-focus microscopy (MFM), obtaining volumetric super-resolution
     imaging of live cells with acquisition speed of ~1 volume/second.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1038/s41592-023-02057-w
 - doi: 10.1016/j.devcel.2022.09.016
@@ -1675,7 +1676,7 @@ records:
     in early-stage breast cancer, correlating with tumor-limiting BMs, and pro-invasive at later stages,
     facilitating cancer-cell dissemination.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   corresponding: true
   related_dois:
   - 10.1101/2021.10.22.464987
@@ -1705,7 +1706,7 @@ records:
     integrin activity in filopodia tips. Taken together, our data indicate a feed-forward mechanism whereby
     MYO10 filopodia are positively regulated by MYO10-mediated transport of RAPH1 to the filopodium tip.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1242/jcs.260574
 - doi: 10.1101/2022.07.12.498931
@@ -1749,7 +1750,7 @@ records:
     by rapidly altering adhesion receptor availability, providing cells with an additional degree of plasticity
     to respond to their environment.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1083/jcb.202508155
 - doi: 10.1101/2022.09.21.508660
@@ -1793,7 +1794,7 @@ records:
     optimal level (i.e. below toxic oncogenic signalling) in KRAS -mutant cancers. SHANK3 silencing (1)
     and inhibition of SHANK3-KRAS interaction (2) drive KRAS -mutant cells into cell death.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1038/s41467-024-52326-1
 - doi: 10.1038/s41592-022-01507-1
@@ -1821,7 +1822,7 @@ records:
     algorithms into tracking pipelines. We illustrate qualitatively and quantitatively that these new
     capabilities function effectively across a wide range of bio-imaging experiments.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   corresponding: true
   related_dois:
   - 10.1101/2021.09.03.458852
@@ -1857,7 +1858,7 @@ records:
     control the maturation, stability, dynamics, arrangement, and overall orientation of FAs, with a net
     effect on FA coordination during migration.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.1038/s41592-021-01284-3
   year: 2021
   status: published
@@ -1880,7 +1881,7 @@ records:
     users and journal editors to define adequate guidelines and ensure the appropriate use of this transformative
     technology.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: bronze
   corresponding: true
 - doi: 10.1101/2021.09.03.458852
   year: 2021
@@ -1907,7 +1908,7 @@ records:
     how these new components can be used to efficiently track objects from brightfield and fluorescence
     microscopy images across a wide range of bio-imaging experiments.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
   related_dois:
   - 10.1038/s41592-022-01507-1
@@ -1952,7 +1953,7 @@ records:
     selectivity for the CG pathway and a role for specific adaptors in recruitment into this endocytic
     route.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1101/2020.10.05.323295
 - doi: 10.1042/bio_2021_167
@@ -1972,7 +1973,7 @@ records:
     briefly underlies the principles behind using AI algorithms to analyse microscopy images with a specific
     focus on segmentation and denoising.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: diamond
   corresponding: true
 - doi: 10.1101/2021.11.03.467152
   year: 2021
@@ -2009,7 +2010,7 @@ records:
     their data through DL. We hope this lays a fertile ground for the efficient application of DL in microbiology
     and fosters the creation of novel tools for bacterial cell biology and antibiotic research.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1038/s42003-022-03634-z
 - doi: 10.1038/s41467-021-22518-0
@@ -2089,7 +2090,7 @@ records:
     physiological barriers for CRISPR/Cas9 delivery, showing considerable promise for paxillin‐associated
     focal adhesion and signaling regulator investigation.'
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
 - doi: 10.1101/2021.10.22.464987
   year: 2021
   status: preprint
@@ -2134,7 +2135,7 @@ records:
     impairs BM assembly and induces an EMT-like phenotype at the tumor-stroma interface in vivo. - MYO10
     filopodia are anti-invasive in DCIS but facilitate dissemination in invasive breast cancer.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1016/j.devcel.2022.09.016
 - doi: 10.1016/j.biocel.2021.106077
@@ -2159,7 +2160,7 @@ records:
     insights into how DL-based denoising methods operate and help users choose the most appropriate tools
     for their applications.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
 - doi: 10.1039/d1nr02872c
   year: 2021
   status: published
@@ -2178,7 +2179,7 @@ records:
     structure–function relationship for efficient intracellular delivery and gene editing, opening up
     new avenues for the MOF-based non-viral vectors.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
 - doi: 10.1016/j.celrep.2021.109716
   year: 2021
   status: published
@@ -2249,7 +2250,7 @@ records:
     for cell morphology and integrin activity in cancer cells. In addition, SHANK3-actin interaction regulates
     dendritic spine morphology in neurons and autism-linked phenotypes in vivo.'
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: bronze
   related_dois:
   - 10.1101/2020.11.12.379222
 - doi: 10.1016/j.jbc.2021.100837
@@ -2330,7 +2331,7 @@ records:
     proliferation and cell adhesion machineries, and thereby enables microenvironmental control of cell
     division.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1016/j.jbc.2021.100837
 - doi: 10.1083/jcb.202005214
@@ -2361,7 +2362,7 @@ records:
     Together, our results suggest that TLNRD1 has retained the diverse interactions of talin R7R8, but
     has developed distinct functionality as an actin-bundling protein that promotes filopodia assembly.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.1101/2020.05.19.103606
 - doi: 10.1101/2020.09.22.306233
@@ -2395,7 +2396,7 @@ records:
     and T cells using fluorescent and brightfield images. Importantly, we provide, as supplementary information,
     a detailed step-by-step protocol to allow researchers to implement it with their images.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.12688/f1000research.27019.1
   - 10.12688/f1000research.27019.2
@@ -2477,7 +2478,7 @@ records:
     for breast cancer. Our results demonstrate a previously unknown cargo selectivity for the CG-pathway
     and opens the possibility to discover more adaptors regulating it.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1038/s41556-021-00767-x
 - doi: 10.1101/2020.11.12.379222
@@ -2515,7 +2516,7 @@ records:
     activity. This dynamic crosstalk has functional implications for filopodia formation in cancer cells,
     dendritic spine morphology in neurons and autism-linked phenotypes in vivo.'
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1016/j.cub.2021.09.022
 - doi: 10.1021/acs.nanolett.9b04083
@@ -2544,7 +2545,7 @@ records:
     cells. Finally, using fluctuation-based traction force microscopy, we observe that filopodia align
     to the force field generated by focal adhesions.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.1101/772947
   corresponding: true
@@ -2574,7 +2575,7 @@ records:
     integrin activation model in filopodia: receptor tethering by MYO10 followed by talin-mediated integrin
     activation.'
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1016/j.celrep.2021.109716
 - doi: 10.1101/2020.05.19.103606
@@ -2604,7 +2605,7 @@ records:
     in 2D. Together our results suggest that TLNRD1 has similar functionality to talin R7R8, serving as
     a nexus between the actin and microtubule cytoskeletons independent of adhesion complexes.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1083/jcb.202005214
 - doi: 10.1242/jcs.240713
@@ -2632,7 +2633,7 @@ records:
     by briefly summarizing the principles behind each technique, highlighting both critical strengths
     and weaknesses, as well as providing example images.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: bronze
   corresponding: true
 - doi: 10.1101/2020.03.20.000133
   year: 2020
@@ -2669,7 +2670,7 @@ records:
     denoising, restoration, resolution enhancement and image-to-image translation. We demonstrate the
     application of the platform to study multiple biological processes.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
   related_dois:
   - 10.1038/s41467-021-22518-0
@@ -2714,7 +2715,7 @@ records:
     from single images using FiloQuant, and (iii) how to track filopodial protrusions from live-cell imaging
     experiments using FiloQuant and TrackMate.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: green
   corresponding: true
 - doi: 10.1016/j.cub.2018.11.053
   year: 2019
@@ -2747,7 +2748,7 @@ records:
     that our map based on myosin-X-induced filopodia can be translated to endogenous filopodia and fascin-
     and IRSp53-mediated filopodia.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   related_dois:
   - 10.1101/377879
   corresponding: true
@@ -2777,7 +2778,7 @@ records:
     with minimal hardware and software investment, and has the potential to standardize high-resolution
     TFM.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1021/acs.nanolett.9b04083
 - doi: 10.1038/s41467-019-12611-w
@@ -2844,7 +2845,7 @@ records:
     treatments to improve endothelial cell function under disease conditions associated with a loss of
     cellular ATP during oxygen deprivation.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: bronze
 - doi: 10.1101/377879
   year: 2018
   status: preprint
@@ -2872,7 +2873,7 @@ records:
     that p130Cas (BCAR1) is recruited to filopodia tips via its CCHD domain and acts as a mechanosensitive
     regulator of filopodia stability.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1016/j.cub.2018.11.053
 - doi: 10.1016/j.devcel.2018.03.015
@@ -2888,7 +2889,7 @@ records:
     Cell, Dix et al. (2018) describe integrin-positive adhesions, devoid of classical focal adhesion components,
     that persist throughout mitosis to contribute to re-spreading.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: bronze
 - doi: 10.1242/prelights.5302
   year: 2018
   status: published
@@ -2930,7 +2931,7 @@ records:
     FA patterning, and actin organisation within the colony, indicating a key role for kanks in hPSC colony
     architecture.'
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1038/s41467-019-12611-w
 - doi: 10.1073/pnas.1722317115
@@ -2959,7 +2960,7 @@ records:
     targeting β1-integrin signaling could be a novel means of achieving vascular stabilization in pathological
     vascular leak.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
 - doi: 10.1083/jcb.201609066
   year: 2017
   status: published
@@ -2992,7 +2993,7 @@ records:
     we show that the loss of AMPK up-regulates tensins, which bind β1-integrins, supporting their activity
     and promoting fibrillar adhesion formation and integrin-dependent processes.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
 - doi: 10.1038/nprot.2017.107
   year: 2017
   status: published
@@ -3016,7 +3017,7 @@ records:
     monitored. We also demonstrate how to use CDMs as an in vivo-relevant reductionist model for studying
     tumor-stroma-induced changes in carcinoma cell proliferation and migration.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.1083/jcb.201704045
   year: 2017
   status: published
@@ -3042,7 +3043,7 @@ records:
     of the carcinoma. Finally, using intravital microscopy, we observe that tumor spheroids display filopodia
     in vivo, supporting a potential role for these protrusions during tumorigenesis.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
   corresponding: true
   related_dois:
   - 10.1101/125047
@@ -3075,7 +3076,7 @@ records:
     breast cancer models in vivo. Finally, using intravital microscopy, we observed that tumour spheroids
     display prominent filopodia in vivo, supporting a potential role for these protrusions during tumorigenesis.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.1083/jcb.201704045
 - doi: 10.1038/ncb3487
@@ -3111,7 +3112,7 @@ records:
     along the Rap1-RIAM-talin axis in cancer cells and neurons. Altogether, we establish SHANKs as critical
     regulators of G-protein signalling and integrin-dependent processes.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.15252/embj.201694387
   year: 2017
   status: published
@@ -3155,7 +3156,7 @@ records:
     morphogenesis in an epithelial cell extrinsic manner by controlling the organisation of the stromal
     ECM.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: bronze
 - doi: 10.1242/jcs.200329
   year: 2017
   status: published
@@ -3188,7 +3189,7 @@ records:
     formation in a LUBAC-independent fashion. This article has an associated First Person interview with
     the first author of the paper.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: bronze
 - doi: 10.1038/ncomms13297
   year: 2016
   status: published
@@ -3309,7 +3310,7 @@ records:
     with focal adhesions. We propose that the talin-KANK1 interaction links the two macromolecular assemblies
     that control cortical attachment of actin fibers and microtubules.
   peer_reviewed: false
-  open_access_status: gold
+  open_access_status: green
   related_dois:
   - 10.7554/elife.18124
 - doi: 10.1038/ncomms7135
@@ -3393,7 +3394,7 @@ records:
     matrix receptors, in particular in the context of cell migration and invasion. Here, we review our
     current understanding of the contribution of integrin trafficking to cell motility.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: bronze
 - doi: 10.1038/ncomms6962
   year: 2015
   status: published
@@ -3443,7 +3444,7 @@ records:
     we outline outstanding questions that remain to be addressed to elucidate the role of filopodia during
     3D cell migration.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
 - doi: 10.1038/ncb3250
   year: 2015
   status: published
@@ -3470,7 +3471,7 @@ records:
     in enhancing distinct integrin downstream signalling events. Finally, endosomal integrin signalling
     contributes to cancer-related processes such as anoikis resistance, anchorage independence and metastasis.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: green
 - doi: 10.1083/jcb.201502040
   year: 2015
   status: published
@@ -3502,7 +3503,7 @@ records:
     by RhoA/ROCK, establishing a novel mechanism through which the RCP–α5β1 pathway reprograms the actin
     cytoskeleton to promote invasive migration and local invasion in vivo.
   peer_reviewed: true
-  open_access_status: bronze
+  open_access_status: hybrid
 - doi: 10.4161/sgtp.27451
   year: 2013
   status: published
@@ -3528,7 +3529,7 @@ records:
     behavior. Finally, to identify other putative key regulators of small GTPase crosstalk, we have assembled
     a small GTPase network using protein-protein interaction databases.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
 - doi: 10.1242/jcs.121988
   year: 2013
   status: published
@@ -3607,4 +3608,4 @@ records:
     itself. We then define the contribution that this element of the migration process makes to processes
     such as wound healing and tumour invasion.
   peer_reviewed: true
-  open_access_status: gold
+  open_access_status: hybrid
