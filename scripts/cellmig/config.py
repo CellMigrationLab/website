@@ -56,7 +56,7 @@ DATASET_TYPES = {
     "image": "Image data",
     "proteomic": "Proteomic data",
     "rna_seq": "Sequencing data",
-    "model": "Deep learning models",
+    "model": "Image data",   # trained models are listed with the image data they come from
 }
 
 

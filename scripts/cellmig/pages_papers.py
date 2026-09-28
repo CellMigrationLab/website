@@ -114,7 +114,7 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str], lead
     p.add("# Publications", section_nav(PAPERS, "All publications"),
           f'<p class="cm-lead">{len(records)} papers and preprints, newest first. Authors directly associated with the lab are '
           '<span class="cm-author--lab">highlighted</span>; preprints are merged with their journal version.</p>',
-          '<form class="cm-filter" data-cm-filter role="search" onsubmit="return false">',
+          '<form class="cm-filter" data-cm-filter="publications" role="search" onsubmit="return false">',
           '<label class="cm-visually-hidden" for="pub-search">Search publications</label>',
           '<input id="pub-search" type="search" placeholder="Search title, author, journal…" data-cm-search>',
           '<div class="cm-filter__chips" role="group" aria-label="Show">',
@@ -125,7 +125,7 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str], lead
           '<p class="cm-filter__count" data-cm-count aria-live="polite"></p>',
           "</form>")
     for y in years:
-        p.add(f'<section class="cm-year" data-cm-year><h2 id="y{y}">{y}</h2><ol class="cm-pubs">')
+        p.add(f'<section class="cm-year" data-cm-group><h2 id="y{y}">{y}</h2><ol class="cm-pubs">')
         for rec in (r for r in records if r["year"] == y):
             story = stories.get(rec["doi"].lower())
             link = f"portfolio/{story['slug']}/" if story else None
