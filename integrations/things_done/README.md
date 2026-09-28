@@ -80,10 +80,8 @@ succeeds, and once a day. It validates the ledger before copying anything.
 
 | Add | Effect on the website |
 | --- | --- |
-| `related_publication_dois` on software and datasets | the paper's page lists its code and data |
 | `report/config/preprint_links_overrides.yaml` entries for missed pairs | the paper appears once, and the lag covers it |
 | `video_url` on talks (future) | the Talks page could be generated from the ledger |
-| the full issue date of each publication (`fetch_publications.py` already reads CSL `issued`, but keeps only the year) | featured papers ordered exactly within a year, and dated in the RSS feed (today only papers with a preprint have a known date) |
 
 To refresh by hand from local checkouts:
 `python scripts/sync_things_done.py --ledger ../things_done`
