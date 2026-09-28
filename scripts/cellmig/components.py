@@ -26,10 +26,12 @@ PAPERS = [("Featured research", "featured-research/"), ("All publications", "pub
 
 
 def section_nav(links: list[tuple[str, str]], current: str) -> str:
-    """Row of sibling pages (e.g. Software · Datasets); `current` is marked, not linked."""
-    return '<p class="cm-toc-inline">' + " · ".join(
-        f'<strong aria-current="page">{esc(title)}</strong>' if title == current else f'<a href="{url}">{esc(title)}</a>'
-        for title, url in links) + "</p>"
+    """Row of buttons to sibling pages (e.g. Software, Datasets), styled like the
+    Research page's buttons: `current` is the filled one, marked, not linked."""
+    return '<nav class="cm-section-nav" aria-label="Section">' + " ".join(
+        f'<span class="cm-button" aria-current="page">{esc(title)}</span>' if title == current
+        else f'<a class="cm-button cm-button--ghost" href="{url}">{esc(title)}</a>'
+        for title, url in links) + "</nav>"
 
 
 # Link from a journal paper to its preprint: worded as an action, so it is not
