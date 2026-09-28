@@ -194,6 +194,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: pix2pix_HUVEC_nuclei_cancer_cells_dataset
   dataset_type: model
   start_date: '2024'
@@ -204,6 +206,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: pix2pix_HUVEC_nuclei_immuno_cells_dataset
   dataset_type: model
   start_date: '2024'
@@ -214,6 +218,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: StarDist_AsPC1_Lifeact
   dataset_type: model
   start_date: '2024'
@@ -224,6 +230,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_cancer_cell_dataset_10x
   dataset_type: model
   start_date: '2024'
@@ -233,6 +241,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_cancer_cell_dataset_20x
   dataset_type: model
   start_date: '2024'
@@ -243,6 +253,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_Monocytes_dataset
   dataset_type: model
   start_date: '2024'
@@ -252,6 +264,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_Neutrophil_dataset
   dataset_type: model
   start_date: '2024'
@@ -261,6 +275,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: StarDist_Fluorescent_cells
   dataset_type: model
   start_date: '2024'
@@ -271,6 +287,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: StarDist_HUVEC_nuclei_dataset
   dataset_type: model
   start_date: '2024'
@@ -280,6 +298,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: Stardist_MiaPaCa2_from_CD44
   dataset_type: model
   start_date: '2024'
@@ -290,6 +310,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: StarDist_TumorCell_nuclei
   dataset_type: model
   start_date: '2024'
@@ -299,6 +321,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1038/s44318-025-00678-9
 - title: TLNRD1 figures
   dataset_type: image
   start_date: '2024'
@@ -341,6 +365,8 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
+  related_publication_dois:
+  - 10.1242/jcs.260728
 - title: Cancer cell migration followed with TrackMate
   dataset_type: image
   start_date: '2022'
@@ -503,6 +529,8 @@ records:
   repository_url: https://www.ebi.ac.uk/pride/archive/projects/PXD024634
   description: Study of human Talin1-GFP and GFP pulldown from U2OS cells plated on fibronectin, using
     mass spectrometry.
+  related_publication_dois:
+  - 10.1016/j.jbc.2021.100837
 - title: ZeroCostDL4Mic - CARE (2D) example training and test dataset
   dataset_type: image
   start_date: '2021'
@@ -693,6 +721,8 @@ records:
   repository_url: https://www.ebi.ac.uk/pride/archive/projects/PRD000726
   description: Analysis of human filamin-A-GFP, IQGAP1-GFP, Rac1 and RCC2-GFP and GFP pulldown from HEK293T
     cells, identifying binding partners through mass spectrometry.
+  related_publication_dois:
+  - 10.1242/jcs.121988
 - title: S-JCBD-201302041
   dataset_type: image
   start_date: '2013'

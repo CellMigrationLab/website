@@ -75,7 +75,7 @@ records:
   - Mitro Miihkinen
   - Omkar Joshi
   - Michal Dibus
-  - Joanna Pylvänäinen
+  - Joanna W. Pylvänäinen
   - Johanna Ivaska
   - Benjamin T. Goult
   - Guillaume Jacquemet
@@ -192,7 +192,7 @@ records:
   - Marcela Xiomara Rivera Pineda
   - Sujan Ghimire
   - Marie-Catherine Laisne
-  - Anna Nylund
+  - Anna S. Nylund
   - Monika Vaitkevičiūtė
   - Helena Vihinen
   - Anu Prakash
@@ -227,7 +227,7 @@ records:
   status: preprint
   title: NucleiSky enables cross-scale multimodal registration of microscopy data using nuclei constellations
   authors:
-  - Iván Hidalgo Cenalmor
+  - Iván Hidalgo-Cenalmor
   - Adán Olguín-Olguín
   - Carolina Prieto
   - Johannes Kumra Ahnlide
@@ -336,7 +336,7 @@ records:
   - Martina Lerche
   - Mathilde Mathieu
   - Hellyeh Hamidi
-  - Megan Chastney
+  - Megan R. Chastney
   - Guillaume Jacquemet
   - Bart Marlon Herwig Bruininks
   - Shreyas Kaptan
@@ -502,14 +502,14 @@ records:
   authors:
   - Megan R. Chastney
   - Anne Pink
-  - Jouni Harkonen
+  - Jouni Härkönen
   - Gautier Follain
   - Vanessa Stuve
-  - Joanna W. Pylvanainen
+  - Joanna W. Pylvänäinen
   - Anna-Mari Haapanen-Saaristo
   - Jenna Villman
-  - Monika Vaitkeviciute
-  - Giorgio R. Scita
+  - Monika Vaitkevičiūtė
+  - Giorgio Scita
   - Ilkka Paatero
   - Guillaume Jacquemet
   - Fabio Giavazzi
@@ -597,7 +597,7 @@ records:
   - Omkar Joshi
   - Michal Dibus
   - Marjaana Ojalill
-  - Joanna Pylvänäinen
+  - Joanna W. Pylvänäinen
   - Johanna Ivaska
   - Benjamin T. Goult
   - Guillaume Jacquemet
@@ -1032,7 +1032,7 @@ records:
   - Leonor Morgado
   - Raquel Portela
   - Guillaume Jacquemet
-  - Pedro Pereira
+  - Pedro M. Pereira
   venue: Research Square
   abstract: Phototoxicity in live-cell fluorescence microscopy can compromise experimental outcomes, yet
     quantitative methods to assess its impact remain limited. Here we present PhotoFiTT (Phototoxicity
@@ -1135,7 +1135,7 @@ records:
   - Afonso Mendes
   - Bruno M. Saraiva
   - Guillaume Jacquemet
-  - João Mamede
+  - João I. Mamede
   - Christophe Leterrier
   venue: Research Square
   abstract: 'From molecules to organelles, cells exhibit recurring structural motifs across multiple scales.
@@ -1230,7 +1230,7 @@ records:
   - Mariana G. Ferreira
   - Craig T. Russell
   - Ignacio Arganda-Carreras
-  - AI4Life Consortium
+  - AI4Life Horizon Europe Program Consortium
   - Guillaume Jacquemet
   - Ricardo Henriques
   - Estibaliz Gómez-de-Mariscal
@@ -1404,7 +1404,7 @@ records:
   title: 'NanoPyx: super-fast bioimage analysis powered by adaptive machine learning'
   authors:
   - Bruno M. Saraiva
-  - Inês M. Cunha
+  - Inês Cunha
   - António D. Brito
   - Gautier Follain
   - Raquel Portela
@@ -1440,11 +1440,11 @@ records:
   - Ricardo Henriques
   - Bruno M. Saraiva
   - Inês Cunha
-  - António Brito
+  - António D. Brito
   - Gautier Follain
   - Raquel Portela
   - Robert Haase
-  - Pedro Pereira
+  - Pedro M. Pereira
   - Guillaume Jacquemet
   venue: Research Square
   abstract: The expanding scale and complexity of microscopy image datasets require accelerated analytical
@@ -1567,7 +1567,7 @@ records:
   - Constantin Pape
   - Tom Burke
   - Carlos Garcia-López-de-Haro
-  - Craig Russell
+  - Craig T. Russell
   - Lucía Moya-Sans
   - Cristina de-la-Torre-Gutiérrez
   - Deborah Schmidt
@@ -1602,7 +1602,7 @@ records:
   - Pedro M. Pereira
   - Lucas von Chamier
   - Mia Conduit
-  - Mariana G. Pinho
+  - Mariana Gomes de Pinho
   - Guillaume Jacquemet
   - Séamus Holden
   - Mike Heilemann
@@ -1775,7 +1775,7 @@ records:
   - Lene Malerød
   - Nina Marie Pedersen
   - Hellyeh Hamidi
-  - Megan Chastney
+  - Megan R. Chastney
   - Bart Marlon Herwig Bruininks
   - Shreyas Kaptan
   - Guillaume Jacquemet
@@ -1828,7 +1828,7 @@ records:
   - Ulla Pentikäinen
   - Itziar Martinez D. Posada
   - Hellyeh Hamidi
-  - Arafat K. Najumudeen
+  - Arafath K. Najumudeen
   - Owen J. Sansom
   - Igor L. Barsukov
   - Daniel Abankwa
@@ -1894,7 +1894,7 @@ records:
   - Mayank Kumar Modi
   - Elena Tcarenkova
   - Giulia Sultana
-  - Jenny Pessa
+  - Jenny C. Pessa
   - Peiru Yang
   - Ujjwal Aryal
   - Leila Rato
@@ -2046,7 +2046,7 @@ records:
   authors:
   - Christoph Spahn
   - Romain F. Laine
-  - Pedro Matos Pereira
+  - Pedro M. Pereira
   - Estibaliz Gómez-de-Mariscal
   - Lucas von Chamier
   - Mia Conduit
@@ -2165,7 +2165,7 @@ records:
   authors:
   - Emilia Peuhu
   - Guillaume Jacquemet
-  - Colinda LGJ Scheele
+  - Colinda L.G.J. Scheele
   - Aleksi Isomursu
   - Ilkka Paatero
   - Kerstin Thol
@@ -2572,7 +2572,7 @@ records:
   - Guillaume Jacquemet
   - Joni Vuorio
   - Lina Antenucci
-  - Fatemeh Hassani-Nia
+  - Fatemeh Hassani Nia
   - Patrik Hollos
   - Aleksi Isomursu
   - Ilpo Vattulainen
@@ -3195,7 +3195,7 @@ records:
   - Fatemeh Hassani Nia
   - Malte Beifuss
   - Tobias Boeckers
-  - Hans-Juergen Kreienkamp
+  - Hans-Jürgen Kreienkamp
   - Igor L. Barsukov
   - Johanna Ivaska
   venue: Nature Cell Biology
