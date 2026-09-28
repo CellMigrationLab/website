@@ -34,7 +34,7 @@ things_done (publications, datasets, lab in numbers) have none.
 | Publications | automatic, from things_done |
 | Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done |
 | Software | automatic, from things_done: projects, names, years, GitHub links, papers (a preprint is followed to its journal version) and texts (`summary`); pictures, videos and extra links in `data/software.yaml`; a project without one shows its paper's picture from `data/featured.yaml` (tile colours follow each other down the page) |
-| Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
+| Datasets | automatic, from things_done (grouped by `dataset_type`, each with its paper); links at the top in `data/site.yaml` (`resources`) |
 | Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<id>.yaml` (the person's things_done id without `member-`), team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
 | Image rights and credits (every image) | `data/media.yaml`; public summary `content/licensing.md` |

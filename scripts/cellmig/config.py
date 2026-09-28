@@ -58,8 +58,6 @@ DATASET_TYPES = {
     "rna_seq": "Sequencing data",
     "model": "Deep learning models",
 }
-# things_done dataset_tags (schema enum) -> badge
-DATASET_TAGS = {"deep-learning-ready": "DL-ready", "model-zoo": "Model zoo"}
 
 
 def fail(message: str) -> NoReturn:

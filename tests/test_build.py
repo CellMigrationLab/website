@@ -340,13 +340,9 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertIn("+3 more", out)                     # AUTHOR_LIMIT - 1 first ones and the last are shown
         self.assertEqual(out.count(","), AUTHOR_LIMIT)    # AUTHOR_LIMIT names + the "more" marker
 
-    def test_unknown_dataset_tag_or_type_stops_the_build(self):
-        from cellmig.pages_content import _dataset_tag, _dataset_type
-        d = {"title": "D", "dataset_type": "image"}
-        self.assertEqual(_dataset_tag("deep-learning-ready", d), "DL-ready")
-        self.assertEqual(_dataset_type(d), "Image data")
-        with self.assertRaises(SystemExit):
-            _dataset_tag("dl-ready", d)
+    def test_unknown_dataset_type_stops_the_build(self):
+        from cellmig.pages_content import _dataset_type
+        self.assertEqual(_dataset_type({"title": "D", "dataset_type": "image"}), "Image data")
         with self.assertRaises(SystemExit):
             _dataset_type({"title": "D", "dataset_type": "video"})
 
