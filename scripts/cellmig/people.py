@@ -90,12 +90,13 @@ def leader(members: list[Person]) -> Person:
 
 
 def lab_names(members: list[Person]) -> set[str]:
-    """Normalized names (and other spellings) of everyone ever in the lab."""
+    """Normalized names (and other spellings) of everyone ever in the lab,
+    current members and alumni alike (no dates: see components.author_list)."""
     return {normalize_name(n) for m in members for n in [m["name"], *(m.get("also_known_as") or [])]}
 
 
 def is_lab_member(name: str, lab: set[str]) -> bool:
-    """Whether an author name is a lab member; ignores a middle initial
+    """Whether an author is directly associated with the lab (now or before); ignores a middle initial
     ("Joanna W. Pylvänäinen" matches "Joanna Pylvänäinen")."""
     parts = name.split()
     return normalize_name(name) in lab or (len(parts) > 2 and normalize_name(parts[0] + parts[-1]) in lab)
