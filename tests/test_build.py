@@ -483,7 +483,8 @@ class CloudTests(unittest.TestCase):
         people = [{"name": f"Ann Author{i}", "papers": 1 + i % 3} for i in range(120)]
         html = _cloud(people, set())
         self.assertEqual(html.count("<span class=\"\" "), 120)
-        self.assertIn("Show the 40 co-authors of one paper", html)
+        self.assertIn("120 people have co-authored papers with us. The 80 who share more than one paper", html)
+        self.assertIn("Show the 40 co-authors with one joint paper", html)
 
 
 class ResearchThemeTests(unittest.TestCase):
