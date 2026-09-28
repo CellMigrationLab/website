@@ -176,7 +176,7 @@ def dataset_item(d: Record) -> Json:
     """A dataset as schema.org Dataset, with the lab as `contributor` (many
     datasets are shared with collaborators)."""
     item: Json = {"@type": "Dataset", "name": d["title"], "url": d["repository_url"],
-                  "description": d["description"], "contributor": {"@id": LAB_ID}}
+                  "description": plain(d["description"]), "contributor": {"@id": LAB_ID}}
     if d.get("archive_doi"):
         item["identifier"] = f"https://doi.org/{d['archive_doi']}"
     if d.get("related_publication_dois"):
