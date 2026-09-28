@@ -73,14 +73,28 @@ def _people(members: list[Person]) -> list[str]:
     return out + [""]
 
 
+def _support(support: list[Record]) -> list[str]:
+    """Current research support, grouped as on the home page."""
+    out = ["## Current research support", ""]
+    for g in support:
+        names = " and ".join(f["name"] for f in g["logos"])
+        if g["title"]:
+            cof = f"; programme co-funded by {', '.join(g['cofunders'])}" if g["cofunders"] else ""
+            out.append(f"- {g['title']['name']}: joint award from {names}{cof}")
+        else:
+            out.append(f"- {names}" + "".join(f"; {p['name']}" for p in g["programmes"]))
+    return out + [""]
+
+
 def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list[Person],
-              affiliations: list[Record]) -> str:
+              affiliations: list[Record], support: list[Record]) -> str:
     """The long llms-full.txt with the site's content."""
     research = load(DATA / "research.yaml")
     out = [f"# {site['name']} (Jacquemet Lab)", "", f"> {preview_text('index')}", "", site["intro"], "",
            f"Website: {SITE_URL}", f"Address: {', '.join(site['contact']['address'])}", "",
            "## Affiliations", ""]
     out += [f"- {a['organization']} ({a['title']})" for a in affiliations]
+    out += ["", *_support(support)][:-1]
     prof = ledger.profile
     out += ["", f"## Group leader: {prof['name']}", "", prof["short_bio"], ""]
     for heading, key in (("Positions", "appointments"), ("Editorial roles", "editorial"),
@@ -124,7 +138,7 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
 
 
 def write_llms(site: Record, featured: list[Story], ledger: Ledger, members: list[Person],
-               affiliations: list[Record]) -> None:
+               affiliations: list[Record], support: list[Record]) -> None:
     """Write docs/llms.txt and docs/llms-full.txt (copied to the site root)."""
     (DOCS / "llms.txt").write_text(llms_txt(site, featured, members), encoding="utf-8")
-    (DOCS / "llms-full.txt").write_text(llms_full(site, featured, ledger, members, affiliations), encoding="utf-8")
+    (DOCS / "llms-full.txt").write_text(llms_full(site, featured, ledger, members, affiliations, support), encoding="utf-8")
