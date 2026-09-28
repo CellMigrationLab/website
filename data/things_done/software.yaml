@@ -6,11 +6,15 @@ records:
   start_date: '2026'
   github_repo_url: https://github.com/HenriquesLab/EZInput
   description: a Python library that simplifies the creation of graphical user interfaces
+  related_publication_dois:
+  - 10.48550/arXiv.2601.08859
 - id: labconstrictor
   title: LabConstrictor
   start_date: '2026'
   github_repo_url: https://github.com/CellMigrationLab/LabConstrictor
   description: From Jupyter Notebook to Desktop App in One Click
+  related_publication_dois:
+  - 10.48550/arXiv.2603.10704
 - id: nucleisky
   title: NucleiSky
   start_date: '2026'
@@ -23,6 +27,8 @@ records:
   start_date: '2025'
   github_repo_url: https://github.com/HenriquesLab/rxiv-maker
   description: a toolbox that converts markdown into a publication-ready PDF
+  related_publication_dois:
+  - 10.1242/jcs.265183
 - id: sred
   title: SReD
   start_date: '2025'
@@ -43,17 +49,23 @@ records:
   github_repo_url: https://github.com/HenriquesLab/DL4MicEverywhere
   description: An extension of ZeroCostDL4Mic featuring interactive Jupyter notebooks for bioimage analysis
     using deep learning.
+  related_publication_dois:
+  - 10.1038/s41592-024-02295-6
 - id: nanopyx
   title: NanoPyx
   start_date: '2024'
   github_repo_url: https://github.com/HenriquesLab/NanoPyx
   description: A library for analyzing light microscopy and super-resolution data, successor to NanoJ.
+  related_publication_dois:
+  - 10.1038/s41592-024-02562-6
 - id: photofitt
   title: PhotoFiTT
   start_date: '2024'
   github_repo_url: https://github.com/HenriquesLab/PhotoFiTT
   description: Phototoxicity Fitness Time Trial. A Quantitative Framework for Assessing Phototoxicity
     in Live-Cells.
+  related_publication_dois:
+  - 10.1038/s41467-025-66209-6
 - id: esrrf
   title: eSRRF
   start_date: '2023'
@@ -67,11 +79,15 @@ records:
   start_date: '2023'
   github_repo_url: https://github.com/CellMigrationLab/Fast4DReg
   description: A Fiji plugin for 2D and 3D video drift correction in all axes.
+  related_publication_dois:
+  - 10.1242/jcs.260728
 - id: trackmate
   title: TrackMate
   start_date: '2022'
   github_repo_url: https://github.com/trackmate-sc/TrackMate
   description: Automated tracking software analyzing bioimages, distributed as a Fiji plugin.
+  related_publication_dois:
+  - 10.1038/s41592-022-01507-1
 - id: zerocostdl4mic
   title: ZeroCostDL4Mic
   start_date: '2021'
@@ -84,8 +100,13 @@ records:
   start_date: '2019'
   github_repo_url: https://github.com/CellMigrationLab/FiloMAP
   description: ImageJ and R scripts for mapping protein localization within filopodia.
+  related_publication_dois:
+  - 10.1007/978-1-0716-2887-4_4
 - id: filoquant
   title: FiloQuant
   start_date: '2017'
   github_repo_url: https://github.com/CellMigrationLab/FiloQuant
   description: A Fiji plugin for automated detection and quantification of filopodia properties.
+  related_publication_dois:
+  - 10.1083/jcb.201704045
+  - 10.1007/978-1-4939-9686-5_16
