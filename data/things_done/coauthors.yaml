@@ -637,7 +637,6 @@ coauthors:
   papers: 1
   first_year: 2026
   last_year: 2026
-  country: FI
 - name: Anna S. Nylund
   papers: 1
   first_year: 2021
@@ -843,7 +842,6 @@ coauthors:
   papers: 1
   first_year: 2022
   last_year: 2022
-  country: GB
 - name: Craig T. Russell
   papers: 1
   first_year: 2024
@@ -1061,7 +1059,6 @@ coauthors:
   papers: 1
   first_year: 2026
   last_year: 2026
-  country: IT
 - name: Giorgio Scita
   papers: 1
   first_year: 2021
@@ -1112,7 +1109,6 @@ coauthors:
   papers: 1
   first_year: 2017
   last_year: 2017
-  country: DE
 - name: Hans-Jürgen Kreienkamp
   papers: 1
   first_year: 2021
@@ -1245,7 +1241,6 @@ coauthors:
   papers: 1
   first_year: 2022
   last_year: 2022
-  country: FI
 - name: Jens C. Luoto
   papers: 1
   first_year: 2025
@@ -1297,12 +1292,10 @@ coauthors:
   papers: 1
   first_year: 2026
   last_year: 2026
-  country: FI
 - name: Joanna W. Pylvanainen
   papers: 1
   first_year: 2026
   last_year: 2026
-  country: FI
 - name: Johanna Bergman
   papers: 1
   first_year: 2026
@@ -1376,7 +1369,6 @@ coauthors:
   papers: 1
   first_year: 2026
   last_year: 2026
-  country: FI
 - name: Jouni Härkönen
   papers: 1
   first_year: 2026
@@ -1391,7 +1383,6 @@ coauthors:
   papers: 1
   first_year: 2024
   last_year: 2024
-  country: US
 - name: Juan C. Caicedo
   papers: 1
   first_year: 2026
@@ -1616,7 +1607,6 @@ coauthors:
   papers: 1
   first_year: 2022
   last_year: 2022
-  country: PT
 - name: Marien Ochoa
   papers: 1
   first_year: 2026
@@ -1688,7 +1678,6 @@ coauthors:
   papers: 1
   first_year: 2026
   last_year: 2026
-  country: FI
 - name: Mehdi Seifi
   papers: 1
   first_year: 2024
@@ -1745,7 +1734,6 @@ coauthors:
   papers: 1
   first_year: 2026
   last_year: 2026
-  country: FI
 - name: Mukund Sharma
   papers: 1
   first_year: 2025
