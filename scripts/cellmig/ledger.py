@@ -170,10 +170,49 @@ def affiliation_list(presentation: list[Record], ledger: Ledger) -> list[Record]
 AFFILIATION_RELATIONS = ("parent", "member", "leader")
 
 
-def funding_list(presentation: list[Record], ledger: Ledger) -> list[Record]:
-    """Direct funders (`funders`: names; co-funded awards have several) of the
-    grants things_done marks `current` (active or awarded and not ended, as
-    of the sync), with their logo and link from data/site.yaml `funding`,
-    in the order of data/site.yaml; see _presentation()."""
-    current = {name for g in ledger.grants if g["current"] for name in g["funders"]}
-    return _presentation("funding", presentation, "funder", current, "things_done ledger/registries/grants.yaml")
+def support_list(funders: list[Record], programmes: list[Record], ledger: Ledger) -> list[Record]:
+    """Current research support for the home page, grouped by meaning
+    (website#27), from the grants things_done marks `current`:
+
+    - a funder (logo and link from data/site.yaml `funding`), with, beneath
+      it, the programmes it alone funds (e.g. the Research Council of
+      Finland -> Centre of Excellence IMMENs);
+    - a programme with several direct funders (e.g. EOSS Cycle 6: Wellcome
+      and the Chan Zuckerberg Initiative) as one group with their logos and
+      the programme's co-funders (ledger `program_cofunders`) named in text.
+      A funder whose only current grants are such awards has no tile of its
+      own, so an award is never shown twice.
+
+    Programmes are matched by the ledger `program` (data/site.yaml
+    `programmes`: program, name, url, logo). Strict like _presentation():
+    a current funder or programme without an entry stops the build; an
+    entry that is no longer current is left out with a warning."""
+    current = [g for g in ledger.grants if g["current"]]
+    by_funder = {f["funder"]: f for f in _presentation(
+        "funding", funders, "funder", {n for g in current for n in g["funders"]},
+        "things_done ledger/registries/grants.yaml")}
+    by_programme = {p["program"]: p for p in _presentation(
+        "programmes", programmes, "program", {g["program"] for g in current if g.get("program")},
+        "things_done ledger/registries/grants.yaml (`program`)")}
+    shared = [g for g in current if len(g["funders"]) > 1]
+    groups: list[Record] = []
+    for f in funders:                                  # data/site.yaml order
+        if f["funder"] not in by_funder:
+            continue
+        own = [g for g in current if g["funders"] == [f["funder"]]]
+        if not own:                                    # only in shared awards: shown with them
+            continue
+        subs = [by_programme[p] for p in dict.fromkeys(g["program"] for g in own if g.get("program"))]
+        groups.append({"logos": [f], "programmes": subs, "title": None, "cofunders": []})
+    for p in programmes:
+        grants = [g for g in shared if g.get("program") == p["program"]]
+        if p["program"] not in by_programme or not grants:
+            continue
+        logos = [by_funder[n] for n in dict.fromkeys(n for g in grants for n in g["funders"])]
+        cofunders = list(dict.fromkeys(c for g in grants for c in g.get("program_cofunders") or []))
+        groups.append({"logos": logos, "programmes": [], "title": p, "cofunders": cofunders})
+    unplaced = [g["title"] for g in shared if not g.get("program")]
+    if unplaced:
+        fail(f"things_done grants {unplaced} have several funders but no `program`; "
+             "the home page groups a joint award by its programme")
+    return groups

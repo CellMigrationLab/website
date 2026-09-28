@@ -49,8 +49,13 @@ def _org(a: Record) -> Json:
     return {"@type": "Organization", "name": a["name"], "url": a["url"]}
 
 
+def support_funders(support: list[Record]) -> list[Record]:
+    """The direct funders of current support (ledger.support_list groups), once each."""
+    return list({f["funder"]: f for g in support for f in g["logos"]}.values())
+
+
 def organization(site: Record, affiliations: list[Record], members: list[Person], logo: str,
-                 leader_bio: str) -> Json:
+                 leader_bio: str, support: list[Record]) -> Json:
     """The lab: name, founding year, address and contact, leader (with
     affiliations and profiles), and how it relates to each affiliation
     (data/site.yaml `relation`: parent -> parentOrganization, member ->
@@ -73,6 +78,7 @@ def organization(site: Record, affiliations: list[Record], members: list[Person]
                          "url": f"{SITE_URL}join-us/"},
         "parentOrganization": by_relation["parent"],
         "memberOf": by_relation["member"],
+        "funder": [_org(f) for f in support_funders(support)],   # current grants (things_done)
         "founder": {
             "@type": "Person",
             "@id": f"{SITE_URL}#{lead['slug']}",
