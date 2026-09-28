@@ -7,7 +7,7 @@ of silently leaving a section out of the site.
 from typing import Any
 
 from .config import DATA, LEDGER_DATA, fail, load
-from .text import year_of
+from .text import known_date, year_of
 
 Record = dict[str, Any]
 
@@ -49,10 +49,12 @@ class Ledger:
             if key not in self.metrics:
                 fail(f"data/things_done/metrics.yaml has no {key}")
         self.by_doi: dict[str, Record] = {p["doi"].lower(): p for p in self.pubs}
-        # Journal publication dates known to the day (from the lag report).
+        # Journal publication dates from the lag report, cut to what is known
+        # ("2021-09-14" or "2021-09"; text.known_date). A year alone adds
+        # nothing to the publication's year, so those papers are undated.
         self.dates: dict[str, str] = {
-            str(p["published_doi"]).lower(): p["published_date"]
-            for p in self.lag_pairs if p.get("published_date_precision") == "day"}
+            str(p["published_doi"]).lower(): known_date(p["published_date"], p["published_date_precision"])
+            for p in self.lag_pairs if p["published_date_precision"] != "year"}
 
     def get(self, doi: str) -> Record | None:
         """Publication by DOI (case-insensitive), or None."""
@@ -91,14 +93,15 @@ class Ledger:
     def grouped(self) -> list[Record]:
         """Publications, each preprint folded into its journal version unless
         things_done marks it `standalone` (display override). Newest first:
-        by year, then the journal date where it is known to the day (dated
-        papers before undated ones of the same year), then ledger order."""
+        by year, then the journal date as far as it is known (a month comes
+        after the days in it; undated papers come last in their year), then
+        ledger order."""
         shown = [r for r in self.pubs
                  if not (r.get("status") == "preprint" and not r.get("standalone")
                          and self.published_version(r) is not r)]
-        day = {id(r): self.dates.get(r["doi"].lower()) for r in shown}
-        shown.sort(key=lambda r: day[id(r)] or "", reverse=True)          # stable: ties keep ledger order
-        shown.sort(key=lambda r: (-int(r["year"]), day[id(r)] is None))
+        date = {id(r): self.dates.get(r["doi"].lower()) for r in shown}
+        shown.sort(key=lambda r: date[id(r)] or "", reverse=True)         # stable: ties keep ledger order
+        shown.sort(key=lambda r: (-int(r["year"]), date[id(r)] is None))
         return shown
 
 

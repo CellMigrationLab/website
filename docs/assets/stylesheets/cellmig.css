@@ -140,8 +140,6 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-badge--preprint { background: #fff1e6; color: #9a3b00; }
 .cm-badge--oa { background: #e8f5ee; color: #1d6b3f; }
 
-/* Drop caps (software tiles, image analysis) */
-
 /* ------------------------------------------------------------------ home */
 
 .cm-home { max-width: none; margin: 0; float: none; }
@@ -379,7 +377,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-footer__title { margin: 0 0 .96rem; font-size: .6rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #9d9494; }
 .cm-footer__col:first-child .cm-footer__title { font-size: .8rem; letter-spacing: .2em; color: #fff; }
 .cm-footer p { margin: 0 0 .8rem; }
-.cm-footer__logo { width: 9.6rem; max-width: 100%; }
+.cm-footer__logo { width: 9.6rem; max-width: 100%; height: auto; }   /* width/height attributes reserve the space */
 .cm-footer__logos { display: grid; grid-template-columns: repeat(2, auto); justify-content: start; align-items: center; gap: 1.2rem 1.6rem; margin: 0; padding: 0; list-style: none; }
 .cm-footer__logos img { display: block; max-width: 6.4rem; max-height: 2.72rem; width: auto; height: auto; opacity: .9; }   /* both auto: shrinks without distortion */
 .cm-footer__logos a:hover img { opacity: 1; }
@@ -456,7 +454,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-tiles span { margin-top: .3rem; font-size: .56rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--cm-muted); }
 .cm-bars, .cm-map { position: relative; }
 .cm-bars__bar { fill: var(--cm-accent); cursor: pointer; }
-.cm-bars__bar:hover, .cm-bars__bar:focus { fill: #5f2a9c; outline: none; }
+.cm-bars__bar:hover, .cm-bars__bar:focus { fill: var(--cm-accent-strong); outline: none; }
 .cm-lag__dot.is-approx { fill: #fff; stroke: var(--cm-accent); stroke-width: 2; }
 .md-typeset ol.cm-toplist { margin: 0; padding: 0; list-style: none; }
 [dir] .md-typeset .cm-toplist > li { display: grid; grid-template-columns: minmax(8rem, 13rem) minmax(0, 1fr) 4.2rem 5rem; align-items: center; gap: .6rem; margin: 0; padding: .35rem 0; border-bottom: 1px solid var(--cm-line); list-style: none; font-size: .72rem; }

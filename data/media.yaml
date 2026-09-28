@@ -20,6 +20,9 @@
 # the GIF's entry. Public facts only: no private correspondence or notes here.
 
 media:
+- path: apple-touch-icon.png
+  type: microscopy
+  rights: unknown
 - path: assets/images/logos/chan-zuckerberg-initiative.svg
   type: logo
   rights: third-party
@@ -116,6 +119,9 @@ media:
   type: microscopy
   rights: unknown
 - path: wp-content/uploads/2019/08/cover9.jpg
+  type: microscopy
+  rights: unknown
+- path: wp-content/uploads/2019/08/cropped-cover4-1.jpg
   type: microscopy
   rights: unknown
 - path: wp-content/uploads/2019/08/ctrl.jpg

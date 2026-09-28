@@ -3,7 +3,7 @@
 import math
 
 from .ledger import Record
-from .text import esc, plural
+from .text import esc, known_date, plural
 
 DAYS_PER_MONTH = 30.44   # same constant as things_done's analyze_preprint_lag.py
 
@@ -31,11 +31,6 @@ def papers_per_year(records: list[Record]) -> str:
     parts.append(f'<line class="cm-lag__axis" x1="{pad}" x2="{W - pad}" y1="{base}" y2="{base}"/>')
     return (f'<div class="cm-bars"><svg class="cm-lag__chart" viewBox="0 0 {W} {H}" role="img" '
             f'aria-label="Papers per year">{"".join(parts)}</svg><div class="cm-chart-tip" hidden></div></div>')
-
-
-def _known(date: str, precision: str) -> str:
-    """A lag-report date shown only as precisely as it is known."""
-    return {"day": date[:10], "month": date[:7], "year": date[:4]}[precision]
 
 
 def _is_exact(row: Record) -> bool:
@@ -85,8 +80,8 @@ def lag_section(pairs: list[Record], summary: Record) -> str:
     median = summary["median_months"]
     rows = sorted(pairs, key=lambda r: r["published_date"], reverse=True)
     table = "".join(
-        f'<tr><td>{esc(r["published_title"])}</td><td>{_known(r["preprint_date"], r["preprint_date_precision"])}</td>'
-        f'<td>{_known(r["published_date"], r["published_date_precision"])}</td>'
+        f'<tr><td>{esc(r["published_title"])}</td><td>{known_date(r["preprint_date"], r["preprint_date_precision"])}</td>'
+        f'<td>{known_date(r["published_date"], r["published_date_precision"])}</td>'
         f'<td>{r["gap_days"] / DAYS_PER_MONTH:.1f}</td></tr>' for r in rows)
     approx = sum(1 for r in rows if not _is_exact(r))
     note = f" Hollow dots ({approx}): one of the two dates is only known to the month or year." if approx else ""

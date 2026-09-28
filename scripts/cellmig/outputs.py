@@ -8,16 +8,17 @@ Items (since OUTPUTS_SINCE):
 Talks, events, funding and positions are not research outputs and are not
 included.
 
-Dates are shown only as precisely as the ledger knows them: papers have a
-day when the preprint-lag report has one, else only a year; dates on
-1 January come from CV-style records and are treated as the year.
+Each item's date is cut to what the ledger knows (text.known_date): papers
+and preprints have the day or month from the preprint-lag report, else only
+the year; other dates on 1 January come from CV-style records and are
+treated as the year. Nothing downstream fills in a missing month or day.
 """
 
 from typing import Any
 
 from .featured import Story, story_by_doi
 from .ledger import Ledger, software_list
-from .text import esc, slugify, year_of
+from .text import esc, known_date, precision_of, slugify, year_of
 
 OUTPUTS_SINCE = "2024-01-01"
 ResearchOutput = dict[str, Any]
@@ -26,7 +27,7 @@ KIND_LABELS = {"paper": "Paper", "preprint": "Preprint", "software": "Software",
 
 
 def _precision(date: str) -> str:
-    """How precisely a ledger date is known: "day", "month" or "year"."""
+    """How precisely a CV-style ledger date is known: "day", "month" or "year"."""
     parts = str(date).split("-")
     if len(parts) == 1 or parts[1:] == ["01", "01"]:
         return "year"
@@ -34,30 +35,29 @@ def _precision(date: str) -> str:
 
 
 def _item(date: str, kind: str, title: str, html: str, url: str, precision: str | None = None) -> ResearchOutput:
-    """One output; `url` is where it links in the feed (site path or absolute)."""
-    return {"date": str(date), "precision": precision or _precision(date), "kind": kind,
+    """One output; `date` is cut to `precision` (guessed from the date when
+    not given); `url` is where it links in the feed (site path or absolute)."""
+    date = known_date(date, precision or _precision(date))
+    return {"date": date, "precision": precision_of(date), "kind": kind,
             "title": title, "html": html, "url": url}
 
 
 def _papers(ledger: Ledger, featured: list[Story]) -> list[ResearchOutput]:
-    """Journal papers (day date from the lag report when known) and preprints
-    not yet published."""
+    """Journal papers and preprints not yet published, dated as far as the
+    lag report knows (else the year)."""
     stories = story_by_doi(featured, ledger)
-    preprint_dates = {str(p["preprint_doi"]).lower(): p["preprint_date"] for p in ledger.lag_pairs
-                      if p["preprint_date_precision"] == "day"}
+    preprint_dates = {str(p["preprint_doi"]).lower(): known_date(p["preprint_date"], p["preprint_date_precision"])
+                      for p in ledger.lag_pairs if p["preprint_date_precision"] != "year"}
     out = []
     for rec in ledger.grouped():
         story = stories.get(rec["doi"].lower())
         url = f"portfolio/{story['slug']}/" if story else f"https://doi.org/{rec['doi']}"
         link = f'<a href="{url}">{esc(rec["title"])}</a>'
-        if rec["status"] == "preprint":
-            date = preprint_dates.get(rec["doi"].lower())
-            out.append(_item(date or str(rec["year"]), "preprint", rec["title"],
-                             f"New preprint on {esc(rec['venue'])}: {link}", url, "day" if date else "year"))
-        else:
-            date = ledger.dates.get(rec["doi"].lower())
-            out.append(_item(date or str(rec["year"]), "paper", rec["title"],
-                             f"New paper in <em>{esc(rec['venue'])}</em>: {link}", url, "day" if date else "year"))
+        preprint = rec["status"] == "preprint"
+        date = (preprint_dates if preprint else ledger.dates).get(rec["doi"].lower()) or str(rec["year"])
+        text = f"New preprint on {esc(rec['venue'])}" if preprint else f"New paper in <em>{esc(rec['venue'])}</em>"
+        out.append(_item(date, "preprint" if preprint else "paper", rec["title"], f"{text}: {link}", url,
+                         precision_of(date)))   # explicit: a lag-report day may be 1 January
     return out
 
 
@@ -77,10 +77,10 @@ def _datasets(ledger: Ledger) -> list[ResearchOutput]:
 
 
 def build_outputs(ledger: Ledger, featured: list[Story]) -> list[ResearchOutput]:
-    """Research outputs since OUTPUTS_SINCE, newest first; within a year,
-    items with a known month come before items known only to the year."""
+    """Research outputs since OUTPUTS_SINCE (compared as far as each date is
+    known), newest first; within a year or month, the less precise dates come
+    after the more precise ones (text.known_date)."""
     items = _papers(ledger, featured) + _software(ledger) + _datasets(ledger)
-    items = [i for i in items
-             if i["date"][:4] >= OUTPUTS_SINCE[:4] and (i["precision"] == "year" or i["date"] >= OUTPUTS_SINCE)]
-    items.sort(key=lambda i: (i["date"][:4], i["precision"] != "year", i["date"]), reverse=True)
+    items = [i for i in items if i["date"] >= OUTPUTS_SINCE[:len(i["date"])]]
+    items.sort(key=lambda i: i["date"], reverse=True)   # stable: ties keep the order above
     return items
