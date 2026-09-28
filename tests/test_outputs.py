@@ -26,7 +26,6 @@ class OutputTests(unittest.TestCase):
         from test_build import fake_ledger, pub
         led = fake_ledger([pub("10.1/y", 2024, title="Year"), pub("10.1/m", 2024, title="Jan"),
                            pub("10.1/d", 2024, title="Day"), pub("10.1/old", 2023, title="Old")])
-        led.lag_pairs = []
         led.dates = {"10.1/m": "2024-01", "10.1/d": "2024-01-20", "10.1/old": "2023-12"}
         with patch.object(outputs, "software_list", return_value=[]):
             items = build_outputs(led, [])
@@ -34,6 +33,17 @@ class OutputTests(unittest.TestCase):
         # comes after the day in it, the bare year last
         self.assertEqual([(i["title"], i["date"]) for i in items],
                          [("Day", "2024-01-20"), ("Jan", "2024-01"), ("Year", "2024")])
+
+    def test_preprints_get_their_own_date(self):
+        """Dates come from each record's publication_date, not only from preprint-paper pairs."""
+        from unittest.mock import patch
+
+        from test_build import fake_ledger, pub
+        led = fake_ledger([pub("10.1101/p", 2025, "preprint", "Preprint P", publication_date="2025-03-04")])
+        led.datasets = []
+        with patch.object(outputs, "software_list", return_value=[]):
+            items = build_outputs(led, [])
+        self.assertEqual([(i["kind"], i["date"], i["precision"]) for i in items], [("preprint", "2025-03-04", "day")])
 
     def test_feed_has_pubdates_only_for_days(self):
         from pathlib import Path
@@ -56,7 +66,6 @@ class OutputTests(unittest.TestCase):
         from test_build import fake_ledger, pub
         led = fake_ledger([pub("10.1/a", 2026, title="Paper A"), pub("10.1101/b", 2025, "preprint", "Preprint B"),
                            pub("10.1/old", 2019, title="Old paper")])
-        led.lag_pairs = []
         led.datasets = [{"title": "Data D", "start_date": "2025", "repository_url": "https://zenodo.org/x"}]
         led.talks = [{"date": "2026-05-01", "title": "Keynote", "talk_kind": "keynote", "event_name": "E"}]
         led.grants = [{"title": "Grant", "start_date": "2026-01-01", "status": "active", "funders": ["F"]}]

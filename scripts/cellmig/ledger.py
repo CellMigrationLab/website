@@ -7,7 +7,7 @@ of silently leaving a section out of the site.
 from typing import Any
 
 from .config import DATA, LEDGER_DATA, fail, load
-from .text import known_date, year_of
+from .text import precision_of, year_of
 
 Record = dict[str, Any]
 
@@ -28,6 +28,8 @@ class Ledger:
         for p in self.pubs:   # optional in things_done, but every citation on the site shows it
             if not p.get("venue"):
                 fail(f"things_done publication {p['doi']} has no venue (journal or preprint server); add it to the ledger")
+            if not p.get("publication_date"):
+                fail(f"things_done publication {p['doi']} has no publication_date; re-run scripts/sync_things_done.py")
         self.software: list[Record] = _records("software")
         self.datasets: list[Record] = _records("datasets")
         self.coauthors: list[Record] = _records("coauthors", "coauthors")
@@ -49,12 +51,13 @@ class Ledger:
             if key not in self.metrics:
                 fail(f"data/things_done/metrics.yaml has no {key}")
         self.by_doi: dict[str, Record] = {p["doi"].lower(): p for p in self.pubs}
-        # Journal publication dates from the lag report, cut to what is known
-        # ("2021-09-14" or "2021-09"; text.known_date). A year alone adds
-        # nothing to the publication's year, so those papers are undated.
+        # First-publication dates from things_done, as precise as known
+        # ("2021-09-14" or "2021-09"; online first, so possibly in the year
+        # before `year`). A year alone adds nothing to the publication's year,
+        # so those papers are undated.
         self.dates: dict[str, str] = {
-            str(p["published_doi"]).lower(): known_date(p["published_date"], p["published_date_precision"])
-            for p in self.lag_pairs if p["published_date_precision"] != "year"}
+            p["doi"].lower(): str(p["publication_date"]) for p in self.pubs
+            if precision_of(str(p["publication_date"])) != "year"}
 
     def get(self, doi: str) -> Record | None:
         """Publication by DOI (case-insensitive), or None."""

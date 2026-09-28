@@ -18,19 +18,20 @@ from cellmig.text import fmt, is_external, normalize_name, plural, slugify
 from cellmig.worldmap import color
 
 
-def fake_ledger(pubs, lag_pairs=()):
+def fake_ledger(pubs):
     """A Ledger over in-memory records (skips reading data/things_done/)."""
     led = object.__new__(ledger.Ledger)
     led.pubs = pubs
     led.by_doi = {p["doi"].lower(): p for p in pubs}
     led.software, led.datasets, led.affiliations = [], [], []
-    led.dates = {p["published_doi"].lower(): p["published_date"] for p in lag_pairs}
+    led.dates = {p["doi"].lower(): p["publication_date"] for p in pubs if len(p["publication_date"]) > 4}
     return led
 
 
 def pub(doi, year, status="published", title="T", **extra):
     """A publication with the fields things_done requires (and venue, which the site requires)."""
-    return {"doi": doi, "year": year, "status": status, "title": title, "authors": ["A. Author"],
+    return {"doi": doi, "year": year, "publication_date": str(year), "status": status, "title": title,
+            "authors": ["A. Author"],
             "venue": "bioRxiv" if status == "preprint" else "J. Cell Sci.", "abstract": f"Abstract of {title}.", **extra}
 
 
@@ -119,19 +120,18 @@ class LedgerTests(unittest.TestCase):
 
 
 class FeaturedTests(unittest.TestCase):
-    def run_featured(self, pubs, entries, lag_pairs=()):
+    def run_featured(self, pubs, entries):
         with patch.object(featured, "load", return_value=entries):
-            return featured.load_featured(fake_ledger(pubs, lag_pairs))
+            return featured.load_featured(fake_ledger(pubs))
 
     def test_corresponding_author_papers_are_featured_newest_first(self):
         a = pub("10.1/a", 2024, "published", "A", corresponding=True)
-        b = pub("10.1/b", 2024, "published", "B", corresponding=True)
+        b = pub("10.1/b", 2024, "published", "B", corresponding=True, publication_date="2024-03-01")
         c = pub("10.1/c", 2025, "published", "C", corresponding=True)
         d = pub("10.1/d", 2026, "published", "D")   # not corresponding
-        lag = [{"published_doi": "10.1/b", "published_date": "2024-03-01"}]
         entries = [{"doi": "10.1/c", "image": "c.png", "area": "methods"},
                    {"doi": "10.1/a", "area": "biology"}, {"doi": "10.1/b", "area": "biology"}]
-        items = self.run_featured([a, b, c, d], entries, lag)
+        items = self.run_featured([a, b, c, d], entries)
         # 2025 first; in 2024 the dated paper comes before the undated one
         self.assertEqual([i["title"] for i in items], ["C", "B", "A"])
         self.assertEqual(items[0]["image"], "c.png")
