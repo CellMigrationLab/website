@@ -54,6 +54,12 @@ def author_list(authors: list[str], lab: set[str]) -> str:
 # things_done open_access_status values that mean free to read (from OpenAlex);
 # closed and unknown get no badge.
 OPEN_ACCESS = {"gold", "diamond", "hybrid", "green", "bronze"}
+OA_BADGE = '<span class="cm-badge cm-badge--oa" title="Open access">Open access</span>'
+
+
+def oa_badge(rec: Record) -> str:
+    """The Open access badge, or "" for a closed or unknown record."""
+    return OA_BADGE if rec.get("open_access_status") in OPEN_ACCESS else ""
 
 
 def badges(rec: Record) -> str:
@@ -63,9 +69,7 @@ def badges(rec: Record) -> str:
         out.append('<span class="cm-badge cm-badge--preprint">Preprint</span>')
     elif rec.get("status") == "in_press":
         out.append('<span class="cm-badge">In press</span>')
-    if rec.get("open_access_status") in OPEN_ACCESS:
-        out.append('<span class="cm-badge cm-badge--oa" title="Open access">Open access</span>')
-    return "".join(out)
+    return "".join(out) + oa_badge(rec)
 
 
 def citation(rec: Record, lab: set[str], ledger: Ledger, story_url: str | None = None,

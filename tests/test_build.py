@@ -489,13 +489,16 @@ class CloudTests(unittest.TestCase):
 
 class ResearchThemeTests(unittest.TestCase):
     def test_selected_papers(self):
-        """#24: preprints can be selected and are labelled; a preprint and its
-        journal version listed together stop the build; the journal version is shown."""
+        """#24: preprints can be selected; a preprint and its journal version listed
+        together stop the build; the journal version is shown. Papers carry the Open
+        access badge, not a Preprint one (the venue says bioRxiv)."""
         from cellmig.pages_content import _theme
-        led = fake_ledger([PRE, JOURNAL, pub("10.1101/solo", 2026, "preprint", "Solo preprint")])
+        led = fake_ledger([PRE, JOURNAL, pub("10.1101/solo", 2026, "preprint", "Solo preprint",
+                                                     open_access_status="green")])
         html = _theme({"title": "T", "papers": ["10.1101/pre", "10.1101/solo"]}, led)
         self.assertIn("doi.org/10.1/j", html)                     # the preprint's journal version
-        self.assertEqual(html.count("cm-badge--preprint"), 1)      # only the preprint without one
+        self.assertNotIn("cm-badge--preprint", html)
+        self.assertEqual(html.count("cm-badge--oa"), 1)            # the journal version has no OA status here
         with self.assertRaises(SystemExit):
             _theme({"title": "T", "papers": ["10.1101/pre", "10.1/j"]}, led)
 
