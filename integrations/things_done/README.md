@@ -8,14 +8,14 @@ them. There is one place to maintain.
 
 ```
 things_done (private)                                   CellMigrationLab/website (public)
-ledger/publications/*.yaml ──────────────┐
+ledger/publications/*.yaml             ──┐
+  (and display_overrides.yaml)           │
 ledger/registries/{software,datasets}  ──┤
 ledger/profile/lab_members.yaml        ──┤
 ledger/profile/affiliations.yaml       ──┤
 ledger/profile/{person,education}.yaml ──┤
 ledger/roles/*.yaml                    ──┤
-ledger/activities/*/{talks,            ──┤
-  conference_organization}.yaml          │
+ledger/activities/*/talks.yaml         ──┤
 ledger/registries/grants.yaml          ──┤  (no amounts)
 report/generated/publications/           │  update_website.yml runs
   preprint_publication_crosswalk.json  ──┼─ scripts/sync_things_done.py ─▶ data/things_done/*.yaml ─▶ site
@@ -26,11 +26,14 @@ report/generated/publications/           │  update_website.yml runs
 ```
 
 Only public fields are copied: title, authors, venue, year, DOI, abstract,
-open-access status, preprint/journal pairs, whether Guillaume is corresponding
-author, software/dataset descriptions, co-author names, joint-paper counts and
-countries, and the public lab roster (names, roles in the lab, current or
-alumni). Supervision records, notes and conflict-of-interest data are never
-read. Every input file is required: if one is missing the sync fails (and the
+peer review and open-access status, preprint/journal pairs, whether Guillaume
+is corresponding author, software/dataset descriptions, co-author names,
+joint-paper counts and countries, the public lab roster (names, roles in the
+lab, current or alumni), Guillaume's current affiliations, roles and
+education, talks, and grant titles, funder names, programmes and dates
+(never amounts). Records marked `confidentiality: internal` or `confidential`
+are never copied; supervision records, teaching, notes and
+conflict-of-interest data are never read. Every input file is required: if one is missing the sync fails (and the
 workflow run turns red) instead of quietly leaving part of the site stale. The website never gets access to the private repository: the token
 below only lets things_done *write* to this repository.
 
@@ -50,7 +53,7 @@ token cannot leave the website silently stale.
 3. **Test it.** things_done → Actions → *Update lab website* → *Run workflow*.
 
 It then runs after every change to the ledger files the website uses
-(publications, software, datasets, grants, profile, roles, talks, events), the
+(publications, software, datasets, grants, profile, roles, talks), the
 generated reports and the Scholar metrics, after the ledger's own automation
 succeeds, and once a day. It validates the ledger before copying anything.
 
@@ -58,9 +61,9 @@ succeeds, and once a day. It validates the ledger before copying anything.
 
 | On the website | things_done source |
 | --- | --- |
-| Publications, latest papers | `ledger/publications/`, paired by the crosswalk report; `display_overrides.yaml` `force_preprint_bucket` keeps a preprint listed on its own |
+| Publications | `ledger/publications/`, paired by the crosswalk report; `display_overrides.yaml` `force_preprint_bucket` keeps a preprint listed on its own |
 | Featured research (which papers, text) | publications with `me.corresponding_author: true`; pictures are in this repo's `data/featured.yaml` |
-| Software (which projects, years, links) | `ledger/registries/software.yaml`; colours/pictures/long text in `data/software.yaml` here |
+| Software (which projects, years, links) | `ledger/registries/software.yaml`; pictures/videos/long text in `data/software.yaml` here |
 | Datasets | `ledger/registries/datasets.yaml` |
 | Lab in numbers: papers, preprints | publications |
 | Lab in numbers: citations, h-index | `.cache/scholar_metrics.json` (Diagnose Scholar Fetch action) |
@@ -68,10 +71,10 @@ succeeds, and once a day. It validates the ledger before copying anything.
 | Lab in numbers: top collaborators, co-author cloud | `coauthor_network.json` |
 | Lab in numbers: co-author map | `coauthor_countries.json` (Export Co-author Countries action) |
 | Lab members, alumni and their roles, member counts | `ledger/profile/lab_members.yaml` (photos and links stay in this repo) |
-| Funding logos (home page) | funders of current grants in `ledger/registries/grants.yaml` (no amounts are copied) |
+| Current research support (home page) | funders and programmes (`program`, `program_cofunders`) of current grants in `ledger/registries/grants.yaml` (no amounts are copied) |
 | Group leader profile (About us) | `ledger/profile/person.yaml`, `education.yaml`, current records of `ledger/roles/*.yaml` |
-| Recent talks (llms-full.txt) and keynotes (News) | `ledger/activities/*/talks.yaml` |
-| Affiliations (home page, footer) | current records of `ledger/profile/affiliations.yaml` (logos and links in `data/site.yaml` here, by `id`) |
+| Recent talks (llms-full.txt) | `ledger/activities/*/talks.yaml` |
+| Affiliations (footer, structured data) | current records of `ledger/profile/affiliations.yaml` (logos and links in `data/site.yaml` here, by `id`) |
 
 ## Worth adding to the ledger
 

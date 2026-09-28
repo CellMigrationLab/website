@@ -12,14 +12,16 @@ Reads                                        Writes (git-ignored, rebuilt every 
   data/things_done/publications.yaml           docs/publications.md,
     + data/featured.yaml                         docs/featured-research.md, docs/portfolio/<slug>.md
   data/things_done/datasets.yaml               docs/datasets.md
-  data/things_done/ (all of it)                docs/lab-in-numbers.md
+  data/things_done/ (papers, coauthors,        docs/lab-in-numbers.md
+    preprint lag, metrics, software,
+    datasets, lab members)
   data/gallery.yaml                            docs/gallery.md
   data/talks.yaml                              docs/online-lectures.md
   data/things_done/ (papers, software,         docs/feed.xml and docs/feed/index.html
     datasets)                                    (RSS of research outputs)
   data/site.yaml + affiliations, members       overrides/partials/cm-footer.html, cm-jsonld.html
   data/previews.yaml                           link previews (title, text, picture) of every page
-  content/*.md                                 docs/about-us.md, docs/join-us.md
+  content/*.md                                 docs/about-us.md, docs/join-us.md, docs/licensing.md
   (all of the above)                           docs/llms.txt, docs/llms-full.txt (Markdown for LLMs)
                                                docs/assets/thumbs/ (resized images, kept)
 

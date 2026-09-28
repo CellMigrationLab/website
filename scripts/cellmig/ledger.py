@@ -107,7 +107,7 @@ class Ledger:
 
 def software_list(ledger: Ledger) -> list[Record]:
     """Software projects: things_done (title, year, code link, description,
-    papers) merged with data/software.yaml (picture, colour, extra links, and
+    papers) merged with data/software.yaml (picture or video, fit, text, extra links, and
     optional overrides). An entry in data/software.yaml without an `id` is a
     website-only project; an entry whose `id` is not in the ledger is an error.
     Newest first; within a year, in the order of data/software.yaml."""

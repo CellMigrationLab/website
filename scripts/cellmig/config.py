@@ -41,8 +41,8 @@ GENERATED = [
 UNCAPTIONED_ALT = "Microscopy image from the Cell Migration Lab"
 
 # Tile surfaces (cm-tile--<name> in cellmig.css), in turn down the Research
-# and Software pages: the lab's purple in four strengths (owner's choice,
-# option A). A tile's colour comes only from its place; data files set none.
+# and Software pages: white, lavender, light grey, deep purple (owner's
+# choice, option A). A tile's colour comes only from its place; data files set none.
 TILE_SURFACES = ("white", "lavender", "light", "purple")
 FITS = {"cover", "contain"}   # optional `fit` of a picture; cover (fill) unless contain
 

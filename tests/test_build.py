@@ -111,10 +111,10 @@ class LedgerTests(unittest.TestCase):
         led = fake_ledger([])
         led.software = [{"id": "a", "title": "A", "start_date": "2020-01-01", "github_repo_url": "https://github.com/x/a",
                          "description": "A tool.", "related_publication_dois": ["10.1/j"]}]
-        with patch.object(ledger, "load", return_value=[{"title": "Web only", "year": 2022}, {"id": "a", "color": "sky"}]):
+        with patch.object(ledger, "load", return_value=[{"title": "Web only", "year": 2022}, {"id": "a", "fit": "contain"}]):
             out = ledger.software_list(led)
         self.assertEqual([s["title"] for s in out], ["Web only", "A"])
-        self.assertEqual(out[1]["color"], "sky")
+        self.assertEqual(out[1]["fit"], "contain")   # presentation keys pass through
         self.assertEqual(out[1]["dois"], ["10.1/j"])
 
 

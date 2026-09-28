@@ -29,7 +29,6 @@ BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our 
 FEATURED_RESEARCH = '<a class="cm-button" href="featured-research/">Explore our featured research</a>'
 
 
-# The menu's "Software & data" covers two pages; this row links them (#25).
 PREPRINT_BADGE = ' <span class="cm-badge cm-badge--preprint">Preprint</span>'
 
 

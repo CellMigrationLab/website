@@ -15,22 +15,23 @@ publishes it with GitHub Pages; pull requests get a downloadable preview.
 ## What to edit
 
 Most pages are generated from the files in `data/`. Open the file on GitHub,
-click the pencil, edit, commit. Every page on the website also has an edit
-button (top right) that opens the right file.
+click the pencil, edit, commit. Most pages also have an edit button (top right)
+that opens their source file; the home page and the pages made only from
+things_done (publications, datasets, lab in numbers) have none.
 
 | Page | Edit |
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
-| Current research support (home page) | which ones: things_done `ledger/registries/grants.yaml` (grants active/awarded and not ended, as of the sync); logo and link per direct funder (`funders[].name`) in `data/site.yaml` `funding` and per programme (`program`) in `programmes` (`logo: null` for text). Grouped by `ledger.support_list`: a funder with the programmes it alone funds; a joint award once, under its programme, with its co-funders. A current funder or programme without an entry stops the build; an entry that is no longer current is left out with a warning |
+| Current research support (home page) | which ones: things_done `ledger/registries/grants.yaml` (grants active/awarded and not ended, as of the sync); logo and link per direct funder in `data/site.yaml` `funding` (`funder:` = the ledger's funder name; `hide: true` leaves one out) and per programme in `programmes` (`program:`; optional `scheme` mark; `logo: null` = named only in llms-full.txt). One row of logos: each funder, then the logos of the programmes it alone funds; joint awards' funders after them. A current funder or programme without an entry stops the build; an entry that is no longer current is left out with a warning |
 | RSS feed of research outputs (`feed.xml`) | automatic, from things_done: papers, preprints, software and datasets since 2024 (`scripts/cellmig/outputs.py`); no talks, events, funding or positions |
 | Join us (recruitment) | `content/join-us.md` |
 | Group leader profile (About us) | automatic, from things_done (`ledger/profile/`, `ledger/roles/`) |
-| Affiliations (home page and footer) | which ones: things_done `ledger/profile/affiliations.yaml` (current = no end date, or one not yet passed); logo and link per ledger `id` in `data/site.yaml` `affiliations` — a current affiliation without an entry stops the build; an entry that is no longer current is left out with a warning |
+| Affiliations (footer) | which ones: things_done `ledger/profile/affiliations.yaml` (current = no end date, or one not yet passed); logo and link per ledger `id` in `data/site.yaml` `affiliations` — a current affiliation without an entry stops the build; an entry that is no longer current is left out with a warning |
 | Research | `data/research.yaml` |
 | Featured research (8 newest biology and 8 newest methods papers on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done, and only those; area (biology or methods), pictures and page addresses in `data/featured.yaml` (`hide: true` to leave one out) |
 | Publications | automatic, from things_done |
 | Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done |
-| Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |
+| Software | automatic list from things_done; pictures, videos, texts and extra links in `data/software.yaml` (tile colours follow each other down the page) |
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
 | Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<name>.yaml`, team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
@@ -88,7 +89,7 @@ keep their old addresses, so existing links to them keep working.
 pip install -r requirements.txt
 python scripts/build_pages.py   # generates the pages from data/
 zensical serve                  # http://localhost:8000, reloads on changes
-# the publish workflow then runs: zensical build && python scripts/write_sitemap.py
+# the publish workflow then runs: zensical build --strict && python scripts/write_sitemap.py
 ```
 
 Generated pages (listed in `.gitignore`) are rebuilt every time; do not edit
@@ -135,7 +136,7 @@ overrides/ (layout), docs/assets/ (CSS, JS, fonts) ───┘
   RSS feed and the footer. The code lives in `scripts/cellmig/`, one module
   per concern (see its `__init__.py` for a map; one module per page family).
   There are no silent fallbacks: a missing file, a DOI that is not in the
-  ledger, an unknown key or colour, or a picture that does not exist stops
+  ledger, an unknown key (or a leftover `color`), or a picture that does not exist stops
   the build with a message naming the file to fix.
 - `scripts/write_sitemap.py` — after `zensical build`, writes `site/sitemap.xml`
   (every page, including the featured-paper pages that are not in the menu)

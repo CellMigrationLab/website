@@ -17,14 +17,14 @@ bands:
     caption: Breast cancer cell monolayer stained for actin.
   - image: wp-content/uploads/2022/10/cover-3.jpg
 
+# The lab's postal address (footer, structured data, llms.txt). The contact
+# email is the group leader's, in data/members/<slug>.yaml.
 contact:
-  email: guillaume.jacquemet@abo.fi
   address:
     - Cell Migration Lab
     - Turku Bioscience Centre, BioCity
     - Tykistökatu 6
     - 20520 Turku, Finland
-  map: https://www.openstreetmap.org/?mlat=60.4499&mlon=22.2720#map=16/60.4499/22.2720
 
 social:
   - label: Bluesky
