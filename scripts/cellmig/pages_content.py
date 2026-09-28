@@ -120,18 +120,24 @@ def _dataset_type(d: Record) -> str:
 
 
 def _dataset(d: Record, ledger: Ledger) -> str:
-    """One dataset: title, description, year, archive DOI and papers."""
+    """One dataset: title, description, year, imaging modality and model
+    scores (when the ledger has them), archive DOI and papers."""
     papers = ledger.dataset_papers(d)
     refs = [paper_link(rec) for rec in papers]
-    # what the search box matches: the dataset and its papers (title, authors, journal, year, DOI)
-    text = " ".join([d["title"], d["description"], d.get("archive_doi") or "",
+    # what the search box matches: the dataset (with its imaging modality) and its papers (title, authors, journal, year, DOI)
+    text = " ".join([d["title"], d["description"], d.get("archive_doi") or "", d.get("imaging_modality") or "",
                      *(f'{r["title"]} {" ".join(r["authors"])} {r["venue"]} {r["year"]} {r["doi"]}' for r in papers)]).lower()
+    facts = [str(year_of(d["start_date"]))]
+    if d.get("imaging_modality"):
+        facts.append(d["imaging_modality"].capitalize())
+    if d.get("model_metrics"):   # scores to three decimals, as reported with the model
+        facts.append(", ".join(f"{k} {v:.3f}" for k, v in d["model_metrics"].items()))
     archive = d.get("archive_doi")
     archive_html = (f' · <a href="https://doi.org/{esc(archive)}">doi:{esc(archive)}</a>'
                     if archive and archive not in d["repository_url"] else "")
     return (f'<li data-search="{esc(text)}"><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>'
             f'<p>{md(d["description"], inline=True)}</p>'
-            f'<p class="cm-small">{year_of(d["start_date"])}{archive_html}'
+            f'<p class="cm-small">{esc(" · ".join(facts))}{archive_html}'
             f' · {"Paper" if len(refs) == 1 else "Papers"}: {", ".join(refs)}</p></li>')   # every dataset has one (Ledger.dataset_papers)
 
 

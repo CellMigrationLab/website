@@ -164,6 +164,10 @@ records:
   archive_doi: 10.5281/zenodo.10611092
   description: Artificial labeling model used to label cell-cell junctions from brightfield images with
     endothelial and immune/cancer cells.
+  imaging_modality: brightfield
+  model_metrics:
+    SSIM: 0.27
+    LPIPS: 0.36
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: pix2pix_HUVEC_nuclei_cancer_cells_dataset
@@ -173,6 +177,10 @@ records:
   archive_doi: 10.5281/zenodo.10621667
   description: Artificial labeling model used to label nuclei from brightfield images containing cancer
     and endothelial cells.
+  imaging_modality: brightfield
+  model_metrics:
+    SSIM: 0.755
+    LPIPS: 0.12
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: pix2pix_HUVEC_nuclei_immuno_cells_dataset
@@ -182,6 +190,10 @@ records:
   archive_doi: 10.5281/zenodo.10617565
   description: Artificial labeling model used to label nuclei from brightfield images containing immune
     and endothelial cells.
+  imaging_modality: brightfield
+  model_metrics:
+    SSIM: 0.756
+    LPIPS: 0.13
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_AsPC1_Lifeact
@@ -191,6 +203,10 @@ records:
   archive_doi: 10.5281/zenodo.13442128
   description: StarDist model for segmenting AsPC1 cells from LifeAct channel, including single-cell separation
     from clusters.
+  imaging_modality: fluorescence
+  model_metrics:
+    IoU: 0.884
+    F1: 0.967
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_cancer_cell_dataset_10x
@@ -199,6 +215,10 @@ records:
   repository_url: https://zenodo.org/uploads/13304399
   archive_doi: 10.5281/zenodo.13304399
   description: StarDist model for segmenting cancer cells on endothelial cells at 10x magnification.
+  imaging_modality: brightfield
+  model_metrics:
+    IoU: 0.882
+    F1: 0.968
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_cancer_cell_dataset_20x
@@ -208,6 +228,10 @@ records:
   archive_doi: 10.5281/zenodo.10572122
   description: StarDist model for segmenting cancer cells on endothelial cells at 20x magnification before
     tracking.
+  imaging_modality: brightfield
+  model_metrics:
+    IoU: 0.793
+    F1: 0.921
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_Monocytes_dataset
@@ -216,6 +240,10 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.10572200
   archive_doi: 10.5281/zenodo.10572200
   description: StarDist model for segmenting mononucleated cells on endothelial cells prior to tracking.
+  imaging_modality: brightfield
+  model_metrics:
+    IoU: 0.831
+    F1: 0.941
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_Neutrophil_dataset
@@ -224,6 +252,10 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.10572231
   archive_doi: 10.5281/zenodo.10572231
   description: StarDist model for segmenting neutrophils on endothelial cells prior to tracking.
+  imaging_modality: brightfield
+  model_metrics:
+    IoU: 0.914
+    F1: 0.969
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_Fluorescent_cells
@@ -233,6 +265,10 @@ records:
   archive_doi: 10.5281/zenodo.10572310
   description: StarDist model to detect cancer cells from fixed fluorescence samples for attached-cell
     quantification.
+  imaging_modality: fluorescence
+  model_metrics:
+    IoU: 0.646
+    F1: 0.877
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_HUVEC_nuclei_dataset
@@ -241,6 +277,10 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.10617532
   archive_doi: 10.5281/zenodo.10617532
   description: StarDist model for segmenting endothelial nuclei while ignoring cancer cells.
+  imaging_modality: fluorescence
+  model_metrics:
+    IoU: 0.927
+    F1: 0.976
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: Stardist_MiaPaCa2_from_CD44
@@ -250,6 +290,10 @@ records:
   archive_doi: 10.5281/zenodo.13442877
   description: StarDist model for segmenting MiaPaCa2 cells from the CD44 channel while ignoring endothelial
     cells.
+  imaging_modality: fluorescence
+  model_metrics:
+    IoU: 0.884
+    F1: 0.95
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_TumorCell_nuclei
@@ -258,6 +302,10 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.13443221
   archive_doi: 10.5281/zenodo.13443221
   description: StarDist model for segmenting tumor cell nuclei while ignoring endothelial nuclei.
+  imaging_modality: fluorescence
+  model_metrics:
+    IoU: 0.558
+    F1: 0.793
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: TLNRD1 figures
@@ -534,6 +582,10 @@ records:
   archive_doi: 10.5281/zenodo.4034939
   description: Contains a StarDist example training dataset, a test dataset, and the StarDist model generated
     using ZeroCostDL4Mic.
+  imaging_modality: brightfield
+  model_metrics:
+    IoU: 0.813
+    F1: 0.933
   related_publication_dois:
   - 10.12688/f1000research.27019.2
 - title: FiloMap Test Dataset
