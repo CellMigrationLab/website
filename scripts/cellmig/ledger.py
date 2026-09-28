@@ -34,12 +34,11 @@ class Ledger:
         self.affiliations: list[Record] = _records("affiliations")
         self.talks: list[Record] = _records("talks")
         self.grants: list[Record] = _records("grants")
-        self.events: list[Record] = _records("conference_organization")
         self.profile: Record = load(LEDGER_DATA / "profile.yaml")
         for key in ("name", "title", "short_bio", "appointments", "education"):
             if not self.profile.get(key):
                 fail(f"data/things_done/profile.yaml has no {key}; re-run scripts/sync_things_done.py")
-        for key in ("editorial", "service", "roles"):   # lists that may be empty, but must be there
+        for key in ("editorial", "service"):   # lists that may be empty, but must be there
             if not isinstance(self.profile.get(key), list):
                 fail(f"data/things_done/profile.yaml has no {key} list; re-run scripts/sync_things_done.py")
         self.lag_pairs: list[Record] = _records("preprint_lag", "pairs")   # the sync keeps pairs with a gap only

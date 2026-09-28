@@ -9,7 +9,7 @@ from .config import DOCS, ROOT, SITE_URL, fail
 from .icons import ICONS
 from .images import dims, thumb
 from .ledger import Record
-from .news import KIND_LABELS, NewsItem
+from .outputs import KIND_LABELS, ResearchOutput
 from .page import check_public
 from .people import Person
 from .structured import organization, to_json
@@ -69,14 +69,14 @@ def write_footer(site: Record, affiliations: list[Record]) -> None:
     (ROOT / "overrides" / "partials" / "cm-footer.html").write_text(out, encoding="utf-8")
 
 
-def write_feed(site: Record, news: list[NewsItem]) -> None:
-    """RSS of the newest news items: docs/feed.xml, and docs/feed/index.html
+def write_feed(site: Record, outputs: list[ResearchOutput]) -> None:
+    """RSS of the newest research outputs: docs/feed.xml, and docs/feed/index.html
     (the old WordPress feed address). Every item has a pubDate (readers date
-    undated items "now", which shows old news as new): the day when known,
+    undated items "now", which shows old items as new): the day when known,
     else the first day of the known month or year."""
     items = []
-    for n in news[:FEED_ITEMS]:
-        url = n["url"] if n["url"] and n["url"].startswith("http") else SITE_URL + (n["url"] or f"news/#y{n['date'][:4]}")
+    for n in outputs[:FEED_ITEMS]:
+        url = n["url"] if n["url"].startswith("http") else SITE_URL + n["url"]
         start = {"day": n["date"][:10], "month": n["date"][:7] + "-01", "year": n["date"][:4] + "-01-01"}[n["precision"]]
         day = datetime.strptime(start, "%Y-%m-%d").replace(tzinfo=timezone.utc)
         when = f"<pubDate>{format_datetime(day)}</pubDate>"
@@ -86,9 +86,10 @@ def write_feed(site: Record, news: list[NewsItem]) -> None:
                      f"<guid isPermaLink=\"false\">{esc(guid)}</guid>"
                      f"{when}<description>{esc(html.unescape(text))}</description></item>")
     rss = ('<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>'
-           f'<title>{esc(site["name"])}: news</title><link>{SITE_URL}news/</link>'
+           f'<title>{esc(site["name"])} research outputs</title><link>{SITE_URL}publications/</link>'
            f'<atom:link href="{SITE_URL}feed.xml" rel="self" type="application/rss+xml"/>'
-           f'<description>{esc(site["motto"])}</description><language>en</language>'
+           f'<description>New publications, preprints, software and datasets from the {esc(site["name"])}.</description>'
+           '<language>en</language>'
            + "".join(items) + "</channel></rss>\n")
     check_public("docs/feed.xml", rss)
     (DOCS / "feed.xml").write_text(rss, encoding="utf-8")
