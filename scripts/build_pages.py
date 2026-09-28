@@ -97,6 +97,7 @@ def main() -> None:
     write_jsonld(site, affiliations, members, plain(ledger.profile["short_bio"]), funding)
     write_llms(site, featured, ledger, members, affiliations, funding)
     check_all_used()
+    rights.use_theme_images()      # favicon, touch icon, default preview image
     rights.check_all_recorded()   # every image shown has a rights entry (data/media.yaml)
     print(f"Generated pages: {len(featured)} featured papers, {len(ledger.grouped())} publications, "
           f"{len(ledger.datasets)} datasets, {len(members)} people.")

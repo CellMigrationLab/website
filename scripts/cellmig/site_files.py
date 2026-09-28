@@ -48,7 +48,7 @@ def write_footer(site: Record, affiliations: list[Record]) -> None:
     <div class="cm-footer__col">
       <p class="cm-footer__title">{t(site["name"])}</p>
       <p>{t(site["motto"])}</p>
-      <img class="cm-footer__logo" src="{u(thumb(site["footer_logo"], 500))}" alt="Cell Migration – Jacquemet Lab logo" loading="lazy">
+      <img class="cm-footer__logo" src="{u(thumb(site["footer_logo"], 500))}"{dims(thumb(site["footer_logo"], 500))} alt="Cell Migration – Jacquemet Lab logo" loading="lazy">
     </div>
     <div class="cm-footer__col">
       <p class="cm-footer__title">Affiliations</p>
@@ -71,15 +71,16 @@ def write_footer(site: Record, affiliations: list[Record]) -> None:
 
 def write_feed(site: Record, outputs: list[ResearchOutput]) -> None:
     """RSS of the newest research outputs: docs/feed.xml, and docs/feed/index.html
-    (the old WordPress feed address). Every item has a pubDate (readers date
-    undated items "now", which shows old items as new): the day when known,
-    else the first day of the known month or year."""
+    (the old WordPress feed address). An item has a pubDate only when its
+    date is known to the day: RSS dates are full dates, and a made-up day
+    would be a fabricated fact. Items with a month or year only have none."""
     items = []
     for n in outputs[:FEED_ITEMS]:
         url = n["url"] if n["url"].startswith("http") else SITE_URL + n["url"]
-        start = {"day": n["date"][:10], "month": n["date"][:7] + "-01", "year": n["date"][:4] + "-01-01"}[n["precision"]]
-        day = datetime.strptime(start, "%Y-%m-%d").replace(tzinfo=timezone.utc)
-        when = f"<pubDate>{format_datetime(day)}</pubDate>"
+        when = ""
+        if n["precision"] == "day":
+            day = datetime.strptime(n["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            when = f"<pubDate>{format_datetime(day)}</pubDate>"
         guid = f"{n['kind']}:{n['date']}:{n['title']}"
         text = re.sub(r"<[^>]+>", "", n["html"])
         items.append(f"<item><title>{esc(KIND_LABELS[n['kind']] + ': ' + n['title'])}</title><link>{esc(url)}</link>"

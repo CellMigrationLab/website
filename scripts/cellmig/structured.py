@@ -20,7 +20,7 @@ from .config import LAB_FOUNDED, SITE_URL
 from .featured import Story
 from .ledger import Record
 from .people import Person, leader
-from .text import md
+from .text import full_date, md
 
 LAB_ID = f"{SITE_URL}#lab"
 Json = dict[str, Any]
@@ -93,8 +93,9 @@ def organization(site: Record, affiliations: list[Record], members: list[Person]
 
 
 def _date(story_date: str | None, year: int) -> str:
-    """ISO date when known, else the year (Scholar tags accept a year)."""
-    return story_date or str(year)
+    """ISO date when known to the day, else the year (Scholar tags accept a
+    full date or a year)."""
+    return full_date(story_date) or str(year)
 
 
 def article(story: Story, page_url: str, image: Json | None) -> Json:
@@ -117,7 +118,7 @@ def article(story: Story, page_url: str, image: Json | None) -> Json:
         # the lab was founded). Organisations come only from provenance data
         # (things_done#142, once it exists); the authors are the claim made here.
     }
-    if story["date"]:   # schema.org Date is a full ISO date: no year-only values
+    if full_date(story["date"]):   # only full dates: no year- or month-only values
         work["datePublished"] = story["date"]
     if image:
         work["image"] = image
@@ -149,13 +150,13 @@ def item_list(name: str, items: list[Json], description: str | None = None) -> J
 
 
 def publication_item(rec: Record, date: str | None) -> Json:
-    """A publication as a short ScholarlyArticle; datePublished only when the
-    full date is known (`date`), never a bare year."""
+    """A publication as a short ScholarlyArticle; datePublished only when
+    `date` (Ledger.dates) is known to the day, never a bare month or year."""
     item: Json = {"@type": "ScholarlyArticle", "name": rec["title"],
                   "author": [{"@type": "Person", "name": a} for a in rec["authors"]],
                   "isPartOf": {"@type": "Periodical", "name": rec["venue"]},
                   "sameAs": f"https://doi.org/{rec['doi']}"}
-    if date:
+    if full_date(date):
         item["datePublished"] = date
     return item
 

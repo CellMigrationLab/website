@@ -299,9 +299,28 @@ class AuditRegressionTests(unittest.TestCase):
 
     def test_grouped_is_newest_first_within_a_year(self):
         older, newer, undated = pub("10.1/o", 2026, title="A older"), pub("10.1/n", 2026, title="B newer"), pub("10.1/u", 2026, title="0 undated")
-        led = fake_ledger([undated, older, newer])
-        led.dates = {"10.1/o": "2026-02-01", "10.1/n": "2026-09-01"}
-        self.assertEqual([r["doi"] for r in led.grouped()], ["10.1/n", "10.1/o", "10.1/u"])
+        month = pub("10.1/m", 2026, title="C month")
+        led = fake_ledger([undated, older, month, newer])
+        led.dates = {"10.1/o": "2026-02-01", "10.1/n": "2026-09-01", "10.1/m": "2026-05"}
+        self.assertEqual([r["doi"] for r in led.grouped()], ["10.1/n", "10.1/m", "10.1/o", "10.1/u"])
+
+    def test_thumbnails_are_remade_when_the_image_code_changes(self):
+        """CI restores older thumbnail caches: the digest must cover the code (quality, resampling)."""
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+
+        from cellmig import images
+        with TemporaryDirectory() as tmp, patch.object(images, "DOCS", Path(tmp)), \
+                patch.object(images, "DIGESTS", Path(tmp) / "digests"):
+            src, out = Path(tmp) / "a.png", Path(tmp) / "t" / "a.webp"
+            src.write_bytes(b"image")
+            out.parent.mkdir()
+            out.write_bytes(b"thumb")
+            images._made(out, src, "webp 400")
+            self.assertFalse(images._stale(out, src, "webp 400"))
+            self.assertTrue(images._stale(out, src, "webp 800"))
+            with patch.object(images, "CODE", "other"):
+                self.assertTrue(images._stale(out, src, "webp 400"))
 
     def test_title_slug_is_cut_at_a_word(self):
         slug = featured._title_slug("word " * 40)
@@ -346,9 +365,15 @@ class NewTabTests(unittest.TestCase):
     def test_which_links(self):
         from cellmig.config import SITE_URL
         from cellmig.text import opens_new_tab
-        self.assertTrue(opens_new_tab("https://doi.org/10.1/x"))
-        for url in (f"{SITE_URL}news/", "https://cellmig.org/software/", "software/", "#top",
-                    "mailto:a@b.fi", "../index.html"):
+        from urllib.parse import urlsplit
+        site = urlsplit(SITE_URL)
+        for url in ("https://doi.org/10.1/x", "https://cellmig.org.example.org/", "https://notcellmig.org/",
+                    f"https://{site.hostname}.example.org{site.path}", f"https://{site.hostname}/other-project/"):
+            with self.subTest(url=url):
+                self.assertTrue(opens_new_tab(url))
+        for url in (f"{SITE_URL}news/", SITE_URL.rstrip("/"),
+                    "https://cellmig.org/software/", "http://www.cellmig.org", "HTTPS://CELLMIG.ORG/x",
+                    "software/", "#top", "mailto:a@b.fi", "../index.html"):
             with self.subTest(url=url):
                 self.assertFalse(opens_new_tab(url))
 
