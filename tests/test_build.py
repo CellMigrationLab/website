@@ -442,12 +442,18 @@ class WorldMapTests(unittest.TestCase):
 class CloudTests(unittest.TestCase):
     def test_compact_size_range_keeps_the_encoding(self):
         """#19: the largest name stays modest, sizes still grow with joint papers."""
-        from cellmig.pages_numbers import CLOUD_MAX, CLOUD_MIN, CLOUD_SIZE, cloud_size
+        from cellmig.pages_numbers import CLOUD_MAX, CLOUD_MIN, cloud_size
         self.assertLessEqual(CLOUD_MAX, 1.6)
-        self.assertLessEqual(CLOUD_SIZE, 50)
         self.assertEqual(cloud_size(28, 28), CLOUD_MAX)
         self.assertLess(cloud_size(3, 28), cloud_size(10, 28))
         self.assertGreaterEqual(cloud_size(1, 28), CLOUD_MIN)
+
+    def test_every_coauthor_is_in_the_cloud(self):
+        from cellmig.pages_numbers import _cloud
+        people = [{"name": f"Ann Author{i}", "papers": 1 + i % 3} for i in range(120)]
+        html = _cloud(people, set())
+        self.assertEqual(html.count("<span class=\"\" "), 120)
+        self.assertIn("Show the 40 co-authors of one paper", html)
 
 
 class ResearchThemeTests(unittest.TestCase):
