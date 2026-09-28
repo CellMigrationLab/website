@@ -135,7 +135,7 @@ def _dataset(d: Record, ledger: Ledger) -> str:
     archive = d.get("archive_doi")
     archive_html = (f' · <a href="https://doi.org/{esc(archive)}">doi:{esc(archive)}</a>'
                     if archive and archive not in d["repository_url"] else "")
-    return (f'<li data-search="{esc(text)}"><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>'
+    return (f'<li data-kind="{slugify(_dataset_type(d))}" data-search="{esc(text)}"><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>'
             f'<p>{md(d["description"], inline=True)}</p>'
             f'<p class="cm-small">{esc(" · ".join(facts))}{archive_html}'
             f' · {"Paper" if len(refs) == 1 else "Papers"}: {", ".join(refs)}</p></li>')   # every dataset has one (Ledger.dataset_papers)
@@ -157,11 +157,14 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     for d in ledger.datasets:
         groups.setdefault(_dataset_type(d), []).append(d)
     order = [g for g in dict.fromkeys(DATASET_TYPES.values()) if g in groups]
-    p.add('<nav class="cm-toc-inline">' + " · ".join(
-        f'<a href="#{slugify(g)}">{esc(g)} ({len(groups[g])})</a>' for g in order) + "</nav>",
-          '<form class="cm-filter" data-cm-filter="datasets" role="search" onsubmit="return false">',
+    # search and one chip per data type, like the Publications filter (cellmig.js initFilter)
+    p.add('<form class="cm-filter" data-cm-filter="datasets" role="search" onsubmit="return false">',
           '<label class="cm-visually-hidden" for="dataset-search">Search datasets</label>',
           '<input id="dataset-search" type="search" placeholder="Search name, description or paper…" data-cm-search>',
+          '<div class="cm-filter__chips" role="group" aria-label="Show">',
+          '<button type="button" class="is-active" data-cm-kind="">All</button>',
+          *(f'<button type="button" data-cm-kind="{slugify(g)}">{esc(g)} ({len(groups[g])})</button>' for g in order),
+          "</div>",
           '<p class="cm-filter__count" data-cm-count aria-live="polite"></p>',
           "</form>")
     for g in order:
