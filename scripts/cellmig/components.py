@@ -72,6 +72,28 @@ def badges(rec: Record) -> str:
     return "".join(out) + oa_badge(rec)
 
 
+# How a paper is mentioned. Two forms, the same everywhere:
+# - citation(): the full reference (Publications, featured paper pages), with
+#   authors, DOI and all badges (Preprint, In press, Open access);
+# - the short forms below (cards, Research, Software, Datasets): the journal in
+#   italics, " · ", the year, and only the Open access badge (a preprint shows
+#   as one by its venue, bioRxiv).
+def venue_year(rec: Record) -> str:
+    """<em>Journal</em> · 2026"""
+    return f'<em class="cm-venue">{esc(rec["venue"])}</em> · {rec["year"]}'
+
+
+def paper_link(rec: Record) -> str:
+    """Short reference without the title: the journal and year, linked to the DOI."""
+    return f'<a href="https://doi.org/{esc(rec["doi"])}">{venue_year(rec)}</a>{oa_badge(rec)}'
+
+
+def paper_ref(rec: Record) -> str:
+    """Short reference with the title: the title linked to the DOI, then journal and year."""
+    return (f'<a href="https://doi.org/{esc(rec["doi"])}">{esc(rec["title"])}</a> '
+            f'<span class="cm-ref__meta">{venue_year(rec)}</span>{oa_badge(rec)}')
+
+
 def citation(rec: Record, lab: set[str], ledger: Ledger, story_url: str | None = None,
              abstract: bool = False, heading: str = "h3") -> str:
     """A publication: title, authors, venue/year/DOI, preprint and story links,
@@ -83,12 +105,11 @@ def citation(rec: Record, lab: set[str], ledger: Ledger, story_url: str | None =
         links.append(f'<a href="https://doi.org/{esc(pre["doi"])}">{PREPRINT_LINK}</a>')
     if story_url:
         links.append(f'<a href="{story_url}">Read more</a>')
-    year = f' · {rec["year"]}'
     parts = [
         f'<{heading} class="cm-pub__title"><a href="https://doi.org/{esc(doi)}">{esc(rec["title"])}</a></{heading}>',
         f'<p class="cm-pub__authors">{author_list(rec["authors"], lab)}</p>',
-        f'<p class="cm-pub__venue"><em>{esc(rec["venue"])}</em>{year}'
-        f' · <a class="cm-doi" href="https://doi.org/{esc(doi)}">doi:{esc(doi)}</a> {badges(rec)}</p>',
+        f'<p class="cm-pub__venue">{venue_year(rec)}'
+        f' · <a class="cm-doi" href="https://doi.org/{esc(doi)}">doi:{esc(doi)}</a>{badges(rec)}</p>',
     ]
     if links:
         parts.append(f'<p class="cm-pub__links">{" · ".join(links)}</p>')
@@ -105,7 +126,7 @@ def feature_card(story: Story) -> str:
     return (f'<a class="cm-card" href="portfolio/{story["slug"]}/">'
             f'<div class="cm-card__media{" cm-fit-contain" if story["fit"] == "contain" else ""}">{pic}</div>'
             f'<p class="cm-card__title">{esc(story["title"])}</p>'
-            f'<p class="cm-card__meta">{esc(pub["venue"])} · {pub["year"]} {badges(pub)}</p></a>')
+            f'<p class="cm-card__meta">{venue_year(pub)}{oa_badge(pub)}</p></a>')
 
 
 # Logo sizes (CSS px): every logo gets about the same visual area, so a wide

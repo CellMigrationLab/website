@@ -210,7 +210,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset ul.cm-tile__papers { margin: 0 0 .8rem; padding: 0; list-style: none; font-size: .68rem; }
 .md-typeset .cm-tile__papers li { margin: 0 0 .36rem; padding-left: .72rem; border-left: 2px solid currentColor; line-height: 1.45; }
 .md-typeset .cm-tile__papers a { font-weight: 500; }
-.md-typeset .cm-tile__papers span { opacity: .75; font-style: italic; }
+.md-typeset .cm-ref__meta { color: var(--cm-muted); }   /* the journal · year of a short reference */
 .md-typeset .cm-tile__credit { margin-top: .96rem !important; font-size: .624rem; opacity: .85; }
 .md-typeset .cm-tile__links { margin-top: 1.12rem !important; font-size: .68rem; }
 
