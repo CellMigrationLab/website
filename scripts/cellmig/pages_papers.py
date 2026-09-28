@@ -2,7 +2,7 @@
 
 
 from . import rights
-from .components import PREPRINT_LINK, citation, feature_card, one_line, orcid_url
+from .components import PAPERS, PREPRINT_LINK, citation, feature_card, one_line, orcid_url, section_nav
 from .config import LAB_FOUNDED, SITE_URL, edit_url
 from .featured import Story, story_by_doi
 from .images import media
@@ -16,9 +16,9 @@ from .text import esc, slugify
 
 def page_featured(featured: list[Story], ledger: Ledger, lab: set[str]) -> None:
     """docs/featured-research.md (the grid) and docs/portfolio/<slug>.md for each story."""
-    p = Page("featured-research.md", title="Featured Research", edit_url=edit_url("data/featured.yaml"),
+    p = Page("featured-research.md", title="Featured Research", menu="publications/", edit_url=edit_url("data/featured.yaml"),
              **preview("featured-research"))
-    p.add("# Featured Research",
+    p.add("# Featured Research", section_nav(PAPERS, "Featured research"),
           '<p class="cm-lead">Papers where Guillaume Jacquemet is corresponding or co-corresponding author, '
           f'including work from before the lab was founded in {LAB_FOUNDED}; newest first. '
           'See <a href="publications/">all our publications</a>.</p>',
@@ -68,7 +68,7 @@ def page_story(story: Story, stories: list[Story], i: int, ledger: Ledger, lab: 
     """docs/portfolio/<slug>.md: picture, citation(s), abstract, links, related
     software/data, and newer/older navigation within `stories`."""
     image = story["image"]
-    p = Page(f"portfolio/{story['slug']}.md", title=story["title"], edit_url=edit_url("data/featured.yaml"),
+    p = Page(f"portfolio/{story['slug']}.md", title=story["title"], menu="publications/", edit_url=edit_url("data/featured.yaml"),
              description=one_line(story["summary"], 300),
              image=image or paper_image(), og_type="article")
     picture = rights.image_object(image or paper_image(), SITE_URL + p.meta["image"])   # the preview picture
@@ -114,7 +114,7 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str], lead
         [publication_item(r, ledger.dates.get(r["doi"].lower())) for r in records],
         f"All publications of Guillaume Jacquemet, who founded the Cell Migration Lab in {LAB_FOUNDED}; "
         f"papers before {LAB_FOUNDED} are from his PhD and postdoctoral work."))
-    p.add("# Publications",
+    p.add("# Publications", section_nav(PAPERS, "All publications"),
           f'<p class="cm-lead">{len(records)} papers and preprints, newest first. Authors directly associated with the lab are '
           '<span class="cm-author--lab">highlighted</span>; preprints are merged with their journal version.</p>',
           '<form class="cm-filter" data-cm-filter role="search" onsubmit="return false">',
