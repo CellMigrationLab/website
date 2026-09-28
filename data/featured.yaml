@@ -59,7 +59,7 @@
   image: wp-content/uploads/2025/12/pasted-image.png
   slug: customizable-fdm-based-zebrafish-embryomold-for-live-imaging
 - doi: 10.1002/1878-0261.70025
-  area: methods
+  area: biology
   image: wp-content/uploads/2025/05/mol270025-fig-0001-m.jpg
   slug: time-the-final-frontier
 - doi: 10.1242/jcs.263801
@@ -137,11 +137,8 @@
 - doi: 10.1042/bio_2021_167
   area: methods
   image: wp-content/uploads/2020/09/max_predicted_12.png
-- doi: 10.1242/jcs.263575
-  area: methods
-  summary: >-
-    Editorial by Lucy Collinson and Guillaume Jacquemet introducing the Journal of Cell Science
-    special issue on imaging cell architecture and dynamics.
+- doi: 10.1242/jcs.263575   # Imaging cell architecture and dynamics: a short editorial
+  hide: true
 - doi: 10.64898/2026.09.02.749041
   area: biology
 - doi: 10.1016/j.ceb.2023.102271
