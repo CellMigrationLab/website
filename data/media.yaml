@@ -35,6 +35,10 @@ media:
   type: logo
   rights: third-party
   source: Finnish Cancer Institute
+- path: assets/images/logos/immens.png
+  type: logo
+  rights: third-party
+  source: Centre of Excellence IMMENs
 - path: assets/images/logos/research-council-of-finland.svg
   type: logo
   rights: third-party
