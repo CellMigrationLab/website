@@ -5,7 +5,7 @@ import re
 from .config import COLORS, FITS, fail
 from .featured import Story
 from .icons import ICONS
-from .images import dims, image_size, media, square_thumb, thumb
+from .images import image_size, media, square_thumb, thumb
 from .ledger import Ledger, Record
 from .people import Person, is_lab_member
 from .text import esc, md
@@ -116,33 +116,22 @@ def _logo(it: Record) -> str:
 
 
 def logo_row(items: list[Record]) -> str:
-    """Row of linked logos (affiliations)."""
+    """Row of linked logos (affiliations, research support)."""
     return '<ul class="cm-logos">' + "".join(f"<li>{_logo(it)}</li>" for it in items) + "</ul>"
 
 
-def _programme(p: Record) -> str:
-    """A programme under its funder(s): its logo when there is an official one, else its name."""
-    if p["logo"] is None:
-        return f'<a href="{esc(p["url"])}">{esc(p["name"])}</a>'
-    src = thumb(p["logo"], 300)
-    return (f'<a class="cm-support__programme" href="{esc(p["url"])}" title="{esc(p["name"])}">'
-            f'<img src="{src}"{dims(src)} alt="{esc(p["name"])}" loading="lazy"></a>')
-
-
 def support_row(groups: list[Record]) -> str:
-    """Current research support (ledger.support_list): each group is its
-    funder logo(s), with the programmes it funds, or a joint award's
-    programme name with its co-funders, underneath in small text."""
+    """Current research support (ledger.support_list) as one row of logos,
+    all sized alike: each group's funders, then the logos of its programmes
+    (a programme's `scheme` mark first). Programmes without a logo, and a
+    joint award's co-funders, are named in llms-full.txt, not here."""
     items = []
     for g in groups:
-        notes = [_programme(p) for p in ([g["title"]] if g["title"] else []) + g["programmes"]]
-        if g["cofunders"]:
-            notes.append(f'Programme co-funder{"s" if len(g["cofunders"]) > 1 else ""}: {esc(", ".join(g["cofunders"]))}')
-        logos = "".join(_logo(it) for it in g["logos"])
-        caption = f'<p class="cm-support__note">{"<br>".join(notes)}</p>' if notes else ""
-        joint = " cm-support__item--joint" if len(g["logos"]) > 1 else ""
-        items.append(f'<li class="cm-support__item{joint}"><div class="cm-support__logos">{logos}</div>{caption}</li>')
-    return '<ul class="cm-logos cm-support">' + "".join(items) + "</ul>"
+        items += g["logos"]
+        for p in g["programmes"] + ([g["title"]] if g["title"] else []):
+            items += [p["scheme"]] if "scheme" in p else []
+            items += [p] if p["logo"] is not None else []
+    return logo_row(items)
 
 def tile(position: int, media_html: str, body_html: str, color: str | None = None,
          fit: str | None = None) -> str:

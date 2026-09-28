@@ -201,9 +201,27 @@ class FundingTests(unittest.TestCase):
         self.assertEqual([f["funder"] for f in eoss["logos"]], ["Wellcome", "CZI"])   # the joint award once,
         self.assertEqual(eoss["title"]["program"], "EOSS 6")                         # under its programme,
         self.assertEqual(eoss["cofunders"], ["Kavli"])                               # co-funder named
-        html = support_row(groups)
-        self.assertEqual(html.count('class="cm-support__item'), 2)
-        self.assertIn("Programme co-funder: Kavli", html)
+
+    def test_one_row_of_logos(self):
+        """Funders, then their programmes' scheme mark and logo; programmes without a logo are not shown."""
+        self.programmes[0] = {**self.programmes[0], "logo": None,
+                              "scheme": {"name": "COE MARK", "url": "https://coe.example/", "logo": None}}
+        html = support_row(ledger.support_list(self.funders, self.programmes, self.led))
+        names = [n for n in ("RCF", "COE MARK", "CoE programme".upper(), "WELLCOME", "CZI") if n in html]
+        self.assertEqual(names, ["RCF", "COE MARK", "WELLCOME", "CZI"])
+        self.assertEqual([html.index(n) for n in names], sorted(html.index(n) for n in names))
+        self.assertEqual(html.count("<li>"), 4)
+
+    def test_hidden_funder_is_left_out_by_choice(self):
+        self.led.grants.append({"title": "Pilot", "funders": ["Pilot"], "current": True})
+        with patch("builtins.print") as warn:
+            groups = ledger.support_list(self.funders + [entry("Pilot", "funder", logo=None, hide=True)],
+                                         self.programmes, self.led)
+        self.assertNotIn("Pilot", [f["funder"] for g in groups for f in g["logos"]])
+        warn.assert_not_called()                     # hidden, not stale
+        with self.assertRaises(SystemExit):          # a scheme mark needs name, url and logo
+            ledger.support_list(self.funders, [{**self.programmes[0], "scheme": {"name": "x"}}, self.programmes[1]],
+                                self.led)
 
     def test_missing_entries_stop_the_build_and_stale_ones_are_left_out(self):
         with self.assertRaises(SystemExit):            # CZI (a co-funder) has no entry

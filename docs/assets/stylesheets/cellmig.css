@@ -490,13 +490,3 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-profile__links a { display: inline-flex; padding: .3rem; color: var(--cm-fg); opacity: .8; }
 .md-typeset .cm-profile__links a:hover { opacity: 1; }
 .cm-profile__links svg { width: .8rem; height: .8rem; fill: currentColor; display: block; }
-
-/* Current research support (home): funder logos, with the programmes they fund
-   or a joint award's programme and co-funders underneath (ledger.support_list). */
-.md-typeset ul.cm-support { align-items: flex-start; }
-.md-typeset .cm-support__item { display: flex; flex-direction: column; align-items: center; gap: .5rem; max-width: 14rem; text-align: center; }
-.cm-support__logos { display: flex; align-items: center; justify-content: center; gap: 1.2rem; min-height: 3.6rem; }
-.md-typeset .cm-support__item--joint { max-width: 22rem; padding: .6rem 1rem; border: 1px solid var(--cm-line); border-radius: .4rem; }
-.md-typeset .cm-support__note { margin: 0; font-size: .64rem; line-height: 1.45; color: var(--cm-muted); }
-.md-typeset .cm-support__note a { color: inherit; text-decoration: underline; text-decoration-color: var(--cm-line); }
-.cm-support__programme img { display: block; width: auto; height: auto; max-height: 2.2rem; max-width: 8rem; margin: 0 auto; }   /* both auto: shrinks without distortion */

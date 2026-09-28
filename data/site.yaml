@@ -81,13 +81,17 @@ affiliations:
 # "Current research support" on the home page. What is shown comes from
 # things_done (ledger/registries/grants.yaml, grants that are active or awarded
 # and not ended, as of the last sync); these two lists add the logo and link of
-# each direct funder (`funders[].name`) and each programme (`program`). The page
-# groups them by meaning (scripts/cellmig/ledger.py support_list): a funder with
-# the programmes it alone funds beneath it; a joint award (several funders) once,
-# under its programme, with the programme's co-funders named. A current funder
+# each direct funder (`funders[].name`) and each programme (`program`). The home
+# page shows one row of logos in this order: each funder, then the logos of
+# the programmes it alone funds (a programme's `scheme` mark first, e.g. the
+# Research Council of Finland's Centres of Excellence); a joint award's funders
+# come after them. Programmes without a logo are named only in llms-full.txt.
+# llms-full.txt also groups them by meaning (scripts/cellmig/ledger.py
+# support_list), naming a joint award's programme co-funders. A current funder
 # or programme without an entry stops the build; an entry that is no longer
-# current is not shown (the build warns: remove it). No amounts are shown.
-# Logos: official files only; `logo: null` shows the name as text.
+# current is not shown (the build warns: remove it); `hide: true` leaves out a
+# current funder by choice. No amounts are shown.
+# Logos: official files only; a funder with `logo: null` is shown as text.
 funding:
   - funder: Research Council of Finland
     name: Research Council of Finland
@@ -118,12 +122,17 @@ funding:
     name: ImmuDocs doctoral education pilot
     url: https://sites.utu.fi/tohtorikoulutuspilotti/en/immudoc/
     logo: null
+    hide: true   # owner's choice: not listed on the site
 
 programmes:
   - program: Research Council of Finland Centre of Excellence Programme 2026–2033
     name: Centre of Excellence IMMENs
     url: https://www.helsinki.fi/en/researchgroups/immune-endothelial-interfaces
     logo: assets/images/logos/immens.png   # official logo, supplied by the IMMENs team
+    scheme:   # the funding scheme's own mark, shown before the programme's logo
+      name: Research Council of Finland Centres of Excellence in Research
+      url: https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/finnish-centres-of-excellence/
+      logo: assets/images/logos/rcf-centres-of-excellence.png   # aka.fi, the programme page
   - program: Essential Open Source Software for Science (EOSS), Cycle 6
     name: Essential Open Source Software for Science (EOSS), Cycle 6
     url: https://chanzuckerberg.com/eoss/
