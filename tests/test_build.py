@@ -380,3 +380,17 @@ class LogoSizeTests(unittest.TestCase):
         wide, square = logo_size(641, 174), logo_size(300, 300)
         self.assertLess(abs(wide[0] * wide[1] - square[0] * square[1]) / (square[0] * square[1]), 0.25)
         self.assertGreater(logo_size(300, 300, 1.2)[0], square[0])   # `scale` override
+
+
+class WorldMapTests(unittest.TestCase):
+    def test_view_box_hugs_the_drawn_countries(self):
+        """#18: the viewBox is the drawn geometry plus a margin, not the full canvas."""
+        import re
+        from cellmig.worldmap import PAD, W, Bounds, world_map
+        b = Bounds()
+        for x, y in ((10, 20), (110, 70)):
+            b.add(x, y)
+        self.assertEqual(b.view_box(), f"{10 - PAD} {20 - PAD} {100 + 2 * PAD} {50 + 2 * PAD}")
+        box = [float(v) for v in re.search(r'viewBox="([^"]+)"', world_map({"FI": 3, "SG": 1})).group(1).split()]
+        self.assertLessEqual(box[2], W)          # no wider than the projection
+        self.assertLess(box[3], box[2] / 2)      # Antarctica left out: much wider than tall
