@@ -5,7 +5,7 @@ import re
 from .config import COLORS, fail
 from .featured import Story
 from .icons import ICONS
-from .images import dims, media, square_thumb, thumb
+from .images import dims, image_size, media, square_thumb, thumb
 from .ledger import Ledger, Record
 from .people import Person, is_lab_member
 from .text import esc, md
@@ -84,13 +84,34 @@ def feature_card(story: Story) -> str:
             f'<p class="cm-card__meta">{esc(pub["venue"])} · {pub["year"]} {badges(pub)}</p></a>')
 
 
+# Logo sizes (CSS px): every logo gets about the same visual area, so a wide
+# word mark and a square seal look equally heavy (#20); within the slot limits.
+LOGO_AREA, LOGO_MAX_W, LOGO_MAX_H = 6400, 170, 76
+
+
+def logo_size(width: int, height: int, scale: float = 1.0) -> tuple[int, int]:
+    """Display size of a logo with this intrinsic size: equal area within the
+    slot, aspect ratio kept; `scale` (an optical correction) is applied last."""
+    ratio = width / height
+    h = min(LOGO_MAX_H, (LOGO_AREA / ratio) ** 0.5)
+    w = h * ratio
+    if w > LOGO_MAX_W:
+        w, h = LOGO_MAX_W, LOGO_MAX_W / ratio
+    return round(w * scale), round(h * scale)
+
+
 def _logo(it: Record) -> str:
-    """A linked logo (data/site.yaml entry: name, url, logo); `logo: null` shows the name."""
+    """A linked logo (data/site.yaml entry: name, url, logo, optional `scale`
+    for artwork with unusual whitespace); `logo: null` shows the name."""
     if it["logo"] is None:
         inner = f'<span class="cm-logos__text">{esc(it["name"])}</span>'
     else:
         src = thumb(it["logo"], 400)
-        inner = f'<img src="{src}"{dims(src)} alt="{esc(it["name"])}" loading="lazy">'
+        size = image_size(src)
+        if not size:
+            fail(f"data/site.yaml: logo {it['logo']} has no size (an SVG needs width and height attributes)")
+        w, h = logo_size(*size, it.get("scale", 1.0))
+        inner = f'<img src="{src}" width="{w}" height="{h}" alt="{esc(it["name"])}" loading="lazy">'
     return f'<a href="{esc(it["url"])}" title="{esc(it["name"])}">{inner}</a>'
 
 
