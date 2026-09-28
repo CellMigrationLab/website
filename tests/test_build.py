@@ -326,3 +326,15 @@ class PublicCopyTests(unittest.TestCase):
         for text in ("Generated from our things_done ledger.", "From our Things Done activity ledger."):
             with self.subTest(text=text), self.assertRaises(SystemExit):
                 check_public("docs/x.md", text)
+
+
+class PreprintLinkTests(unittest.TestCase):
+    def test_published_paper_links_its_preprint_without_looking_like_one(self):
+        """#15: a journal paper with a preprint gets an action link, never the Preprint badge."""
+        from cellmig.components import PREPRINT_LINK, citation
+        led = fake_ledger([PRE, JOURNAL])
+        html = citation(JOURNAL, set(), led)
+        self.assertIn(f'<a href="https://doi.org/10.1101/pre">{PREPRINT_LINK}</a>', html)
+        self.assertNotIn("cm-badge--preprint", html)
+        self.assertNotIn(">Preprint<", html)
+        self.assertIn("cm-badge--preprint", citation({**PRE, "related_dois": []}, set(), fake_ledger([PRE])))

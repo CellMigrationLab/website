@@ -19,6 +19,11 @@ def section_title(text: str, level: int = 2, id_: str | None = None) -> str:
     return f'<h{level} class="cm-section-title"{i}><span>{esc(text)}</span></h{level}>'
 
 
+# Link from a journal paper to its preprint: worded as an action, so it is not
+# read as a status (the "Preprint" badge is only for records that are preprints).
+PREPRINT_LINK = "Read the associated preprint"
+
+
 def author_list(authors: list[str], lab: set[str]) -> str:
     """Comma-separated authors, long lists shortened. Authors directly associated
     with the lab, now or in the past, are highlighted on every paper: the
@@ -51,7 +56,7 @@ def citation(rec: Record, lab: set[str], ledger: Ledger, story_url: str | None =
     links = []
     pre = ledger.preprint_of(rec)
     if pre:
-        links.append(f'<a href="https://doi.org/{esc(pre["doi"])}">Preprint</a>')
+        links.append(f'<a href="https://doi.org/{esc(pre["doi"])}">{PREPRINT_LINK}</a>')
     if story_url:
         links.append(f'<a href="{story_url}">Read more</a>')
     year = f' · {rec["year"]}'
