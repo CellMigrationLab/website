@@ -1,8 +1,8 @@
 {#- Same as the theme's actions.html, but the edit button goes to the page's
     `edit_url:` (front matter, set by scripts/cellmig for every page with a
-    public source file: data/*.yaml or content/*.md). Pages generated from
-    the private things_done ledger (publications, datasets, numbers, news)
-    have none, so they get no button: the theme's default would link to a
+    public source file: data/*.yaml or content/*.md). The home page and the
+    pages generated from the private things_done ledger (publications,
+    datasets, lab in numbers) have none, so they get no button: the theme's default would link to a
     generated, git-ignored docs/*.md file. -#}
 {% set edit_url = page.meta.edit_url %}
 {% if edit_url %}

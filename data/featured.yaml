@@ -3,7 +3,7 @@
 # shows all of them, and each has its own page at /portfolio/<slug>/.
 #
 # Title, authors, journal, abstract and links all come from the things_done
-# ledger (by DOI). Here you only choose the picture.
+# ledger (by DOI). Here you choose its area, picture and page address.
 #
 #   doi:    the paper (journal version or preprint; a preprint's journal version
 #           is used automatically when the ledger links them)

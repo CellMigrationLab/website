@@ -19,7 +19,7 @@ from .previews import preview_text
 from .profile import month_year, recent_talks
 from .structured import plain
 
-PAGES = [  # (title, path) in the order of the menu
+PAGES = [  # (title, path): main pages in menu order, each page's sub-pages after it
     ("Research", "research/"), ("Featured research", "featured-research/"), ("Publications", "publications/"),
     ("Software", "software/"), ("Datasets", "datasets/"), ("Lab members", "lab-members/"),
     ("Lab in numbers", "lab-in-numbers/"), ("Gallery", "gallery/"), ("Online talks", "online-lectures/"),

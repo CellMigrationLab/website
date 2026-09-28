@@ -1,13 +1,15 @@
 /* Cell Migration Lab – look and feel (#25: editorial, microscopy-led, restrained).
  *
  * - White pages, charcoal text, thin rules, a dark footer.
- * - Research and Software tiles take the lab's purple in four strengths, in
- *   turn: white, lavender, light grey, deep purple (config.TILE_SURFACES).
+ * - Research and Software tiles take four surfaces in turn: white, lavender,
+ *   light grey, deep purple (config.TILE_SURFACES).
  * - One accent, purple (--cm-accent*): data visualisation, lab-author names,
- *   active and focus states. No other UI colours.
+ *   tile surfaces, active and focus states. No other accent colour (the
+ *   preprint and open-access badges and the video play button keep their own).
  * - Inter for everything; Bodoni only for the lab wordmark and the marks
  *   derived from it (member initials, card placeholders).
- * - Pictures fill their frame (cover) unless the data says `fit: contain`.
+ * - Tile and card pictures fill their frame (cover) unless the data says
+ *   `fit: contain`; featured-paper pictures and the gallery are never cropped.
  * Fonts are self-hosted (docs/assets/fonts, SIL Open Font License), so the
  * site makes no requests to Google.
  */
@@ -129,7 +131,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
    transform: Safari can shift or blur transformed content by half a pixel. */
 .cm-wide, .cm-cards, .cm-talks { margin: 1.6rem 0 1.6rem calc(50% - var(--w) / 2); }
 
-/* Section titles: small caps with a hairline on both sides ("RECENT WORKS") */
+/* Section titles: small caps with a hairline on both sides ("FEATURED RESEARCH") */
 .md-typeset .cm-section-title { display: flex; align-items: center; gap: 1.2rem; margin: 3.6rem auto 1.6rem; max-width: 33.6rem; font-size: .64rem; font-weight: 500; letter-spacing: .35em; text-transform: uppercase; color: var(--cm-fg); text-align: center; }
 .md-typeset .cm-section-title::before, .md-typeset .cm-section-title::after { content: ""; flex: 1; height: 1px; background: var(--cm-line); }
 
@@ -155,12 +157,12 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-hero__image { margin: 0; height: clamp(14.4rem, 48vw, 33.6rem); background: #000; }
 .cm-hero__image img, .cm-hero__image video { width: 100%; height: 100%; object-fit: cover; }
 .cm-intro { max-width: 36.8rem; margin: clamp(2.8rem, 8vw, 5.2rem) auto; padding: 0 var(--cm-gutter); text-align: center; font-size: clamp(.92rem, 2vw, 1.16rem); font-weight: 300; line-height: 1.65; color: var(--cm-fg); }
-.cm-home .md-typeset .cm-pubs, .cm-home .cm-more-link { max-width: var(--cm-text); margin-left: auto; margin-right: auto; padding: 0 var(--cm-gutter); }
+.cm-home .cm-more-link { max-width: var(--cm-text); margin-left: auto; margin-right: auto; padding: 0 var(--cm-gutter); }
 .md-typeset .cm-band { position: relative; margin: 4rem 0 0; height: clamp(11.2rem, 34vw, 22.4rem); overflow: hidden; background: #000; }
 .cm-band img, .cm-band video { width: 100%; height: 100%; object-fit: cover; }
 .md-typeset .cm-band figcaption { position: absolute; left: var(--cm-gutter); bottom: .8rem; margin: 0; padding: .16rem .48rem; background: rgba(0, 0, 0, .55); color: #fff; font-size: .6rem; }
 
-.md-typeset ul.cm-logos, .md-typeset ul.cm-people, .md-typeset ul.cm-pubs, .md-typeset ul.cm-covers, .md-typeset ul.cm-gallery, .md-typeset ul.cm-alumni, .md-typeset ul.cm-datasets, .md-typeset ul.cm-resources, .md-typeset ol.cm-pubs { list-style: none; margin-left: 0; }
+.md-typeset ul.cm-logos, .md-typeset ul.cm-people, .md-typeset ul.cm-covers, .md-typeset ul.cm-gallery, .md-typeset ul.cm-alumni, .md-typeset ul.cm-datasets, .md-typeset ul.cm-resources, .md-typeset ol.cm-pubs { list-style: none; margin-left: 0; }
 [dir] .md-typeset .cm-logos > li, [dir] .md-typeset .cm-people > li, [dir] .md-typeset .cm-pubs > li, [dir] .md-typeset .cm-covers > li, [dir] .md-typeset .cm-gallery > li, [dir] .md-typeset .cm-alumni > li, [dir] .md-typeset .cm-datasets > li, [dir] .md-typeset .cm-resources > li { margin-left: 0; list-style: none; }
 .md-typeset ul.cm-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.6rem 2.8rem; max-width: var(--cm-wide); margin: 0 auto !important; padding: 0 var(--cm-gutter) !important; list-style: none; }
 .md-typeset .cm-logos li { margin: 0; }
@@ -399,7 +401,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-footer__bottom a { color: #b9b1b1; }
 @media (max-width: 52rem) { .cm-footer__inner { grid-template-columns: 1fr; gap: 1.6rem; } }
 
-/* Theme bits we do not use */
+/* Theme elements we restyle or hide */
 .md-top { background: #fff; color: var(--cm-strong); box-shadow: 0 .16rem .64rem rgba(0, 0, 0, .12); }
 .md-typeset .headerlink { display: none; }
 

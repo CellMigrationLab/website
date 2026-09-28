@@ -2,8 +2,8 @@
 
 The flag comes from the ledger (`me.corresponding_author`, copied as
 `corresponding: true`, on the paper or any of its versions). data/featured.yaml
-only adds a picture and a page address per paper; `hide: true` un-features a
-paper. An entry for a paper that is not corresponding-author stops the build
+adds the required `area`, a picture (and its `fit`), a page address and,
+optionally, `summary` and `also`; `hide: true` un-features a paper. An entry for a paper that is not corresponding-author stops the build
 (old addresses of removed pages are redirected in mkdocs.yml).
 """
 

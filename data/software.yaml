@@ -14,9 +14,9 @@
 #   paper:   link to the paper, when the ledger has no related DOI
 #   links:   extra links shown under the text
 #
-# The order of the page follows the ledger (newest first). A project that is
-# in the ledger but not here is still shown, with its ledger description and a
-# neutral colour. A project that is only here (no ledger id) needs `title`,
+# The page is newest year first and, within a year, in this file's order. A
+# project in the ledger but not here is still shown, with its ledger
+# description. A project that is only here (no ledger id) needs `title`,
 # `year` and `github`/`paper` itself.
 
 - id: nucleisky
