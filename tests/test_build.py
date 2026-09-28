@@ -405,3 +405,16 @@ class CloudTests(unittest.TestCase):
         self.assertEqual(cloud_size(28, 28), CLOUD_MAX)
         self.assertLess(cloud_size(3, 28), cloud_size(10, 28))
         self.assertGreaterEqual(cloud_size(1, 28), CLOUD_MIN)
+
+
+class ResearchThemeTests(unittest.TestCase):
+    def test_selected_papers(self):
+        """#24: preprints can be selected and are labelled; a preprint and its
+        journal version listed together stop the build; the journal version is shown."""
+        from cellmig.pages_content import _theme
+        led = fake_ledger([PRE, JOURNAL, pub("10.1101/solo", 2026, "preprint", "Solo preprint")])
+        html = _theme({"title": "T", "papers": ["10.1101/pre", "10.1101/solo"]}, led)
+        self.assertIn("doi.org/10.1/j", html)                     # the preprint's journal version
+        self.assertEqual(html.count("cm-badge--preprint"), 1)      # only the preprint without one
+        with self.assertRaises(SystemExit):
+            _theme({"title": "T", "papers": ["10.1101/pre", "10.1/j"]}, led)
