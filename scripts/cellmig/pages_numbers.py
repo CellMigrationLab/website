@@ -9,7 +9,7 @@ from .ledger import Ledger, Record, software_list
 from .page import Page
 from .people import Person, is_lab_member
 from .previews import preview
-from .text import esc, flag, fmt, plural
+from .text import esc, flag, fmt, long_date, plural
 from .worldmap import world_map
 
 TOP_COLLABORATORS = 12
@@ -36,7 +36,7 @@ def _tiles(ledger: Ledger, members: list[Person], countries: dict[str, int]) -> 
     return ('<ul class="cm-tiles">' + "".join(
         f'<li><a href="{esc(link)}"><strong>{value}</strong><span>{esc(label)}</span></a></li>'
         for value, label, link in tiles) + "</ul>"
-        f'<p class="cm-small">Citations and h-index from Google Scholar, {str(mt["fetched_at"])[:10]}.</p>')
+        f'<p class="cm-small">Citations and h-index from Google Scholar, {long_date(mt["fetched_at"])}.</p>')
 
 
 def _top_collaborators(coauthors: list[Record], lab: set[str]) -> str:

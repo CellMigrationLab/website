@@ -233,7 +233,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 
 .cm-videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr)); gap: 1.2rem; margin: 1.2rem 0 2.4rem; }
 .md-typeset .cm-videos figure { margin: 0; }
-.md-typeset .cm-videos figcaption { text-align: center; font-weight: 600; color: var(--cm-fg); }
+.md-typeset .cm-videos figcaption { text-align: center; font-weight: 500; color: var(--cm-strong); }   /* a title, as on Online talks */
 .cm-video { position: relative; aspect-ratio: 16 / 9; background: #000 var(--thumb) center / cover no-repeat; }
 .cm-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .md-typeset .cm-video__play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(transparent 55%, rgba(0, 0, 0, .35)); }
@@ -324,7 +324,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-story__cite .cm-pub__title { font-size: .784rem; }
 .cm-story__links { margin: 1.6rem 0; }
 .cm-related { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(11.2rem, 100%), 1fr)); gap: .8rem 1.6rem; margin: 2rem 0; padding: 1.2rem; border: 1px solid var(--cm-line); }
-.md-typeset .cm-related h2 { margin: 0 0 .4rem; font-size: .576rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--cm-muted); }
+.md-typeset .cm-related h2 { margin: 0 0 .4rem; font-size: .56rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--cm-muted); }   /* as .cm-tile__label */
 .md-typeset .cm-related ul { margin: 0; padding-left: .8rem; font-size: .72rem; }
 .cm-pager { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin: 3.2rem 0 0; padding-top: 1.2rem; border-top: 1px solid var(--cm-line); }
 .md-typeset .cm-pager a { display: block; font-size: .72rem; line-height: 1.4; }

@@ -40,6 +40,10 @@ JOURNAL = pub("10.1/j", 2024, "published", "Journal", related_dois=["10.1101/pre
 
 
 class TextTests(unittest.TestCase):
+    def test_long_date(self):
+        from cellmig.text import long_date
+        self.assertEqual(long_date("2026-09-21T04:17:00+00:00"), "21 September 2026")
+
     def test_slugify_and_names(self):
         self.assertEqual(slugify("Iván Hidalgo Cenalmor"), "ivan-hidalgo-cenalmor")
         self.assertEqual(normalize_name("Joanna Pylvänäinen"), normalize_name("joanna pylvanainen"))

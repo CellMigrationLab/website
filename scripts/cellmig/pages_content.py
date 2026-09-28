@@ -159,7 +159,7 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
           '<p class="cm-filter__count" data-cm-count aria-live="polite"></p>',
           "</form>")
     for g in order:
-        p.add(f'<section data-cm-group><h2 id="{slugify(g)}">{esc(g)}</h2><ul class="cm-datasets">',
+        p.add(f'<section data-cm-group>{section_title(g, id_=slugify(g))}<ul class="cm-datasets">',
               *(_dataset(d, ledger) for d in groups[g]), "</ul></section>")
     p.write()
 
