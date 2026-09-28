@@ -1,6 +1,11 @@
 # Copied by scripts/sync_things_done.py from things_done/ledger/activities/*/talks.yaml.
 # Do not edit by hand: change things_done instead, the website updates itself.
 records:
+- date: '2026-09-28'
+  title: Building accessible tools for bioimage analysis
+  event_name: Biocenter Finland Bioinformatics Webinar Series
+  location: Online
+  talk_kind: webinar
 - date: '2026-09-18'
   title: Taming the Publication Monster – Opportunities for Euro-BioImaging Nodes
   event_name: 'Euro-BioImaging All Hands Nodes Meeting: Connecting the Communities'
@@ -87,6 +92,11 @@ records:
   event_name: ITQB NOVA Microscopy Symposium
   location: Lisbon, Portugal
   talk_kind: keynote
+- date: '2026'
+  title: Researcher perspectives on the evolving publishing environment
+  event_name: STM Researcher Roundtable on Publishing Policy
+  location: Not specified
+  talk_kind: panel_participation
 - date: '2025-11-06'
   title: 'AI & Smart Microscopy: Studying Cancer Cell Metastasis in the Era of Deep Learning for Microscopy'
   event_name: SPAOM Meeting 2025

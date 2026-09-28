@@ -44,8 +44,8 @@ records:
   title: CellTracksColab
   status: active
   start_date: '2024'
-  repository_url: https://github.com/guijacquemet/CellTracksColab
-  github_repo_url: https://github.com/guijacquemet/CellTracksColab
+  repository_url: https://github.com/CellMigrationLab/CellTracksColab
+  github_repo_url: https://github.com/CellMigrationLab/CellTracksColab
   description: A platform for compiling, analyzing, and exploring tracking data.
   related_publication_dois:
   - 10.1371/journal.pbio.3002740
@@ -86,8 +86,8 @@ records:
   title: Fast4DReg
   status: maintenance
   start_date: '2023'
-  repository_url: https://github.com/guijacquemet/Fast4DReg
-  github_repo_url: https://github.com/guijacquemet/Fast4DReg
+  repository_url: https://github.com/CellMigrationLab/Fast4DReg
+  github_repo_url: https://github.com/CellMigrationLab/Fast4DReg
   description: A Fiji plugin for 2D and 3D video drift correction in all axes.
 - id: trackmate
   title: TrackMate
@@ -109,13 +109,13 @@ records:
   title: FiloMap
   status: maintenance
   start_date: '2019'
-  repository_url: https://github.com/guijacquemet/FiloMAP
-  github_repo_url: https://github.com/guijacquemet/FiloMAP
+  repository_url: https://github.com/CellMigrationLab/FiloMAP
+  github_repo_url: https://github.com/CellMigrationLab/FiloMAP
   description: ImageJ and R scripts for mapping protein localization within filopodia.
 - id: filoquant
   title: FiloQuant
   status: maintenance
   start_date: '2017'
-  repository_url: https://github.com/guijacquemet/FiloQuant
-  github_repo_url: https://github.com/guijacquemet/FiloQuant
+  repository_url: https://github.com/CellMigrationLab/FiloQuant
+  github_repo_url: https://github.com/CellMigrationLab/FiloQuant
   description: A Fiji plugin for automated detection and quantification of filopodia properties.

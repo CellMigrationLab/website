@@ -123,7 +123,7 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str]) -> N
             story = stories.get(rec["doi"].lower())
             link = f"portfolio/{story['slug']}/" if story else None
             kind = publication_filter_kind(rec)
-            text = " ".join([rec["title"], *(rec.get("authors") or []), rec.get("venue") or "", rec["doi"]]).lower()
+            text = " ".join([rec["title"], *(rec["authors"]), rec.get("venue") or "", rec["doi"]]).lower()
             p.add(f'<li class="cm-pub" data-kind="{kind}" data-search="{esc(text)}">'
                   f'{citation(rec, lab, ledger, link, abstract=True)}</li>')
         p.add("</ol></section>")

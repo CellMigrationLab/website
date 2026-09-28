@@ -2,7 +2,6 @@
 Gallery, Online talks, and the hand-written pages in content/."""
 
 import re
-from datetime import date
 
 import yaml
 
@@ -103,12 +102,9 @@ def _dataset(d: Record, ledger: Ledger) -> str:
     archive = d.get("archive_doi")
     archive_html = (f' · <a href="https://doi.org/{esc(archive)}">doi:{esc(archive)}</a>'
                     if archive and archive not in d["repository_url"] else "")
-    description = str(d.get("description") or "").strip()
-    if description.lower() == "description not provided":
-        description = ""
     return (f'<li><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>{tags}'
-            f'{f"<p>{esc(description)}</p>" if description else ""}'
-            f'<p class="cm-small">{year_of(d.get("start_date")) or ""}{archive_html}'
+            f'<p>{esc(d["description"])}</p>'
+            f'<p class="cm-small">{year_of(d["start_date"])}{archive_html}'
             f'{" · Paper: " + ", ".join(refs) if refs else ""}</p></li>')
 
 
@@ -126,7 +122,7 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
         for r in site["resources"]), "</ul>")
     groups: dict[str, list[Record]] = {}
     for d in ledger.datasets:
-        groups.setdefault(DATASET_TYPES.get(str(d.get("dataset_type") or "").lower(), OTHER_DATA), []).append(d)
+        groups.setdefault(DATASET_TYPES.get(d["dataset_type"].lower(), OTHER_DATA), []).append(d)
     order = [g for g in [*dict.fromkeys(DATASET_TYPES.values()), OTHER_DATA] if g in groups]
     p.add('<nav class="cm-toc-inline">' + " · ".join(
         f'<a href="#{slugify(g)}">{esc(g)} ({len(groups[g])})</a>' for g in order) + "</nav>")
@@ -153,7 +149,7 @@ def page_gallery() -> None:
     p.write()
 
 
-def page_talks(ledger: Ledger, today: date) -> None:
+def page_talks() -> None:
     """docs/online-lectures.md: recorded talks from data/talks.yaml."""
     p = Page("online-lectures.md", title="Online talks", edit_url=edit_url("data/talks.yaml"),
              **preview("online-lectures"))

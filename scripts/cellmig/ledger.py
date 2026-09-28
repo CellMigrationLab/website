@@ -30,7 +30,6 @@ class Ledger:
         self.coauthors: list[Record] = _records("coauthors", "coauthors")
         self.affiliations: list[Record] = _records("affiliations")
         self.talks: list[Record] = _records("talks")
-        self.teaching: list[Record] = _records("teaching")
         self.grants: list[Record] = _records("grants")
         self.events: list[Record] = _records("conference_organization")
         self.profile: Record = load(LEDGER_DATA / "profile.yaml")
@@ -147,16 +146,22 @@ CURRENT_GRANT = ("active", "awarded")
 AFFILIATION_RELATIONS = ("parent", "member", "leader")
 
 
+def funder_names(grant: Record) -> list[str]:
+    """Names of a grant's direct funders (ledger `funders[].name`; co-funded
+    awards have several; programme co-funders are not included)."""
+    return [f["name"] for f in grant["funders"]]
+
+
 def funding_list(presentation: list[Record], ledger: Ledger, today: str) -> list[Record]:
-    """Funders of the current grants in things_done (status active or awarded,
-    not ended), with their logo and link from data/site.yaml `funding` (matched
-    by the ledger `funder` name), in the order of data/site.yaml. Strict both
-    ways, like affiliation_list()."""
-    current = {g["funder"] for g in ledger.grants
-               if g.get("status") in CURRENT_GRANT and str(g.get("end_date") or "9999") >= today}
-    listed = [f.get("funder") for f in presentation]
+    """Direct funders of the current grants in things_done (status active or
+    awarded, not ended), with their logo and link from data/site.yaml
+    `funding` (matched by the ledger `funders[].name`), in the order of
+    data/site.yaml. Strict both ways, like affiliation_list()."""
+    current = {name for g in ledger.grants
+               if g["status"] in CURRENT_GRANT and str(g["end_date"]) >= today for name in funder_names(g)}
+    listed = [f["funder"] for f in presentation]
     missing = sorted(current - set(listed))
-    stale = sorted({str(f) for f in listed} - current)
+    stale = sorted(set(listed) - current)
     if missing:
         fail(f"data/site.yaml funding: add an entry (funder, name, url, logo) for {missing} "
              "(funders of current grants in things_done ledger/registries/grants.yaml)")
