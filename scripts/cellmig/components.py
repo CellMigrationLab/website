@@ -20,7 +20,9 @@ def section_title(text: str, level: int = 2, id_: str | None = None) -> str:
 
 
 def author_list(authors: list[str], lab: set[str]) -> str:
-    """Comma-separated authors, lab members highlighted, long lists shortened."""
+    """Comma-separated authors, long lists shortened. Authors directly associated
+    with the lab, now or in the past, are highlighted on every paper: the
+    highlight does not depend on the paper's year or on when they were in the lab."""
     out = [f'<span class="cm-author--lab">{esc(a)}</span>' if is_lab_member(a, lab) else esc(a)
            for a in authors]
     if len(out) > AUTHOR_LIMIT:

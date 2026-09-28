@@ -244,6 +244,19 @@ class PeopleTests(unittest.TestCase):
         self.assertTrue(is_lab_member("Ana Gracanin", lab))
         self.assertFalse(is_lab_member("Ana Smith", lab))
 
+    def test_highlighting_is_independent_of_dates(self):
+        """#14: current members and alumni are highlighted on every paper (the
+        highlight takes no date, so a paper's year cannot change it);
+        unrelated co-authors are not."""
+        import inspect
+        from cellmig.components import author_list
+        self.assertEqual(list(inspect.signature(author_list).parameters), ["authors", "lab"])
+        lab = lab_names([{"name": "Now Member", "status": "current"}, {"name": "Past Member", "status": "alumni"}])
+        html = author_list(["Past Member", "Now Member", "Other Person"], lab)
+        self.assertIn('<span class="cm-author--lab">Past Member</span>', html)
+        self.assertIn('<span class="cm-author--lab">Now Member</span>', html)
+        self.assertNotIn('cm-author--lab">Other Person', html)
+
 
 class ChartTests(unittest.TestCase):
     def test_map_colour_steps(self):
