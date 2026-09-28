@@ -11,6 +11,8 @@
 #   slug:   page address; kept from the old website - leave unchanged
 #   also:   other DOIs told by the same story (optional)
 #   hide:   true to leave a corresponding-author paper out
+#   summary: the page text, for a paper with no abstract in the ledger (an
+#           editorial, say); the build stops if such a paper has none
 #
 # Featured research is every paper where Guillaume is (co-)corresponding author
 # in the ledger, and only those: an entry for any other paper stops the build. Papers without a picture show the journal name instead: add
@@ -98,3 +100,7 @@
   image: wp-content/uploads/2019/08/vasp.jpg
 - doi: 10.1042/bio_2021_167
   image: wp-content/uploads/2020/09/max_predicted_12.png
+- doi: 10.1242/jcs.263575
+  summary: >-
+    Editorial by Lucy Collinson and Guillaume Jacquemet introducing the Journal of Cell Science
+    special issue on imaging cell architecture and dynamics.

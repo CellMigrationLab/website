@@ -1,12 +1,13 @@
 """Featured research grid, one page per featured paper, and all publications."""
 
 
-from .components import citation, feature_card, one_line
+from .components import citation, feature_card, one_line, orcid_url
 from .config import LAB_FOUNDED, SITE_URL, edit_url
 from .featured import Story, story_by_doi
 from .images import media
 from .ledger import Ledger, Record, software_list
 from .page import Page
+from .people import Person
 from .previews import paper_image, preview
 from .structured import article, item_list, publication_item, scholar_tags, to_json
 from .text import esc, slugify
@@ -91,7 +92,7 @@ def publication_filter_kind(rec: Record) -> str:
     return "peer-reviewed" if rec.get("peer_reviewed") is True else "other"
 
 
-def page_publications(ledger: Ledger, featured: list[Story], lab: set[str]) -> None:
+def page_publications(ledger: Ledger, featured: list[Story], lab: set[str], leader: Person) -> None:
     """docs/publications.md: every publication by year, with search and filters
     (filtering itself is done in the browser by cellmig.js)."""
     records = ledger.grouped()
@@ -123,12 +124,12 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str]) -> N
             story = stories.get(rec["doi"].lower())
             link = f"portfolio/{story['slug']}/" if story else None
             kind = publication_filter_kind(rec)
-            text = " ".join([rec["title"], *(rec["authors"]), rec.get("venue") or "", rec["doi"]]).lower()
+            text = " ".join([rec["title"], *(rec["authors"]), rec["venue"], rec["doi"]]).lower()
             p.add(f'<li class="cm-pub" data-kind="{kind}" data-search="{esc(text)}">'
                   f'{citation(rec, lab, ledger, link, abstract=True)}</li>')
         p.add("</ol></section>")
     p.add('<p class="cm-small cm-source">This list is generated from our '
           '<em>things_done</em> activity ledger and updates automatically when a paper is added. '
-          'Also on <a href="https://scholar.google.com/citations?user=dnBWtfsAAAAJ&hl=en">Google Scholar</a> and '
-          '<a href="https://orcid.org/0000-0002-9286-920X">ORCID</a>.</p>')
+          f'Also on <a href="{esc(ledger.metrics["scholar_url"])}">Google Scholar</a> and '
+          f'<a href="{esc(orcid_url(leader["orcid"]))}">ORCID</a>.</p>')
     p.write()

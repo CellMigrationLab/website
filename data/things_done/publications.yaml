@@ -3,7 +3,6 @@
 records:
 - doi: 10.6084/m9.figshare.32180745
   year: 2026
-  type: article
   status: preprint
   title: 'Accuracy versus Perception: a Benchmark of Deep Learning Models for Single-Image Super-Resolution
     in Microscopy'
@@ -34,7 +33,6 @@ records:
   open_access_status: gold
 - doi: 10.20944/preprints202607.1414.v1
   year: 2026
-  type: article
   status: preprint
   title: AI-Driven Cell-Fate Prediction in Microscopy
   authors:
@@ -64,7 +62,6 @@ records:
   open_access_status: gold
 - doi: 10.1242/jcs.265278
   year: 2026
-  type: article
   status: in_press
   title: CCT8 associates with the MYO10 motor domain and regulates filopodia and breast cancer cell invasion
   authors:
@@ -98,7 +95,6 @@ records:
   corresponding: true
 - doi: 10.1242/bio.062406
   year: 2026
-  type: article
   status: published
   title: Customizable FDM-based zebrafish larvae mold for live imaging
   authors:
@@ -122,7 +118,6 @@ records:
   - 10.1101/2025.11.24.689779
 - doi: 10.48550/arXiv.2601.08859
   year: 2026
-  type: article
   status: preprint
   title: 'EZInput: A Cross-Environment Python Library for Easy UI Generation in Scientific Computing'
   authors:
@@ -143,7 +138,6 @@ records:
   corresponding: true
 - doi: 10.1038/s44318-025-00678-9
   year: 2026
-  type: article
   status: published
   title: Fast label-free live imaging with FlowVision reveals key principles of cancer cell arrest on
     endothelial monolayers
@@ -184,7 +178,6 @@ records:
   - 10.1101/2024.09.30.615654
 - doi: 10.64898/2026.02.09.703982
   year: 2026
-  type: article
   status: preprint
   title: Filopodia-mediated trans-endocytosis
   authors:
@@ -223,7 +216,6 @@ records:
   corresponding: true
 - doi: 10.64898/2026.06.29.735028
   year: 2026
-  type: article
   status: preprint
   title: NucleiSky enables cross-scale multimodal registration of microscopy data using nuclei constellations
   authors:
@@ -245,7 +237,6 @@ records:
   corresponding: true
 - doi: 10.1242/jcs.265152
   year: 2026
-  type: article
   status: published
   title: NucleiSky enables cross-scale multimodal registration of microscopy data using nuclei constellations
   authors:
@@ -267,7 +258,6 @@ records:
   corresponding: true
 - doi: 10.48550/arXiv.2603.10704
   year: 2026
-  type: article
   status: preprint
   title: Packaging Jupyter notebooks as installable desktop apps using LabConstrictor
   authors:
@@ -286,7 +276,6 @@ records:
   corresponding: true
 - doi: 10.64898/2026.09.02.749041
   year: 2026
-  type: article
   status: preprint
   title: Pancreatic cancer cells breach endothelial barriers through protrusion-driven invasion or endothelial
     retraction
@@ -329,7 +318,6 @@ records:
   corresponding: true
 - doi: 10.1083/jcb.202508155
   year: 2026
-  type: article
   status: published
   title: Regulation of cell dynamics by rapid integrin transport through the biosynthetic pathway
   authors:
@@ -370,7 +358,6 @@ records:
   - 10.1101/2022.07.12.498931
 - doi: 10.1088/2515-7647/ae0fd1
   year: 2026
-  type: article
   status: published
   title: Roadmap on Deep Learning for Microscopy
   authors:
@@ -461,9 +448,9 @@ records:
     aim to give the reader an overview of the key developments and an understanding of possibilities and
     limitations of ML for microscopy. It will be of interest to a wide cross-disciplinary audience in
     the physical sciences and life sciences.
+  peer_reviewed: true
 - doi: 10.1242/jcs.265183
   year: 2026
-  type: article
   status: published
   title: 'Rxiv-Maker: An automated template engine for streamlined scientific publications'
   authors:
@@ -494,7 +481,6 @@ records:
   corresponding: true
 - doi: 10.64898/2026.04.12.717721
   year: 2026
-  type: article
   status: preprint
   title: Scaffold protein SHANK3 regulates endothelial cell motility and tissue mechanics
   authors:
@@ -535,7 +521,6 @@ records:
   open_access_status: gold
 - doi: 10.1101/2025.11.24.689779
   year: 2025
-  type: article
   status: preprint
   title: Customizable FDM-based zebrafish embryo mold for live imaging
   authors:
@@ -558,7 +543,6 @@ records:
   - 10.1242/bio.062406
 - doi: 10.1038/s41592-024-02562-6
   year: 2025
-  type: article
   status: published
   title: Efficiently accelerated bioimage analysis with NanoPyx, a Liquid Engine-powered Python framework
   authors:
@@ -585,7 +569,6 @@ records:
   - 10.21203/rs.3.rs-3328438/v1
 - doi: 10.64898/2025.12.03.691809
   year: 2025
-  type: article
   status: preprint
   title: Filopodome proteomics identifies CCT8 as a MYO10 interactor critical for filopodia functions
   authors:
@@ -621,7 +604,6 @@ records:
   corresponding: true
 - doi: 10.1101/2025.05.14.653937
   year: 2025
-  type: article
   status: preprint
   title: LSD1 serine 166 is a phosphorylation switch for chromatin landscaping, gene activation, and tissue
     remodeling
@@ -653,7 +635,6 @@ records:
   open_access_status: gold
 - doi: 10.1016/j.isci.2025.111745
   year: 2025
-  type: article
   status: published
   title: Nuclear talin-1 provides a bridge between cell adhesion and gene expression
   authors:
@@ -684,7 +665,6 @@ records:
   - 10.1101/2022.03.15.484419
 - doi: 10.1038/s41467-025-66209-6
   year: 2025
-  type: article
   status: published
   title: 'PhotoFiTT: a quantitative framework for assessing phototoxicity in live-cell microscopy experiments'
   authors:
@@ -703,7 +683,7 @@ records:
     machine learning and cell cycle dynamics to analyse mitotic timing, cell size changes, and overall
     cellular activity in response to controlled light exposure. Using adherent mammalian cells, we demonstrate
     PhotoFiTT’s ability to detect wavelength- and dose-dependent effects, showcasing that near-UV light
-    induces significant mitotic delays at doses as low as 0.6 J/cm 2 , while longer wavelengths require
+    induces significant mitotic delays at doses as low as 0.6 J/cm 2, while longer wavelengths require
     higher doses for comparable deleterious effects. PhotoFiTT enables researchers to establish quantitative
     benchmarks for acceptable levels of photodamage, facilitating the optimisation of imaging protocols
     that balance image quality with sample health.
@@ -714,7 +694,6 @@ records:
   - 10.21203/rs.3.rs-4809905/v1
 - doi: 10.1242/jcs.263801
   year: 2025
-  type: article
   status: published
   title: Practical considerations for data exploration in quantitative cell biology
   authors:
@@ -736,7 +715,6 @@ records:
   corresponding: true
 - doi: 10.1242/jcs.263711
   year: 2025
-  type: article
   status: published
   title: Practical recommendations for developing software for life science applications
   authors:
@@ -758,7 +736,6 @@ records:
   open_access_status: gold
 - doi: 10.48550/arXiv.2508.00836
   year: 2025
-  type: article
   status: preprint
   title: 'Rxiv-Maker: an automated template engine for streamlined scientific publications'
   authors:
@@ -778,7 +755,6 @@ records:
   - 10.1242/jcs.265183
 - doi: 10.1038/s41467-025-60709-1
   year: 2025
-  type: article
   status: published
   title: Structural Repetition Detector for multi-scale quantitative mapping of molecular complexes through
     microscopy
@@ -808,7 +784,6 @@ records:
   - 10.1101/2024.09.16.613204
 - doi: 10.1002/1878-0261.70025
   year: 2025
-  type: article
   status: published
   title: Time, the final frontier
   authors:
@@ -831,7 +806,6 @@ records:
   corresponding: true
 - doi: 10.1371/journal.pbio.3002740
   year: 2024
-  type: article
   status: published
   title: CellTracksColab is a platform that enables compilation, analysis, and exploration of cell tracking
     data
@@ -855,8 +829,7 @@ records:
     without bias. Finally, CellTracksColab also includes specialized analysis modules enabling spatial
     analyses (clustering, proximity to specific regions of interest). We demonstrate CellTracksColab capabilities
     with 3 use cases, including T cells and cancer cell migration, as well as filopodia dynamics. CellTracksColab
-    is available for the broader scientific community at https://github.com/CellMigrationLab/CellTracksColab
-    .
+    is available for the broader scientific community at https://github.com/CellMigrationLab/CellTracksColab.
   peer_reviewed: true
   open_access_status: gold
   corresponding: true
@@ -864,7 +837,6 @@ records:
   - 10.1101/2023.10.20.563252
 - doi: 10.1038/s41592-024-02295-6
   year: 2024
-  type: article
   status: published
   title: 'DL4MicEverywhere: deep learning for microscopy made flexible, shareable and reproducible'
   authors:
@@ -911,7 +883,6 @@ records:
   corresponding: true
 - doi: 10.1101/2024.09.30.615654
   year: 2024
-  type: article
   status: preprint
   title: Fast label-free live imaging reveals key roles of flow dynamics and CD44-HA interaction in cancer
     cell arrest on endothelial monolayers
@@ -953,7 +924,6 @@ records:
   - 10.1038/s44318-025-00678-9
 - doi: 10.1242/jcs.261545
   year: 2024
-  type: article
   status: published
   title: Harnessing artificial intelligence to reduce phototoxicity in live imaging
   authors:
@@ -979,20 +949,17 @@ records:
   open_access_status: gold
 - doi: 10.1242/jcs.263575
   year: 2024
-  type: article
   status: published
   title: Imaging cell architecture and dynamics
   authors:
   - Lucy Collinson
   - Guillaume Jacquemet
   venue: Journal of Cell Science
-  abstract: unavailable from Crossref
   peer_reviewed: false
   open_access_status: bronze
   corresponding: true
 - doi: 10.1101/2024.07.16.603046
   year: 2024
-  type: article
   status: preprint
   title: 'PhotoFiTT: A Quantitative Framework for Assessing Phototoxicity in Live-Cell Microscopy Experiments'
   authors:
@@ -1011,7 +978,7 @@ records:
     machine learning and cell cycle dynamics to analyse mitotic timing, cell size changes, and overall
     cellular activity in response to controlled light exposure. Using adherent mammalian cells, we demonstrate
     PhotoFiTT’s ability to detect wavelength- and dose-dependent effects, showcasing that near-UV light
-    induces significant mitotic delays at doses as low as 0.6 J/cm 2 , while longer wavelengths require
+    induces significant mitotic delays at doses as low as 0.6 J/cm 2, while longer wavelengths require
     higher doses for comparable effects. PhotoFiTT enables researchers to establish quantitative benchmarks
     for acceptable levels of photodamage, facilitating the optimisation of imaging protocols that balance
     image quality with sample health.
@@ -1022,7 +989,6 @@ records:
   - 10.21203/rs.3.rs-4809905/v1
 - doi: 10.21203/rs.3.rs-4809905/v1
   year: 2024
-  type: article
   status: preprint
   title: 'PhotoFiTT: A Quantitative Framework for Assessing Phototoxicity in Live-Cell Microscopy Experiments'
   authors:
@@ -1033,7 +999,7 @@ records:
   - Raquel Portela
   - Guillaume Jacquemet
   - Pedro Pereira
-  venue: Springer Science and Business Media LLC
+  venue: Research Square
   abstract: Phototoxicity in live-cell fluorescence microscopy can compromise experimental outcomes, yet
     quantitative methods to assess its impact remain limited. Here we present PhotoFiTT (Phototoxicity
     Fitness Time Trial), an integrated framework combining a standardised experimental protocol with advanced
@@ -1041,7 +1007,7 @@ records:
     machine learning and cell cycle dynamics to analyse mitotic timing, cell size changes, and overall
     cellular activity in response to controlled light exposure. Using adherent mammalian cells, we demonstrate
     PhotoFiTT's ability to detect wavelength- and dose-dependent effects, showcasing that near-UV light
-    induces significant mitotic delays at doses as low as 0.6 J/cm 2 , while longer wavelengths require
+    induces significant mitotic delays at doses as low as 0.6 J/cm 2, while longer wavelengths require
     higher doses for comparable effects. PhotoFiTT enables researchers to establish quantitative benchmarks
     for acceptable levels of photodamage, facilitating the optimisation of imaging protocols that balance
     image quality with sample health.
@@ -1052,7 +1018,6 @@ records:
   - 10.1101/2024.07.16.603046
 - doi: 10.1038/s41467-024-52326-1
   year: 2024
-  type: article
   status: published
   title: SHANK3 depletion leads to ERK signalling overdose and cell death in KRAS-mutant cancers
   authors:
@@ -1096,7 +1061,6 @@ records:
   - 10.1101/2022.09.21.508660
 - doi: 10.1101/2024.09.16.613204
   year: 2024
-  type: article
   status: preprint
   title: 'Structural Repetition Detector: multi-scale quantitative mapping of molecular complexes through
     microscopy'
@@ -1126,7 +1090,6 @@ records:
   - 10.1038/s41467-025-60709-1
 - doi: 10.21203/rs.3.rs-5182329/v1
   year: 2024
-  type: article
   status: preprint
   title: 'Structural Repetition Detector: multi-scale quantitative mapping of molecular complexes through
     microscopy'
@@ -1137,7 +1100,7 @@ records:
   - Guillaume Jacquemet
   - João Mamede
   - Christophe Leterrier
-  venue: Springer Science and Business Media LLC
+  venue: Research Square
   abstract: 'From molecules to organelles, cells exhibit recurring structural motifs across multiple scales.
     Understanding these structures provides insights into their functional roles. While super-resolution
     microscopy can visualise such patterns, manual detection in large datasets is challenging and biased.
@@ -1155,7 +1118,6 @@ records:
   - 10.1101/2024.09.16.613204
 - doi: 10.1083/jcb.202310030
   year: 2024
-  type: article
   status: published
   title: TLNRD1 is a CCM complex component and regulates endothelial barrier integrity
   authors:
@@ -1190,7 +1152,6 @@ records:
   - 10.1101/2023.09.29.559344
 - doi: 10.1101/2023.10.20.563252
   year: 2023
-  type: article
   status: preprint
   title: CellTracksColab — A platform for compiling, analyzing, and exploring tracking data
   authors:
@@ -1213,8 +1174,7 @@ records:
     Finally, CellTracksColab also includes specialized analysis modules enabling spatial analyses (clustering,
     proximity to specific regions of interest). We demonstrate CellTracksColab capabilities with three
     use cases, including T-cells and cancer cell migration, as well as filopodia dynamics. CellTracksColab
-    is available for the broader scientific community at https://github.com/CellMigrationLab/CellTracksColab
-    .
+    is available for the broader scientific community at https://github.com/CellMigrationLab/CellTracksColab.
   peer_reviewed: false
   open_access_status: gold
   corresponding: true
@@ -1222,7 +1182,6 @@ records:
   - 10.1371/journal.pbio.3002740
 - doi: 10.1101/2023.11.19.567606
   year: 2023
-  type: article
   status: preprint
   title: 'DL4MicEverywhere: Deep learning for microscopy made flexible, shareable, and reproducible'
   authors:
@@ -1253,7 +1212,6 @@ records:
   corresponding: true
 - doi: 10.1242/jcs.260728
   year: 2023
-  type: article
   status: published
   title: Fast4DReg – fast registration of 4D microscopy datasets
   authors:
@@ -1284,7 +1242,6 @@ records:
   - 10.1101/2022.08.22.504744
 - doi: 10.1038/s41592-023-02057-w
   year: 2023
-  type: article
   status: published
   title: High-fidelity 3D live-cell nanoscopy through data-driven enhanced super-resolution radial fluctuation
   authors:
@@ -1325,7 +1282,6 @@ records:
   - 10.1101/2022.04.07.487490
 - doi: 10.1016/j.ceb.2023.102271
   year: 2023
-  type: article
   status: published
   title: Live-cell imaging in the deep learning era
   authors:
@@ -1347,7 +1303,6 @@ records:
   corresponding: true
 - doi: 10.1007/978-1-0716-2887-4_4
   year: 2023
-  type: article
   status: published
   title: Mapping the Localization of Proteins Within Filopodia Using FiloMap
   authors:
@@ -1368,7 +1323,6 @@ records:
   corresponding: true
 - doi: 10.1242/jcs.260574
   year: 2023
-  type: article
   status: published
   title: Myosin-X recruits lamellipodin to filopodia tips
   authors:
@@ -1400,7 +1354,6 @@ records:
   corresponding: true
 - doi: 10.1101/2023.08.13.553080
   year: 2023
-  type: article
   status: preprint
   title: 'NanoPyx: super-fast bioimage analysis powered by adaptive machine learning'
   authors:
@@ -1434,7 +1387,6 @@ records:
   - 10.1038/s41592-024-02562-6
 - doi: 10.21203/rs.3.rs-3328438/v1
   year: 2023
-  type: article
   status: preprint
   title: 'NanoPyx: super-fast bioimage analysis powered by adaptive machine learning'
   authors:
@@ -1447,7 +1399,7 @@ records:
   - Robert Haase
   - Pedro Pereira
   - Guillaume Jacquemet
-  venue: Springer Science and Business Media LLC
+  venue: Research Square
   abstract: The expanding scale and complexity of microscopy image datasets require accelerated analytical
     workflows. NanoPyx meets this need through an adaptive framework enhanced for high-speed bioimage
     analysis. At the core of NanoPyx, the Liquid Engine dynamically generates optimised CPU and GPU-based
@@ -1461,7 +1413,6 @@ records:
   - 10.1038/s41592-024-02562-6
 - doi: 10.1101/2023.02.23.529674
   year: 2023
-  type: article
   status: preprint
   title: Proteomic profiling of isolated immune synapses from primary mouse B cells
   authors:
@@ -1492,7 +1443,6 @@ records:
   open_access_status: gold
 - doi: 10.1101/2023.09.29.559344
   year: 2023
-  type: article
   status: preprint
   title: TLNRD1 is a CCM complex component and regulates endothelial barrier integrity
   authors:
@@ -1528,7 +1478,6 @@ records:
   - 10.1083/jcb.202310030
 - doi: 10.1101/2022.03.15.484419
   year: 2022
-  type: article
   status: preprint
   title: A subpopulation of Talin 1 resides in the nucleus and regulates gene expression
   authors:
@@ -1558,7 +1507,6 @@ records:
   - 10.1016/j.isci.2025.111745
 - doi: 10.1101/2022.06.07.495102
   year: 2022
-  type: article
   status: preprint
   title: 'BioImage Model Zoo: A Community-Driven Resource for Accessible Deep Learning in BioImage Analysis'
   authors:
@@ -1593,7 +1541,6 @@ records:
   open_access_status: gold
 - doi: 10.1038/s42003-022-03634-z
   year: 2022
-  type: article
   status: published
   title: DeepBacs for multi-task bacterial image analysis using open-source deep learning approaches
   authors:
@@ -1629,7 +1576,6 @@ records:
   - 10.1101/2021.11.03.467152
 - doi: 10.1101/2022.08.22.504744
   year: 2022
-  type: article
   status: preprint
   title: 'Fast4DReg: Fast registration of 4D microscopy datasets'
   authors:
@@ -1652,14 +1598,13 @@ records:
     them in speed (5x to 60x). We also demonstrate that Fast4DReg can be used to register misaligned channels
     in 3D using either calibration slides or misaligned images directly. Altogether Fast4DReg provides
     a quick and easy-to-use method to correct 3D imaging data before further visualization and analysis.
-    Fast4DReg is available on GitHub .
+    Fast4DReg is available on GitHub.
   peer_reviewed: false
   open_access_status: gold
   related_dois:
   - 10.1242/jcs.260728
 - doi: 10.1101/2022.04.07.487490
   year: 2022
-  type: article
   status: preprint
   title: High-fidelity 3D live-cell nanoscopy through data-driven enhanced super-resolution radial fluctuation
   authors:
@@ -1696,7 +1641,6 @@ records:
   - 10.1038/s41592-023-02057-w
 - doi: 10.1016/j.devcel.2022.09.016
   year: 2022
-  type: article
   status: published
   title: MYO10-filopodia support basement membranes at pre-invasive tumor boundaries
   authors:
@@ -1737,7 +1681,6 @@ records:
   - 10.1101/2021.10.22.464987
 - doi: 10.1101/2022.08.17.504298
   year: 2022
-  type: article
   status: preprint
   title: Myosin-X recruits lamellipodin to filopodia tips
   authors:
@@ -1767,7 +1710,6 @@ records:
   - 10.1242/jcs.260574
 - doi: 10.1101/2022.07.12.498931
   year: 2022
-  type: article
   status: preprint
   title: Regulation of cell dynamics by rapid transport of integrins through the biosynthetic pathway
   authors:
@@ -1791,14 +1733,14 @@ records:
   abstract: Cells sense and respond to the extracellular matrix (ECM) milieu through integrin proteins.
     Integrin availability on the plasma membrane, regulated by endosomal receptor uptake and recycling,
     has been extensively studied and regulates cell dynamics in various normal and pathological contexts
-    1–5 . In contrast, the role of integrin transport through the biosynthetic pathway has been considered
-    primarily as a mechanism to replenish the receptor pool and too slow to influence cell dynamics 6
-    . Here, we adopted the RUSH (Retention Using Selective Hooks) assay to synchronize integrin anterograde
+    1–5. In contrast, the role of integrin transport through the biosynthetic pathway has been considered
+    primarily as a mechanism to replenish the receptor pool and too slow to influence cell dynamics 6.
+    Here, we adopted the RUSH (Retention Using Selective Hooks) assay to synchronize integrin anterograde
     transport from the endoplasmic reticulum (ER), allowing spatial and temporal analysis of newly synthesized
     receptor traffic. We observe that the delivery of new integrins to the plasma membrane is polarized
     in response to specific ECM ligands, facilitates integrin recruitment specifically to the membrane-proximal
     tip of focal adhesions (FA) and contributes to cell protrusion and FA growth. We explain the augmented
-    adhesion growth using a computational molecular clutch model 7 , where increased integrin availability
+    adhesion growth using a computational molecular clutch model 7, where increased integrin availability
     drives recruitment of additional integrins. Notably, a subset of newly synthesized integrins undergo
     rapid traffic from the ER to the cell surface to facilitate localized cell spreading, seemingly bypassing
     the Golgi. This unconventional secretion is dependent on cell adhesion and mediated by Golgi reassembling
@@ -1812,7 +1754,6 @@ records:
   - 10.1083/jcb.202508155
 - doi: 10.1101/2022.09.21.508660
   year: 2022
-  type: article
   status: preprint
   title: Targeting a broad spectrum of KRAS -mutant cancers by hyperactivation-induced cell death
   authors:
@@ -1857,7 +1798,6 @@ records:
   - 10.1038/s41467-024-52326-1
 - doi: 10.1038/s41592-022-01507-1
   year: 2022
-  type: article
   status: published
   title: 'TrackMate 7: integrating state-of-the-art segmentation algorithms into tracking pipelines'
   authors:
@@ -1887,7 +1827,6 @@ records:
   - 10.1101/2021.09.03.458852
 - doi: 10.1101/2022.10.02.510295
   year: 2022
-  type: article
   status: preprint
   title: Vimentin enables directional cell migration by coordinating focal adhesion organization and dynamics
   authors:
@@ -1921,7 +1860,6 @@ records:
   open_access_status: gold
 - doi: 10.1038/s41592-021-01284-3
   year: 2021
-  type: article
   status: published
   title: Avoiding a replication crisis in deep-learning-based bioimage analysis
   authors:
@@ -1946,7 +1884,6 @@ records:
   corresponding: true
 - doi: 10.1101/2021.09.03.458852
   year: 2021
-  type: article
   status: preprint
   title: Bringing TrackMate into the era of machine-learning and deep-learning
   authors:
@@ -1976,7 +1913,6 @@ records:
   - 10.1038/s41592-022-01507-1
 - doi: 10.1038/s41556-021-00767-x
   year: 2021
-  type: article
   status: published
   title: Cargo-specific recruitment in clathrin- and dynamin-independent endocytosis
   authors:
@@ -2021,7 +1957,6 @@ records:
   - 10.1101/2020.10.05.323295
 - doi: 10.1042/bio_2021_167
   year: 2021
-  type: article
   status: published
   title: Deep learning to analyse microscopy images
   authors:
@@ -2041,7 +1976,6 @@ records:
   corresponding: true
 - doi: 10.1101/2021.11.03.467152
   year: 2021
-  type: article
   status: preprint
   title: 'DeepBacs: Bacterial image analysis using open-source deep learning approaches'
   authors:
@@ -2080,7 +2014,6 @@ records:
   - 10.1038/s42003-022-03634-z
 - doi: 10.1038/s41467-021-22518-0
   year: 2021
-  type: article
   status: published
   title: Democratising deep learning for microscopy with ZeroCostDL4Mic
   authors:
@@ -2125,7 +2058,6 @@ records:
   - 10.1101/2020.03.20.000133
 - doi: 10.1002/adtp.202000072
   year: 2021
-  type: article
   status: published
   title: Effective Delivery of the CRISPR/Cas9 System Enabled by Functionalized Mesoporous Silica Nanoparticles
     for GFP‐Tagged Paxillin Knock‐In
@@ -2160,7 +2092,6 @@ records:
   open_access_status: gold
 - doi: 10.1101/2021.10.22.464987
   year: 2021
-  type: article
   status: preprint
   title: Filopodia-mediated basement membrane assembly at pre-invasive tumor boundaries
   authors:
@@ -2199,8 +2130,8 @@ records:
     at the tumor-stroma interface to limit cancer progression, and a pro-invasive role that facilitates
     cancer cell dissemination at later stages. Abstract Figure Highlights - Filopodia sculpt the tumor-proximal
     stroma in pre-invasive ductal carcinoma in situ (DCIS). - Filopodia-dependent basement membrane (BM)
-    assembly limits invasive transition of DCIS-like tumors in vivo . - Loss of MYO10-dependent filopodia
-    impairs BM assembly and induces an EMT-like phenotype at the tumor-stroma interface in vivo . - MYO10
+    assembly limits invasive transition of DCIS-like tumors in vivo. - Loss of MYO10-dependent filopodia
+    impairs BM assembly and induces an EMT-like phenotype at the tumor-stroma interface in vivo. - MYO10
     filopodia are anti-invasive in DCIS but facilitate dissemination in invasive breast cancer.
   peer_reviewed: false
   open_access_status: gold
@@ -2208,7 +2139,6 @@ records:
   - 10.1016/j.devcel.2022.09.016
 - doi: 10.1016/j.biocel.2021.106077
   year: 2021
-  type: article
   status: published
   title: 'Imaging in focus: An introduction to denoising bioimages in the era of deep learning'
   authors:
@@ -2232,7 +2162,6 @@ records:
   open_access_status: gold
 - doi: 10.1039/d1nr02872c
   year: 2021
-  type: article
   status: published
   title: Improving the knock-in efficiency of the MOF-encapsulated CRISPR/Cas9 system through controllable
     embedding structures
@@ -2252,7 +2181,6 @@ records:
   open_access_status: gold
 - doi: 10.1016/j.celrep.2021.109716
   year: 2021
-  type: article
   status: published
   title: Myosin-X and talin modulate integrin activity at filopodia tips
   authors:
@@ -2284,7 +2212,6 @@ records:
   corresponding: true
 - doi: 10.1016/j.cub.2021.09.022
   year: 2021
-  type: article
   status: published
   title: SHANK3 conformation regulates direct actin binding and crosstalk with Rap1 signaling
   authors:
@@ -2327,7 +2254,6 @@ records:
   - 10.1101/2020.11.12.379222
 - doi: 10.1016/j.jbc.2021.100837
   year: 2021
-  type: article
   status: published
   title: Talin mechanosensitivity is modulated by a direct interaction with cyclin-dependent kinase-1
   authors:
@@ -2367,7 +2293,6 @@ records:
   - 10.1101/2021.03.19.436208
 - doi: 10.1101/2021.03.19.436208
   year: 2021
-  type: article
   status: preprint
   title: Talin mechanosensitivity is modulated by a direct interaction with cyclin-dependent kinase-1
   authors:
@@ -2395,7 +2320,7 @@ records:
     at sites of integrin-mediated adhesion. Mutagenesis demonstrated that CDK1 contains a functional talin-binding
     LD motif, and the binding site within talin was pinpointed to helical bundle R8 through the use of
     recombinant fragments. Talin also contains a consensus CDK1 phosphorylation motif centred on S1589;
-    a site that was phosphorylated by CDK1 in vitro . A phosphomimetic mutant of this site within talin
+    a site that was phosphorylated by CDK1 in vitro. A phosphomimetic mutant of this site within talin
     lowered the binding affinity of KANK and weakened the mechanical response of the region, potentially
     altering downstream mechanotransduction pathways. The direct binding of the master cell cycle regulator,
     CDK1, to the primary integrin effector, talin, therefore provides a primordial solution for coupling
@@ -2410,7 +2335,6 @@ records:
   - 10.1016/j.jbc.2021.100837
 - doi: 10.1083/jcb.202005214
   year: 2021
-  type: article
   status: published
   title: Talin rod domain–containing protein 1 (TLNRD1) is a novel actin-bundling protein which promotes
     filopodia formation
@@ -2442,7 +2366,6 @@ records:
   - 10.1101/2020.05.19.103606
 - doi: 10.1101/2020.09.22.306233
   year: 2020
-  type: article
   status: preprint
   title: Automated cell tracking using StarDist and TrackMate
   authors:
@@ -2478,7 +2401,6 @@ records:
   - 10.12688/f1000research.27019.2
 - doi: 10.12688/f1000research.27019.2
   year: 2020
-  type: article
   status: published
   title: Automated cell tracking using StarDist and TrackMate
   authors:
@@ -2515,7 +2437,6 @@ records:
   corresponding: true
 - doi: 10.1101/2020.10.05.323295
   year: 2020
-  type: article
   status: preprint
   title: Cargo-specific recruitment in clathrin and dynamin-independent endocytosis
   authors:
@@ -2541,12 +2462,12 @@ records:
   - Johanna Ivaska
   venue: bioRxiv
   abstract: Spatially controlled, cargo-specific endocytosis is essential for development, tissue homeostasis,
-    and cancer invasion and is often hijacked by viral infections 1 . Unlike clathrin-mediated endocytosis,
+    and cancer invasion and is often hijacked by viral infections 1. Unlike clathrin-mediated endocytosis,
     which exploits cargo-specific adaptors for selective protein internalization, the clathrin and dynamin-independent
     endocytic pathway (CLIC-GEEC, CG-pathway) has until now been considered a bulk internalization route
-    for the fluid phase, glycosylated membrane proteins and lipids 2,3 . Although the core molecular players
+    for the fluid phase, glycosylated membrane proteins and lipids 2,3. Although the core molecular players
     of CG endocytosis have been recently defined, no cargo-specific adaptors are known and evidence of
-    selective protein uptake into the pathway is lacking 3 . Here, we identify the first cargo-specific
+    selective protein uptake into the pathway is lacking 3. Here, we identify the first cargo-specific
     adaptor for CG-endocytosis and demonstrate its clinical relevance in breast cancer progression. By
     combining unbiased molecular characterization and super-resolution imaging, we identified the actin-binding
     protein swiprosin-1 (EFHD2) as a cargo-specific adaptor regulating integrin internalization via the
@@ -2561,7 +2482,6 @@ records:
   - 10.1038/s41556-021-00767-x
 - doi: 10.1101/2020.11.12.379222
   year: 2020
-  type: article
   status: preprint
   title: Conformational dynamics regulate SHANK3 actin and Rap1 binding
   authors:
@@ -2593,14 +2513,13 @@ records:
     domain covers the actin-binding interface of the SPN domain. Actin and Rap1 compete with each other
     for binding to SHANK3 and loss of SHANK3-actin binding augments inhibition of Rap1-mediated integrin
     activity. This dynamic crosstalk has functional implications for filopodia formation in cancer cells,
-    dendritic spine morphology in neurons and autism-linked phenotypes in vivo .'
+    dendritic spine morphology in neurons and autism-linked phenotypes in vivo.'
   peer_reviewed: false
   open_access_status: gold
   related_dois:
   - 10.1016/j.cub.2021.09.022
 - doi: 10.1021/acs.nanolett.9b04083
   year: 2020
-  type: article
   status: published
   title: Fluctuation-Based Super-Resolution Traction Force Microscopy
   authors:
@@ -2631,7 +2550,6 @@ records:
   corresponding: true
 - doi: 10.1101/2020.05.05.078733
   year: 2020
-  type: article
   status: preprint
   title: Myosin-X and talin modulate integrin activity at filopodia tips
   authors:
@@ -2661,7 +2579,6 @@ records:
   - 10.1016/j.celrep.2021.109716
 - doi: 10.1101/2020.05.19.103606
   year: 2020
-  type: article
   status: preprint
   title: Talin Rod Domain Containing Protein 1 (TLNRD1) is a novel actin-bundling protein which promotes
     filopodia formation
@@ -2692,7 +2609,6 @@ records:
   - 10.1083/jcb.202005214
 - doi: 10.1242/jcs.240713
   year: 2020
-  type: article
   status: published
   title: The cell biologist's guide to super-resolution microscopy
   authors:
@@ -2720,7 +2636,6 @@ records:
   corresponding: true
 - doi: 10.1101/2020.03.20.000133
   year: 2020
-  type: article
   status: preprint
   title: 'ZeroCostDL4Mic: an open platform to use Deep-Learning in Microscopy'
   authors:
@@ -2760,7 +2675,6 @@ records:
   - 10.1038/s41467-021-22518-0
 - doi: 10.1042/EBC20190012
   year: 2019
-  type: article
   status: published
   title: Cell matrix adhesion in cell migration
   authors:
@@ -2780,7 +2694,6 @@ records:
   corresponding: true
 - doi: 10.1007/978-1-4939-9686-5_16
   year: 2019
-  type: article
   status: published
   title: Filopodia Quantification Using FiloQuant
   authors:
@@ -2805,7 +2718,6 @@ records:
   corresponding: true
 - doi: 10.1016/j.cub.2018.11.053
   year: 2019
-  type: article
   status: published
   title: Filopodome Mapping Identifies p130Cas as a Mechanosensitive Regulator of Filopodia Stability
   authors:
@@ -2841,7 +2753,6 @@ records:
   corresponding: true
 - doi: 10.1101/772947
   year: 2019
-  type: article
   status: preprint
   title: Fluctuation-Based Super-Resolution Traction Force Microscopy
   authors:
@@ -2871,7 +2782,6 @@ records:
   - 10.1021/acs.nanolett.9b04083
 - doi: 10.1038/s41467-019-12611-w
   year: 2019
-  type: article
   status: published
   title: Superresolution architecture of cornerstone focal adhesions in human pluripotent stem cells
   authors:
@@ -2902,7 +2812,6 @@ records:
   - 10.1101/402305
 - doi: 10.1016/j.bbadis.2018.03.001
   year: 2018
-  type: article
   status: published
   title: Endothelial cells cope with hypoxia-induced depletion of ATP via activation of cellular purine
     turnover and phosphotransfer networks
@@ -2938,7 +2847,6 @@ records:
   open_access_status: gold
 - doi: 10.1101/377879
   year: 2018
-  type: article
   status: preprint
   title: Filopodome mapping identifies p130Cas as a mechanosensitive regulator of filopodia stability
   authors:
@@ -2969,7 +2877,6 @@ records:
   - 10.1016/j.cub.2018.11.053
 - doi: 10.1016/j.devcel.2018.03.015
   year: 2018
-  type: article
   status: published
   title: Mitosis-Resistant Adhesions Provide Molecular Memory to Dividing Cells
   authors:
@@ -2984,18 +2891,15 @@ records:
   open_access_status: gold
 - doi: 10.1242/prelights.5302
   year: 2018
-  type: article
   status: published
   title: PlotsOfData - a web app for visualizing data together with its summaries
   authors:
   - Guillaume Jacquemet
   venue: The Company of Biologists
-  abstract: unavailable from Crossref
   peer_reviewed: false
   open_access_status: gold
 - doi: 10.1101/402305
   year: 2018
-  type: article
   status: preprint
   title: Superresolution architecture of pluripotency guarding adhesions
   authors:
@@ -3031,7 +2935,6 @@ records:
   - 10.1038/s41467-019-12611-w
 - doi: 10.1073/pnas.1722317115
   year: 2018
-  type: article
   status: published
   title: Targeting β1-integrin inhibits vascular leakage in endotoxemia
   authors:
@@ -3059,7 +2962,6 @@ records:
   open_access_status: gold
 - doi: 10.1083/jcb.201609066
   year: 2017
-  type: article
   status: published
   title: AMPK negatively regulates tensin-dependent integrin activity
   authors:
@@ -3093,7 +2995,6 @@ records:
   open_access_status: gold
 - doi: 10.1038/nprot.2017.107
   year: 2017
-  type: article
   status: published
   title: Cell-derived matrices for studying cell proliferation and directional migration in a complex
     3D microenvironment
@@ -3118,7 +3019,6 @@ records:
   open_access_status: gold
 - doi: 10.1083/jcb.201704045
   year: 2017
-  type: article
   status: published
   title: FiloQuant reveals increased filopodia density during breast cancer progression
   authors:
@@ -3148,7 +3048,6 @@ records:
   - 10.1101/125047
 - doi: 10.1101/125047
   year: 2017
-  type: article
   status: preprint
   title: FiloQuant reveals increased filopodia density during DCIS progression
   authors:
@@ -3181,7 +3080,6 @@ records:
   - 10.1083/jcb.201704045
 - doi: 10.1038/ncb3487
   year: 2017
-  type: article
   status: published
   title: SHANK proteins limit integrin activation by directly interacting with Rap1 and R-Ras
   authors:
@@ -3216,7 +3114,6 @@ records:
   open_access_status: gold
 - doi: 10.15252/embj.201694387
   year: 2017
-  type: article
   status: published
   title: SHARPIN regulates collagen architecture and ductal outgrowth in the developing mouse mammary
     gland
@@ -3247,7 +3144,7 @@ records:
     linear ubiquitination and integrin activity inhibition; however, its contribution to epithelial homeostasis
     remains poorly understood. Here, we examined the role of SHARPIN in mammary gland development, a process
     strongly regulated by epithelial-stromal interactions. Mice lacking SHARPIN expression in all cells
-    (Sharpin cpdm ), and mice with a stromal (S100a4-Cre) deletion of Sharpin, have reduced mammary ductal
+    (Sharpin cpdm), and mice with a stromal (S100a4-Cre) deletion of Sharpin, have reduced mammary ductal
     outgrowth during puberty. In contrast, Sharpin cpdm mammary epithelial cells transplanted in vivo
     into wild-type stroma, fully repopulate the mammary gland fat pad, undergo unperturbed ductal outgrowth
     and terminal differentiation. Thus, SHARPIN is required in mammary gland stroma during development.
@@ -3261,7 +3158,6 @@ records:
   open_access_status: gold
 - doi: 10.1242/jcs.200329
   year: 2017
-  type: article
   status: published
   title: The Sharpin interactome reveals a role for Sharpin in lamellipodium formation via the Arp2/3
     complex
@@ -3295,7 +3191,6 @@ records:
   open_access_status: gold
 - doi: 10.1038/ncomms13297
   year: 2016
-  type: article
   status: published
   title: L-type calcium channels regulate filopodia stability and cancer cell invasion downstream of integrin
     signalling
@@ -3312,24 +3207,22 @@ records:
   - Heikki Joensuu
   - Johanna Ivaska
   venue: Nature Communications
-  abstract: Mounting in vitro , in vivo and clinical evidence suggest an important role for filopodia
-    in driving cancer cell invasion. Using a high-throughput microscopic-based drug screen, we identify
-    FDA-approved calcium channel blockers (CCBs) as potent inhibitors of filopodia formation in cancer
-    cells. Unexpectedly, we discover that L-type calcium channels are functional and frequently expressed
-    in cancer cells suggesting a previously unappreciated role for these channels during tumorigenesis.
-    We further demonstrate that, at filopodia, L-type calcium channels are activated by integrin inside-out
-    signalling, integrin activation and Src. Moreover, L-type calcium channels promote filopodia stability
-    and maturation into talin-rich adhesions through the spatially restricted regulation of calcium entry
-    and subsequent activation of the protease calpain-1. Altogether we uncover a novel and clinically
-    relevant signalling pathway that regulates filopodia formation in cancer cells and propose that cycles
-    of filopodia stabilization, followed by maturation into focal adhesions, directs cancer cell migration
-    and invasion.
+  abstract: Mounting in vitro, in vivo and clinical evidence suggest an important role for filopodia in
+    driving cancer cell invasion. Using a high-throughput microscopic-based drug screen, we identify FDA-approved
+    calcium channel blockers (CCBs) as potent inhibitors of filopodia formation in cancer cells. Unexpectedly,
+    we discover that L-type calcium channels are functional and frequently expressed in cancer cells suggesting
+    a previously unappreciated role for these channels during tumorigenesis. We further demonstrate that,
+    at filopodia, L-type calcium channels are activated by integrin inside-out signalling, integrin activation
+    and Src. Moreover, L-type calcium channels promote filopodia stability and maturation into talin-rich
+    adhesions through the spatially restricted regulation of calcium entry and subsequent activation of
+    the protease calpain-1. Altogether we uncover a novel and clinically relevant signalling pathway that
+    regulates filopodia formation in cancer cells and propose that cycles of filopodia stabilization,
+    followed by maturation into focal adhesions, directs cancer cell migration and invasion.
   peer_reviewed: true
   open_access_status: gold
   corresponding: true
 - doi: 10.1083/jcb.201508080
   year: 2016
-  type: article
   status: published
   title: Modulation of FAK and Src adhesion signaling occurs independently of adhesion complex composition
   authors:
@@ -3357,7 +3250,6 @@ records:
   open_access_status: bronze
 - doi: 10.7554/elife.18124
   year: 2016
-  type: article
   status: published
   title: Talin-KANK1 interaction controls the recruitment of cortical microtubule stabilizing complexes
     to focal adhesions
@@ -3390,7 +3282,6 @@ records:
   - 10.1101/055210
 - doi: 10.1101/055210
   year: 2016
-  type: article
   status: preprint
   title: Talin-KANK1 interaction controls the recruitment of cortical microtubule stabilizing complexes
     to focal adhesions
@@ -3423,7 +3314,6 @@ records:
   - 10.7554/elife.18124
 - doi: 10.1038/ncomms7135
   year: 2015
-  type: article
   status: published
   title: A proteomic approach reveals integrin activation state-dependent control of microtubule cortical
     targeting
@@ -3456,7 +3346,6 @@ records:
   open_access_status: gold
 - doi: 10.1038/ncomms7265
   year: 2015
-  type: article
   status: published
   title: Defining the phospho-adhesome through the phosphoproteomic analysis of integrin signalling
   authors:
@@ -3486,7 +3375,6 @@ records:
   open_access_status: gold
 - doi: 10.1016/j.cub.2015.09.049
   year: 2015
-  type: article
   status: published
   title: Endocytic Trafficking of Integrins in Cell Migration
   authors:
@@ -3508,7 +3396,6 @@ records:
   open_access_status: gold
 - doi: 10.1038/ncomms6962
   year: 2015
-  type: article
   status: published
   title: Endothelial destabilization by angiopoietin-2 via integrin β1 activation
   authors:
@@ -3534,13 +3421,12 @@ records:
     cell–cell junctions. The Tie2-silenced monolayer integrity is rescued by β1-integrin, phosphoinositide-3
     kinase or Rho kinase inhibition, and by re-expression of a membrane-bound Tie2 ectodomain. Furthermore,
     Tie2 silencing increases, whereas Ang2 blocking inhibits transendothelial tumour cell migration in
-    vitro . These results establish Ang2-mediated β1-integrin activation as a promoter of endothelial
-    destablization, explaining the controversial vascular functions of Ang1 and Ang2.
+    vitro. These results establish Ang2-mediated β1-integrin activation as a promoter of endothelial destablization,
+    explaining the controversial vascular functions of Ang1 and Ang2.
   peer_reviewed: true
   open_access_status: gold
 - doi: 10.1016/j.ceb.2015.06.007
   year: 2015
-  type: article
   status: published
   title: Filopodia in cell adhesion, 3D migration and cancer cell invasion
   authors:
@@ -3560,7 +3446,6 @@ records:
   open_access_status: gold
 - doi: 10.1038/ncb3250
   year: 2015
-  type: article
   status: published
   title: Integrin endosomal signalling suppresses anoikis
   authors:
@@ -3588,7 +3473,6 @@ records:
   open_access_status: gold
 - doi: 10.1083/jcb.201502040
   year: 2015
-  type: article
   status: published
   title: α5β1 integrin recycling promotes Arp2/3-independent cancer cell invasion via the formin FHOD3
   authors:
@@ -3621,7 +3505,6 @@ records:
   open_access_status: bronze
 - doi: 10.4161/sgtp.27451
   year: 2013
-  type: article
   status: published
   title: IQGAP1 is a key node within the small GTPase network
   authors:
@@ -3648,7 +3531,6 @@ records:
   open_access_status: gold
 - doi: 10.1242/jcs.121988
   year: 2013
-  type: article
   status: published
   title: Rac1 is deactivated at integrin activation sites via an IQGAP1/filamin-A/RacGAP1 pathway
   authors:
@@ -3683,7 +3565,6 @@ records:
   open_access_status: green
 - doi: 10.1083/jcb.201302041
   year: 2013
-  type: article
   status: published
   title: RCP-driven α5β1 recycling suppresses Rac and promotes RhoA activity via the RacGAP1–IQGAP1 complex
   authors:
@@ -3711,7 +3592,6 @@ records:
   open_access_status: bronze
 - doi: 10.1016/j.ceb.2013.05.008
   year: 2013
-  type: article
   status: published
   title: Role of adhesion receptor trafficking in 3D cell migration
   authors:

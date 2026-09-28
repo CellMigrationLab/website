@@ -11,9 +11,12 @@ permissions:
   pages: write
   id-token: write
 
+# One run per branch at a time. A newer push cancels an older pull-request
+# build, but never a deploy of main that is already running (a cancelled
+# deploy can leave GitHub Pages half-updated); main runs queue instead.
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -33,8 +36,10 @@ jobs:
       - name: Restore image thumbnails
         uses: actions/cache@v4
         with:
-          path: docs/assets/thumbs
-          key: thumbs-${{ hashFiles('docs/wp-content/**', 'docs/assets/images/**', 'data/photos/**') }}
+          path: |
+            docs/assets/thumbs
+            .cache/cellmig-thumbs
+          key: thumbs-${{ hashFiles('docs/wp-content/**', 'docs/assets/images/**', 'data/photos/**', 'scripts/cellmig/images.py') }}
           restore-keys: thumbs-
 
       - name: Unit tests

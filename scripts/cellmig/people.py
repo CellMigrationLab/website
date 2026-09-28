@@ -30,8 +30,7 @@ def _publish_photo(slug: str) -> str | None:
         if src.is_file():
             dest = DOCS / "assets" / "images" / "members" / src.name
             dest.parent.mkdir(parents=True, exist_ok=True)
-            if not dest.exists() or dest.stat().st_mtime < src.stat().st_mtime:
-                shutil.copy2(src, dest)
+            shutil.copy2(src, dest)   # the folder is emptied by build_pages.clean() on every build
             return f"assets/images/members/{src.name}"
     return None
 
@@ -77,6 +76,17 @@ def load_members() -> list[Person]:
         fail("data/things_done/lab_members.yaml has no records")
     _check_no_orphans({p["slug"] for p in people})
     return people
+
+
+def leader(members: list[Person]) -> Person:
+    """The current group leader (group `pi`), who must have an email in
+    data/members/<slug>.yaml (it is the lab's contact address)."""
+    pis = [m for m in members if m["group"] == "pi" and m["status"] == "current"]
+    if len(pis) != 1:
+        fail(f"things_done lab_members.yaml: expected one current group leader (group pi), found {len(pis)}")
+    if not pis[0].get("email"):
+        fail(f"data/members/{pis[0]['slug']}.yaml: the group leader needs an email (the lab's contact address)")
+    return pis[0]
 
 
 def lab_names(members: list[Person]) -> set[str]:
