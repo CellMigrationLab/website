@@ -15,8 +15,8 @@ Reads                                        Writes (git-ignored, rebuilt every 
   data/things_done/ (all of it)                docs/lab-in-numbers.md
   data/gallery.yaml                            docs/gallery.md
   data/talks.yaml                              docs/online-lectures.md
-  data/things_done/ (papers, talks, events,    docs/news.md, docs/feed.xml and
-    grants, roles, software)                     docs/feed/index.html (RSS)
+  data/things_done/ (papers, software,         docs/feed.xml and docs/feed/index.html
+    datasets)                                    (RSS of research outputs)
   data/site.yaml + affiliations, members       overrides/partials/cm-footer.html, cm-jsonld.html
   data/previews.yaml                           link previews (title, text, picture) of every page
   content/*.md                                 docs/about-us.md, docs/join-us.md
@@ -36,7 +36,7 @@ from cellmig.config import DATA, DOCS, GENERATED, load
 from cellmig.featured import load_featured
 from cellmig.ledger import Ledger, affiliation_list, support_list
 from cellmig.llms import write_llms
-from cellmig.news import build_news, page_news
+from cellmig.outputs import build_outputs
 from cellmig.pages_content import (
     page_datasets,
     page_gallery,
@@ -77,8 +77,8 @@ def main() -> None:
     affiliations = affiliation_list(site["affiliations"], ledger)
     funding = support_list(site["funding"], site["programmes"], ledger)
 
-    news = build_news(ledger, featured)
-    page_home(site, featured, ledger, lab, affiliations, funding, news)
+    outputs = build_outputs(ledger, featured)
+    page_home(site, featured, ledger, lab, affiliations, funding)
     page_research(ledger)
     page_members(members)
     page_software(ledger)
@@ -90,8 +90,7 @@ def main() -> None:
     page_talks()
     page_handwritten("about-us", extra=pi_profile(ledger.profile, leader(members)))
     page_handwritten("join-us")
-    page_news(news)
-    write_feed(site, news)
+    write_feed(site, outputs)
     write_footer(site, affiliations)
     write_jsonld(site, affiliations, members, plain(ledger.profile["short_bio"]), funding)
     write_llms(site, featured, ledger, members, affiliations, funding)

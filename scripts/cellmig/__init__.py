@@ -18,6 +18,6 @@ scripts/build_pages.py is the entry point; the modules here are:
   structured  schema.org JSON-LD and Google Scholar tags
   llms        /llms.txt and /llms-full.txt
   profile     group leader profile and recent talks
-  news        news items (page and RSS) generated from things_done
+  outputs     research outputs (RSS): papers, preprints, software, datasets
   site_files  footer and JSON-LD partials, RSS feed
 """

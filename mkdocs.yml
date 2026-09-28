@@ -31,7 +31,6 @@ theme:
 # Software; Online talks and Join us from About us (same addresses).
 nav:
   - Home: index.md
-  - News: news.md
   - Research: research.md
   - Publications: publications.md
   - Software & data: software.md
@@ -58,6 +57,7 @@ plugins:
         2021/09/16/phd-position-available.md: lab-members.md
         2019/10/11/we-are-ready-to-move.md: about-us.md
         home-2/index.md: index.md
+        news.md: index.md   # the News page was removed (#22); the RSS feed lists research outputs
         portfolio/pancreatic-cancer-cells-breach-endothelial-barriers-through-protrusion-driven-invasion-or-.md: portfolio/pancreatic-cancer-cells-breach-endothelial-barriers-through-protrusion-driven-invasion-or.md
 
 markdown_extensions:
