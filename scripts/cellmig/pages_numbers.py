@@ -13,7 +13,8 @@ from .text import esc, flag, fmt
 from .worldmap import world_map
 
 TOP_COLLABORATORS = 12
-CLOUD_SIZE = 70
+CLOUD_SIZE = 45                  # names in the co-author cloud (#19: a compact, secondary chart)
+CLOUD_MIN, CLOUD_MAX = 0.72, 1.55   # font sizes (rem) of the least and most frequent co-author
 
 
 def _tiles(ledger: Ledger, members: list[Person], countries: dict[str, int]) -> str:
@@ -53,13 +54,18 @@ def _top_collaborators(coauthors: list[Record], lab: set[str]) -> str:
     return '<ol class="cm-toplist">' + "".join(rows) + "</ol>"
 
 
+def cloud_size(papers: int, most: int) -> float:
+    """Font size (rem) of a name: grows with the square root of joint papers."""
+    return CLOUD_MIN + (CLOUD_MAX - CLOUD_MIN) * (papers / most) ** 0.5
+
+
 def _cloud(coauthors: list[Record], lab: set[str]) -> str:
     """Word cloud of the most frequent co-authors, sorted by surname."""
     cloud = coauthors[:CLOUD_SIZE]
     most = cloud[0]["papers"]
     words = []
     for c in sorted(cloud, key=lambda c: c["name"].split()[-1]):
-        size = 0.7 + 1.8 * (c["papers"] / most) ** 0.5
+        size = cloud_size(c["papers"], most)
         cls = "cm-cloud__lab" if is_lab_member(c["name"], lab) else ""
         words.append(f'<span class="{cls}" style="font-size:{size:.2f}rem" '
                      f'title="{esc(c["name"])}: {c["papers"]} joint papers">{esc(c["name"])}</span>')
