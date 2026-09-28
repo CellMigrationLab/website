@@ -91,10 +91,6 @@ media:
   rights: CC-BY-4.0
   creators:
   - Guillaume Jacquemet
-- path: assets/media/srrf-tfm.mp4
-  type: software-media
-  rights: all-rights-reserved
-  owner: Cell Migration Lab
 - path: assets/media/zerocostdl4mic.jpg
   type: microscopy
   rights: third-party

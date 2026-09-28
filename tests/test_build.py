@@ -108,15 +108,42 @@ class LedgerTests(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 ledger.software_list(led)
 
-    def test_software_merges_ledger_and_website_only_entries(self):
-        led = fake_ledger([])
-        led.software = [{"id": "a", "title": "A", "start_date": "2020-01-01", "github_repo_url": "https://github.com/x/a",
-                         "description": "A tool.", "related_publication_dois": ["10.1/j"]}]
-        with patch.object(ledger, "load", return_value=[{"title": "Web only", "year": 2022}, {"id": "a", "fit": "contain"}]):
-            out = ledger.software_list(led)
-        self.assertEqual([s["title"] for s in out], ["Web only", "A"])
-        self.assertEqual(out[1]["fit"], "contain")   # presentation keys pass through
-        self.assertEqual(out[1]["dois"], ["10.1/j"])
+    SOFTWARE = {"id": "a", "title": "A", "start_date": "2020-01-01", "github_repo_url": "https://github.com/x/a",
+                "description": "A tool.", "summary": "A longer text.", "related_publication_dois": ["10.1101/pre"]}
+
+    def test_software_facts_from_the_ledger_look_from_the_website(self):
+        """The paper link follows a preprint to its journal version."""
+        led = fake_ledger([PRE, JOURNAL])
+        led.software = [self.SOFTWARE]
+        with patch.object(ledger, "load", return_value=[{"id": "a", "fit": "contain"}]):
+            [s] = ledger.software_list(led)
+        self.assertEqual((s["title"], s["year"], s["text"], s["fit"]), ("A", 2020, "A longer text.", "contain"))
+        self.assertEqual([r["doi"] for r in s["papers"]], ["10.1/j"])
+
+    def test_software_facts_on_the_website_stop_the_build(self):
+        led = fake_ledger([PRE, JOURNAL])
+        led.software = [self.SOFTWARE]
+        for entry in ({"id": "a", "text": "Old text"}, {"id": "a", "paper": "https://x"}, {"title": "Web only"}):
+            with patch.object(ledger, "load", return_value=[entry]), self.assertRaises(SystemExit):
+                ledger.software_list(led)
+        led.software = [dict(self.SOFTWARE, related_publication_dois=[])]
+        with patch.object(ledger, "load", return_value=[]), self.assertRaises(SystemExit):
+            ledger.software_list(led)
+
+    def test_software_takes_its_papers_featured_picture(self):
+        """A tool linked to a preprint finds the picture of the featured journal version."""
+        from cellmig.featured import paper_picture
+        led = fake_ledger([PRE, JOURNAL])
+        stories = [{"papers": ["10.1/j"], "image": "assets/images/j.png", "fit": "contain"}]
+        self.assertEqual(paper_picture(["10.1101/pre"], stories, led), ("assets/images/j.png", "contain"))
+        self.assertIsNone(paper_picture(["10.1101/pre"], [dict(stories[0], image=None)], led))
+
+    def test_dataset_papers_follow_preprints_and_are_required(self):
+        led = fake_ledger([PRE, JOURNAL])
+        self.assertEqual([r["doi"] for r in led.dataset_papers({"title": "D", "related_publication_dois": ["10.1101/pre", "10.1/j"]})],
+                         ["10.1/j"])
+        with self.assertRaises(SystemExit):
+            led.dataset_papers({"title": "D"})
 
 
 class FeaturedTests(unittest.TestCase):

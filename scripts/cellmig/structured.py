@@ -167,22 +167,19 @@ def software_item(s: Record, anchor_url: str) -> Json:
     the ledger does not record who the authors are."""
     item: Json = {"@type": "SoftwareSourceCode", "name": s["title"], "url": anchor_url,
                   "description": plain(s.get("text")), "contributor": {"@id": LAB_ID}}
-    if s.get("github"):
-        item["codeRepository"] = s["github"]
-    if s["dois"]:
-        item["citation"] = [f"https://doi.org/{d}" for d in s["dois"]]
+    item["codeRepository"] = s["github"]
+    item["citation"] = [f"https://doi.org/{r['doi']}" for r in s["papers"]]
     return item
 
 
-def dataset_item(d: Record) -> Json:
+def dataset_item(d: Record, papers: list[Record]) -> Json:
     """A dataset as schema.org Dataset, with the lab as `contributor` (many
-    datasets are shared with collaborators)."""
+    datasets are shared with collaborators), citing its papers (Ledger.dataset_papers)."""
     item: Json = {"@type": "Dataset", "name": d["title"], "url": d["repository_url"],
                   "description": plain(d["description"]), "contributor": {"@id": LAB_ID}}
     if d.get("archive_doi"):
         item["identifier"] = f"https://doi.org/{d['archive_doi']}"
-    if d.get("related_publication_dois"):
-        item["citation"] = [f"https://doi.org/{x}" for x in d["related_publication_dois"]]
+    item["citation"] = [f"https://doi.org/{r['doi']}" for r in papers]
     return item
 
 

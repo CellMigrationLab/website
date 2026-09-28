@@ -18,6 +18,7 @@ from .config import (
     load,
 )
 from .images import image_size, lite_video, media, thumb
+from .featured import Story, paper_picture
 from .ledger import Ledger, Record, software_list
 from .page import Page, new_tab_markdown
 from .previews import preview
@@ -80,19 +81,22 @@ def _software_body(s: Record) -> str:
     """Text of one software tile: title (year), description, links."""
     title = f'{s["title"]} ({s["year"]})' if s.get("year") else s["title"]
     text = md(s.get("text") or "")
-    links = []
-    paper = s.get("paper") or (f'https://doi.org/{s["dois"][0]}' if s["dois"] else None)
-    if paper:
-        links.append(f'<a href="{esc(paper)}">Read our paper</a>')
-    if s.get("github"):
-        host = "GitHub" if "github.com" in s["github"] else "Code"
-        links.append(f'<a href="{esc(s["github"])}">Find {esc(s["title"])} on {host}</a>')
+    papers = s["papers"]   # never empty (software_list); journal versions once published
+    if len(papers) == 1:
+        links = [f'<a href="https://doi.org/{esc(papers[0]["doi"])}">Read our paper</a>']
+    else:
+        links = ["Read our papers: " + ", ".join(
+            f'<a href="https://doi.org/{esc(r["doi"])}">{esc(r["venue"])}, {r["year"]}</a>' for r in papers)]
+    host = "GitHub" if "github.com" in s["github"] else "Code"
+    links.append(f'<a href="{esc(s["github"])}">Find {esc(s["title"])} on {host}</a>')
     links += [f'<a href="{esc(link["url"])}">{esc(link["label"])}</a>' for link in s.get("links") or []]
     return f'<h2 id="{slugify(s["title"])}">{esc(title)}</h2>{text}<p class="cm-tile__links">{" · ".join(links)}</p>'
 
 
-def page_software(ledger: Ledger) -> None:
-    """docs/software.md: one tile per project (things_done + data/software.yaml)."""
+def page_software(ledger: Ledger, featured: list[Story]) -> None:
+    """docs/software.md: one tile per project (things_done + data/software.yaml).
+    A project with no picture or video of its own shows its paper's featured
+    picture (featured.paper_picture), so one picture serves both."""
     p = Page("software.md", title="Software", edit_url=edit_url("data/software.yaml"), **preview("software"))
     projects = software_list(ledger)
     p.meta["jsonld"] = to_json(item_list("Software from the Cell Migration Lab", [
@@ -103,6 +107,9 @@ def page_software(ledger: Ledger) -> None:
           'Looking for example data or trained models? See '
           '<a href="datasets/">our datasets, models and materials</a>.</p>', '<div class="cm-wide">')
     for i, s in enumerate(projects):
+        if not (s.get("video") or s.get("image")) and (shared := paper_picture(s["dois"], featured, ledger)):
+            s["image"] = shared[0]
+            s.setdefault("fit", shared[1])
         pic = media(s.get("video") or s.get("image"), f'{s["title"]} logo' if s.get("image") else "", 900)
         _no_colour(s, "data/software.yaml")
         p.add(tile(i, pic, _software_body(s), s.get("fit"), picture_right_first=True))   # as before
@@ -128,11 +135,8 @@ def _dataset_type(d: Record) -> str:
 
 def _dataset(d: Record, ledger: Ledger) -> str:
     """One dataset: title, tags, description, year, archive DOI and papers."""
-    refs = []
-    for doi in d.get("related_publication_dois") or []:
-        rec = ledger.require(doi, f"things_done dataset {d['title']!r} (related_publication_dois)")
-        label = f'{rec["venue"]}, {rec["year"]}'
-        refs.append(f'<a href="https://doi.org/{esc(doi)}">{esc(label)}</a>')
+    refs = [f'<a href="https://doi.org/{esc(rec["doi"])}">{esc(rec["venue"])}, {rec["year"]}</a>'
+            for rec in ledger.dataset_papers(d)]
     tags = "".join(f'<span class="cm-badge">{esc(_dataset_tag(t, d))}</span>' for t in d.get("dataset_tags") or [])
     archive = d.get("archive_doi")
     archive_html = (f' · <a href="https://doi.org/{esc(archive)}">doi:{esc(archive)}</a>'
@@ -147,7 +151,7 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     """docs/datasets.md: shared resources (data/site.yaml), then datasets by type."""
     p = Page("datasets.md", title="Datasets", menu="software/", **preview("datasets"))
     p.meta["jsonld"] = to_json(item_list("Datasets shared by the Cell Migration Lab",
-                                         [dataset_item(d) for d in ledger.datasets]))
+                                         [dataset_item(d, ledger.dataset_papers(d)) for d in ledger.datasets]))
     p.add("# Datasets", section_nav(SOFTWARE_DATA, "Datasets"),
           '<p class="cm-lead">We share microscopy datasets, trained models and other research data from our work. '
           'Many accompany published papers or provide examples for our image-analysis tools. '

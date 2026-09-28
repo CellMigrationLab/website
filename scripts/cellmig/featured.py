@@ -126,3 +126,15 @@ def story_by_doi(featured: list[Story], ledger: Ledger) -> dict[str, Story]:
             for d in ledger.family_dois(doi):
                 out.setdefault(d, story)
     return out
+
+
+def paper_picture(dois: list[str], featured: list[Story], ledger: Ledger) -> tuple[str, str] | None:
+    """(image, fit) of the first of `dois` that is a featured paper with a
+    picture, any version of it (preprint or journal) counting; else None. Lets
+    a software project show its paper's picture without repeating it."""
+    for doi in dois:
+        family = ledger.family_dois(doi)
+        for story in featured:
+            if story["image"] and family & {d.lower() for d in story["papers"]}:
+                return story["image"], story["fit"]
+    return None

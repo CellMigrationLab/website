@@ -33,7 +33,7 @@ things_done (publications, datasets, lab in numbers) have none.
 | Featured research (8 newest biology and 8 newest methods papers on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done, and only those; area (biology or methods), pictures and page addresses in `data/featured.yaml` (`hide: true` to leave one out) |
 | Publications | automatic, from things_done |
 | Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done |
-| Software | automatic list from things_done; pictures, videos, texts and extra links in `data/software.yaml` (tile colours follow each other down the page) |
+| Software | automatic, from things_done: projects, names, years, GitHub links, papers (a preprint is followed to its journal version) and texts (`summary`); pictures, videos and extra links in `data/software.yaml`; a project without one shows its paper's picture from `data/featured.yaml` (tile colours follow each other down the page) |
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
 | Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<id>.yaml` (the person's things_done id without `member-`), team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
