@@ -25,6 +25,8 @@ from .structured import dataset_item, item_list, software_item, to_json
 from .text import esc, is_external, md, slugify, year_of
 
 BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our publications</a>'
+# Research page: the papers behind the themes, at the top and the bottom.
+FEATURED_RESEARCH = '<a class="cm-button" href="featured-research/">Explore our featured research</a>'
 
 
 # The menu's "Software & data" covers two pages; this row links them (#25).
@@ -58,13 +60,15 @@ def page_research(ledger: Ledger) -> None:
     """docs/research.md from data/research.yaml: videos, then one tile per theme."""
     research = load(DATA / "research.yaml")
     p = Page("research.md", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
-    p.add("# Research", f'<p class="cm-lead">{esc(research["intro"])}</p>', '<div class="cm-videos">')
+    papers = f'{FEATURED_RESEARCH} {BROWSE_PUBLICATIONS.replace("cm-button", "cm-button cm-button--ghost", 1)}'
+    p.add("# Research", f'<p class="cm-lead">{esc(research["intro"])}</p>', f'<p class="cm-research-links">{papers}</p>',
+          '<div class="cm-videos">')
     p.add(*(f'<figure>{lite_video(v.get("youtube"), v.get("vimeo"), v["title"], v.get("start"))}'
             f'<figcaption>{esc(v["title"])}</figcaption></figure>' for v in research.get("videos") or []))
     p.add("</div>", '<div class="cm-wide">')
     for i, t in enumerate(research["themes"]):
         p.add(tile(i, media(t.get("image"), t.get("credit", ""), 1000), _theme(t, ledger), t.get("color"), t.get("fit")))
-    p.add("</div>", f'<p class="cm-cta">{BROWSE_PUBLICATIONS}</p>')
+    p.add("</div>", f'<p class="cm-cta">{papers}</p>')
     p.write()
 
 

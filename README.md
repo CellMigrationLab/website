@@ -27,7 +27,7 @@ button (top right) that opens the right file.
 | Group leader profile (About us) | automatic, from things_done (`ledger/profile/`, `ledger/roles/`) |
 | Affiliations (home page and footer) | which ones: things_done `ledger/profile/affiliations.yaml` (current = no end date, or one not yet passed); logo and link per ledger `id` in `data/site.yaml` `affiliations` — a current affiliation without an entry stops the build; an entry that is no longer current is left out with a warning |
 | Research | `data/research.yaml` |
-| Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done, and only those; pictures and page addresses in `data/featured.yaml` (`hide: true` to leave one out) |
+| Featured research (8 newest biology and 8 newest methods papers on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done, and only those; area (biology or methods), pictures and page addresses in `data/featured.yaml` (`hide: true` to leave one out) |
 | Publications | automatic, from things_done |
 | Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done |
 | Software | automatic list from things_done; colours, pictures, texts in `data/software.yaml` |

@@ -16,7 +16,10 @@ from .text import slugify
 
 Story = dict[str, Any]
 
-ENTRY_KEYS = {"doi", "image", "slug", "also", "hide", "summary", "fit"}
+ENTRY_KEYS = {"doi", "image", "slug", "also", "hide", "summary", "fit", "area"}
+# What a featured paper is mainly about; the home page shows the newest of
+# each in its own group (config.HOME_FEATURED each). Required on every paper.
+AREAS = {"biology": "Biology", "methods": "Methods and tools"}
 
 
 def _entries(ledger: Ledger) -> dict[str, Record]:
@@ -73,6 +76,7 @@ def _story(ledger: Ledger, main: Record, entry: Record) -> Story:
         "pubs": pubs,
         "image": entry.get("image"),
         "fit": _fit(entry),
+        "area": entry.get("area"),
         "title": main["title"],
         "slug": entry.get("slug") or _title_slug(main["title"]),
         "year": int(main["year"]),
@@ -100,6 +104,9 @@ def load_featured(ledger: Ledger) -> list[Story]:
     stray = [e["doi"] for k, e in entries.items() if k not in used]
     if stray:
         fail(f"data/featured.yaml: not corresponding-author papers in the ledger, remove them: {stray}")
+    no_area = [s["papers"][0] for s in featured if s["area"] not in AREAS]
+    if no_area:
+        fail(f"data/featured.yaml: give these featured papers an `area` ({' or '.join(AREAS)}): {no_area}")
     bad = [s["slug"] for s in featured if not SLUG.fullmatch(s["slug"])]
     if bad:
         fail(f"data/featured.yaml: slugs must be lower-case words joined by '-': {bad}")

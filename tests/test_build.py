@@ -129,7 +129,9 @@ class FeaturedTests(unittest.TestCase):
         c = pub("10.1/c", 2025, "published", "C", corresponding=True)
         d = pub("10.1/d", 2026, "published", "D")   # not corresponding
         lag = [{"published_doi": "10.1/b", "published_date": "2024-03-01"}]
-        items = self.run_featured([a, b, c, d], [{"doi": "10.1/c", "image": "c.png"}], lag)
+        entries = [{"doi": "10.1/c", "image": "c.png", "area": "methods"},
+                   {"doi": "10.1/a", "area": "biology"}, {"doi": "10.1/b", "area": "biology"}]
+        items = self.run_featured([a, b, c, d], entries, lag)
         # 2025 first; in 2024 the dated paper comes before the undated one
         self.assertEqual([i["title"] for i in items], ["C", "B", "A"])
         self.assertEqual(items[0]["image"], "c.png")
@@ -138,6 +140,12 @@ class FeaturedTests(unittest.TestCase):
     def test_hidden_paper_is_left_out(self):
         a = pub("10.1/a", 2024, "published", "A", corresponding=True)
         self.assertEqual(self.run_featured([a], [{"doi": "10.1/a", "hide": True}]), [])
+
+    def test_every_featured_paper_needs_an_area(self):
+        a = pub("10.1/a", 2024, "published", "A", corresponding=True)
+        for entries in ([], [{"doi": "10.1/a", "area": "chemistry"}]):   # no entry; unknown area
+            with self.subTest(entries=entries), self.assertRaises(SystemExit):
+                self.run_featured([a], entries)
 
     def test_bad_entries_stop_the_build(self):
         a = pub("10.1/a", 2024, "published", "A", corresponding=True)

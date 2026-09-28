@@ -37,7 +37,7 @@ def write_footer(site: Record, affiliations: list[Record]) -> None:
         if s["icon"] not in ICONS:
             fail(f"data/site.yaml social {s['label']!r}: icon must be one of {sorted(ICONS)}")
     logos = "".join(
-        f'<li><a href="{t(a["url"])}" title="{t(a["name"])}"{tab(a["url"])}><img src="{u(thumb(a.get("logo_dark") or a["logo"], 300))}"{dims(thumb(a.get("logo_dark") or a["logo"], 300))} '
+        f'<li><a href="{t(a["url"])}" title="{t(a["name"])}"{tab(a["url"])}><img src="{u(thumb(a["logo"], 300))}"{dims(thumb(a["logo"], 300))} '
         f'alt="{t(a["name"])}" loading="lazy"></a></li>' for a in affiliations)
     social = "".join(f'<li><a href="{t(s["url"])}"{tab(s["url"])}>{ICONS[s["icon"]]}<span>{t(s["label"])}</span></a></li>'
                      for s in site["social"])
