@@ -106,7 +106,7 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str], lead
         f"All publications of Guillaume Jacquemet, who founded the Cell Migration Lab in {LAB_FOUNDED}; "
         f"papers before {LAB_FOUNDED} are from his PhD and postdoctoral work."))
     p.add("# Publications",
-          f'<p class="cm-lead">{len(records)} papers and preprints, newest first. Lab members are '
+          f'<p class="cm-lead">{len(records)} papers and preprints, newest first. Authors directly associated with the lab are '
           '<span class="cm-author--lab">highlighted</span>; preprints are merged with their journal version.</p>',
           '<form class="cm-filter" data-cm-filter role="search" onsubmit="return false">',
           '<label class="cm-visually-hidden" for="pub-search">Search publications</label>',
