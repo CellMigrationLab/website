@@ -25,6 +25,11 @@ removed and preprints paired with their journal versions (*Ledger Cleanup and
 Preprint Links*); the preprint-to-paper lag and the co-authors' countries are
 recomputed (also every Monday); the reports and CV list are regenerated.
 
+**Citation numbers** (Lab in numbers) are refreshed from Google Scholar on the
+1st of each month (*Diagnose Scholar Fetch*). Scholar sometimes blocks GitHub:
+the run is then red, the site keeps the last numbers and their date, and you
+can re-run it later (*Run workflow*, *refresh_cache* `true`).
+
 **Built from the ledger at every build (no file to touch):**
 
 | On the website | Comes from |
@@ -42,7 +47,6 @@ recomputed (also every Monday); the reports and CV list are regenerated.
 | When | Do |
 | --- | --- |
 | **A new paper or preprint** | Run the *Fetch publications from ORCID* action and review and merge the pull request it opens (or add one DOI with `python tools/fetch_publications.py --doi …`). Then check what the import cannot know: `status` (preprint, in press), and `me.corresponding_author` for papers where you are corresponding author, since that is what makes a paper Featured research. The date, open-access status and author spellings are filled in by the import. |
-| **Citation numbers** (Lab in numbers) | Run the *Diagnose Scholar Fetch* action with *refresh_cache* set to `true`, about once a month. Nothing refreshes them on a schedule; the reports flag a snapshot older than 30 days. |
 | **Someone joins, changes role or leaves** | `ledger/profile/lab_members.yaml`: add them with a `role`; move the old role to `previous_roles`; set `status: alumni` when they leave. |
 | **A new grant, or one starts or ends** | `ledger/registries/grants.yaml` (`status`, dates, funders, programme). A new funder or programme also needs its logo here (below). |
 | **New software or dataset** | `ledger/registries/software.yaml` or `datasets.yaml`, with `related_publication_dois` so its paper page lists it. |
