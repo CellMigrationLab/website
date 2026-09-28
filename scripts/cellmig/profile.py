@@ -1,5 +1,5 @@
-"""Guillaume's short profile (About us), recent talks and teaching (Online
-talks), all from things_done data."""
+"""Guillaume's short profile (About us) and his recent talks (llms-full.txt),
+from things_done data."""
 
 from datetime import date, timedelta
 
@@ -11,12 +11,9 @@ from .people import Person
 from .text import esc, md
 
 RECENT_TALK_DAYS = 730   # "recent talks": the last two years
-TALK_KINDS = {           # ledger talk_kind -> label (None: no label); others are not listed
-    "keynote": "Keynote", "plenary": "Plenary", "invited_talk": None, "seminar": "Seminar",
-    "contributed_talk": None, "webinar": "Webinar", "chair_and_speaker": None,
+TALK_KINDS = {           # ledger talk_kinds that are listed; other kinds are not
+    "keynote", "plenary", "invited_talk", "seminar", "contributed_talk", "webinar", "chair_and_speaker",
 }
-TEACHING_ROLES = {"course_director": "Course director", "course_lecturer": "Lecturer",
-                  "guest_lecturer": "Guest lecturer"}
 MONTHS = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
 
 
@@ -45,31 +42,4 @@ def pi_profile(profile: Record, leader: Person) -> str:
 def recent_talks(ledger: Ledger, today: date) -> list[Record]:
     """Talks of the listed kinds from the last RECENT_TALK_DAYS days, newest first."""
     since = (today - timedelta(days=RECENT_TALK_DAYS)).isoformat()
-    return [t for t in ledger.talks if t.get("talk_kind") in TALK_KINDS and str(t["date"]) >= since]
-
-
-def talks_section(ledger: Ledger, today: date) -> str:
-    """List of recent talks: date, title, event and place."""
-    rows = []
-    for t in recent_talks(ledger, today):
-        label = TALK_KINDS[t["talk_kind"]]
-        badge = f' <span class="cm-badge">{label}</span>' if label else ""
-        where = " · ".join(esc(x) for x in (t.get("event_name"), t.get("location")) if x)
-        rows.append(f'<li><span class="cm-talklist__date">{month_year(t["date"])}</span>'
-                    f'<span><strong>{esc(t["title"])}</strong>{badge}<span class="cm-talklist__where">{where}</span></span></li>')
-    return (f'{section_title("Recent talks", id_="recent-talks")}<ul class="cm-talklist">{"".join(rows)}</ul>'
-            '<p class="cm-small cm-source">From our <em>things_done</em> activity ledger; updates automatically.</p>')
-
-
-def teaching_section(ledger: Ledger, today: date) -> str:
-    """Courses taught this year (teaching records that have not ended)."""
-    now = today.isoformat()
-    seen, rows = set(), []
-    for t in ledger.teaching:
-        if str(t.get("end_date") or "9999") < now or t["title"] in seen:
-            continue
-        seen.add(t["title"])
-        role = TEACHING_ROLES.get(t.get("teaching_kind"), "")
-        rows.append(f'<li><span class="cm-talklist__date">{esc(role)}</span>'
-                    f'<span><strong>{esc(t["title"])}</strong><span class="cm-talklist__where">{esc(t["organization"])}</span></span></li>')
-    return f'{section_title("Teaching", id_="teaching")}<ul class="cm-talklist">{"".join(rows)}</ul>' if rows else ""
+    return [t for t in ledger.talks if t["talk_kind"] in TALK_KINDS and str(t["date"]) >= since]

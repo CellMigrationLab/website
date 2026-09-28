@@ -82,7 +82,7 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
     out += ["", f"## Group leader: {prof['name']}", "", prof["short_bio"], ""]
     for heading, key in (("Positions", "appointments"), ("Editorial roles", "editorial"),
                          ("Service and leadership", "service")):
-        out += [f"### {heading}", "", *(f"- {r['title']}, {r['organization']}" for r in prof.get(key) or []), ""]
+        out += [f"### {heading}", "", *(f"- {r['title']}, {r['organization']}" for r in prof[key]), ""]
     out += ["### Education", "", *(f"- {e['degree']}, {e['organization']}" + (f" ({str(e['end_date'])[:4]})" if e.get("end_date") else "")
                                    for e in prof["education"]), ""]
     out += _people(members)
@@ -92,26 +92,26 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
     out += ["## Featured papers", "", "Papers where Guillaume Jacquemet is (co-)corresponding author.", ""]
     for s in featured:
         pub = s["pubs"][0]
-        out += [f"### {s['title']}", "", f"{', '.join(pub.get('authors') or [])}. {_cite(pub)}",
+        out += [f"### {s['title']}", "", f"{', '.join(pub['authors'])}. {_cite(pub)}",
                 f"Page: {SITE_URL}portfolio/{s['slug']}/", "", " ".join(s["summary"].split()), ""]
     out += ["## All publications", "",
             f"Publications of Guillaume Jacquemet and the Cell Migration Lab. The lab was founded in {LAB_FOUNDED}; "
             f"papers from before {LAB_FOUNDED} come from his PhD and postdoctoral work.", ""]
-    out += [f"- {r['title']}. {', '.join(r.get('authors') or [])}. {_cite(r)}"
+    out += [f"- {r['title']}. {', '.join(r['authors'])}. {_cite(r)}"
             + (" (preprint)" if r.get("status") == "preprint" else "") for r in ledger.grouped()]
     out += ["", "## Software", ""]
     for s in software_list(ledger):
         code = f" Code: {s['github']}" if s.get("github") else ""
         out += [f"- {s['title']}" + (f" ({s['year']})" if s.get("year") else "") + f": {plain(s.get('text'))}{code}"]
     out += ["", "## Datasets", ""]
-    out += [f"- {d['title']}: {d.get('description') or ''} {d['repository_url']}" for d in ledger.datasets]
+    out += [f"- {d['title']}: {d['description']} {d['repository_url']}" for d in ledger.datasets]
     out += ["", "## Contact", "",
             f"- Email: {ledger.profile['name']}, {leader_email(members)}",
             f"- Address: {', '.join(site['contact']['address'])}",
             f"- How to join: {SITE_URL}join-us/", ""]
     out += ["## Join the lab", "", _join_us_text()]
     out += ["", "## Talks (last two years)", ""]
-    out += [f"- {month_year(t['date'])}: {t['title']}" + "".join(f", {x}" for x in (t.get("event_name"), t.get("location")) if x)
+    out += [f"- {month_year(t['date'])}: {t['title']}" + "".join(f", {x}" for x in (t["event_name"], t.get("location")) if x)
             for t in recent_talks(ledger, date.today())]
     out += ["", "## Recorded talks", ""]
     for t in load(DATA / "talks.yaml"):

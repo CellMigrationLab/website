@@ -99,7 +99,7 @@ def article(story: Story, page_url: str, image_url: str | None) -> Json:
         "@id": f"{page_url}#article",
         "headline": pub["title"],
         "name": pub["title"],
-        "author": [{"@type": "Person", "name": a} for a in pub.get("authors") or []],
+        "author": [{"@type": "Person", "name": a} for a in pub["authors"]],
         "isPartOf": {"@type": "Periodical", "name": pub.get("venue") or ""},
         "identifier": {"@type": "PropertyValue", "propertyID": "DOI", "value": pub["doi"]},
         "sameAs": f"https://doi.org/{pub['doi']}",
@@ -123,7 +123,7 @@ def scholar_tags(story: Story) -> list[list[str]]:
     story's main paper."""
     pub = story["pubs"][0]
     tags = [["citation_title", pub["title"]]]
-    tags += [["citation_author", a] for a in pub.get("authors") or []]
+    tags += [["citation_author", a] for a in pub["authors"]]
     tags += [["citation_publication_date", _date(story["date"], story["year"]).replace("-", "/")],
              ["citation_journal_title", pub.get("venue") or ""],
              ["citation_doi", pub["doi"]]]
@@ -142,7 +142,7 @@ def publication_item(rec: Record, date: str | None) -> Json:
     """A publication as a short ScholarlyArticle; datePublished only when the
     full date is known (`date`), never a bare year."""
     item: Json = {"@type": "ScholarlyArticle", "name": rec["title"],
-                  "author": [{"@type": "Person", "name": a} for a in rec.get("authors") or []],
+                  "author": [{"@type": "Person", "name": a} for a in rec["authors"]],
                   "isPartOf": {"@type": "Periodical", "name": rec.get("venue") or ""},
                   "sameAs": f"https://doi.org/{rec['doi']}"}
     if date:
@@ -167,7 +167,7 @@ def dataset_item(d: Record) -> Json:
     """A dataset as schema.org Dataset, with the lab as `contributor` (many
     datasets are shared with collaborators)."""
     item: Json = {"@type": "Dataset", "name": d["title"], "url": d["repository_url"],
-                  "description": d.get("description") or d["title"], "contributor": {"@id": LAB_ID}}
+                  "description": d["description"], "contributor": {"@id": LAB_ID}}
     if d.get("archive_doi"):
         item["identifier"] = f"https://doi.org/{d['archive_doi']}"
     if d.get("related_publication_dois"):
