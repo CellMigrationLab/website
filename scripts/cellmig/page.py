@@ -6,7 +6,7 @@ import yaml
 
 from .config import DOCS, SITE_URL, fail
 from .images import gif_video, share_jpeg
-from .text import is_external
+from .text import NEW_TAB, is_external, opens_new_tab
 
 
 def share_image(site_path: str | None) -> str | None:
@@ -32,6 +32,35 @@ def check_public(where: str, text: str) -> None:
     m = INTERNAL.search(text)
     if m:
         fail(f"{where}: shows the internal name {m.group(0)!r} to visitors; describe the content instead")
+
+
+def new_tab_links(text: str) -> str:
+    """Outbound web links (<a href=...>) open in a new tab (#16); internal
+    links, fragments and mailto: are left alone, as are links that already
+    set a target. Every generated page goes through this (Page.fix_links)."""
+    def html_link(m: re.Match) -> str:
+        tag = m.group(0)
+        if "target=" in tag or not opens_new_tab(m.group(1)):
+            return tag
+        if ' rel="' in tag:   # keep its rel values, add noopener
+            tag = re.sub(r'rel="([^"]*)"', lambda r: f'rel="{r.group(1)} noopener"', tag, count=1)
+            return tag[:-1] + ' target="_blank">'
+        return tag[:-1] + f" {NEW_TAB}>"
+
+    return re.sub(r'<a\b[^>]*\bhref="([^"]*)"[^>]*>', html_link, text)
+
+
+def new_tab_markdown(text: str) -> str:
+    """The same for Markdown links ([text](url) -> attr_list), in the
+    hand-written pages of content/ (generated pages hold HTML only)."""
+    def md_link(m: re.Match) -> str:
+        label, url, attrs = m.group(1), m.group(2), m.group(3)
+        if not opens_new_tab(url) or (attrs and "target=" in attrs):
+            return m.group(0)
+        inner = f"{attrs[1:-1].strip()} " if attrs else ""
+        return f"[{label}]({url}){{ {inner}{NEW_TAB} }}"
+
+    return re.sub(r"(?<!!)\[([^\]\n]+)\]\((https?://[^)\s]+)\)(\{[^}\n]*\})?", md_link, text)
 
 
 def curly_quotes(text: str) -> str:
@@ -96,7 +125,8 @@ class Page:
             return f'srcset="{", ".join(items)}"'
 
         text = re.sub(r'\bsrcset="([^"]*)"', repl_srcset, text)
-        return re.sub(r'\b(href|src|poster)="([^"]*)"', repl, text)
+        text = re.sub(r'\b(href|src|poster)="([^"]*)"', repl, text)
+        return new_tab_links(text)
 
     def write(self) -> None:
         """Write docs/<path> (front matter + body)."""
