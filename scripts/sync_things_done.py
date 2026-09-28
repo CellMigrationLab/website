@@ -90,6 +90,15 @@ def clean_text(value: object) -> str:
     return re.sub(r"\s+", " ", value).strip()
 
 
+PUBLIC = (None, "public")   # ledger `confidentiality`: absent or public may be copied
+
+
+def public_records(path: Path) -> list[dict]:
+    """The records of a ledger file that may be published: those marked
+    `confidentiality: internal` or `confidential` are never copied."""
+    return [r for r in load(path)["records"] if r.get("confidentiality") in PUBLIC]
+
+
 def pick(record: dict, fields: tuple[str, ...]) -> dict:
     """The listed fields of a record, leaving out empty ones."""
     return {k: record[k] for k in fields if record.get(k) not in (None, "", [])}
@@ -110,7 +119,7 @@ def publications(ledger: Path) -> None:
     overrides = load(pub_dir / "display_overrides.yaml").get("overrides") or {}
     records, skipped = [], []
     for path in sorted(pub_dir.glob("[0-9]*.yaml")):
-        for rec in load(path)["records"]:
+        for rec in public_records(path):
             if not rec.get("doi") or not rec.get("title"):
                 skipped.append(rec.get("title") or rec.get("doi") or "?")
                 continue
@@ -151,8 +160,7 @@ def publications(ledger: Path) -> None:
 
 def registry(ledger: Path, name: str, fields: tuple[str, ...]) -> None:
     """A registry (software or datasets), newest first."""
-    data = load(ledger / "ledger" / "registries" / f"{name}.yaml")
-    out = [pick(r, fields) for r in data["records"]]
+    out = [pick(r, fields) for r in public_records(ledger / "ledger" / "registries" / f"{name}.yaml")]
     out.sort(key=lambda r: (-int(str(r.get("start_date") or "0")[:4] or 0), r["title"].casefold()))
     dump(name, {"records": out}, f"ledger/registries/{name}.yaml")
     print(f"{name}: {len(out)} records")
@@ -162,7 +170,7 @@ def lab_members(ledger: Path) -> None:
     """The public roster: name, current/last role, earlier roles, group, status."""
     path = ledger / "ledger" / "profile" / "lab_members.yaml"
     fields = ("name", "role", "previous_roles", "group", "status", "also_known_as")
-    records = [pick(r, fields) for r in load(path)["records"]]
+    records = [pick(r, fields) for r in public_records(path)]
     dump("lab_members", {"records": records}, "ledger/profile/lab_members.yaml")
     print(f"lab members: {sum(1 for r in records if r.get('status') != 'alumni')} current, "
           f"{sum(1 for r in records if r.get('status') == 'alumni')} alumni")
@@ -171,7 +179,7 @@ def lab_members(ledger: Path) -> None:
 def affiliations(ledger: Path, today: str) -> None:
     """Guillaume's current affiliations: no end date, or one not yet passed."""
     path = ledger / "ledger" / "profile" / "affiliations.yaml"
-    records = [pick(r, ("id", "organization", "title")) for r in load(path)["records"]
+    records = [pick(r, ("id", "organization", "title")) for r in public_records(path)
                if str(r.get("end_date") or "9999") >= today]
     dump("affiliations", {"records": records}, "ledger/profile/affiliations.yaml (current)")
     print(f"affiliations: {len(records)} current")
@@ -193,11 +201,11 @@ def profile(ledger: Path, today: str) -> None:
         "name": person["preferred_name"],
         "title": person["primary_title"],
         "short_bio": "\n\n".join(" ".join(para.split()) for para in person["short_bio"].split("\n\n")),
-        "appointments": [pick(r, role_fields) for r in current(load(roles / "appointments.yaml")["records"], today)],
-        "editorial": [pick(r, role_fields) for r in current(load(roles / "editorial_roles.yaml")["records"], today)],
-        "service": [pick(r, role_fields) for r in current(load(roles / "service_and_leadership.yaml")["records"], today)],
+        "appointments": [pick(r, role_fields) for r in current(public_records(roles / "appointments.yaml"), today)],
+        "editorial": [pick(r, role_fields) for r in current(public_records(roles / "editorial_roles.yaml"), today)],
+        "service": [pick(r, role_fields) for r in current(public_records(roles / "service_and_leadership.yaml"), today)],
         "education": [pick(r, ("degree", "organization", "end_date", "thesis_title"))
-                      for r in load(ledger / "ledger" / "profile" / "education.yaml")["records"]],
+                      for r in public_records(ledger / "ledger" / "profile" / "education.yaml")],
     }
     dump("profile", data, "ledger/profile/person.yaml, education.yaml and ledger/roles/ (current)")
     print(f"profile: {len(data['appointments'])} appointments, {len(data['editorial'])} editorial, "
@@ -207,7 +215,7 @@ def profile(ledger: Path, today: str) -> None:
 def activities(ledger: Path, kind: str, fields: tuple[str, ...]) -> None:
     """All records of ledger/activities/<year>/<kind>.yaml, newest first."""
     records = [pick(r, fields) for path in sorted((ledger / "ledger" / "activities").glob(f"*/{kind}.yaml"))
-               for r in load(path)["records"]]
+               for r in public_records(path)]
     records.sort(key=lambda r: str(r.get("date") or r.get("start_date") or ""), reverse=True)
     dump(kind, {"records": records}, f"ledger/activities/*/{kind}.yaml")
     print(f"{kind}: {len(records)} records")
@@ -215,12 +223,11 @@ def activities(ledger: Path, kind: str, fields: tuple[str, ...]) -> None:
 
 def grants(ledger: Path) -> None:
     """Public grant metadata (amounts are not copied)."""
-    data = load(ledger / "ledger" / "registries" / "grants.yaml")
     fields = (
         "id", "title", "funders", "program", "program_cofunders",
         "role", "status", "start_date", "end_date",
     )
-    records = [pick(r, fields) for r in data["records"]]
+    records = [pick(r, fields) for r in public_records(ledger / "ledger" / "registries" / "grants.yaml")]
     dump("grants", {"records": records}, "ledger/registries/grants.yaml (no amounts)")
     print(f"grants: {len(records)} records")
 
