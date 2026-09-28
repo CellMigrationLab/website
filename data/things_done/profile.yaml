@@ -2,22 +2,18 @@
 # Do not edit by hand: change things_done instead, the website updates itself.
 name: Guillaume Jacquemet
 title: Professor in Bioimaging
-summary: Fundamental quantitative cell biologist focused on microscopy and dynamic cellular behavior,
-  with research centered on cancer cell adaptation and migration across the metastatic cascade. Leads
-  integrated experimental and computational work, including image and data analysis tool development,
-  with lab information hosted at https://cellmig.org.
-short_bio: Guillaume Jacquemet is Professor in Bioimaging at [Åbo Akademi University](https://www.abo.fi/en/),
-  where his lab is part of [Cell Biology](https://www.abo.fi/en/subject/cell-biology/) and of [Turku Bioscience
-  Centre](https://bioscience.fi/). He holds a [K. Albin Johansson Research Professorship](https://www.syopainstituutti.com/researcher-positions/granted-positions)
-  of the Finnish Cancer Institute, and the lab is part of the Research Council of Finland Centre of Excellence
-  [IMMENs](https://www.helsinki.fi/en/researchgroups/immune-endothelial-interfaces). Guillaume did his
-  PhD with Martin Humphries at the University of Manchester, working on integrin signalling, and his postdoc
-  with Johanna Ivaska at the University of Turku, where he studied filopodia. He is an Associate Editor
-  at [Journal of Cell Science](https://journals.biologists.com/jcs), handling image analysis and microscopy
-  papers, one of the heads of [AIC-Turku](https://bioscience.fi/aic/), the Advanced Imaging Core of Turku
-  Bioscience Centre ([microscopy dashboard](https://aic-turku.github.io/AIC-Turku-database/)), and head
-  of the [Doctoral Programme in Biosciences and Drug Research](https://www.abo.fi/en/research-at-aau/postgraduate-and-doctoral-studies/doctoral-programmes-at-abo-akademi-university/doctoral-programme-in-bio-drug-research/)
-  at Åbo Akademi ([programme website](https://aaugs-dp-biosciences-and-drug-research.github.io/Home/)).
+short_bio: 'Guillaume Jacquemet is Professor in Bioimaging at [Åbo Akademi University](https://www.abo.fi/en/)
+  and leads the Cell Migration Lab at [Turku Bioscience Centre](https://bioscience.fi/). His research
+  focuses on cell migration, cancer-cell interactions with the vasculature, filopodia and quantitative
+  microscopy. He trained with Martin Humphries at the University of Manchester and Johanna Ivaska at the
+  University of Turku.
+
+
+  He holds a [K. Albin Johansson Research Professorship](https://www.syopainstituutti.com/researcher-positions/granted-positions)
+  of the Finnish Cancer Institute and is an Associate Editor at [Journal of Cell Science](https://journals.biologists.com/jcs)
+  for bioimaging and image-analysis papers. He is also one of the heads of [AIC-Turku](https://bioscience.fi/aic/)
+  and heads the [Doctoral Programme in Biosciences and Drug Research](https://www.abo.fi/en/research-at-aau/postgraduate-and-doctoral-studies/doctoral-programmes-at-abo-akademi-university/doctoral-programme-in-bio-drug-research/)
+  at Åbo Akademi University.'
 appointments:
 - title: Professor in Bioimaging
   organization: Åbo Akademi University
