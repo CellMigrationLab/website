@@ -10,7 +10,6 @@ from . import rights
 from .config import (
     CONTENT,
     DATA,
-    DATASET_TAGS,
     DATASET_TYPES,
     UNCAPTIONED_ALT,
     edit_url,
@@ -118,13 +117,6 @@ def page_software(ledger: Ledger, featured: list[Story]) -> None:
     p.write()
 
 
-def _dataset_tag(tag: str, d: Record) -> str:
-    """Badge text of a things_done dataset tag; an unknown tag stops the build."""
-    if tag not in DATASET_TAGS:
-        fail(f"dataset {d['title']!r}: tag {tag!r} has no badge; add it to DATASET_TAGS in scripts/cellmig/config.py")
-    return DATASET_TAGS[tag]
-
-
 def _dataset_type(d: Record) -> str:
     """Section of a dataset; an unknown things_done dataset_type stops the build."""
     if d["dataset_type"] not in DATASET_TYPES:
@@ -134,17 +126,16 @@ def _dataset_type(d: Record) -> str:
 
 
 def _dataset(d: Record, ledger: Ledger) -> str:
-    """One dataset: title, tags, description, year, archive DOI and papers."""
+    """One dataset: title, description, year, archive DOI and papers."""
     refs = [f'<a href="https://doi.org/{esc(rec["doi"])}">{esc(rec["venue"])}, {rec["year"]}</a>'
             for rec in ledger.dataset_papers(d)]
-    tags = "".join(f'<span class="cm-badge">{esc(_dataset_tag(t, d))}</span>' for t in d.get("dataset_tags") or [])
     archive = d.get("archive_doi")
     archive_html = (f' · <a href="https://doi.org/{esc(archive)}">doi:{esc(archive)}</a>'
                     if archive and archive not in d["repository_url"] else "")
-    return (f'<li><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>{tags}'
+    return (f'<li><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>'
             f'<p>{md(d["description"], inline=True)}</p>'
             f'<p class="cm-small">{year_of(d["start_date"])}{archive_html}'
-            f'{" · Paper: " + ", ".join(refs) if refs else ""}</p></li>')
+            f' · Paper: {", ".join(refs)}</p></li>')   # every dataset has one (Ledger.dataset_papers)
 
 
 def page_datasets(ledger: Ledger, site: Record) -> None:

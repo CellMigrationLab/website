@@ -52,9 +52,6 @@ records:
   archive_doi: 10.5281/zenodo.17159634
   description: Tracking results for mononucleated cells and neutrophils perfused on endothelial monolayers
     with/without IL-1β and CD44 blocking antibody.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: MYO10-TurboID in U2-OS and U-87 MG cells
@@ -96,9 +93,6 @@ records:
   archive_doi: 10.5281/zenodo.13584215
   description: Tracking dataset used to analyze attachment of PDAC cells to endothelium with CD44 blocking
     antibody treatment.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: CellTracksColab - breast cancer cell dataset
@@ -108,9 +102,6 @@ records:
   archive_doi: 10.5281/zenodo.10539020
   description: Dataset used in the manuscript "CellTracksColab—A platform for compiling, analyzing, and
     exploring tracking data"
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1371/journal.pbio.3002740
 - title: CellTracksColab - Filopodia dataset
@@ -120,9 +111,6 @@ records:
   archive_doi: 10.5281/zenodo.10539196
   description: Dataset used in the manuscript "CellTracksColab—A platform for compiling, analyzing, and
     exploring tracking data"
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1371/journal.pbio.3002740
 - title: CellTracksColab - T cell dataset (full)
@@ -132,9 +120,6 @@ records:
   archive_doi: 10.5281/zenodo.10539720
   description: Dataset used in the manuscript "CellTracksColab—A platform for compiling, analyzing, and
     exploring tracking data"
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1371/journal.pbio.3002740
 - title: HUVEC CD44 siRNA perfusion tracking dataset
@@ -144,9 +129,6 @@ records:
   archive_doi: 10.5281/zenodo.13377961
   description: Tracking dataset used to analyze attachment of PDAC cells to endothelium under endothelial
     CD44 siRNA perturbation.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: Hyaluronidase treatment perfusion tracking dataset
@@ -156,9 +138,6 @@ records:
   archive_doi: 10.5281/zenodo.13627037
   description: Tracking dataset used to analyze attachment of PDAC cells to endothelium after hyaluronidase
     treatment.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: PDAC cells CD44 siRNA perfusion tracking dataset
@@ -168,9 +147,6 @@ records:
   archive_doi: 10.5281/zenodo.13379627
   description: Tracking dataset used to analyze attachment of PDAC cells to endothelium under CD44 siRNA
     perturbation.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: PDAC cells vs Immune cells perfusion tracking dataset
@@ -179,9 +155,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.13643590
   archive_doi: 10.5281/zenodo.13643590
   description: Tracking dataset used to analyze attachment of PDAC and immune cells to endothelium.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: pix2pix_HUVEC_juctions_dataset
@@ -191,9 +164,6 @@ records:
   archive_doi: 10.5281/zenodo.10611092
   description: Artificial labeling model used to label cell-cell junctions from brightfield images with
     endothelial and immune/cancer cells.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: pix2pix_HUVEC_nuclei_cancer_cells_dataset
@@ -203,9 +173,6 @@ records:
   archive_doi: 10.5281/zenodo.10621667
   description: Artificial labeling model used to label nuclei from brightfield images containing cancer
     and endothelial cells.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: pix2pix_HUVEC_nuclei_immuno_cells_dataset
@@ -215,9 +182,6 @@ records:
   archive_doi: 10.5281/zenodo.10617565
   description: Artificial labeling model used to label nuclei from brightfield images containing immune
     and endothelial cells.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_AsPC1_Lifeact
@@ -227,9 +191,6 @@ records:
   archive_doi: 10.5281/zenodo.13442128
   description: StarDist model for segmenting AsPC1 cells from LifeAct channel, including single-cell separation
     from clusters.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_cancer_cell_dataset_10x
@@ -238,9 +199,6 @@ records:
   repository_url: https://zenodo.org/uploads/13304399
   archive_doi: 10.5281/zenodo.13304399
   description: StarDist model for segmenting cancer cells on endothelial cells at 10x magnification.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_cancer_cell_dataset_20x
@@ -250,9 +208,6 @@ records:
   archive_doi: 10.5281/zenodo.10572122
   description: StarDist model for segmenting cancer cells on endothelial cells at 20x magnification before
     tracking.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_Monocytes_dataset
@@ -261,9 +216,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.10572200
   archive_doi: 10.5281/zenodo.10572200
   description: StarDist model for segmenting mononucleated cells on endothelial cells prior to tracking.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_BF_Neutrophil_dataset
@@ -272,9 +224,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.10572231
   archive_doi: 10.5281/zenodo.10572231
   description: StarDist model for segmenting neutrophils on endothelial cells prior to tracking.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_Fluorescent_cells
@@ -284,9 +233,6 @@ records:
   archive_doi: 10.5281/zenodo.10572310
   description: StarDist model to detect cancer cells from fixed fluorescence samples for attached-cell
     quantification.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_HUVEC_nuclei_dataset
@@ -295,9 +241,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.10617532
   archive_doi: 10.5281/zenodo.10617532
   description: StarDist model for segmenting endothelial nuclei while ignoring cancer cells.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: Stardist_MiaPaCa2_from_CD44
@@ -307,9 +250,6 @@ records:
   archive_doi: 10.5281/zenodo.13442877
   description: StarDist model for segmenting MiaPaCa2 cells from the CD44 channel while ignoring endothelial
     cells.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: StarDist_TumorCell_nuclei
@@ -318,9 +258,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.13443221
   archive_doi: 10.5281/zenodo.13443221
   description: StarDist model for segmenting tumor cell nuclei while ignoring endothelial nuclei.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: TLNRD1 figures
@@ -362,9 +299,6 @@ records:
   repository_url: https://zenodo.org/records/8347798
   archive_doi: 10.5281/zenodo.8347798
   description: Fast4DReg workshop data
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1242/jcs.260728
 - title: Cancer cell migration followed with TrackMate
@@ -373,9 +307,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.5206107
   archive_doi: 10.5281/zenodo.5206107
   description: Dataset of migrating breast cancer cells for analysis with TrackMate. [tutorial](https://imagej.net/plugins/trackmate/trackmate-stardist).
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41556-021-00767-x
 - title: Cancer cell migration followed with TrackMate
@@ -384,9 +315,6 @@ records:
   repository_url: https://zenodo.org/records/4812018
   archive_doi: 10.5281/zenodo.4812018
   description: Stardist model and training dataset for automated tracking of MDA-MB-231 and BT20 cells
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41556-021-00767-x
 - title: Cell migration with ERK signalling
@@ -396,9 +324,6 @@ records:
   archive_doi: 10.5281/zenodo.5205935
   description: Movie following cells expressing ERK and a nuclei staining, tracked with TrackMate and
     later analyzed with MATLAB.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: MYO10-Filopodia Breast Tumor Xenograft Expression Dataset
@@ -416,9 +341,6 @@ records:
   archive_doi: 10.5281/zenodo.6087729
   description: we used TrackMate-Helper to assess the performance of TrackMate on four datasets that cover
     a wide range of biological and imaging situations
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: Segmenting cells in a spheroid in 3D using 2D StarDist within TrackMate
@@ -427,9 +349,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.5220610
   archive_doi: 10.5281/zenodo.5220610
   description: Dataset for segmenting cells in a 3D spheroid using 2D StarDist in TrackMate.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: T cells migration followed with TrackMate
@@ -438,9 +357,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.5206119
   archive_doi: 10.5281/zenodo.5206119
   description: Dataset of T cells migrating on ICAM-1, tracked using StarDist in TrackMate.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: Tracking breast cancer cells migrating collectively with TrackMate-Cellpose
@@ -449,9 +365,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.5864646
   archive_doi: 10.5281/zenodo.5864646
   description: Dataset for tracking collective migration of breast cancer cells with TrackMate-Cellpose.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: Tracking cell migration with the TrackMate threshold detector
@@ -461,9 +374,6 @@ records:
   archive_doi: 10.5281/zenodo.5220796
   description: Dataset used in a [tutorial](https://imagej.net/plugins/trackmate/trackmate-thresholding-detector)
     on using the TrackMate threshold detector.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: Tracking focal adhesions with TrackMate and Weka - tutorial dataset 1
@@ -472,9 +382,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.5226842
   archive_doi: 10.5281/zenodo.5226842
   description: Dataset of MDA-mb-231 cells expressing GFP-paxillin for tracking focal adhesions.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: Tracking focal adhesions with TrackMate and Weka - tutorial dataset 2
@@ -483,9 +390,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.5978940
   archive_doi: 10.5281/zenodo.5978940
   description: Dataset of human dermal microvascular blood endothelial cells for tracking focal adhesions.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: Tracking Glioblastoma-astrocytoma cells with TrackMate-Cellpose
@@ -494,9 +398,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.5863317
   archive_doi: 10.5281/zenodo.5863317
   description: Dataset of Glioblastoma-astrocytoma U373 cells migrating on a polyacrylamide gel.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: Tracking label images with TrackMate
@@ -506,9 +407,6 @@ records:
   archive_doi: 10.5281/zenodo.5221424
   description: Dataset used in a [tutorial](https://imagej.net/plugins/trackmate/trackmate-label-image-detector)
     on tracking label images with TrackMate.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: Tracking with TrackMate using mask images of cell migration
@@ -518,9 +416,6 @@ records:
   archive_doi: 10.5281/zenodo.5243127
   description: Dataset used in a [tutorial](https://imagej.net/plugins/trackmate/trackmate-mask-detector)
     on tracking mask images with TrackMate.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
 - title: Talin1-GFP Pulldown in U2OS Cells
@@ -537,9 +432,6 @@ records:
   repository_url: https://zenodo.org/records/3713330
   archive_doi: 10.5281/zenodo.3713330
   description: Paired microscopy images (fluorescence) of low and high signal-to-noise ratio
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: ZeroCostDL4Mic - CARE (3D) example training and test dataset
@@ -548,9 +440,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.3713337
   archive_doi: 10.5281/zenodo.3713337
   description: 3D paired microscopy images (fluorescence) of low and high signal-to-noise ratio
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: ZeroCostDL4Mic - CycleGAN example training and test dataset
@@ -560,9 +449,6 @@ records:
   archive_doi: 10.5281/zenodo.3941884
   description: Unpaired microscopy images (fluorescence) of microtubules (Spinning-disk and SRRF reconstructed
     images)
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: ZeroCostDL4Mic - DeepSTORM training and example dataset
@@ -572,9 +458,6 @@ records:
   archive_doi: 10.5281/zenodo.3959089
   description: Experimental time-series dSTORM acquisition of Glial cells stained with phalloidin for
     actin
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: ZeroCostDL4Mic - Label-free prediction (fnet) example training and test dataset
@@ -583,9 +466,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.3748967
   archive_doi: 10.5281/zenodo.3748967
   description: Hela labeled with TOM20
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: ZeroCostDL4Mic - Noise2Void (2D) example training and test dataset
@@ -594,9 +474,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.3713315
   archive_doi: 10.5281/zenodo.3713315
   description: U-251 glioma cells, endogenously expressing paxillin-GFP
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: ZeroCostDL4Mic - Noise2Void (3D) example training and test dataset
@@ -605,9 +482,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.3713326
   archive_doi: 10.5281/zenodo.3713326
   description: A2780 ovarian carcinoma cells, transiently expressing Lifeact-RFP
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: ZeroCostDL4Mic - pix2pix example training and test dataset
@@ -616,9 +490,6 @@ records:
   repository_url: https://zenodo.org/records/3941889
   archive_doi: 10.5281/zenodo.3941889
   description: Paired microscopy images (fluorescence) of lifeact-RFP and sir-DNA
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: ZeroCostDL4Mic - Stardist example training and test dataset
@@ -628,9 +499,6 @@ records:
   archive_doi: 10.5281/zenodo.3713307
   description: DCIS.COM LifeAct-RFP cells stained with SiR-DNA and imaged by spinning-disk confocal microscopy
     (20x), paired with manually segmented nuclei masks for training StarDist in ZeroCostDL4Mic.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: ZeroCostDL4Mic - YoloV2 example training and test dataset
@@ -639,9 +507,6 @@ records:
   repository_url: https://doi.org/10.5281/zenodo.3941908
   archive_doi: 10.5281/zenodo.3941908
   description: MDA-MB-231 cells migrating on cell-derived matrices generated by fibroblasts
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - title: Combining StarDist and TrackMate example 1 - Breast cancer cell dataset
@@ -651,9 +516,6 @@ records:
   archive_doi: 10.5281/zenodo.4034976
   description: Contains a StarDist example training dataset, a test dataset, and the StarDist model generated
     using ZeroCostDL4Mic.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.12688/f1000research.27019.2
 - title: Combining StarDist and TrackMate example 2 - T cell dataset
@@ -663,9 +525,6 @@ records:
   archive_doi: 10.5281/zenodo.4034929
   description: Contains a StarDist example training dataset, a test dataset, and the StarDist model generated
     using ZeroCostDL4Mic.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.12688/f1000research.27019.2
 - title: Combining StarDist and TrackMate example 3 - Flow chamber dataset
@@ -675,9 +534,6 @@ records:
   archive_doi: 10.5281/zenodo.4034939
   description: Contains a StarDist example training dataset, a test dataset, and the StarDist model generated
     using ZeroCostDL4Mic.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.12688/f1000research.27019.2
 - title: FiloMap Test Dataset
@@ -687,9 +543,6 @@ records:
   archive_doi: 10.5281/zenodo.5912949
   description: Dataset for testing and validation in FiloMap for mapping localization of proteins within
     filopodia from microscopy images.
-  dataset_tags:
-  - deep-learning-ready
-  - model-zoo
   related_publication_dois:
   - 10.1007/978-1-0716-2887-4_4
 - title: S-JCBD-201704045

@@ -60,7 +60,7 @@ SOFTWARE_FIELDS = (
 )
 DATASET_FIELDS = (
     "title", "dataset_type", "start_date", "repository_url",
-    "archive_doi", "description", "dataset_tags", "related_publication_dois",
+    "archive_doi", "description", "related_publication_dois",
 )
 LAG_FIELDS = (
     "preprint_doi", "published_doi", "published_title", "preprint_date",

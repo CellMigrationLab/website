@@ -139,12 +139,6 @@ footer_logo: wp-content/uploads/2023/02/g2198-8.png
 
 # Links at the top of https://cellmig.org/datasets/
 resources:
-  - title: Deep learning models and training data
-    text: Our model zoo on GitHub
-    url: https://github.com/CellMigrationLab/ModelZoo
   - title: Plasmids at Addgene
     text: Request our constructs
     url: https://www.addgene.org/Guillaume_Jacquemet/
-  - title: Datasets repository
-    text: All our datasets on GitHub
-    url: https://github.com/CellMigrationLab/Datasets
