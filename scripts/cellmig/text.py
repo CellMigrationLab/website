@@ -46,6 +46,21 @@ def is_external(url: str) -> bool:
     return bool(re.match(r"^([a-z][a-z0-9+.-]*:|#|//)", str(url), flags=re.I))
 
 
+SAME_SITE = ("https://cellmig.org", "http://cellmig.org", "https://www.cellmig.org")
+
+
+def opens_new_tab(url: str) -> bool:
+    """Web links that leave the site open in a new tab (#16); site pages
+    (also absolute ones), fragments, mailto: and other schemes do not."""
+    from .config import SITE_URL   # config imports text: import here
+    url = str(url)
+    return (bool(re.match(r"^https?://", url, flags=re.I))
+            and not url.startswith((SITE_URL.rstrip("/"), *SAME_SITE)))
+
+
+NEW_TAB = 'target="_blank" rel="noopener"'
+
+
 def fmt(n: int) -> str:
     """1234 -> "1\u202f234" (narrow no-break space as thousands separator)."""
     return f"{n:,}".replace(",", "\u202f")
