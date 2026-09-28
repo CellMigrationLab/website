@@ -1,6 +1,7 @@
 """Featured research grid, one page per featured paper, and all publications."""
 
 
+from . import rights
 from .components import PREPRINT_LINK, citation, feature_card, one_line, orcid_url
 from .config import LAB_FOUNDED, SITE_URL, edit_url
 from .featured import Story, story_by_doi
@@ -68,7 +69,8 @@ def page_story(story: Story, stories: list[Story], i: int, ledger: Ledger, lab: 
     p = Page(f"portfolio/{story['slug']}.md", title=story["title"], edit_url=edit_url("data/featured.yaml"),
              description=one_line(story["summary"], 300),
              image=image or paper_image(), og_type="article")
-    p.meta["jsonld"] = to_json(article(story, p.url, SITE_URL + p.meta["image"] if p.meta.get("image") else None))
+    picture = rights.image_object(image or paper_image(), SITE_URL + p.meta["image"])   # the preview picture
+    p.meta["jsonld"] = to_json(article(story, p.url, picture))
     p.meta["citation"] = scholar_tags(story)
     p.add(f'# {esc(story["title"])}')
     # Lead section (#21): the picture beside the citation and summary on wide
@@ -76,8 +78,9 @@ def page_story(story: Story, stories: list[Story], i: int, ledger: Ledger, lab: 
     text = "".join([*(f'<div class="cm-story__cite cm-pub">{citation(rec, lab, ledger, heading="p")}</div>'
                       for rec in story["pubs"]),
                     *(f"<p>{esc(para.strip())}</p>" for para in story["summary"].splitlines() if para.strip())])
+    credit = rights.credit(image) if image else ""
     pic = (f'<figure class="cm-story__media">{media(image, story["title"], 1000, eager=True, sizes="(max-width: 760px) 100vw, 360px")}'
-           '</figure>' if image else "")
+           f'{f"<figcaption>{esc(credit)}</figcaption>" if credit else ""}</figure>' if image else "")
     p.add(f'<div class="cm-story__lead{"" if image else " cm-story__lead--text"}">{pic}<div class="cm-story__text">{text}</div></div>')
     main = story["pubs"][0]
     buttons = [f'<a class="cm-button" href="https://doi.org/{esc(main["doi"])}">Read the paper</a>']

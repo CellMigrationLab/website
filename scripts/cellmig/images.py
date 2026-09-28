@@ -13,6 +13,7 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 
+from . import rights
 from .config import DOCS, ROOT, THUMBS, fail
 from .text import esc
 
@@ -22,7 +23,10 @@ SMALL_FILE = 150_000                    # bytes; smaller images are not resized
 
 
 def source(site_path: str) -> Path:
-    """The file behind a site path; the build stops if it does not exist."""
+    """The file behind a site path; the build stops if it does not exist.
+    Every original image used is recorded for the rights check (rights.py)."""
+    if not site_path.startswith(THUMBS):
+        rights.use(site_path)
     path = DOCS / site_path
     if not path.is_file():
         fail(f"missing image docs/{site_path}")
@@ -148,6 +152,7 @@ def media(site_path: str | None, alt: str = "", width: int = 900, cls: str = "",
     """
     if not site_path:
         return ""
+    rights.use(site_path)   # recorded here too: a GIF may be shown through its MP4 twin
     if site_path.lower().endswith(".mp4"):
         source(site_path)
         poster = site_path[:-4] + ".jpg"
