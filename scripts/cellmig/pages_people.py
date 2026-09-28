@@ -44,9 +44,7 @@ def page_members(members: list[Person]) -> None:
         p.add(section_title("Alumni"), '<ul class="cm-alumni">', *(_alumnus(m) for m in alumni), "</ul>")
     p.add('<aside class="cm-join">',
           '<h2>Join us</h2>',
-          '<p>Motivated students and researchers are always welcome: we host fellowship applicants. '
-          '<a href="join-us/">How to join us</a>.</p>',
-          f'<p class="cm-small">Lab member? <a href="{REPO}/issues/new?template=lab-member.yml">'
-          'Add or update your photo and links</a>.</p>',
+          '<p>Interested in joining the lab? We welcome enquiries from students, researchers and '
+          'fellowship applicants. <a href="join-us/">See opportunities and how to apply</a>.</p>',
           "</aside>")
     p.write()

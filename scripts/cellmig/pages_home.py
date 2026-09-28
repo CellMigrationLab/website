@@ -35,13 +35,14 @@ def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str]
     """Hero, newest featured papers, latest papers and news, affiliations,
     funders; data/site.yaml `bands` (two pictures) go between the sections."""
     hero, bands = site["hero"], site["bands"]
+    welcome = f'<p class="cm-hero__welcome">{esc(site["welcome"])}</p>' if site.get("welcome") else ""
     p = Page("index.md", template="home.html", title="Home", head_title=f'{site["name"]} – {site["motto"].rstrip(".")}',
              **preview("index"))
     p.add(
         '<section class="cm-hero">',
         '<div class="cm-hero__text">',
         f'<h1 class="cm-hero__title">{esc(site["tagline"])}</h1>',
-        f'<p class="cm-hero__welcome">{esc(site["welcome"])}</p>',
+        welcome,
         "</div>",
         f'<figure class="cm-hero__image">{media(hero["image"], hero.get("caption") or UNCAPTIONED_ALT, 2400, eager=True, sizes="100vw")}</figure>',
         "</section>",

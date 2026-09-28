@@ -25,9 +25,9 @@ def _tiles(ledger: Ledger, members: list[Person], countries: dict[str, int]) -> 
         (fmt(n_pre), "preprints", "publications/"),
         (fmt(mt["citation_count"]), "citations", mt["scholar_url"]),
         (str(mt["h_index"]), "h-index", mt["scholar_url"]),
-        (str(len(members)), f"lab members ({n_now} now)", "lab-members/"),
+        (str(len(members)), f"members · {n_now} current", "lab-members/"),
         (fmt(len(ledger.coauthors)), "co-authors", "#collaborators"),
-        (str(len(countries)), "countries", "#map"),
+        (str(len(countries)), "co-author countries", "#map"),
         (str(len(software_list(ledger))), "software tools", "software/"),
         (str(len(ledger.datasets)), "datasets", "datasets/"),
     ]
@@ -63,7 +63,7 @@ def _cloud(coauthors: list[Record], lab: set[str]) -> str:
                      f'title="{esc(c["name"])}: {c["papers"]} joint papers">{esc(c["name"])}</span>')
     return ('<p class="cm-cloud" aria-label="Co-authors; larger names share more papers">' + "\n".join(words) + "</p>"
             '<p class="cm-small cm-cloud__legend">Size: number of joint papers. '
-            '<span class="cm-cloud__lab">Purple</span>: lab members.</p>')
+            '<span class="cm-cloud__lab">Purple</span>: authors directly associated with the lab.</p>')
 
 
 def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
@@ -73,13 +73,11 @@ def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
         if c.get("country"):
             countries[c["country"]] = countries.get(c["country"], 0) + 1
     p = Page("lab-in-numbers.md", title="Lab in numbers", **preview("lab-in-numbers"))
-    p.add("# Lab in numbers", '<p class="cm-lead">Generated automatically from our activity ledger.</p>',
+    p.add("# Lab in numbers",
           _tiles(ledger, members, countries),
           section_title("Papers per year"), papers_per_year(ledger.grouped()),
           section_title("From preprint to paper"), lag_section(ledger.lag_pairs, ledger.lag_summary),
           section_title("Top collaborators", id_="collaborators"), _top_collaborators(ledger.coauthors, lab),
           section_title("Where our co-authors are", id_="map"), world_map(countries),
-          section_title("Co-authors"), _cloud(ledger.coauthors, lab),
-          '<p class="cm-small cm-source">All numbers come from our <em>things_done</em> activity ledger and its reports '
-          '(co-author countries from OpenAlex) and update automatically.</p>')
+          section_title("Co-authors"), _cloud(ledger.coauthors, lab))
     p.write()

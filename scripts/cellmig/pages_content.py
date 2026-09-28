@@ -21,7 +21,6 @@ from .images import lite_video, media, thumb
 from .ledger import Ledger, Record, software_list
 from .page import Page
 from .previews import preview
-from .profile import talks_section, teaching_section
 from .structured import dataset_item, item_list, software_item, to_json
 from .text import esc, is_external, md, slugify, year_of
 
@@ -50,7 +49,7 @@ def page_research(ledger: Ledger) -> None:
     """docs/research.md from data/research.yaml: videos, then one tile per theme."""
     research = load(DATA / "research.yaml")
     p = Page("research.md", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
-    p.add("# Research", '<p class="cm-lead">Our research interests</p>', '<div class="cm-videos">')
+    p.add("# Research", f'<p class="cm-lead">{esc(research["intro"])}</p>', '<div class="cm-videos">')
     p.add(*(f'<figure>{lite_video(v.get("youtube"), v.get("vimeo"), v["title"], v.get("start"))}'
             f'<figcaption>{esc(v["title"])}</figcaption></figure>' for v in research.get("videos") or []))
     p.add("</div>", '<div class="cm-wide">')
@@ -81,8 +80,10 @@ def page_software(ledger: Ledger) -> None:
     projects = software_list(ledger)
     p.meta["jsonld"] = to_json(item_list("Software from the Cell Migration Lab", [
         software_item(s, f"{p.url}#{slugify(s['title'])}") for s in projects]))
-    p.add("# Software", '<p class="cm-lead">Here are the software we have developed or contributed to. '
-          'Looking for data? See <a href="datasets/">our datasets, models and materials</a>.</p>', '<div class="cm-wide">')
+    p.add("# Software", '<p class="cm-lead">Here are the tools we have developed or contributed to. '
+          'Many are designed to make microscopy and image analysis easier to run, reproduce and share. '
+          'Looking for example data or trained models? See '
+          '<a href="datasets/">our datasets, models and materials</a>.</p>', '<div class="cm-wide">')
     for i, s in enumerate(projects):
         pic = media(s.get("video") or s.get("image"), f'{s["title"]} logo' if s.get("image") else "", 900)
         p.add(tile(s.get("color", "light"), pic, _software_body(s), media_right=i % 2 == 0))
@@ -102,8 +103,11 @@ def _dataset(d: Record, ledger: Ledger) -> str:
     archive = d.get("archive_doi")
     archive_html = (f' · <a href="https://doi.org/{esc(archive)}">doi:{esc(archive)}</a>'
                     if archive and archive not in d["repository_url"] else "")
+    description = str(d.get("description") or "").strip()
+    if description.lower() == "description not provided":
+        description = ""
     return (f'<li><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>{tags}'
-            f'<p>{esc(d.get("description") or "")}</p>'
+            f'{f"<p>{esc(description)}</p>" if description else ""}'
             f'<p class="cm-small">{year_of(d.get("start_date")) or ""}{archive_html}'
             f'{" · Paper: " + ", ".join(refs) if refs else ""}</p></li>')
 
@@ -114,8 +118,9 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     p.meta["jsonld"] = to_json(item_list("Datasets shared by the Cell Migration Lab",
                                          [dataset_item(d) for d in ledger.datasets]))
     p.add("# Datasets",
-          '<p class="cm-lead">We share our data. Here are the datasets, models and materials that accompany our papers. '
-          'The tools we build are on <a href="software/">Software</a>.</p>')
+          '<p class="cm-lead">We share microscopy datasets, trained models and other research data from our work. '
+          'Many accompany published papers or provide examples for our image-analysis tools. '
+          'Looking for analysis software? See <a href="software/">our software</a>.</p>')
     p.add('<ul class="cm-resources">', *(
         f'<li><a href="{esc(r["url"])}"><strong>{esc(r["title"])}</strong><span>{esc(r.get("text", ""))}</span></a></li>'
         for r in site["resources"]), "</ul>")
@@ -128,7 +133,6 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     for g in order:
         p.add(f'<h2 id="{slugify(g)}">{esc(g)}</h2>', '<ul class="cm-datasets">',
               *(_dataset(d, ledger) for d in groups[g]), "</ul>")
-    p.add('<p class="cm-small cm-source">Generated from our <em>things_done</em> activity ledger; updates automatically.</p>')
     p.write()
 
 
@@ -150,8 +154,7 @@ def page_gallery() -> None:
 
 
 def page_talks(ledger: Ledger, today: date) -> None:
-    """docs/online-lectures.md: recorded talks (data/talks.yaml), then recent
-    talks and this year's teaching from things_done."""
+    """docs/online-lectures.md: recorded talks from data/talks.yaml."""
     p = Page("online-lectures.md", title="Online talks", edit_url=edit_url("data/talks.yaml"),
              **preview("online-lectures"))
     p.add("# Online talks", '<div class="cm-talks">')
@@ -159,7 +162,7 @@ def page_talks(ledger: Ledger, today: date) -> None:
         meta = " · ".join(str(x) for x in (t.get("event"), t.get("year")) if x)
         p.add(f'<figure class="cm-talk">{lite_video(t.get("youtube"), t.get("vimeo"), t["title"], t.get("start"))}'
               f'<figcaption><strong>{esc(t["title"])}</strong><span>{esc(meta)}</span></figcaption></figure>')
-    p.add("</div>", talks_section(ledger, today), teaching_section(ledger, today))
+    p.add("</div>")
     p.write()
 
 
