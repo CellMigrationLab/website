@@ -18,7 +18,7 @@ The same items feed docs/news.md and the RSS feed (site_files.write_feed).
 from typing import Any
 
 from .featured import Story, story_by_doi
-from .ledger import Ledger, funder_names, software_list
+from .ledger import Ledger, software_list
 from .page import Page
 from .previews import preview
 from .profile import MONTHS
@@ -93,7 +93,7 @@ def _activities(ledger: Ledger) -> list[NewsItem]:
 
 def _funding_and_roles(ledger: Ledger) -> list[NewsItem]:
     """New grants and the group leader's new positions and editorial roles."""
-    out = [_item(g["start_date"], "funding", g["title"], f'New funding: {esc(g["title"])} ({esc(", ".join(funder_names(g)))})', None)
+    out = [_item(g["start_date"], "funding", g["title"], f'New funding: {esc(g["title"])}', None)   # public titles name the funder (things_done)
            for g in ledger.grants if g.get("start_date") and g["status"] in ("active", "awarded", "completed")]
     prof = ledger.profile
     for key in ("appointments", "editorial"):

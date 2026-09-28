@@ -12,7 +12,7 @@ records:
   start_date: '2026-01-01'
   end_date: '2030-12-31'
 - id: finnish-cancer-foundation-project-grant-2026-2028
-  title: Finnish Cancer Foundation grant
+  title: Cancer Foundation Finland project grant 2026–2029
   funders:
   - name: Finnish Cancer Foundation
   role: pi
@@ -20,7 +20,7 @@ records:
   start_date: '2026-01-01'
   end_date: '2029-12-31'
 - id: research-council-finland-project-grant-2026-2029
-  title: Academy of Finland Project Grant
+  title: Research Council of Finland project grant 2025–2029
   funders:
   - name: Research Council of Finland
   role: pi
@@ -36,7 +36,7 @@ records:
   start_date: '2023-01-01'
   end_date: '2026-06-30'
 - id: sigrid-juselius-foundation-grant-2026-2029
-  title: Jusélius Jacquemet 2026-2029
+  title: Sigrid Jusélius Foundation project grant 2026–2029
   funders:
   - name: Sigrid Juselius Foundation
   role: pi
@@ -58,7 +58,7 @@ records:
   start_date: '2025-08-01'
   end_date: '2027-07-31'
 - id: inflames-overheads-jacquemet-2026
-  title: INFLAMES overheads Jacquemet
+  title: InFLAMES Flagship research support 2026
   funders:
   - name: InFLAMES Flagship
   role: pi
@@ -66,7 +66,7 @@ records:
   start_date: '2026-02-04'
   end_date: '2026-12-10'
 - id: immudoc-jacquemet-costs-2025-2027
-  title: IMMUDOC Jacquemet costs
+  title: ImmuDocs doctoral education pilot funding 2025–2027
   funders:
   - name: IMMUDOC
   role: pi
@@ -82,7 +82,7 @@ records:
   start_date: '2020-01-01'
   end_date: '2025-12-31'
 - id: cancer-foundation-panmet-2024-2025
-  title: Cancer Foundation PanMet 2024
+  title: Cancer Foundation Finland PanMet grant 2024–2025
   funders:
   - name: Finnish Cancer Foundation
   role: pi
