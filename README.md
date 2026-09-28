@@ -34,6 +34,7 @@ button (top right) that opens the right file.
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
 | Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<name>.yaml`, team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
+| Image rights and credits (every image) | `data/media.yaml`; public summary `content/licensing.md` |
 | Online talks | `data/talks.yaml` |
 | About us | `content/about-us.md` |
 | What a pasted link shows (title, sentence, picture) for every page | `data/previews.yaml` |
@@ -150,9 +151,15 @@ overrides/ (layout), docs/assets/ (CSS, JS, fonts) ───┘
 - `overrides/` — page layout (header, footer, home page).
 - `.github/workflows/publish.yml` — build and deploy.
 
-## Credits
+## Licence and credits
 
-Fonts: [Inter](https://github.com/rsms/inter) and
-[Bodoni Moda](https://github.com/indestructible-type/Bodoni), SIL Open Font
-License, self-hosted (no requests to Google). Images © Cell Migration Lab
-unless stated otherwise.
+- **Code** (scripts, templates, style sheets): MIT, see `LICENSE`.
+- **Images and videos are not covered by the MIT licence.** Their rights are
+  recorded one file at a time in `data/media.yaml` (lab/personal work with its
+  creators, third-party material with its source, or `unknown` until
+  established); credits shown on the site come from there, and the build stops
+  if an image the site shows has no entry. Public facts only in that file. The
+  public summary is the Licensing page (`content/licensing.md`).
+- **Fonts:** [Inter](https://github.com/rsms/inter) and
+  [Bodoni Moda](https://github.com/indestructible-type/Bodoni), SIL Open Font
+  License, self-hosted (no requests to Google).

@@ -62,7 +62,7 @@ def write_footer(site: Record, affiliations: list[Record]) -> None:
   </div>
   <div class="cm-footer__bottom">
     <span>{{{{ config.copyright }}}}</span>
-    <span><a href="{u('feed.xml')}">RSS</a> · <a href="{{{{ config.repo_url }}}}" {NEW_TAB}>Website source on GitHub</a></span>
+    <span><a href="{u('feed.xml')}">RSS</a> · <a href="{u('licensing/')}">Licensing</a> · <a href="{{{{ config.repo_url }}}}" {NEW_TAB}>Website source on GitHub</a></span>
   </div>
 </footer>
 """

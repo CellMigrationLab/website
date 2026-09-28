@@ -71,3 +71,36 @@ class StructuredDataTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RightsTests(unittest.TestCase):
+    """#28: rights come from data/media.yaml; nothing is inferred or implied."""
+
+    def use(self, entries):
+        from cellmig import rights
+        rights.registry.cache_clear()
+        return patch.object(rights, "load", return_value={"media": entries})
+
+    def test_credit_and_image_object(self):
+        from cellmig import rights
+        with self.use([{"path": "a.jpg", "type": "microscopy", "rights": "all-rights-reserved",
+                        "creators": ["Emilia Peuhu", "Guillaume Jacquemet"]},
+                       {"path": "c.jpg", "type": "journal-cover", "rights": "third-party", "source": "J Cell Sci"},
+                       {"path": "u.jpg", "type": "photo", "rights": "unknown"}]):
+            self.assertEqual(rights.credit("a.jpg"), "© Emilia Peuhu and Guillaume Jacquemet")
+            self.assertEqual(rights.credit("c.jpg"), "Cover © the publisher")
+            self.assertEqual(rights.credit("u.jpg"), "")                       # unknown: no credit shown
+            for path in ("a.jpg", "c.jpg", "u.jpg"):                            # no open licence anywhere
+                self.assertNotIn("license", rights.image_object(path, "https://x/"))
+            self.assertEqual(rights.image_object("a.jpg", "https://x/")["creator"][0]["name"], "Emilia Peuhu")
+
+    def test_bad_entries_stop_the_build(self):
+        from cellmig import rights
+        for bad in ({"path": "a", "type": "microscopy", "rights": "CC-BY-4.0"},          # licence without creators
+                    {"path": "a", "type": "logo", "rights": "third-party"},              # third-party without source
+                    {"path": "a", "type": "logo", "rights": "third-party", "source": "X", "owner": "Lab"},
+                    {"path": "a", "type": "microscopy", "rights": "MIT", "creators": ["X"]}):  # not an image licence
+            with self.subTest(bad=bad), self.use([bad]), self.assertRaises(SystemExit):
+                rights.registry()
+        with self.use([]), self.assertRaises(SystemExit):
+            rights.entry("missing.jpg")

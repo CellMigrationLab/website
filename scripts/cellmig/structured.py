@@ -97,8 +97,9 @@ def _date(story_date: str | None, year: int) -> str:
     return story_date or str(year)
 
 
-def article(story: Story, page_url: str, image_url: str | None) -> Json:
-    """A featured paper as a ScholarlyArticle, with breadcrumbs."""
+def article(story: Story, page_url: str, image: Json | None) -> Json:
+    """A featured paper as a ScholarlyArticle, with breadcrumbs; `image` is its
+    picture as an ImageObject with its rights (rights.image_object)."""
     pub = story["pubs"][0]
     work: Json = {
         "@type": "ScholarlyArticle",
@@ -118,8 +119,8 @@ def article(story: Story, page_url: str, image_url: str | None) -> Json:
     }
     if story["date"]:   # schema.org Date is a full ISO date: no year-only values
         work["datePublished"] = story["date"]
-    if image_url:
-        work["image"] = image_url
+    if image:
+        work["image"] = image
     crumbs = [("Home", SITE_URL), ("Featured research", f"{SITE_URL}featured-research/"), (pub["title"], page_url)]
     return {"@context": "https://schema.org", "@graph": [work, {
         "@type": "BreadcrumbList",

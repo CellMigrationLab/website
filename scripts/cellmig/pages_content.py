@@ -6,6 +6,7 @@ import re
 import yaml
 
 from .components import section_title, tile
+from . import rights
 from .config import (
     CONTENT,
     DATA,
@@ -46,8 +47,9 @@ def _theme(t: Record, ledger: Ledger) -> str:
                  f' <span>{esc(r["venue"])}, {r["year"]}</span>'
                  f'{PREPRINT_BADGE if r["status"] == "preprint" else ""}</li>' for r in papers]
         body.append("</ul>")
-    if t.get("credit"):
-        body.append(f'<p class="cm-tile__credit">{esc(t["credit"])}</p>')
+    caption = " ".join(x for x in (t.get("credit"), rights.credit(t["image"]) if t.get("image") else "") if x)
+    if caption:   # `credit` in research.yaml is the caption; the © line comes from data/media.yaml
+        body.append(f'<p class="cm-tile__credit">{esc(caption)}</p>')
     return "\n".join(body)
 
 
@@ -160,12 +162,13 @@ def page_gallery() -> None:
     p = Page("gallery.md", title="Gallery", edit_url=edit_url("data/gallery.yaml"), **preview("gallery"))
     p.add("# Gallery", section_title("Journal covers"), '<ul class="cm-covers">')
     for c in gallery["covers"]:
-        cap = esc(c["caption"])   # a cover's caption is its journal and issue: required
+        cap = esc(f'{c["caption"]} · {rights.credit(c["image"])}')   # journal and issue (required) · © the journal
         p.add(f'<li><a href="{thumb(c["image"], 1600)}" data-cm-lightbox data-caption="{cap}">'
               f'{media(c["image"], c["caption"], 500)}</a><span>{cap}</span></li>')
     p.add("</ul>", section_title("Images"), '<ul class="cm-gallery">')
     for g in gallery["images"]:
-        p.add(f'<li><a href="{thumb(g["image"], 2000)}" data-cm-lightbox data-caption="{esc(g.get("caption", ""))}">'
+        cap = " ".join(x for x in (g.get("caption"), rights.credit(g["image"])) if x)   # © from data/media.yaml
+        p.add(f'<li><a href="{thumb(g["image"], 2000)}" data-cm-lightbox data-caption="{esc(cap)}">'
               f'{media(g["image"], g.get("caption") or UNCAPTIONED_ALT, 600)}</a></li>')
     p.add("</ul>")
     p.write()
