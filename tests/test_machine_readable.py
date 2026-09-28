@@ -99,13 +99,19 @@ class RightsTests(unittest.TestCase):
         with self.use([{"path": "a.jpg", "type": "microscopy", "rights": "all-rights-reserved",
                         "creators": ["Emilia Peuhu", "Guillaume Jacquemet"]},
                        {"path": "c.jpg", "type": "journal-cover", "rights": "third-party", "source": "J Cell Sci"},
-                       {"path": "u.jpg", "type": "photo", "rights": "unknown"}]):
+                       {"path": "u.jpg", "type": "photo", "rights": "unknown"},
+                       {"path": "b.jpg", "type": "microscopy", "rights": "CC-BY-4.0", "creators": ["Ana Popović"]}]):
             self.assertEqual(rights.credit("a.jpg"), "© Emilia Peuhu and Guillaume Jacquemet")
             self.assertEqual(rights.credit("c.jpg"), "Cover © the publisher")
             self.assertEqual(rights.credit("u.jpg"), "")                       # unknown: no credit shown
-            for path in ("a.jpg", "c.jpg", "u.jpg"):                            # no open licence anywhere
+            for path in ("a.jpg", "c.jpg", "u.jpg"):                            # no open licence on these
                 self.assertNotIn("license", rights.image_object(path, "https://x/"))
             self.assertEqual(rights.image_object("a.jpg", "https://x/")["creator"][0]["name"], "Emilia Peuhu")
+            # an open licence is named in the credit and linked in the ImageObject
+            self.assertEqual(rights.credit("b.jpg"), "© Ana Popović · CC BY 4.0")
+            obj = rights.image_object("b.jpg", "https://x/")
+            self.assertEqual((obj["license"], obj["creditText"], obj["copyrightNotice"]),
+                             ("https://creativecommons.org/licenses/by/4.0/", "Ana Popović", "© Ana Popović"))
 
     def test_bad_entries_stop_the_build(self):
         from cellmig import rights

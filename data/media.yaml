@@ -22,7 +22,9 @@
 media:
 - path: apple-touch-icon.png
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: assets/images/logos/chan-zuckerberg-initiative.svg
   type: logo
   rights: third-party
@@ -49,202 +51,288 @@ media:
   source: Wellcome
 - path: assets/media/esrrf.mp4
   type: software-media
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: assets/media/fast4dreg-drift.mp4
   type: software-media
-  rights: unknown
+  rights: third-party
+  source: Journal of Cell Science (Fast4DReg paper)
 - path: assets/media/fast4dreg-glioblastoma.mp4
   type: software-media
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: assets/media/filomap-dcis-collagen.mp4
   type: software-media
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: assets/media/gif/2019/08/cna35-merged-2.jpg
   type: software-media
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: assets/media/gif/2020/03/giphy.jpg
   type: software-media
-  rights: unknown
+  rights: third-party
+  source: Nature Communications (ZeroCostDL4Mic paper)
+  source_url: https://www.nature.com/articles/s41467-021-22518-0
 - path: assets/media/gif/2020/09/stardist_trackmate.jpg
   type: software-media
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: assets/media/gif/2021/09/trackmate-capture-of-becsctrl100xpaxillingfp-position3_xy1520360652_z0_t000_c0_tracks.jpg
   type: software-media
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: assets/media/gif/2024/10/mia_n1_p2_3350_5600_bftracks-3-ezgif.com-video-to-gif-converter-1.jpg
   type: software-media
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: assets/media/srrf-tfm.mp4
   type: software-media
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: assets/media/zerocostdl4mic.jpg
   type: microscopy
-  rights: unknown
+  rights: third-party
+  source: Nature Communications (ZeroCostDL4Mic paper)
+  source_url: https://www.nature.com/articles/s41467-021-22518-0
 - path: assets/media/zerocostdl4mic.mp4
   type: software-media
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2019/08/12g10-myo10-actin-rgb-2.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/20x-fn-slide-1-p1-rgb.jpg
   type: microscopy
+  rights: all-rights-reserved
   creators:
   - Emilia Peuhu
   - Guillaume Jacquemet
-  rights: all-rights-reserved
 - path: wp-content/uploads/2019/08/20x-fn-slide-1-p1-rgb2.jpg
   type: microscopy
+  rights: all-rights-reserved
   creators:
   - Emilia Peuhu
   - Guillaume Jacquemet
-  rights: all-rights-reserved
 - path: wp-content/uploads/2019/08/cancer-cell-vasculature.jpg
   type: microscopy
+  rights: all-rights-reserved
   creators:
   - Ilkka Paatero
   - Guillaume Jacquemet
-  rights: all-rights-reserved
 - path: wp-content/uploads/2019/08/cna35-merged-2.gif
   type: microscopy
+  rights: all-rights-reserved
   creators:
   - Guillaume Jacquemet
   - Emilia Peuhu
-  rights: all-rights-reserved
 - path: wp-content/uploads/2019/08/cover3.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/cover4.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/cover6.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/cover8.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/cover9.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/cropped-cover4-1.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/ctrl.jpg
   type: microscopy
+  rights: all-rights-reserved
   creators:
   - Martina Lerche
   - Guillaume Jacquemet
-  rights: all-rights-reserved
 - path: wp-content/uploads/2019/08/dnsecwawsaeb1il.jpg
   type: microscopy
+  rights: all-rights-reserved
   creators:
   - Guillaume Jacquemet
-  rights: all-rights-reserved
 - path: wp-content/uploads/2019/08/dovfjnkxkaaw5sz.jpg
   type: microscopy
+  rights: all-rights-reserved
   creators:
   - Aki Stubb
   - Guillaume Jacquemet
-  rights: all-rights-reserved
 - path: wp-content/uploads/2019/08/dtolcalwsaaaxoc.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/g_jacquemet-1.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/image-2.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/max_colored.png
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/max_dcis-mammary-fib-separated-3_xy1457682444_z0_t0_c0.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/monolayer-1.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/monolayer-2.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/p1080272-1-e1566674878737.jpg
   type: photo
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/paxillin.jpg
-  type: paper-figure
-  rights: unknown
+  type: journal-cover
+  rights: third-party
+  source: Journal of Cell Science
 - path: wp-content/uploads/2019/08/result-of-result-of-110619_si60x_514_tiff_fn_pax_attopha_002_sir_alx-1.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/rgb-neuron-1.png
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/rgb3.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/sigrid.png
   type: logo
   rights: third-party
   source: Sigrid Jusélius Foundation
 - path: wp-content/uploads/2019/08/sim-rgb4.jpg
   type: microscopy
-  rights: unknown
-- path: wp-content/uploads/2019/08/sim_rgb.jpg
-  type: microscopy
-  rights: unknown
-- path: wp-content/uploads/2019/08/spheroid-rgb.jpg
-  type: microscopy
-  rights: unknown
-- path: wp-content/uploads/2019/08/vasp.jpg
-  type: microscopy
-  rights: unknown
-- path: wp-content/uploads/2019/09/screenshot-from-2023-02-25-11-37-35.png
-  type: paper-figure
-  rights: unknown
-- path: wp-content/uploads/2019/12/img_20181014_121906_bokeh-1-e1575372412894.jpg
-  type: portrait
-  rights: unknown
-- path: wp-content/uploads/2020/03/giphy.gif
-  type: microscopy
-  rights: unknown
-- path: wp-content/uploads/2020/03/merged-1.gif
-  type: microscopy
+  rights: CC-BY-4.0
   creators:
   - Guillaume Jacquemet
+- path: wp-content/uploads/2019/08/sim_rgb.jpg
+  type: microscopy
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
+- path: wp-content/uploads/2019/08/spheroid-rgb.jpg
+  type: microscopy
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
+- path: wp-content/uploads/2019/08/vasp.jpg
+  type: microscopy
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
+- path: wp-content/uploads/2019/09/screenshot-from-2023-02-25-11-37-35.png
+  type: paper-figure
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
+- path: wp-content/uploads/2019/12/img_20181014_121906_bokeh-1-e1575372412894.jpg
+  type: portrait
   rights: all-rights-reserved
+  owner: Cell Migration Lab
+- path: wp-content/uploads/2020/03/giphy.gif
+  type: microscopy
+  rights: third-party
+  source: Nature Communications (ZeroCostDL4Mic paper)
+  source_url: https://www.nature.com/articles/s41467-021-22518-0
+- path: wp-content/uploads/2020/03/merged-1.gif
+  type: microscopy
+  rights: all-rights-reserved
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2020/09/image-21-airyscan-processing-63.czi-c0.png
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Anna Nylund
 - path: wp-content/uploads/2020/09/image-50-airyscan-processing-32.czi-c0.png
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Anna Nylund
 - path: wp-content/uploads/2020/09/max_predicted_12.png
   type: paper-figure
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2020/09/stardist_trackmate.gif
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2020/09/ta330489l-u019cgfbndq-72887aa671b7-512.jpeg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2021/04/finnish_cancer_society.png
   type: logo
   rights: third-party
   source: Cancer Foundation Finland
 - path: wp-content/uploads/2021/04/sem_filopodia.png
   type: paper-figure
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2021/09/trackmate-capture-of-becsctrl100xpaxillingfp-position3_xy1520360652_z0_t000_c0_tracks.gif
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2022/03/image-from-ios-e1664982648377.png
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2022/10/cover-3.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2022/12/whatsapp-image-2022-11-03-at-852764316-e1670429833164.jpeg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2023/02/978-1-4939-9686-5.webp
   type: journal-cover
   rights: third-party
@@ -283,106 +371,149 @@ media:
   source: Turku Bioscience Centre
 - path: wp-content/uploads/2023/03/ana-2006937570-e1679567263257.jpg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2023/03/jcs_136_04_forauthor.jpg
   type: journal-cover
   rights: third-party
   source: Journal of Cell Science
 - path: wp-content/uploads/2023/04/pxl_20230428_123345039.jpg
   type: photo
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2023/10/max_220913-sitlnrd1-2.sld-si2-position-5-fav.jpg
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Gautier Follain
 - path: wp-content/uploads/2024/01/259983552-ef7aa814-16ba-4947-a69f-1f096d70370e.png
   type: software-media
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2024/01/celltrackscolab_logo.png
   type: software-media
-  rights: unknown
-- path: wp-content/uploads/2024/01/dl4miceverywhere-logo.png
-  type: software-media
-  rights: unknown
-- path: wp-content/uploads/2024/08/marcela-rivera-e1723478055484.jpeg
-  type: portrait
-  rights: unknown
-- path: wp-content/uploads/2024/08/photofitt-logo.png
-  type: software-media
-  rights: unknown
-- path: wp-content/uploads/2024/08/rgb.jpg
-  type: microscopy
+  rights: CC-BY-4.0
   creators:
   - Guillaume Jacquemet
+- path: wp-content/uploads/2024/01/dl4miceverywhere-logo.png
+  type: software-media
   rights: all-rights-reserved
+  owner: Cell Migration Lab
+- path: wp-content/uploads/2024/08/marcela-rivera-e1723478055484.jpeg
+  type: portrait
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
+- path: wp-content/uploads/2024/08/photofitt-logo.png
+  type: software-media
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
+- path: wp-content/uploads/2024/08/rgb.jpg
+  type: microscopy
+  rights: all-rights-reserved
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2024/10/mia_n1_p2_3350_5600_bftracks-3-ezgif.com-video-to-gif-converter-1.gif
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2025/01/img_3147.jpg
   type: photo
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2025/01/jaakko-551790944-e1736491819378.jpg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2025/01/photo_ivan_square.jpg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2025/05/jcs26380101.png
   type: paper-figure
-  rights: unknown
+  rights: third-party
+  source: Journal of Cell Science
 - path: wp-content/uploads/2025/05/mol270025-fig-0001-m.jpg
   type: paper-figure
-  rights: unknown
+  rights: third-party
+  source: Molecular Oncology
 - path: wp-content/uploads/2025/09/image-e1757319800664.png
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2025/10/touma_christine-e1759315123335.jpg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2025/11/bf2e6760-da78-439c-8731-7a63ee6bb82c-e1762177757264.jpeg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2025/12/pasted-image.png
   type: paper-figure
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Jaakko Lehtimäki
 - path: wp-content/uploads/2026/01/max_si8-6-processed.czi-rgb.png
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Ana Popović
 - path: wp-content/uploads/2026/04/471431b4-0e9a-4953-812e-a32f57407eb9-2.jpg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2026/05/img-20260527-wa0005-e1779980209936.jpg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2026/07/comic-e1782918385802.png
   type: software-media
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Iván Hidalgo Cenalmor
 - path: wp-content/uploads/2026/07/filopodia-1.png
   type: paper-figure
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Marcela Rivera
 - path: wp-content/uploads/2026/07/gemini_generated_image_kc5ezfkc5ezfkc5e.png
   type: software-media
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Guillaume Jacquemet
 - path: wp-content/uploads/2026/07/logo-rxiv-maker.png
   type: software-media
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2026/07/logo_small.png
   type: software-media
-  rights: unknown
+  rights: third-party
+  source: EZInput project
 - path: wp-content/uploads/2026/07/logo_white_bg.png
   type: software-media
-  rights: unknown
+  rights: third-party
+  source: EZInput project
 - path: wp-content/uploads/2026/08/z30_0239_1x1_2.jpg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2026/09/297bab59-c8b1-46a8-b233-26e4cc467494-e1790156529741.png
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb-1.png
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Ana Popović
 - path: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb.png
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Ana Popović
 - path: wp-content/uploads/2026/09/sicct8_ctrl_1-airyscan-processing-01-1.png
   type: microscopy
-  rights: unknown
+  rights: CC-BY-4.0
+  creators:
+  - Ana Popović
