@@ -187,6 +187,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-card__media { aspect-ratio: 1; overflow: hidden; background: var(--cm-soft); }
 .cm-card__media img, .cm-card__media video { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
 .cm-card:hover .cm-card__media img, .cm-card:hover .cm-card__media video { transform: scale(1.035); }
+.md-typeset a.cm-card:hover .cm-card__title, .md-typeset a.cm-card:focus .cm-card__title { color: var(--cm-accent); }   /* the title reacts like a text link */
 .md-typeset .cm-card__title { margin: .64rem 0 0; font-size: .736rem; line-height: 1.45; color: var(--cm-strong); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; text-align: center; }
 .md-typeset .cm-card__meta { margin: .64rem 0 0; font-size: .6rem; color: var(--cm-muted); }
 .md-typeset .cm-card__meta .cm-badge { margin-left: .16rem; }
