@@ -123,7 +123,7 @@ programmes:
   - program: Research Council of Finland Centre of Excellence Programme 2026–2033
     name: Centre of Excellence IMMENs
     url: https://www.helsinki.fi/en/researchgroups/immune-endothelial-interfaces
-    logo: null   # official logo to be obtained from the IMMENs team (the public file is restricted)
+    logo: assets/images/logos/immens.png   # official logo, supplied by the IMMENs team
   - program: Essential Open Source Software for Science (EOSS), Cycle 6
     name: Essential Open Source Software for Science (EOSS), Cycle 6
     url: https://chanzuckerberg.com/eoss/

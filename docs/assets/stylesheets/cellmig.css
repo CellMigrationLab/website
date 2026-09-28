@@ -499,4 +499,4 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-support__item--joint { max-width: 22rem; padding: .6rem 1rem; border: 1px solid var(--cm-line); border-radius: .4rem; }
 .md-typeset .cm-support__note { margin: 0; font-size: .64rem; line-height: 1.45; color: var(--cm-muted); }
 .md-typeset .cm-support__note a { color: inherit; text-decoration: underline; text-decoration-color: var(--cm-line); }
-.cm-support__programme img { display: block; max-height: 2rem; max-width: 8rem; margin: 0 auto; }
+.cm-support__programme img { display: block; width: auto; height: auto; max-height: 2.2rem; max-width: 8rem; margin: 0 auto; }   /* both auto: shrinks without distortion */
