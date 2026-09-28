@@ -76,10 +76,13 @@ def _cloud(coauthors: list[Record], lab: set[str]) -> str:
     most = max(c["papers"] for c in coauthors)
     several = [c for c in coauthors if c["papers"] > 1]
     once = [c for c in coauthors if c["papers"] == 1]
-    out = [f'<p class="cm-cloud" aria-label="Co-authors of several papers; larger names share more papers">'
+    out = [f'<p class="cm-small cm-cloud__legend">{fmt(len(coauthors))} people have co-authored papers with us. '
+           f'The {fmt(len(several))} who share more than one paper with us are shown below'
+           + (f'; the {fmt(len(once))} with one joint paper are listed underneath.</p>' if once else '.</p>'),
+           f'<p class="cm-cloud" aria-label="Co-authors of several papers; larger names share more papers">'
            f'{_words(several, lab, most)}</p>']
     if once:
-        out.append(f'<details class="cm-cloud__more"><summary>Show the {plural(len(once), "co-author")} of one paper</summary>'
+        out.append(f'<details class="cm-cloud__more"><summary>Show the {plural(len(once), "co-author")} with one joint paper</summary>'
                    f'<p class="cm-cloud">{_words(once, lab, most)}</p></details>')
     out.append('<p class="cm-small cm-cloud__legend">Size: number of joint papers. '
                '<span class="cm-cloud__lab">Purple</span>: authors directly associated with the lab.</p>')
@@ -99,5 +102,5 @@ def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
           section_title("From preprint to paper"), lag_section(ledger.lag_pairs, ledger.lag_summary),
           section_title("Top collaborators", id_="collaborators"), _top_collaborators(ledger.coauthors, lab),
           section_title("Where our co-authors are", id_="map"), world_map(countries),
-          section_title(f"All {fmt(len(ledger.coauthors))} co-authors", id_="coauthors"), _cloud(ledger.coauthors, lab))
+          section_title("Our co-authors", id_="coauthors"), _cloud(ledger.coauthors, lab))
     p.write()

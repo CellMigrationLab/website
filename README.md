@@ -11,6 +11,8 @@ publishes it with GitHub Pages; pull requests get a downloadable preview.
 **Papers, software and datasets update themselves** from the
 [things_done](https://github.com/guijacquemet/things_done) ledger — see
 [integrations/things_done](integrations/things_done/README.md).
+**[MAINTAINING.md](MAINTAINING.md)** lists what is automatic and what needs a
+person (new papers, people, grants, pictures, the token).
 
 ## What to edit
 

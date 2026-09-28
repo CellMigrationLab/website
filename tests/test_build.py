@@ -483,18 +483,22 @@ class CloudTests(unittest.TestCase):
         people = [{"name": f"Ann Author{i}", "papers": 1 + i % 3} for i in range(120)]
         html = _cloud(people, set())
         self.assertEqual(html.count("<span class=\"\" "), 120)
-        self.assertIn("Show the 40 co-authors of one paper", html)
+        self.assertIn("120 people have co-authored papers with us. The 80 who share more than one paper", html)
+        self.assertIn("Show the 40 co-authors with one joint paper", html)
 
 
 class ResearchThemeTests(unittest.TestCase):
     def test_selected_papers(self):
-        """#24: preprints can be selected and are labelled; a preprint and its
-        journal version listed together stop the build; the journal version is shown."""
+        """#24: preprints can be selected; a preprint and its journal version listed
+        together stop the build; the journal version is shown. Papers carry the Open
+        access badge, not a Preprint one (the venue says bioRxiv)."""
         from cellmig.pages_content import _theme
-        led = fake_ledger([PRE, JOURNAL, pub("10.1101/solo", 2026, "preprint", "Solo preprint")])
+        led = fake_ledger([PRE, JOURNAL, pub("10.1101/solo", 2026, "preprint", "Solo preprint",
+                                                     open_access_status="green")])
         html = _theme({"title": "T", "papers": ["10.1101/pre", "10.1101/solo"]}, led)
         self.assertIn("doi.org/10.1/j", html)                     # the preprint's journal version
-        self.assertEqual(html.count("cm-badge--preprint"), 1)      # only the preprint without one
+        self.assertNotIn("cm-badge--preprint", html)
+        self.assertEqual(html.count("cm-badge--oa"), 1)            # the journal version has no OA status here
         with self.assertRaises(SystemExit):
             _theme({"title": "T", "papers": ["10.1101/pre", "10.1/j"]}, led)
 

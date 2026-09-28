@@ -26,10 +26,12 @@ PAPERS = [("Featured research", "featured-research/"), ("All publications", "pub
 
 
 def section_nav(links: list[tuple[str, str]], current: str) -> str:
-    """Row of sibling pages (e.g. Software · Datasets); `current` is marked, not linked."""
-    return '<p class="cm-toc-inline">' + " · ".join(
-        f'<strong aria-current="page">{esc(title)}</strong>' if title == current else f'<a href="{url}">{esc(title)}</a>'
-        for title, url in links) + "</p>"
+    """Row of buttons to sibling pages (e.g. Software, Datasets), styled like the
+    Research page's buttons: `current` is the filled one, marked, not linked."""
+    return '<nav class="cm-section-nav" aria-label="Section">' + " ".join(
+        f'<span class="cm-button" aria-current="page">{esc(title)}</span>' if title == current
+        else f'<a class="cm-button cm-button--ghost" href="{url}">{esc(title)}</a>'
+        for title, url in links) + "</nav>"
 
 
 # Link from a journal paper to its preprint: worded as an action, so it is not
@@ -52,6 +54,12 @@ def author_list(authors: list[str], lab: set[str]) -> str:
 # things_done open_access_status values that mean free to read (from OpenAlex);
 # closed and unknown get no badge.
 OPEN_ACCESS = {"gold", "diamond", "hybrid", "green", "bronze"}
+OA_BADGE = '<span class="cm-badge cm-badge--oa" title="Open access">Open access</span>'
+
+
+def oa_badge(rec: Record) -> str:
+    """The Open access badge, or "" for a closed or unknown record."""
+    return OA_BADGE if rec.get("open_access_status") in OPEN_ACCESS else ""
 
 
 def badges(rec: Record) -> str:
@@ -61,9 +69,7 @@ def badges(rec: Record) -> str:
         out.append('<span class="cm-badge cm-badge--preprint">Preprint</span>')
     elif rec.get("status") == "in_press":
         out.append('<span class="cm-badge">In press</span>')
-    if rec.get("open_access_status") in OPEN_ACCESS:
-        out.append('<span class="cm-badge cm-badge--oa" title="Open access">Open access</span>')
-    return "".join(out)
+    return "".join(out) + oa_badge(rec)
 
 
 def citation(rec: Record, lab: set[str], ledger: Ledger, story_url: str | None = None,

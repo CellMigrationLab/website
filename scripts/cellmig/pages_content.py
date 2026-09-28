@@ -5,7 +5,7 @@ import re
 
 import yaml
 
-from .components import SOFTWARE_DATA, section_nav, section_title, tile
+from .components import SOFTWARE_DATA, oa_badge, section_nav, section_title, tile
 from . import rights
 from .config import (
     CONTENT,
@@ -29,9 +29,6 @@ BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our 
 FEATURED_RESEARCH = '<a class="cm-button" href="featured-research/">Explore our featured research</a>'
 
 
-PREPRINT_BADGE = ' <span class="cm-badge cm-badge--preprint">Preprint</span>'
-
-
 def _theme(t: Record, ledger: Ledger) -> str:
     """Text of one research theme: title, lead, paragraphs, selected papers, credit."""
     body = [f'<h2 id="{slugify(t["title"])}">{esc(t["title"])}</h2>']
@@ -47,7 +44,7 @@ def _theme(t: Record, ledger: Ledger) -> str:
         body.append('<p class="cm-tile__label">Selected papers</p><ul class="cm-tile__papers">')
         body += [f'<li><a href="https://doi.org/{esc(r["doi"])}">{esc(r["title"])}</a>'
                  f' <span>{esc(r["venue"])}, {r["year"]}</span>'
-                 f'{PREPRINT_BADGE if r["status"] == "preprint" else ""}</li>' for r in papers]
+                 f' {oa_badge(r)}</li>' for r in papers]   # a preprint shows as such by its venue (bioRxiv)
         body.append("</ul>")
     caption = " ".join(x for x in (t.get("credit"), rights.credit(t["image"]) if t.get("image") else "") if x)
     if caption:   # `credit` in research.yaml is the caption; the © line comes from data/media.yaml

@@ -140,7 +140,8 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-button--ghost { background: transparent; color: var(--cm-strong); }
 .md-typeset .cm-button--ghost:hover { background: var(--cm-strong); color: #fff; }
 .cm-cta { text-align: center; margin: 2.4rem 0; }
-.cm-research-links { margin: 0 0 1.6rem; }
+.cm-research-links, .cm-section-nav { margin: 0 0 1.6rem; }
+.md-typeset span.cm-button:hover { background: var(--cm-strong); color: #fff; }   /* the current page's button: not a link */
 .cm-more-link { text-align: center; margin: 1.2rem 0 0; font-size: .64rem; letter-spacing: .15em; text-transform: uppercase; }
 
 .cm-badge { display: inline-block; margin-left: .28rem; padding: .04rem .36rem; border-radius: .8rem; background: var(--cm-soft); color: var(--cm-fg); font-size: .6rem; font-style: normal; font-weight: 600; letter-spacing: .04em; vertical-align: .1em; white-space: nowrap; }
