@@ -17,7 +17,7 @@ from .config import (
     fail,
     load,
 )
-from .images import lite_video, media, thumb
+from .images import image_size, lite_video, media, thumb
 from .ledger import Ledger, Record, software_list
 from .page import Page, new_tab_markdown
 from .previews import preview
@@ -162,6 +162,21 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     p.write()
 
 
+GALLERY_ROW = 8.5   # rem: height a gallery row aims for before it is stretched to the full width
+
+
+def _justified(site_path: str) -> str:
+    """Flex sizes of a gallery picture in rows of equal height (#gallery):
+    basis and growth both proportional to its aspect ratio, so every picture
+    in a row gets the same height and none is cropped. Computed here, not by
+    the browser, so the layout is the same in every browser."""
+    size = image_size(site_path)
+    if not size:
+        fail(f"data/gallery.yaml: {site_path} has no size (an SVG needs width and height attributes)")
+    ratio = size[0] / size[1]
+    return f"flex: {ratio * 100:.1f} 1 {ratio * GALLERY_ROW:.2f}rem"
+
+
 def page_gallery() -> None:
     """docs/gallery.md from data/gallery.yaml: journal covers and images (lightbox)."""
     gallery = load(DATA / "gallery.yaml")
@@ -174,7 +189,7 @@ def page_gallery() -> None:
     p.add("</ul>", section_title("Images"), '<ul class="cm-gallery">')
     for g in gallery["images"]:
         cap = " ".join(x for x in (g.get("caption"), rights.credit(g["image"])) if x)   # © from data/media.yaml
-        p.add(f'<li><a href="{thumb(g["image"], 2000)}" data-cm-lightbox data-caption="{esc(cap)}">'
+        p.add(f'<li style="{_justified(g["image"])}"><a href="{thumb(g["image"], 2000)}" data-cm-lightbox data-caption="{esc(cap)}">'
               f'{media(g["image"], g.get("caption") or UNCAPTIONED_ALT, 600)}</a></li>')
     p.add("</ul>")
     p.write()
