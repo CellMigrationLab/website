@@ -27,6 +27,8 @@ from .text import esc, is_external, md, slugify, year_of
 BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our publications</a>'
 
 
+# The menu's "Software & data" covers two pages; this row links them (#25).
+SOFTWARE_DATA_NAV = '<p class="cm-toc-inline">{software} · {datasets}</p>'
 PREPRINT_BADGE = ' <span class="cm-badge cm-badge--preprint">Preprint</span>'
 
 
@@ -62,7 +64,7 @@ def page_research(ledger: Ledger) -> None:
             f'<figcaption>{esc(v["title"])}</figcaption></figure>' for v in research.get("videos") or []))
     p.add("</div>", '<div class="cm-wide">')
     for i, t in enumerate(research["themes"]):
-        p.add(tile(t["color"], media(t.get("image"), t.get("credit", ""), 1000), _theme(t, ledger), media_right=i % 2 == 1))
+        p.add(tile(i, media(t.get("image"), t.get("credit", ""), 1000), _theme(t, ledger), t.get("color"), t.get("fit")))
     p.add("</div>", f'<p class="cm-cta">{BROWSE_PUBLICATIONS}</p>')
     p.write()
 
@@ -70,7 +72,7 @@ def page_research(ledger: Ledger) -> None:
 def _software_body(s: Record) -> str:
     """Text of one software tile: title (year), description, links."""
     title = f'{s["title"]} ({s["year"]})' if s.get("year") else s["title"]
-    text = md(s.get("text") or "").replace("<p>", '<p class="cm-dropcap">', 1)
+    text = md(s.get("text") or "")
     links = []
     paper = s.get("paper") or (f'https://doi.org/{s["dois"][0]}' if s["dois"] else None)
     if paper:
@@ -88,13 +90,15 @@ def page_software(ledger: Ledger) -> None:
     projects = software_list(ledger)
     p.meta["jsonld"] = to_json(item_list("Software from the Cell Migration Lab", [
         software_item(s, f"{p.url}#{slugify(s['title'])}") for s in projects]))
-    p.add("# Software", '<p class="cm-lead">Here are the tools we have developed or contributed to. '
+    p.add("# Software", SOFTWARE_DATA_NAV.format(software='<strong aria-current="page">Software</strong>',
+                                                 datasets='<a href="datasets/">Datasets</a>'),
+          '<p class="cm-lead">Here are the tools we have developed or contributed to. '
           'Many are designed to make microscopy and image analysis easier to run, reproduce and share. '
           'Looking for example data or trained models? See '
           '<a href="datasets/">our datasets, models and materials</a>.</p>', '<div class="cm-wide">')
     for i, s in enumerate(projects):
         pic = media(s.get("video") or s.get("image"), f'{s["title"]} logo' if s.get("image") else "", 900)
-        p.add(tile(s.get("color", "light"), pic, _software_body(s), media_right=i % 2 == 0))
+        p.add(tile(i + 1, pic, _software_body(s), s.get("color"), s.get("fit")))   # +1: picture on the right first, as before
     p.add("</div>", f'<p class="cm-cta">{BROWSE_PUBLICATIONS} '
           '<a class="cm-button cm-button--ghost" href="https://github.com/CellMigrationLab">CellMigrationLab on GitHub</a></p>')
     p.write()
@@ -137,7 +141,8 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     p = Page("datasets.md", title="Datasets", **preview("datasets"))
     p.meta["jsonld"] = to_json(item_list("Datasets shared by the Cell Migration Lab",
                                          [dataset_item(d) for d in ledger.datasets]))
-    p.add("# Datasets",
+    p.add("# Datasets", SOFTWARE_DATA_NAV.format(software='<a href="software/">Software</a>',
+                                                 datasets='<strong aria-current="page">Datasets</strong>'),
           '<p class="cm-lead">We share microscopy datasets, trained models and other research data from our work. '
           'Many accompany published papers or provide examples for our image-analysis tools. '
           'Looking for analysis software? See <a href="software/">our software</a>.</p>')
