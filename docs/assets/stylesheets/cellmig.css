@@ -68,7 +68,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
    accent colour on hover; they never change weight or underline thickness.
    (Buttons, cards and the menu and footer have their own look.) */
 .md-typeset a { color: var(--cm-strong); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; transition: color .15s; }
-.md-typeset a:hover, .md-typeset a:focus { color: var(--cm-accent-strong); text-decoration-thickness: 1px; }
+.md-typeset a:hover, .md-typeset a:focus { color: var(--cm-accent); text-decoration-thickness: 1px; }   /* 6:1 on white */
 :focus-visible { outline: 2px solid var(--cm-accent-strong); outline-offset: 3px; }
 
 .md-typeset h1 { font-weight: 400; font-size: clamp(1.36rem, 3vw, 1.68rem); color: var(--cm-fg); letter-spacing: -.01em; margin: 0 0 .8em; }
@@ -207,6 +207,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-tile h2 { margin: 0 0 .88rem; font-size: clamp(1.04rem, 2.2vw, 1.32rem); font-weight: 400; letter-spacing: .08em; line-height: 1.3; color: inherit; }
 .md-typeset .cm-tile p { margin: 0 0 .72rem; }
 .md-typeset .cm-tile a { color: inherit; }
+.md-typeset .cm-tile a:hover, .md-typeset .cm-tile a:focus { color: var(--cm-accent); }   /* the rule above would cancel it */
 .md-typeset .cm-tile__lead { font-size: .84rem; font-weight: 500; }
 .md-typeset .cm-tile__label { margin-top: 1.12rem !important; font-size: .56rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .8; }
 .md-typeset ul.cm-tile__papers { margin: 0 0 .8rem; padding: 0; list-style: none; font-size: .68rem; }
@@ -219,7 +220,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-tile--lavender { background: var(--cm-accent-soft); color: #1d1330; }
 .cm-tile--light { background: var(--cm-soft); }
 .cm-tile--purple { background: var(--cm-accent-deep); color: #f5f0fb; }
-.md-typeset .cm-tile--purple a:hover, .md-typeset .cm-tile--purple a:focus { color: var(--cm-accent-soft); }   /* the accent would vanish on purple */
+.md-typeset .cm-tile--purple a:hover, .md-typeset .cm-tile--purple a:focus { color: #cfa9f7; }   /* a light accent: the accent itself would vanish on purple */
 .cm-tile--white .cm-tile__media, .cm-tile--lavender .cm-tile__media, .cm-tile--light .cm-tile__media { background: transparent; }
 
 @media (max-width: 48rem) {
