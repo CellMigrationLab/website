@@ -50,6 +50,7 @@ from cellmig.pages_numbers import page_numbers
 from cellmig.pages_papers import page_featured, page_publications
 from cellmig.pages_people import page_members
 from cellmig.people import lab_names, leader, load_members
+from cellmig import rights
 from cellmig.previews import check_all_used
 from cellmig.profile import pi_profile
 from cellmig.site_files import write_feed, write_footer, write_jsonld
@@ -90,11 +91,13 @@ def main() -> None:
     page_talks()
     page_handwritten("about-us", extra=pi_profile(ledger.profile, leader(members)))
     page_handwritten("join-us")
+    page_handwritten("licensing")
     write_feed(site, outputs)
     write_footer(site, affiliations)
     write_jsonld(site, affiliations, members, plain(ledger.profile["short_bio"]), funding)
     write_llms(site, featured, ledger, members, affiliations, funding)
     check_all_used()
+    rights.check_all_recorded()   # every image shown has a rights entry (data/media.yaml)
     print(f"Generated pages: {len(featured)} featured papers, {len(ledger.grouped())} publications, "
           f"{len(ledger.datasets)} datasets, {len(members)} people.")
 

@@ -23,7 +23,7 @@ PAGES = [  # (title, path) in the order of the menu
     ("Research", "research/"), ("Featured research", "featured-research/"), ("Publications", "publications/"),
     ("Software", "software/"), ("Datasets", "datasets/"), ("Lab members", "lab-members/"),
     ("Lab in numbers", "lab-in-numbers/"), ("Gallery", "gallery/"), ("Online talks", "online-lectures/"),
-    ("About us", "about-us/"), ("Join us", "join-us/"),
+    ("About us", "about-us/"), ("Join us", "join-us/"), ("Licensing", "licensing/"),
 ]
 
 

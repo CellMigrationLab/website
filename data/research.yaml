@@ -35,7 +35,7 @@ themes:
         for much of the mortality associated with solid cancers. We investigate the cellular
         mechanisms that allow cancer cells to migrate, interact with extracellular matrices and blood
         vessels, and complete the different steps of the metastatic cascade.
-    credit: "Video: Cancer cells (purple) invade through collagen (green). Credit: Guillaume Jacquemet and Emilia Peuhu"
+    credit: "Video: Cancer cells (purple) invade through collagen (green)."
     papers:
       - 10.64898/2026.09.02.749041   # PDAC: breaching endothelial barriers (preprint, current work)
       - 10.1016/j.devcel.2022.09.016 # MYO10-filopodia at pre-invasive tumour boundaries
@@ -51,7 +51,7 @@ themes:
       - Migrating cells continuously interact with their surroundings. We study how adhesion
         receptors such as integrins, together with the cytoskeleton and adhesion complexes, allow
         cells to sense extracellular cues, generate force and change direction.
-    credit: "Video: Cancer cell (green) migrating on cell-derived matrices (magenta). Credit: Guillaume Jacquemet"
+    credit: "Video: Cancer cell (green) migrating on cell-derived matrices (magenta)."
     papers:
       - 10.1016/j.celrep.2021.109716 # myosin-X and talin: integrin activity at filopodia tips
       - 10.1242/jcs.260574           # myosin-X recruits lamellipodin
@@ -71,7 +71,7 @@ themes:
         Centre of Excellence
         [IMMENs](https://www.helsinki.fi/en/researchgroups/immune-endothelial-interfaces), we also
         investigate immune–endothelial interactions and lymphatic vessels.
-    credit: "Picture: A cancer cell (magenta) inside the vasculature of a zebrafish embryo. Credit: Guillaume Jacquemet"
+    credit: "Picture: A cancer cell (magenta) inside the vasculature of a zebrafish embryo."
     papers:
       - 10.1083/jcb.202310030        # TLNRD1 and endothelial barrier integrity
       - 10.1038/s44318-025-00678-9   # FlowVision: cancer cell arrest on endothelial monolayers
@@ -87,7 +87,7 @@ themes:
         invasion and interactions with extracellular matrices.
       - We investigate how filopodia are assembled, how proteins are organised within them, and how
         they contribute to cancer-cell behaviour and tissue invasion.
-    credit: "Picture: Cancer cell labeled for F-actin. Credit: Guillaume Jacquemet"
+    credit: "Picture: Cancer cell labeled for F-actin."
     papers:
       - 10.64898/2026.02.09.703982   # filopodia-mediated trans-endocytosis (preprint)
       - 10.1242/jcs.265278           # CCT8 and the MYO10 motor domain
@@ -104,7 +104,7 @@ themes:
       - Many of these tools are designed for biologists who do not routinely program, while remaining
         flexible enough for more advanced workflows.
       - See [our software](software/) and [the datasets and models we share](datasets/).
-    credit: "Image: Time projection illustrating the dynamics of focal adhesions in human endothelial cells. Credit: Martina Lerche and Guillaume Jacquemet"
+    credit: "Image: Time projection illustrating the dynamics of focal adhesions in human endothelial cells."
     papers:
       - 10.1038/s41467-021-22518-0   # ZeroCostDL4Mic (foundational: deep learning for everyone)
       - 10.1371/journal.pbio.3002740 # CellTracksColab (analysis platform)
