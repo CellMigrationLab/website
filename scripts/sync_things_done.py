@@ -14,9 +14,8 @@ Reads (in the things_done checkout)                    Writes (data/things_done/
   ledger/profile/lab_members.yaml                        lab_members.yaml
   ledger/profile/affiliations.yaml  (current ones)       affiliations.yaml
   ledger/profile/person.yaml, education.yaml,            profile.yaml
-    ledger/roles/*.yaml  (current roles, and started ones for news)
+    ledger/roles/*.yaml  (current roles)
   ledger/activities/*/talks.yaml                         talks.yaml
-  ledger/activities/*/conference_organization.yaml       conference_organization.yaml
   ledger/registries/grants.yaml  (no amounts; `current`)  grants.yaml
   report/generated/publications/
     preprint_publication_crosswalk.json  (pairs)         related_dois in publications.yaml
@@ -28,7 +27,7 @@ Only fields that are already public are copied (title, authors, venue, DOI,
 abstract, links, whether Guillaume is corresponding author, descriptions,
 co-author countries, the public lab roster: names, roles in the lab and
 current/alumni, Guillaume's current affiliations, roles and education, talks,
-events organised, and grant titles, funder names, programmes and dates
+and grant titles, funder names, programmes and dates
 without amounts). Records marked `confidentiality: internal` or
 `confidential` are never copied. Supervision records, teaching, notes and
 conflict-of-interest data are never read. Every input is required: a
@@ -209,13 +208,10 @@ def current(records: list[dict], today: str) -> list[dict]:
 def profile(ledger: Path, today: str) -> None:
     """Guillaume's public profile: title, short bio (Markdown; paragraphs kept,
     lines within a paragraph joined), current appointments, editorial and
-    service roles, education, and `roles`: every appointment and editorial
-    role that has started (current or completed), for the news history."""
+    service roles, and education."""
     person = load(ledger / "ledger" / "profile" / "person.yaml")
     roles = ledger / "ledger" / "roles"
     role_fields = ("title", "organization", "start_date")
-    started = [pick(r, role_fields) for name in ("appointments", "editorial_roles")
-               for r in public_records(roles / f"{name}.yaml") if r["status"] in ("current", "completed")]
     data = {
         "name": person["preferred_name"],
         "title": person["primary_title"],
@@ -225,7 +221,6 @@ def profile(ledger: Path, today: str) -> None:
         "service": [pick(r, role_fields) for r in current(public_records(roles / "service_and_leadership.yaml"), today)],
         "education": [pick(r, ("degree", "organization", "end_date"))
                       for r in public_records(ledger / "ledger" / "profile" / "education.yaml")],
-        "roles": sorted(started, key=lambda r: str(r["start_date"]), reverse=True),
     }
     dump("profile", data, "ledger/profile/person.yaml, education.yaml and ledger/roles/ (current)")
     print(f"profile: {len(data['appointments'])} appointments, {len(data['editorial'])} editorial, "
@@ -325,7 +320,6 @@ def main() -> None:
     affiliations(ledger, today)
     profile(ledger, today)
     activities(ledger, "talks", ("date", "title", "event_name", "location", "talk_kind"))
-    activities(ledger, "conference_organization", ("title", "event_name", "location", "start_date"))
     grants(ledger, today)
     preprint_lag(ledger)
     coauthors(ledger)

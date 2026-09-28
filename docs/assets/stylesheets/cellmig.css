@@ -476,7 +476,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-cloud span.cm-cloud__lab, .cm-cloud__legend .cm-cloud__lab { color: #7a35c4; }
 .cm-cloud__legend { text-align: center; }
 
-/* Group leader profile (About us) and dated lists (.cm-talklist: news on Home and News) */
+/* Group leader profile (About us) */
 .md-typeset .cm-profile { margin: 1.2rem 0 2rem; }
 .cm-profile__head { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; }
 .cm-profile__photo { width: 7.2rem; height: 7.2rem; border-radius: 50%; object-fit: cover; flex: none; }
@@ -487,15 +487,6 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-profile__links a { display: inline-flex; padding: .3rem; color: var(--cm-fg); opacity: .8; }
 .md-typeset .cm-profile__links a:hover { opacity: 1; }
 .cm-profile__links svg { width: .8rem; height: .8rem; fill: currentColor; display: block; }
-.md-typeset ul.cm-talklist { margin: .6rem 0 1rem; padding: 0; list-style: none; }
-.md-typeset ul.cm-talklist li { display: grid; grid-template-columns: 6rem 1fr; gap: .8rem; margin: 0; padding: .5rem 0; border-bottom: 1px solid var(--cm-line); font-size: .72rem; line-height: 1.45; }
-.md-typeset .cm-talklist .cm-badge { margin-left: .4rem; vertical-align: .1em; }
-.cm-talklist__date { color: var(--cm-muted); font-variant-numeric: tabular-nums; font-size: .64rem; padding-top: .1rem; }
-@media (max-width: 30rem) { .md-typeset ul.cm-talklist li { grid-template-columns: 1fr; gap: .1rem; } }
-
-/* News (generated from things_done) */
-.md-typeset .cm-talklist .cm-news__kind { margin: 0 .35rem 0 0; vertical-align: .1em; }
-.md-typeset ul.cm-news--home { max-width: 42rem; margin-left: auto; margin-right: auto; }
 
 /* Current research support (home): funder logos, with the programmes they fund
    or a joint award's programme and co-funders underneath (ledger.support_list). */
