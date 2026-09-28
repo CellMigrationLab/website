@@ -128,8 +128,7 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str], lead
             p.add(f'<li class="cm-pub" data-kind="{kind}" data-search="{esc(text)}">'
                   f'{citation(rec, lab, ledger, link, abstract=True)}</li>')
         p.add("</ol></section>")
-    p.add('<p class="cm-small cm-source">This list is generated from our '
-          '<em>things_done</em> activity ledger and updates automatically when a paper is added. '
+    p.add('<p class="cm-small cm-source">'
           f'Also on <a href="{esc(ledger.metrics["scholar_url"])}">Google Scholar</a> and '
           f'<a href="{esc(orcid_url(leader["orcid"]))}">ORCID</a>.</p>')
     p.write()

@@ -68,8 +68,7 @@ pages:
   news:
     title: News – Cell Migration Lab
     description: >-
-      New papers, preprints, talks, events and funding of the Cell Migration Lab, generated
-      automatically from our activity ledger.
+      New papers, preprints, talks, events and funding of the Cell Migration Lab.
     image: wp-content/uploads/2019/08/max_colored.png
   join-us:
     title: Join the Cell Migration Lab
