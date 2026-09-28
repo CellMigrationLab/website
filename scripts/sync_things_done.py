@@ -52,7 +52,7 @@ OUT = ROOT / "data" / "things_done"
 REPORTS = Path("report") / "generated" / "publications"
 
 PUBLICATION_FIELDS = (
-    "doi", "year", "status", "title", "authors", "venue",
+    "doi", "year", "publication_date", "status", "title", "authors", "venue",
     "abstract", "peer_reviewed", "open_access_status", "related_dois",
 )
 SOFTWARE_FIELDS = (

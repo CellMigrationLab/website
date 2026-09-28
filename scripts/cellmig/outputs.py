@@ -9,9 +9,10 @@ Talks, events, funding and positions are not research outputs and are not
 included.
 
 Each item's date is cut to what the ledger knows (text.known_date): papers
-and preprints have the day or month from the preprint-lag report, else only
-the year; other dates on 1 January come from CV-style records and are
-treated as the year. Nothing downstream fills in a missing month or day.
+and preprints have their things_done publication_date (day or month when
+known, else only the year); other dates on 1 January come from CV-style
+records and are treated as the year. Nothing downstream fills in a missing
+month or day.
 """
 
 from typing import Any
@@ -43,21 +44,19 @@ def _item(date: str, kind: str, title: str, html: str, url: str, precision: str 
 
 
 def _papers(ledger: Ledger, featured: list[Story]) -> list[ResearchOutput]:
-    """Journal papers and preprints not yet published, dated as far as the
-    lag report knows (else the year)."""
+    """Journal papers and preprints not yet published, dated as far as
+    things_done knows (Ledger.dates, else the year)."""
     stories = story_by_doi(featured, ledger)
-    preprint_dates = {str(p["preprint_doi"]).lower(): known_date(p["preprint_date"], p["preprint_date_precision"])
-                      for p in ledger.lag_pairs if p["preprint_date_precision"] != "year"}
     out = []
     for rec in ledger.grouped():
         story = stories.get(rec["doi"].lower())
         url = f"portfolio/{story['slug']}/" if story else f"https://doi.org/{rec['doi']}"
         link = f'<a href="{url}">{esc(rec["title"])}</a>'
         preprint = rec["status"] == "preprint"
-        date = (preprint_dates if preprint else ledger.dates).get(rec["doi"].lower()) or str(rec["year"])
+        date = ledger.dates.get(rec["doi"].lower()) or str(rec["year"])
         text = f"New preprint on {esc(rec['venue'])}" if preprint else f"New paper in <em>{esc(rec['venue'])}</em>"
         out.append(_item(date, "preprint" if preprint else "paper", rec["title"], f"{text}: {link}", url,
-                         precision_of(date)))   # explicit: a lag-report day may be 1 January
+                         precision_of(date)))   # explicit: a real day may be 1 January
     return out
 
 

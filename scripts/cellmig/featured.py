@@ -80,7 +80,7 @@ def _story(ledger: Ledger, main: Record, entry: Record) -> Story:
         "title": main["title"],
         "slug": entry.get("slug") or _title_slug(main["title"]),
         "year": int(main["year"]),
-        # Journal date as far as the lag report knows it (Ledger.dates), else None.
+        # First-publication date as far as things_done knows it (Ledger.dates), else None.
         "date": next((ledger.dates[r["doi"].lower()] for r in family if r["doi"].lower() in ledger.dates), None),
         "summary": _summary(main, pubs, entry),
     }

@@ -25,10 +25,10 @@ report/generated/publications/           │  update_website.yml runs
 .cache/scholar_metrics.json            ──┘
 ```
 
-Only public fields are copied: title, authors, venue, year, DOI, abstract,
+Only public fields are copied: title, authors, venue, year and publication date, DOI, abstract,
 peer review and open-access status, preprint/journal pairs, whether Guillaume
 is corresponding author, software/dataset descriptions, co-author names,
-joint-paper counts and countries, the public lab roster (names, roles in the
+joint-paper counts and countries, the public lab roster (stable ids, names, roles in the
 lab, current or alumni), Guillaume's current affiliations, roles and
 education, talks, and grant titles, funder names, programmes and dates
 (never amounts). Records marked `confidentiality: internal` or `confidential`
@@ -61,7 +61,7 @@ succeeds, and once a day. It validates the ledger before copying anything.
 
 | On the website | things_done source |
 | --- | --- |
-| Publications | `ledger/publications/`, paired by the crosswalk report; `display_overrides.yaml` `force_preprint_bucket` keeps a preprint listed on its own |
+| Publications | `ledger/publications/` (newest first by `publication_date`), paired by the crosswalk report; `display_overrides.yaml` `force_preprint_bucket` keeps a preprint listed on its own |
 | Featured research (which papers, text) | publications with `me.corresponding_author: true`; pictures are in this repo's `data/featured.yaml` |
 | Software (which projects, years, links) | `ledger/registries/software.yaml`; pictures/videos/long text in `data/software.yaml` here |
 | Datasets | `ledger/registries/datasets.yaml` |
