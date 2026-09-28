@@ -63,7 +63,7 @@ but does not update, and the failed run names the file to fix (below).
 | --- | --- | --- |
 | **A new corresponding-author paper** reaches the site | Add it to `data/featured.yaml` with `area: biology` or `area: methods`, a picture (`image:`) and, if it has no abstract, a `summary:`; or `hide: true` to leave it out. | Yes, without an `area` |
 | **A new member** | Photo `data/photos/<id>.jpg` (their roster id without `member-`); optional links and one-liner in `data/members/<id>.yaml`. Members can send these with the *Lab member profile* issue form. | No: initials are shown until there is a photo |
-| **A new software project** | Picture or video (and `fit`, extra `links`) in `data/software.yaml`, by its ledger `id`. Its name, text and links come from the ledger. | No: it shows as a text-only tile |
+| **A new software project** | Nothing, when its paper is Featured research with a picture: the tool shows that picture. Otherwise a picture or video (and `fit`, extra `links`) in `data/software.yaml`, by its ledger `id`. Its name, text and links come from the ledger. | No: without a picture it shows as a text-only tile |
 | **A new funder, programme or affiliation** | Its logo and link in `data/site.yaml` (`funding`, `programmes` or `affiliations`). | Yes |
 | **Any new image** (gallery, research, featured, software, pages) | An entry in `data/media.yaml` with its rights and creators. | Yes |
 | **Research themes and selected papers** | `data/research.yaml`. | No |

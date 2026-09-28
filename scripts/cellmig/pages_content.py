@@ -18,6 +18,7 @@ from .config import (
     load,
 )
 from .images import image_size, lite_video, media, thumb
+from .featured import Story, paper_picture
 from .ledger import Ledger, Record, software_list
 from .page import Page, new_tab_markdown
 from .previews import preview
@@ -92,8 +93,10 @@ def _software_body(s: Record) -> str:
     return f'<h2 id="{slugify(s["title"])}">{esc(title)}</h2>{text}<p class="cm-tile__links">{" · ".join(links)}</p>'
 
 
-def page_software(ledger: Ledger) -> None:
-    """docs/software.md: one tile per project (things_done + data/software.yaml)."""
+def page_software(ledger: Ledger, featured: list[Story]) -> None:
+    """docs/software.md: one tile per project (things_done + data/software.yaml).
+    A project with no picture or video of its own shows its paper's featured
+    picture (featured.paper_picture), so one picture serves both."""
     p = Page("software.md", title="Software", edit_url=edit_url("data/software.yaml"), **preview("software"))
     projects = software_list(ledger)
     p.meta["jsonld"] = to_json(item_list("Software from the Cell Migration Lab", [
@@ -104,6 +107,9 @@ def page_software(ledger: Ledger) -> None:
           'Looking for example data or trained models? See '
           '<a href="datasets/">our datasets, models and materials</a>.</p>', '<div class="cm-wide">')
     for i, s in enumerate(projects):
+        if not (s.get("video") or s.get("image")) and (shared := paper_picture(s["dois"], featured, ledger)):
+            s["image"] = shared[0]
+            s.setdefault("fit", shared[1])
         pic = media(s.get("video") or s.get("image"), f'{s["title"]} logo' if s.get("image") else "", 900)
         _no_colour(s, "data/software.yaml")
         p.add(tile(i, pic, _software_body(s), s.get("fit"), picture_right_first=True))   # as before

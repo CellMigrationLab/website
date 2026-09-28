@@ -7,7 +7,9 @@
 # This file only adds the look; giving a fact here stops the build.
 #
 #   id:      the project id in the ledger
-#   image:   picture or logo shown next to the text (a .gif is played as a video)
+#   image:   picture or logo shown next to the text (a .gif is played as a video);
+#            without image or video, the project shows the picture of its paper
+#            in data/featured.yaml (any version of the paper), so it is kept once
 #   video:   short video file instead of a picture (in docs/assets/media/)
 #   fit:     (optional) contain for a logo, screenshot or drawing (shown whole,
 #            with a margin); pictures fill the tile (cover) otherwise
@@ -18,19 +20,12 @@
 # project is added to the ledger, not here.
 
 - id: nucleisky
-  image: wp-content/uploads/2026/07/gemini_generated_image_kc5ezfkc5ezfkc5e.png
 
 - id: labconstrictor
-  image: wp-content/uploads/2026/07/comic-e1782918385802.png
-  fit: contain
 
 - id: ezinput
-  image: wp-content/uploads/2026/07/logo_white_bg.png
-  fit: contain
 
 - id: rxiv-maker
-  image: wp-content/uploads/2026/07/logo-rxiv-maker.png
-  fit: contain
 
 - id: sred
   image: wp-content/uploads/2026/07/logo_small.png
@@ -41,16 +36,12 @@
   fit: contain
 
 - id: celltrackscolab
-  image: wp-content/uploads/2024/01/celltrackscolab_logo.png
-  fit: contain
 
 - id: nanopyx
   image: wp-content/uploads/2024/01/259983552-ef7aa814-16ba-4947-a69f-1f096d70370e.png
   fit: contain
 
 - id: dl4miceverywhere
-  image: wp-content/uploads/2024/01/dl4miceverywhere-logo.png
-  fit: contain
 
 - id: esrrf
   video: assets/media/esrrf.mp4
@@ -68,7 +59,6 @@
   video: assets/media/zerocostdl4mic.mp4
 
 - id: filomap
-  image: wp-content/uploads/2019/08/vasp.jpg
 
 - id: filoquant
   video: assets/media/filomap-dcis-collagen.mp4

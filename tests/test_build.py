@@ -130,6 +130,14 @@ class LedgerTests(unittest.TestCase):
         with patch.object(ledger, "load", return_value=[]), self.assertRaises(SystemExit):
             ledger.software_list(led)
 
+    def test_software_takes_its_papers_featured_picture(self):
+        """A tool linked to a preprint finds the picture of the featured journal version."""
+        from cellmig.featured import paper_picture
+        led = fake_ledger([PRE, JOURNAL])
+        stories = [{"papers": ["10.1/j"], "image": "assets/images/j.png", "fit": "contain"}]
+        self.assertEqual(paper_picture(["10.1101/pre"], stories, led), ("assets/images/j.png", "contain"))
+        self.assertIsNone(paper_picture(["10.1101/pre"], [dict(stories[0], image=None)], led))
+
     def test_dataset_papers_follow_preprints_and_are_required(self):
         led = fake_ledger([PRE, JOURNAL])
         self.assertEqual([r["doi"] for r in led.dataset_papers({"title": "D", "related_publication_dois": ["10.1101/pre", "10.1/j"]})],

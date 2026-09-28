@@ -84,7 +84,7 @@ def main() -> None:
     page_home(site, featured, funding)
     page_research(ledger)
     page_members(members)
-    page_software(ledger)
+    page_software(ledger, featured)
     page_featured(featured, ledger, lab)
     page_numbers(ledger, lab, members)
     page_publications(ledger, featured, lab, leader(members))
