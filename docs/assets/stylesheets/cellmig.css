@@ -300,8 +300,19 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 
 /* ------------------------------------------------------------------ stories */
 
-.md-typeset .cm-story__media { margin: 0 0 1.6rem; }
-.cm-story__media img, .cm-story__media video { width: 100%; max-height: 30.4rem; object-fit: contain; background: transparent; }
+/* Featured paper lead (#21): picture beside the citation and summary; stacked,
+   with a capped picture height, on narrow screens. object-fit: contain, so
+   microscopy images are never cropped. */
+.cm-story__lead { display: grid; grid-template-columns: minmax(0, 38fr) minmax(0, 62fr); gap: 1.6rem; align-items: start; margin: 0 0 1.6rem; }
+.cm-story__lead--text { grid-template-columns: minmax(0, 1fr); }
+.md-typeset .cm-story__media { margin: 0; position: sticky; top: 5rem; }
+.cm-story__media img, .cm-story__media video { display: block; width: 100%; height: auto; max-height: 26rem; object-fit: contain; background: transparent; }
+.md-typeset .cm-story__text > :first-child { margin-top: 0; }
+@media (max-width: 47.5rem) {
+  .cm-story__lead { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .md-typeset .cm-story__media { position: static; }
+  .cm-story__media img, .cm-story__media video { max-height: 15rem; margin: 0 auto; width: auto; max-width: 100%; }
+}
 .cm-story__media video { background: #000; }
 .cm-story__cite { margin: 0 0 1.6rem; padding: .8rem .96rem; border-left: 3px solid var(--cm-strong); background: var(--cm-soft); }
 .md-typeset .cm-story__cite .cm-pub__title { font-size: .784rem; }
