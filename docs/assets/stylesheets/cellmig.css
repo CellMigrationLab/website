@@ -153,8 +153,11 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 [dir] .md-typeset .cm-logos > li, [dir] .md-typeset .cm-people > li, [dir] .md-typeset .cm-pubs > li, [dir] .md-typeset .cm-covers > li, [dir] .md-typeset .cm-gallery > li, [dir] .md-typeset .cm-alumni > li, [dir] .md-typeset .cm-datasets > li, [dir] .md-typeset .cm-resources > li { margin-left: 0; list-style: none; }
 .md-typeset ul.cm-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.6rem 2.8rem; max-width: var(--cm-wide); margin: 0 auto !important; padding: 0 var(--cm-gutter) !important; list-style: none; }
 .md-typeset .cm-logos li { margin: 0; }
-.cm-logos img { display: block; max-height: 3.6rem; max-width: 9.6rem; width: auto; filter: grayscale(1); opacity: .8; transition: filter .2s, opacity .2s; }
+/* Logos keep the size set in components.logo_size() (equal visual area, aspect
+   ratio kept); on narrow screens they only shrink, proportionally. */
+.cm-logos img { display: block; max-width: 100%; height: auto; filter: grayscale(1); opacity: .8; transition: filter .2s, opacity .2s; }
 .cm-logos a:hover img { filter: none; opacity: 1; }
+@media (max-width: 40rem) { .md-typeset ul.cm-logos { gap: 1.2rem 2rem; } }
 .cm-logos__text { display: block; max-width: 9.6rem; font-size: .8rem; font-weight: 600; line-height: 1.3; text-align: center; color: var(--md-default-fg-color--light); }
 .cm-logos a:hover .cm-logos__text { color: var(--md-default-fg-color); }
 
@@ -362,7 +365,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-footer p { margin: 0 0 .8rem; }
 .cm-footer__logo { width: 9.6rem; max-width: 100%; }
 .cm-footer__logos { display: grid; grid-template-columns: repeat(2, auto); justify-content: start; align-items: center; gap: 1.2rem 1.6rem; margin: 0; padding: 0; list-style: none; }
-.cm-footer__logos img { display: block; max-width: 6.4rem; max-height: 2.72rem; width: auto; opacity: .9; }
+.cm-footer__logos img { display: block; max-width: 6.4rem; max-height: 2.72rem; width: auto; height: auto; opacity: .9; }   /* both auto: shrinks without distortion */
 .cm-footer__logos a:hover img { opacity: 1; }
 .cm-footer__social { display: flex; flex-wrap: wrap; gap: .64rem 1.12rem; margin: 0 0 1.2rem; padding: 0; list-style: none; }
 .cm-footer a { color: #f2eeee; text-decoration: none; }
