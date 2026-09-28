@@ -1,7 +1,7 @@
 """Featured research grid, one page per featured paper, and all publications."""
 
 
-from .components import citation, feature_card, one_line, orcid_url
+from .components import PREPRINT_LINK, citation, feature_card, one_line, orcid_url
 from .config import LAB_FOUNDED, SITE_URL, edit_url
 from .featured import Story, story_by_doi
 from .images import media
@@ -79,7 +79,7 @@ def page_story(story: Story, stories: list[Story], i: int, ledger: Ledger, lab: 
     buttons = [f'<a class="cm-button" href="https://doi.org/{esc(main["doi"])}">Read the paper</a>']
     pre = ledger.preprint_of(main)
     if pre:
-        buttons.append(f'<a class="cm-button cm-button--ghost" href="https://doi.org/{esc(pre["doi"])}">Preprint</a>')
+        buttons.append(f'<a class="cm-button cm-button--ghost" href="https://doi.org/{esc(pre["doi"])}">{PREPRINT_LINK}</a>')
     p.add(f'<p class="cm-story__links">{" ".join(buttons)}</p>')
     p.add(_related(story, ledger, software), _pager(stories, i))
     p.write()
