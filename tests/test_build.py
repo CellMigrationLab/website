@@ -353,6 +353,18 @@ class AuditRegressionTests(unittest.TestCase):
         self.assertLessEqual(len(slug), featured.SLUG_LENGTH)
         self.assertFalse(slug.endswith("-"))
 
+    def test_members_are_joined_by_their_things_done_id(self):
+        """A corrected spelling of a name keeps the person's files and page anchor."""
+        from cellmig import people
+        roster = {"records": [{"id": "member-ivan-hidalgo-cenalmor", "name": "Iván Hidalgo-Cenalmor",
+                               "role": "PhD student", "group": "phd", "status": "current"}]}
+        with patch.object(people, "load", side_effect=lambda p: roster if p.name == "lab_members.yaml" else {}), \
+                patch.object(people, "_publish_photo", return_value=None), patch.object(people, "_check_no_orphans"):
+            self.assertEqual(people.load_members()[0]["slug"], "ivan-hidalgo-cenalmor")
+            roster["records"][0].pop("id")
+            with self.assertRaises(SystemExit):   # no id: stop, never fall back to the name
+                people.load_members()
+
     def test_one_current_group_leader_with_an_email(self):
         from cellmig.people import leader
         pi = {"group": "pi", "status": "current", "slug": "g", "email": "g@x.fi"}

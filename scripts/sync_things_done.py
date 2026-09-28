@@ -178,9 +178,10 @@ def registry(ledger: Path, name: str, fields: tuple[str, ...]) -> None:
 
 
 def lab_members(ledger: Path) -> None:
-    """The public roster: name, current/last role, earlier roles, group, status."""
+    """The public roster: stable id (the website's join key), name, current/last
+    role, earlier roles, group, status."""
     path = ledger / "ledger" / "profile" / "lab_members.yaml"
-    fields = ("name", "role", "previous_roles", "group", "status", "also_known_as")
+    fields = ("id", "name", "role", "previous_roles", "group", "status", "also_known_as")
     records = [pick(r, fields) for r in public_records(path)]
     dump("lab_members", {"records": records}, "ledger/profile/lab_members.yaml")
     print(f"lab members: {sum(1 for r in records if r.get('status') != 'alumni')} current, "

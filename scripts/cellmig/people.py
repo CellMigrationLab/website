@@ -3,18 +3,21 @@
 Who is in the lab, their role(s) and whether they are current or alumni come
 from data/things_done/lab_members.yaml (things_done's ledger/profile/lab_members.yaml).
 Photos and links live here: data/members/<slug>.yaml and data/photos/<slug>.<ext>,
-where <slug> is the roster name slugified ("Iván Hidalgo Cenalmor" ->
-ivan-hidalgo-cenalmor). A file here that matches nobody in the roster, or a key
-that is not listed below, stops the build (it would otherwise be ignored).
+where <slug> is the person's stable things_done id without "member-"
+(member-ivan-hidalgo-cenalmor -> ivan-hidalgo-cenalmor). The id, not the name,
+is the join key, so a corrected spelling of a name keeps the photo, links and
+page anchor. A file here that matches nobody in the roster, or a key that is
+not listed below, stops the build (it would otherwise be ignored).
 """
 
 import shutil
 from typing import Any
 
 from .config import DATA, DOCS, GROUPS, LEDGER_DATA, fail, load
-from .text import normalize_name, slugify
+from .text import normalize_name
 
 Person = dict[str, Any]
+ID_PREFIX = "member-"   # things_done roster ids: member-<name as first recorded>
 
 # Keys allowed in data/members/<slug>.yaml.
 PROFILE_KEYS = {"photo", "photo_position", "email", "orcid", "scholar", "github",
@@ -41,8 +44,8 @@ def _check_no_orphans(slugs: set[str]) -> None:
         p for p in (DATA / "photos").glob("*") if p.suffix.lower() in PHOTO_EXTENSIONS]
     orphans = sorted(str(p.relative_to(DATA.parent)) for p in files if p.stem not in slugs)
     if orphans:
-        fail(f"{', '.join(orphans)}: no one with this name in the things_done roster "
-             "(rename the file to match the roster name, or remove it)")
+        fail(f"{', '.join(orphans)}: no one with this id in the things_done roster "
+             f"(name the file after the person's id without '{ID_PREFIX}', or remove it)")
 
 
 def load_members() -> list[Person]:
@@ -52,7 +55,9 @@ def load_members() -> list[Person]:
     oldest first) and photo (site path) when there is one."""
     people = []
     for i, rec in enumerate(load(LEDGER_DATA / "lab_members.yaml").get("records") or []):
-        person = dict(rec, slug=slugify(rec["name"]), order=i)
+        if not str(rec.get("id", "")).startswith(ID_PREFIX):
+            fail(f"lab_members.yaml: {rec.get('name')}: no things_done id ({ID_PREFIX}...); re-run the sync")
+        person = dict(rec, slug=rec["id"].removeprefix(ID_PREFIX), order=i)
         if person["status"] not in STATUSES:
             fail(f"lab_members.yaml: {rec['name']}: status must be one of {STATUSES}")
         if person["group"] not in GROUPS:

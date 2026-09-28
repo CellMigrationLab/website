@@ -33,7 +33,7 @@ things_done (publications, datasets, lab in numbers) have none.
 | Lab in numbers (papers, citations, people, preprint lag, collaborators, map, co-author cloud) | automatic, from things_done |
 | Software | automatic list from things_done; pictures, videos, texts and extra links in `data/software.yaml` (tile colours follow each other down the page) |
 | Datasets | automatic, from things_done; links at the top in `data/site.yaml` (`resources`) |
-| Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<name>.yaml`, team photos in `data/team.yaml` |
+| Lab members and alumni (who, roles) | things_done `ledger/profile/lab_members.yaml`; photos in `data/photos/`, links in `data/members/<id>.yaml` (the person's things_done id without `member-`), team photos in `data/team.yaml` |
 | Gallery | `data/gallery.yaml` |
 | Image rights and credits (every image) | `data/media.yaml`; public summary `content/licensing.md` |
 | Online talks | `data/talks.yaml` |
@@ -49,12 +49,13 @@ things_done (publications, datasets, lab in numbers) have none.
 leave. Current members show their current role; alumni show all their
 roles. No dates are shown. The website only adds the look:
 
-- Photo: `data/photos/<name>.jpg` (file name = the person's name as in the
-  roster, in lower case without accents and with hyphens, e.g. `ivan-hidalgo-cenalmor.jpg`),
-  or `photo:` in `data/members/<name>.yaml` pointing to an image under `docs/`
+- Photo: `data/photos/<id>.jpg`, where `<id>` is the person's things_done roster
+  id without `member-` (`member-ivan-hidalgo-cenalmor` → `ivan-hidalgo-cenalmor.jpg`;
+  the id stays the same if the spelling of the name is corrected),
+  or `photo:` in `data/members/<id>.yaml` pointing to an image under `docs/`
   (one or the other, not both). Photos are cropped to a square automatically;
   without a photo the initials are shown.
-- Optional `data/members/<name>.yaml` with links and a one-liner:
+- Optional `data/members/<id>.yaml` with links and a one-liner:
 
 ```yaml
 orcid: 0000-0000-0000-0000     # also: email, github, bluesky, scholar, website
