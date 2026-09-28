@@ -129,7 +129,9 @@ class FeaturedTests(unittest.TestCase):
         c = pub("10.1/c", 2025, "published", "C", corresponding=True)
         d = pub("10.1/d", 2026, "published", "D")   # not corresponding
         lag = [{"published_doi": "10.1/b", "published_date": "2024-03-01"}]
-        items = self.run_featured([a, b, c, d], [{"doi": "10.1/c", "image": "c.png"}], lag)
+        entries = [{"doi": "10.1/c", "image": "c.png", "area": "methods"},
+                   {"doi": "10.1/a", "area": "biology"}, {"doi": "10.1/b", "area": "biology"}]
+        items = self.run_featured([a, b, c, d], entries, lag)
         # 2025 first; in 2024 the dated paper comes before the undated one
         self.assertEqual([i["title"] for i in items], ["C", "B", "A"])
         self.assertEqual(items[0]["image"], "c.png")
@@ -138,6 +140,12 @@ class FeaturedTests(unittest.TestCase):
     def test_hidden_paper_is_left_out(self):
         a = pub("10.1/a", 2024, "published", "A", corresponding=True)
         self.assertEqual(self.run_featured([a], [{"doi": "10.1/a", "hide": True}]), [])
+
+    def test_every_featured_paper_needs_an_area(self):
+        a = pub("10.1/a", 2024, "published", "A", corresponding=True)
+        for entries in ([], [{"doi": "10.1/a", "area": "chemistry"}]):   # no entry; unknown area
+            with self.subTest(entries=entries), self.assertRaises(SystemExit):
+                self.run_featured([a], entries)
 
     def test_bad_entries_stop_the_build(self):
         a = pub("10.1/a", 2024, "published", "A", corresponding=True)
@@ -439,15 +447,31 @@ class WorldMapTests(unittest.TestCase):
         self.assertLess(box[3], box[2] / 2)      # Antarctica left out: much wider than tall
 
 
+class GalleryTests(unittest.TestCase):
+    def test_rows_of_equal_height_from_the_aspect_ratio(self):
+        """Flex basis and growth are both proportional to width/height, so a row's pictures share one height."""
+        from cellmig import pages_content
+        with patch.object(pages_content, "image_size", return_value=(800, 400)):
+            self.assertEqual(pages_content._justified("x.jpg"), f"flex: 200.0 1 {2 * pages_content.GALLERY_ROW:.2f}rem")
+        with patch.object(pages_content, "image_size", return_value=None), self.assertRaises(SystemExit):
+            pages_content._justified("x.svg")
+
+
 class CloudTests(unittest.TestCase):
     def test_compact_size_range_keeps_the_encoding(self):
         """#19: the largest name stays modest, sizes still grow with joint papers."""
-        from cellmig.pages_numbers import CLOUD_MAX, CLOUD_MIN, CLOUD_SIZE, cloud_size
+        from cellmig.pages_numbers import CLOUD_MAX, CLOUD_MIN, cloud_size
         self.assertLessEqual(CLOUD_MAX, 1.6)
-        self.assertLessEqual(CLOUD_SIZE, 50)
         self.assertEqual(cloud_size(28, 28), CLOUD_MAX)
         self.assertLess(cloud_size(3, 28), cloud_size(10, 28))
         self.assertGreaterEqual(cloud_size(1, 28), CLOUD_MIN)
+
+    def test_every_coauthor_is_in_the_cloud(self):
+        from cellmig.pages_numbers import _cloud
+        people = [{"name": f"Ann Author{i}", "papers": 1 + i % 3} for i in range(120)]
+        html = _cloud(people, set())
+        self.assertEqual(html.count("<span class=\"\" "), 120)
+        self.assertIn("Show the 40 co-authors of one paper", html)
 
 
 class ResearchThemeTests(unittest.TestCase):
@@ -464,14 +488,19 @@ class ResearchThemeTests(unittest.TestCase):
 
 
 class VisualSystemTests(unittest.TestCase):
-    def test_tiles_alternate_and_fit_is_explicit(self):
-        """#25: tiles alternate white/light, `dark` is the only colour override,
-        and `fit: contain` is set in the data, not guessed from file names."""
+    def test_tiles_cycle_the_surfaces_and_fit_is_explicit(self):
+        """Tiles take white, lavender, light and purple in turn; the picture side
+        alternates; `fit: contain` is set in the data, not guessed from file names."""
         from cellmig.components import tile
-        self.assertIn("cm-tile--white", tile(0, "<img>", "t"))
-        self.assertIn("cm-tile--light cm-tile--right", tile(1, "<img>", "t"))
-        self.assertIn("cm-tile--dark", tile(2, "<img>", "t", "dark"))
+        self.assertEqual([tile(i, "<img>", "t").split('"')[1] for i in range(5)],
+                         ["cm-tile cm-tile--white", "cm-tile cm-tile--lavender cm-tile--right", "cm-tile cm-tile--light",
+                          "cm-tile cm-tile--purple cm-tile--right", "cm-tile cm-tile--white"])
+        self.assertIn("cm-tile--white cm-tile--right", tile(0, "<img>", "t", picture_right_first=True))
         self.assertIn("cm-fit-contain", tile(0, "<img>", "t", fit="contain"))
-        for bad in ({"color": "purple"}, {"fit": "stretch"}):
-            with self.subTest(bad=bad), self.assertRaises(SystemExit):
-                tile(0, "<img>", "t", **bad)
+        with self.assertRaises(SystemExit):
+            tile(0, "<img>", "t", fit="stretch")
+
+    def test_data_files_set_no_tile_colour(self):
+        from cellmig.pages_content import _no_colour
+        with self.assertRaises(SystemExit):
+            _no_colour({"title": "T", "color": "dark"}, "data/research.yaml")

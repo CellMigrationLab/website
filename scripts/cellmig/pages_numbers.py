@@ -9,12 +9,11 @@ from .ledger import Ledger, Record, software_list
 from .page import Page
 from .people import Person, is_lab_member
 from .previews import preview
-from .text import esc, flag, fmt
+from .text import esc, flag, fmt, plural
 from .worldmap import world_map
 
 TOP_COLLABORATORS = 12
-CLOUD_SIZE = 45                  # names in the co-author cloud (#19: a compact, secondary chart)
-CLOUD_MIN, CLOUD_MAX = 0.72, 1.55   # font sizes (rem) of the least and most frequent co-author
+CLOUD_MIN, CLOUD_MAX = 0.62, 1.55   # font sizes (rem) of the least and most frequent co-author
 
 
 def _tiles(ledger: Ledger, members: list[Person], countries: dict[str, int]) -> str:
@@ -59,19 +58,32 @@ def cloud_size(papers: int, most: int) -> float:
     return CLOUD_MIN + (CLOUD_MAX - CLOUD_MIN) * (papers / most) ** 0.5
 
 
-def _cloud(coauthors: list[Record], lab: set[str]) -> str:
-    """Word cloud of the most frequent co-authors, sorted by surname."""
-    cloud = coauthors[:CLOUD_SIZE]
-    most = cloud[0]["papers"]
+def _words(coauthors: list[Record], lab: set[str], most: int) -> str:
+    """Names sorted by surname, sized by joint papers (cloud_size)."""
     words = []
-    for c in sorted(cloud, key=lambda c: c["name"].split()[-1]):
+    for c in sorted(coauthors, key=lambda c: c["name"].split()[-1]):
         size = cloud_size(c["papers"], most)
         cls = "cm-cloud__lab" if is_lab_member(c["name"], lab) else ""
         words.append(f'<span class="{cls}" style="font-size:{size:.2f}rem" '
-                     f'title="{esc(c["name"])}: {c["papers"]} joint papers">{esc(c["name"])}</span>')
-    return ('<p class="cm-cloud" aria-label="Co-authors; larger names share more papers">' + "\n".join(words) + "</p>"
-            '<p class="cm-small cm-cloud__legend">Size: number of joint papers. '
-            '<span class="cm-cloud__lab">Purple</span>: authors directly associated with the lab.</p>')
+                     f'title="{esc(c["name"])}: {plural(c["papers"], "joint paper")}">{esc(c["name"])}</span>')
+    return "\n".join(words)
+
+
+def _cloud(coauthors: list[Record], lab: set[str]) -> str:
+    """Every co-author: those with several joint papers as a word cloud,
+    those with one paper in a list that opens on request (the page stays
+    short on phones)."""
+    most = max(c["papers"] for c in coauthors)
+    several = [c for c in coauthors if c["papers"] > 1]
+    once = [c for c in coauthors if c["papers"] == 1]
+    out = [f'<p class="cm-cloud" aria-label="Co-authors of several papers; larger names share more papers">'
+           f'{_words(several, lab, most)}</p>']
+    if once:
+        out.append(f'<details class="cm-cloud__more"><summary>Show the {plural(len(once), "co-author")} of one paper</summary>'
+                   f'<p class="cm-cloud">{_words(once, lab, most)}</p></details>')
+    out.append('<p class="cm-small cm-cloud__legend">Size: number of joint papers. '
+               '<span class="cm-cloud__lab">Purple</span>: authors directly associated with the lab.</p>')
+    return "".join(out)
 
 
 def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
@@ -87,5 +99,5 @@ def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
           section_title("From preprint to paper"), lag_section(ledger.lag_pairs, ledger.lag_summary),
           section_title("Top collaborators", id_="collaborators"), _top_collaborators(ledger.coauthors, lab),
           section_title("Where our co-authors are", id_="map"), world_map(countries),
-          section_title("Co-authors"), _cloud(ledger.coauthors, lab))
+          section_title(f"All {fmt(len(ledger.coauthors))} co-authors", id_="coauthors"), _cloud(ledger.coauthors, lab))
     p.write()

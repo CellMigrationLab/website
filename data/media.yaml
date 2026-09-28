@@ -31,10 +31,6 @@ media:
   type: logo
   rights: third-party
   source: Finnish Cancer Institute
-- path: assets/images/logos/finnish-cancer-institute.png
-  type: logo
-  rights: third-party
-  source: Finnish Cancer Institute
 - path: assets/images/logos/immens.png
   type: logo
   rights: third-party
@@ -253,10 +249,6 @@ media:
   type: journal-cover
   rights: third-party
   source: Computer Optimized Microscopy (Methods in Molecular Biology)
-- path: wp-content/uploads/2023/02/aboakademi-logo-914629676-e1677354803399.png
-  type: logo
-  rights: third-party
-  source: Åbo Akademi University
 - path: wp-content/uploads/2023/02/aboakademi-logo_black-300x300-1.png
   type: logo
   rights: third-party
@@ -285,10 +277,6 @@ media:
   type: journal-cover
   rights: third-party
   source: Journal of Cell Science
-- path: wp-content/uploads/2023/02/turku_bioscience_logo_rgb-300x78-1.png
-  type: logo
-  rights: third-party
-  source: Turku Bioscience Centre
 - path: wp-content/uploads/2023/02/turku_bioscience_logo_white_rgb-300x78-1.png
   type: logo
   rights: third-party

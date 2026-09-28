@@ -40,8 +40,8 @@ social:
     icon: mail
     url: mailto:guillaume.jacquemet@abo.fi
 
-# Logos: `logo` is shown on white (home page), `logo_dark` in the dark footer.
-# Home-page logos are sized to the same visual area with their proportions
+# Logos: affiliation logos are shown in the dark footer; funding logos on white
+# (home page). Home-page logos are sized to the same visual area with their proportions
 # kept (scripts/cellmig/components.py logo_size); an optional `scale` (e.g.
 # 1.2) corrects one whose artwork has unusual whitespace. Never stretch a file.
 affiliations:
@@ -49,7 +49,8 @@ affiliations:
   # (ledger/profile/affiliations.yaml, current ones); this list adds the logo
   # and link for each, matched by the ledger `id`. A current affiliation
   # without an entry stops the build; an entry that is no longer current is
-  # not shown (the build warns: remove it). logo_dark is used on the dark footer.
+  # not shown (the build warns: remove it). Affiliations are shown in the footer,
+  # so `logo` is the version for a dark background.
   # relation (for search engines and LLMs): parent = the lab is part of this
   # organisation; member = the lab belongs to this centre or network;
   # leader = an affiliation of the group leader, not of the lab.
@@ -57,26 +58,22 @@ affiliations:
     relation: parent
     name: Åbo Akademi University
     url: https://www.abo.fi/en/
-    logo: wp-content/uploads/2023/02/aboakademi-logo-914629676-e1677354803399.png
-    logo_dark: wp-content/uploads/2023/02/aboakademi-logo_black-300x300-1.png
+    logo: wp-content/uploads/2023/02/aboakademi-logo_black-300x300-1.png   # on the dark footer
   - id: turku-bioscience-centre-utuaau-affiliation
     relation: member
     name: Turku Bioscience Centre
     url: https://bioscience.fi/
-    logo: wp-content/uploads/2023/02/turku_bioscience_logo_rgb-300x78-1.png
-    logo_dark: wp-content/uploads/2023/02/turku_bioscience_logo_white_rgb-300x78-1.png
+    logo: wp-content/uploads/2023/02/turku_bioscience_logo_white_rgb-300x78-1.png   # on the dark footer
   - id: inflames-research-flagship-centre-affiliation
     relation: member
     name: InFLAMES Flagship
     url: https://inflames.utu.fi/
-    logo: wp-content/uploads/2023/02/inflames_logo_color.png
-    logo_dark: wp-content/uploads/2023/02/inflames_logo_color2.png
+    logo: wp-content/uploads/2023/02/inflames_logo_color2.png   # on the dark footer
   - id: foundation-finnish-cancer-institute-affiliation
     relation: leader
     name: Finnish Cancer Institute
     url: https://www.syopainstituutti.com/
-    logo: assets/images/logos/finnish-cancer-institute.png
-    logo_dark: assets/images/logos/finnish-cancer-institute-white.png
+    logo: assets/images/logos/finnish-cancer-institute-white.png   # on the dark footer
 
 # "Current research support" on the home page. What is shown comes from
 # things_done (ledger/registries/grants.yaml, grants that are active or awarded

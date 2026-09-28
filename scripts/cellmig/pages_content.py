@@ -17,7 +17,7 @@ from .config import (
     fail,
     load,
 )
-from .images import lite_video, media, thumb
+from .images import image_size, lite_video, media, thumb
 from .ledger import Ledger, Record, software_list
 from .page import Page, new_tab_markdown
 from .previews import preview
@@ -25,6 +25,8 @@ from .structured import dataset_item, item_list, software_item, to_json
 from .text import esc, is_external, md, slugify, year_of
 
 BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our publications</a>'
+# Research page: the papers behind the themes, at the top and the bottom.
+FEATURED_RESEARCH = '<a class="cm-button" href="featured-research/">Explore our featured research</a>'
 
 
 # The menu's "Software & data" covers two pages; this row links them (#25).
@@ -54,17 +56,27 @@ def _theme(t: Record, ledger: Ledger) -> str:
     return "\n".join(body)
 
 
+def _no_colour(entry: Record, source: str) -> None:
+    """Tiles take their colour from their place (config.TILE_SURFACES)."""
+    if "color" in entry:
+        fail(f"{source} ({entry.get('title') or entry.get('id')}): remove `color`; "
+             "tile colours follow each other down the page")
+
+
 def page_research(ledger: Ledger) -> None:
     """docs/research.md from data/research.yaml: videos, then one tile per theme."""
     research = load(DATA / "research.yaml")
     p = Page("research.md", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
-    p.add("# Research", f'<p class="cm-lead">{esc(research["intro"])}</p>', '<div class="cm-videos">')
+    papers = f'{FEATURED_RESEARCH} {BROWSE_PUBLICATIONS.replace("cm-button", "cm-button cm-button--ghost", 1)}'
+    p.add("# Research", f'<p class="cm-lead">{esc(research["intro"])}</p>', f'<p class="cm-research-links">{papers}</p>',
+          '<div class="cm-videos">')
     p.add(*(f'<figure>{lite_video(v.get("youtube"), v.get("vimeo"), v["title"], v.get("start"))}'
             f'<figcaption>{esc(v["title"])}</figcaption></figure>' for v in research.get("videos") or []))
     p.add("</div>", '<div class="cm-wide">')
     for i, t in enumerate(research["themes"]):
-        p.add(tile(i, media(t.get("image"), t.get("credit", ""), 1000), _theme(t, ledger), t.get("color"), t.get("fit")))
-    p.add("</div>", f'<p class="cm-cta">{BROWSE_PUBLICATIONS}</p>')
+        _no_colour(t, "data/research.yaml")
+        p.add(tile(i, media(t.get("image"), t.get("credit", ""), 1000), _theme(t, ledger), t.get("fit")))
+    p.add("</div>", f'<p class="cm-cta">{papers}</p>')
     p.write()
 
 
@@ -96,7 +108,8 @@ def page_software(ledger: Ledger) -> None:
           '<a href="datasets/">our datasets, models and materials</a>.</p>', '<div class="cm-wide">')
     for i, s in enumerate(projects):
         pic = media(s.get("video") or s.get("image"), f'{s["title"]} logo' if s.get("image") else "", 900)
-        p.add(tile(i + 1, pic, _software_body(s), s.get("color"), s.get("fit")))   # +1: picture on the right first, as before
+        _no_colour(s, "data/software.yaml")
+        p.add(tile(i, pic, _software_body(s), s.get("fit"), picture_right_first=True))   # as before
     p.add("</div>", f'<p class="cm-cta">{BROWSE_PUBLICATIONS} '
           '<a class="cm-button cm-button--ghost" href="https://github.com/CellMigrationLab">CellMigrationLab on GitHub</a></p>')
     p.write()
@@ -158,6 +171,21 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     p.write()
 
 
+GALLERY_ROW = 8.5   # rem: height a gallery row aims for before it is stretched to the full width
+
+
+def _justified(site_path: str) -> str:
+    """Flex sizes of a gallery picture in rows of equal height (#gallery):
+    basis and growth both proportional to its aspect ratio, so every picture
+    in a row gets the same height and none is cropped. Computed here, not by
+    the browser, so the layout is the same in every browser."""
+    size = image_size(site_path)
+    if not size:
+        fail(f"data/gallery.yaml: {site_path} has no size (an SVG needs width and height attributes)")
+    ratio = size[0] / size[1]
+    return f"flex: {ratio * 100:.1f} 1 {ratio * GALLERY_ROW:.2f}rem"
+
+
 def page_gallery() -> None:
     """docs/gallery.md from data/gallery.yaml: journal covers and images (lightbox)."""
     gallery = load(DATA / "gallery.yaml")
@@ -170,7 +198,7 @@ def page_gallery() -> None:
     p.add("</ul>", section_title("Images"), '<ul class="cm-gallery">')
     for g in gallery["images"]:
         cap = " ".join(x for x in (g.get("caption"), rights.credit(g["image"])) if x)   # © from data/media.yaml
-        p.add(f'<li><a href="{thumb(g["image"], 2000)}" data-cm-lightbox data-caption="{esc(cap)}">'
+        p.add(f'<li style="{_justified(g["image"])}"><a href="{thumb(g["image"], 2000)}" data-cm-lightbox data-caption="{esc(cap)}">'
               f'{media(g["image"], g.get("caption") or UNCAPTIONED_ALT, 600)}</a></li>')
     p.add("</ul>")
     p.write()

@@ -79,7 +79,7 @@ def main() -> None:
     funding = support_list(site["funding"], site["programmes"], ledger)
 
     outputs = build_outputs(ledger, featured)
-    page_home(site, featured, affiliations, funding)
+    page_home(site, featured, funding)
     page_research(ledger)
     page_members(members)
     page_software(ledger)
