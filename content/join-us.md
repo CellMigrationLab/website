@@ -18,7 +18,6 @@ the application. The main options are:
 - [Marie Skłodowska-Curie Postdoctoral Fellowships](https://marie-sklodowska-curie-actions.ec.europa.eu/actions/postdoctoral-fellowships) (European Commission)
 - [EMBO Postdoctoral Fellowships](https://www.embo.org/funding/fellowships-grants-and-career-support/postdoctoral-fellowships/)
 - [Human Frontier Science Program fellowships](https://www.hfsp.org/funding/hfsp-funding/postdoctoral-fellowships)
-- [Research Council of Finland](https://www.aka.fi/en/research-funding/) postdoctoral funding
 - Finnish foundations, such as the [Sigrid Jusélius Foundation](https://www.sigridjuselius.fi/en/)
   and the [Finnish Cultural Foundation](https://skr.fi/en)
 
