@@ -365,3 +365,18 @@ class NewTabTests(unittest.TestCase):
                          '[a](https://x.org/){ target="_blank" rel="noopener" } [b](join-us.md) '
                          '![p](https://x.org/p.png) [c](https://y.org/){ .cm-button target="_blank" rel="noopener" } '
                          '[m](mailto:a@b.fi)')
+
+
+class LogoSizeTests(unittest.TestCase):
+    def test_equal_area_and_no_distortion(self):
+        """#20: wide and square logos get similar areas, within the slot, proportions kept."""
+        from cellmig.components import LOGO_MAX_H, LOGO_MAX_W, logo_size
+        for native in ((641, 174), (300, 300), (1200, 100), (100, 400)):
+            with self.subTest(native=native):
+                w, h = logo_size(*native)
+                self.assertLessEqual(w, LOGO_MAX_W)
+                self.assertLessEqual(h, LOGO_MAX_H)
+                self.assertAlmostEqual(w / h, native[0] / native[1], delta=0.06 * native[0] / native[1])
+        wide, square = logo_size(641, 174), logo_size(300, 300)
+        self.assertLess(abs(wide[0] * wide[1] - square[0] * square[1]) / (square[0] * square[1]), 0.25)
+        self.assertGreater(logo_size(300, 300, 1.2)[0], square[0])   # `scale` override
