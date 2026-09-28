@@ -19,6 +19,19 @@ def section_title(text: str, level: int = 2, id_: str | None = None) -> str:
     return f'<h{level} class="cm-section-title"{i}><span>{esc(text)}</span></h{level}>'
 
 
+# Sibling pages shown as a row under a page title; each page belongs to one
+# main-menu item (Page `menu`), which stays highlighted on all of them.
+SOFTWARE_DATA = [("Software", "software/"), ("Datasets", "datasets/")]
+PAPERS = [("Featured research", "featured-research/"), ("All publications", "publications/")]
+
+
+def section_nav(links: list[tuple[str, str]], current: str) -> str:
+    """Row of sibling pages (e.g. Software · Datasets); `current` is marked, not linked."""
+    return '<p class="cm-toc-inline">' + " · ".join(
+        f'<strong aria-current="page">{esc(title)}</strong>' if title == current else f'<a href="{url}">{esc(title)}</a>'
+        for title, url in links) + "</p>"
+
+
 # Link from a journal paper to its preprint: worded as an action, so it is not
 # read as a status (the "Preprint" badge is only for records that are preprints).
 PREPRINT_LINK = "Read the associated preprint"
