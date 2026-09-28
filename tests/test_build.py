@@ -418,3 +418,17 @@ class ResearchThemeTests(unittest.TestCase):
         self.assertEqual(html.count("cm-badge--preprint"), 1)      # only the preprint without one
         with self.assertRaises(SystemExit):
             _theme({"title": "T", "papers": ["10.1101/pre", "10.1/j"]}, led)
+
+
+class VisualSystemTests(unittest.TestCase):
+    def test_tiles_alternate_and_fit_is_explicit(self):
+        """#25: tiles alternate white/light, `dark` is the only colour override,
+        and `fit: contain` is set in the data, not guessed from file names."""
+        from cellmig.components import tile
+        self.assertIn("cm-tile--white", tile(0, "<img>", "t"))
+        self.assertIn("cm-tile--light cm-tile--right", tile(1, "<img>", "t"))
+        self.assertIn("cm-tile--dark", tile(2, "<img>", "t", "dark"))
+        self.assertIn("cm-fit-contain", tile(0, "<img>", "t", fit="contain"))
+        for bad in ({"color": "purple"}, {"fit": "stretch"}):
+            with self.subTest(bad=bad), self.assertRaises(SystemExit):
+                tile(0, "<img>", "t", **bad)

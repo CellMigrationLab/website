@@ -5,8 +5,10 @@
 # automatically). This file only adds the website presentation:
 #
 #   id:      the project id in the ledger (ledger/registries/software.yaml)
-#   color:   tile colour: purple, orange, blue, black, white, sky, grey, mint,
-#            red, green, amber, pink, light
+#   color:   (optional) dark, for dark artwork; tiles otherwise alternate white
+#            and light (#25)
+#   fit:     (optional) contain for a logo, screenshot or drawing (shown whole,
+#            with a margin); pictures fill the tile (cover) otherwise
 #   image:   picture or logo shown next to the text (a .gif is played as a video)
 #   video:   short video file instead of a picture (in docs/assets/media/)
 #   text:    longer description for the website (the ledger's one-line
@@ -20,7 +22,7 @@
 # `year` and `github`/`paper` itself.
 
 - id: nucleisky
-  color: purple
+  color: dark
   image: wp-content/uploads/2026/07/gemini_generated_image_kc5ezfkc5ezfkc5e.png
   text: >-
     NucleiSky registers microscopy images in 2D and 3D by matching the spatial arrangement of
@@ -29,8 +31,8 @@
     Google Colab, a desktop interface or directly from Python.
 
 - id: labconstrictor
-  color: orange
   image: wp-content/uploads/2026/07/comic-e1782918385802.png
+  fit: contain
   paper: https://arxiv.org/abs/2603.10704
   text: >-
     LabConstrictor turns Jupyter notebooks into installable desktop applications. It lets
@@ -39,8 +41,8 @@
     packaging, cross-platform installers and the application interface.
 
 - id: ezinput
-  color: blue
   image: wp-content/uploads/2026/07/logo_white_bg.png
+  fit: contain
   paper: https://arxiv.org/abs/2601.08859
   text: >-
     EZInput is a Python library for building simple interfaces for scientific computing workflows.
@@ -50,8 +52,9 @@
 
 - id: rxiv-maker
   title: Rxiv-Maker
-  color: black
+  color: dark
   image: wp-content/uploads/2026/07/logo-rxiv-maker.png
+  fit: contain
   paper: https://arxiv.org/abs/2508.00836
   text: >-
     Rxiv-Maker is a framework for writing scientific manuscripts in Markdown and generating
@@ -61,8 +64,8 @@
 
 - id: sred
   title: SReD
-  color: white
   image: wp-content/uploads/2026/07/logo_small.png
+  fit: contain
   text: >-
     SReD, the Structural Repetition Detector, is an ImageJ/Fiji plugin for detecting repetitive
     structures in microscopy images. It measures local structural similarity to generate maps of
@@ -70,8 +73,8 @@
     data and applies to a range of biological structures and imaging modalities.
 
 - id: photofitt
-  color: sky
   image: wp-content/uploads/2024/08/photofitt-logo.png
+  fit: contain
   text: >-
     PhotoFiTT measures phototoxicity during live-cell microscopy. It combines a standardised imaging
     protocol with image analysis that quantifies changes in mitotic timing, cell size and cellular
@@ -79,8 +82,8 @@
     settings that preserve cell health while still producing useful images.
 
 - id: celltrackscolab
-  color: white
   image: wp-content/uploads/2024/01/celltrackscolab_logo.png
+  fit: contain
   github: https://github.com/CellMigrationLab/CellTracksColab
   text: >-
     CellTracksColab brings tracking data from multiple movies, conditions and experiments into a
@@ -90,8 +93,8 @@
     accessible without requiring users to build an analysis pipeline from scratch.
 
 - id: nanopyx
-  color: grey
   image: wp-content/uploads/2024/01/259983552-ef7aa814-16ba-4947-a69f-1f096d70370e.png
+  fit: contain
   paper: https://www.biorxiv.org/content/10.1101/2023.08.13.553080v2
   text: >-
     NanoPyx is a Python library for analysing light-microscopy and super-resolution images. It builds
@@ -100,8 +103,8 @@
     [Henriques Laboratory](https://henriqueslab.org/) and collaborators.
 
 - id: dl4miceverywhere
-  color: mint
   image: wp-content/uploads/2024/01/dl4miceverywhere-logo.png
+  fit: contain
   paper: https://doi.org/10.1038/s41592-024-02295-6
   text: >-
     DL4MicEverywhere makes deep-learning workflows for bioimage analysis portable across different
@@ -113,7 +116,6 @@
     the notebook-based interface.
 
 - id: esrrf
-  color: red
   video: assets/media/esrrf.mp4
   text: >-
     eSRRF is a fluorescence-fluctuation method for super-resolution microscopy. It reconstructs
@@ -122,7 +124,6 @@
     reconstruction artefacts across different datasets.
 
 - id: fast4dreg
-  color: green
   video: assets/media/fast4dreg-drift.mp4
   paper: https://doi.org/10.1242/jcs.260728
   text: >-
@@ -131,7 +132,6 @@
     z-axes, then corrects each frame. It can also align channels in multichannel 2D and 3D datasets.
 
 - id: trackmate
-  color: sky
   video: assets/media/fast4dreg-glioblastoma.mp4
   paper: https://doi.org/10.1038/s41592-022-01507-1
   text: >-
@@ -145,7 +145,6 @@
 
 - id: zerocostdl4mic
   title: ZeroCostDL4Mic
-  color: amber
   video: assets/media/zerocostdl4mic.mp4
   text: >-
     [ZeroCostDL4Mic](https://github.com/HenriquesLab/ZeroCostDL4Mic/wiki) provides notebook-based
@@ -156,7 +155,6 @@
 
 - title: SRRF TFM
   year: 2020
-  color: pink
   video: assets/media/srrf-tfm.mp4
   paper: https://doi.org/10.1021/acs.nanolett.9b04083
   text: >-
@@ -167,7 +165,6 @@
 
 - id: filomap
   title: FiloMap
-  color: light
   image: wp-content/uploads/2019/08/vasp.jpg
   paper: https://doi.org/10.1016/j.cub.2018.11.053
   text: >-
@@ -176,7 +173,6 @@
     patterns of multiple proteins.
 
 - id: filoquant
-  color: orange
   video: assets/media/filomap-dcis-collagen.mp4
   paper: https://doi.org/10.1083/jcb.201704045
   text: >-
