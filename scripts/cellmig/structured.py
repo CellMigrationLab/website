@@ -111,7 +111,10 @@ def article(story: Story, page_url: str, image_url: str | None) -> Json:
         "sameAs": f"https://doi.org/{pub['doi']}",
         "url": page_url,
         "abstract": " ".join(story["summary"].split()),
-        "sourceOrganization": {"@id": LAB_ID},
+        # No sourceOrganization: being listed on the lab's site does not make
+        # the current lab the paper's source (featured papers go back to before
+        # the lab was founded). Organisations come only from provenance data
+        # (things_done#142, once it exists); the authors are the claim made here.
     }
     if story["date"]:   # schema.org Date is a full ISO date: no year-only values
         work["datePublished"] = story["date"]
