@@ -38,8 +38,8 @@ images:
   caption: Cancer cell spheroid stained for actin (magenta) and collagen (green).
 - image: wp-content/uploads/2019/08/rgb3.jpg
   caption: Curly collagen (green and magenta) found in the proximity of a breast tumour.
-- image: wp-content/uploads/2019/08/cancer-cell-vasculature.jpg
-  caption: Cancer cells (red) migrating inside a blood vessel in a living zebrafish embryo (green).
+- image: wp-content/uploads/2024/08/rgb.jpg
+  caption: Cancer cells (magenta) migrating inside a blood vessel in a living zebrafish embryo (green).
 - image: wp-content/uploads/2019/08/20x-fn-slide-1-p1-rgb.jpg
   caption: 'Breast tumour stained for DAPI (blue), actin (red) and fibronectin (green).'
 - image: wp-content/uploads/2019/08/20x-fn-slide-1-p1-rgb2.jpg
@@ -72,7 +72,7 @@ images:
 - image: wp-content/uploads/2019/08/image-2.jpg
   caption: Breast cancer cells invading through collagen. The actin cytoskeleton (green) and the nuclei
     (blue) are labelled.
-- image: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb-1.png
+- image: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb.png
 - image: wp-content/uploads/2019/08/dtolcalwsaaaxoc.jpg
   caption: Osteosarcoma cell labelled for actin and imaged using structured illumination microscopy.
     Colour indicates the z-position.

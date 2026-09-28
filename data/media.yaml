@@ -117,12 +117,6 @@ media:
   creators:
   - Emilia Peuhu
   - Guillaume Jacquemet
-- path: wp-content/uploads/2019/08/cancer-cell-vasculature.jpg
-  type: microscopy
-  rights: all-rights-reserved
-  creators:
-  - Ilkka Paatero
-  - Guillaume Jacquemet
 - path: wp-content/uploads/2019/08/cna35-merged-2.gif
   type: microscopy
   rights: all-rights-reserved
@@ -407,6 +401,7 @@ media:
   type: microscopy
   rights: all-rights-reserved
   creators:
+  - Ilkka Paatero
   - Guillaume Jacquemet
 - path: wp-content/uploads/2024/10/mia_n1_p2_3350_5600_bftracks-3-ezgif.com-video-to-gif-converter-1.gif
   type: microscopy
@@ -498,11 +493,6 @@ media:
   type: portrait
   rights: all-rights-reserved
   owner: Cell Migration Lab
-- path: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb-1.png
-  type: microscopy
-  rights: CC-BY-4.0
-  creators:
-  - Ana Popović
 - path: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb.png
   type: microscopy
   rights: CC-BY-4.0
