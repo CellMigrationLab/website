@@ -4,7 +4,7 @@ import re
 
 import yaml
 
-from .config import DOCS, SITE_URL
+from .config import DOCS, SITE_URL, fail
 from .images import gif_video, share_jpeg
 from .text import is_external
 
@@ -20,6 +20,18 @@ def share_image(site_path: str | None) -> str | None:
     if site_path.lower().endswith(".svg"):
         return None
     return share_jpeg(site_path)
+
+
+# How the site is built is not visitor-facing content (#17): these words may
+# appear in code and docs, never on a page.
+INTERNAL = re.compile(r"things[_ ]done|activity ledger", re.I)
+
+
+def check_public(where: str, text: str) -> None:
+    """Stop the build if generated text shows internal pipeline names."""
+    m = INTERNAL.search(text)
+    if m:
+        fail(f"{where}: shows the internal name {m.group(0)!r} to visitors; describe the content instead")
 
 
 def curly_quotes(text: str) -> str:
@@ -92,4 +104,5 @@ class Page:
         out.parent.mkdir(parents=True, exist_ok=True)
         front = yaml.safe_dump(self.meta, allow_unicode=True, sort_keys=False, width=10**9).strip()
         body = self.fix_links("\n".join(self.parts))
+        check_public(f"docs/{self.path}", f"{front}\n{body}")
         out.write_text(f"---\n{front}\n---\n\n{body}\n", encoding="utf-8")

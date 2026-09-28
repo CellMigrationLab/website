@@ -10,6 +10,7 @@ from .icons import ICONS
 from .images import dims, thumb
 from .ledger import Record
 from .news import KIND_LABELS, NewsItem
+from .page import check_public
 from .people import Person
 from .structured import organization, to_json
 from .text import esc, is_external
@@ -85,6 +86,7 @@ def write_feed(site: Record, news: list[NewsItem]) -> None:
            f'<atom:link href="{SITE_URL}feed.xml" rel="self" type="application/rss+xml"/>'
            f'<description>{esc(site["motto"])}</description><language>en</language>'
            + "".join(items) + "</channel></rss>\n")
+    check_public("docs/feed.xml", rss)
     (DOCS / "feed.xml").write_text(rss, encoding="utf-8")
     (DOCS / "feed").mkdir(exist_ok=True)
     (DOCS / "feed" / "index.html").write_text(rss, encoding="utf-8")

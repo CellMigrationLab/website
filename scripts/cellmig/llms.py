@@ -13,6 +13,7 @@ from datetime import date
 from .config import CONTENT, DATA, DOCS, LAB_FOUNDED, SITE_URL, load
 from .featured import Story
 from .ledger import Ledger, Record, software_list
+from .page import check_public
 from .people import Person, leader
 from .previews import preview_text
 from .profile import month_year, recent_talks
@@ -140,5 +141,7 @@ def llms_full(site: Record, featured: list[Story], ledger: Ledger, members: list
 def write_llms(site: Record, featured: list[Story], ledger: Ledger, members: list[Person],
                affiliations: list[Record], support: list[Record]) -> None:
     """Write docs/llms.txt and docs/llms-full.txt (copied to the site root)."""
-    (DOCS / "llms.txt").write_text(llms_txt(site, featured, members), encoding="utf-8")
-    (DOCS / "llms-full.txt").write_text(llms_full(site, featured, ledger, members, affiliations, support), encoding="utf-8")
+    for name, text in (("llms.txt", llms_txt(site, featured, members)),
+                       ("llms-full.txt", llms_full(site, featured, ledger, members, affiliations, support))):
+        check_public(f"docs/{name}", text)
+        (DOCS / name).write_text(text, encoding="utf-8")
