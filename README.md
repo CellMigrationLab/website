@@ -21,7 +21,7 @@ button (top right) that opens the right file.
 | Page | Edit |
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
-| Funding logos (home page) | which ones: things_done `ledger/registries/grants.yaml` (funders of active/awarded grants not yet ended); logo and link per ledger direct funder (`funders[].name`; co-funded grants have several) in `data/site.yaml` `funding`, `logo: null` for a text-only entry — a current funder without an entry stops the build; an entry that is no longer current is left out with a warning |
+| Current research support (home page) | which ones: things_done `ledger/registries/grants.yaml` (grants active/awarded and not ended, as of the sync); logo and link per direct funder (`funders[].name`) in `data/site.yaml` `funding` and per programme (`program`) in `programmes` (`logo: null` for text). Grouped by `ledger.support_list`: a funder with the programmes it alone funds; a joint award once, under its programme, with its co-funders. A current funder or programme without an entry stops the build; an entry that is no longer current is left out with a warning |
 | News (and the RSS feed) | automatic, from things_done: papers, preprints, keynotes, events, funding, positions and software since 2024 (`scripts/cellmig/news.py`) |
 | Join us (recruitment) | `content/join-us.md` |
 | Group leader profile (About us) | automatic, from things_done (`ledger/profile/`, `ledger/roles/`) |

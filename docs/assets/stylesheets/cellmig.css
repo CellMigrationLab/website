@@ -481,3 +481,13 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 /* News (generated from things_done) */
 .md-typeset .cm-talklist .cm-news__kind { margin: 0 .35rem 0 0; vertical-align: .1em; }
 .md-typeset ul.cm-news--home { max-width: 42rem; margin-left: auto; margin-right: auto; }
+
+/* Current research support (home): funder logos, with the programmes they fund
+   or a joint award's programme and co-funders underneath (ledger.support_list). */
+.md-typeset ul.cm-support { align-items: flex-start; }
+.md-typeset .cm-support__item { display: flex; flex-direction: column; align-items: center; gap: .5rem; max-width: 14rem; text-align: center; }
+.cm-support__logos { display: flex; align-items: center; justify-content: center; gap: 1.2rem; min-height: 3.6rem; }
+.md-typeset .cm-support__item--joint { max-width: 22rem; padding: .6rem 1rem; border: 1px solid var(--cm-line); border-radius: .4rem; }
+.md-typeset .cm-support__note { margin: 0; font-size: .64rem; line-height: 1.45; color: var(--cm-muted); }
+.md-typeset .cm-support__note a { color: inherit; text-decoration: underline; text-decoration-color: var(--cm-line); }
+.cm-support__programme img { display: block; max-height: 2rem; max-width: 8rem; margin: 0 auto; }

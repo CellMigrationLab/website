@@ -1,6 +1,6 @@
 """The home page (docs/index.md, rendered with overrides/home.html)."""
 
-from .components import citation, feature_card, logo_row, section_title
+from .components import citation, feature_card, logo_row, section_title, support_row
 from .config import HOME_FEATURED, UNCAPTIONED_ALT
 from .featured import Story, story_by_doi
 from .images import media
@@ -60,5 +60,5 @@ def page_home(site: Record, featured: list[Story], ledger: Ledger, lab: set[str]
     p.add("</ol>", '<p class="cm-more-link"><a href="publications/">All publications</a></p>', latest_news(news))
 
     p.add(band(bands[1]), section_title("Affiliations"), logo_row(affiliations),
-          section_title("Funding"), logo_row(funding))
+          section_title("Current research support", id_="funding"), support_row(funding))
     p.write()

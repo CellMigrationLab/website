@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 from cellmig import featured, ledger
 from cellmig.charts import lag_section
-from cellmig.components import badges, logo_row
+from cellmig.components import badges, logo_row, support_row
 from cellmig.pages_papers import publication_filter_kind
 from cellmig.page import Page
 from cellmig.people import is_lab_member, lab_names
@@ -182,16 +182,43 @@ class AffiliationTests(unittest.TestCase):
 
 
 class FundingTests(unittest.TestCase):
-    def test_current_funders_only_and_strict(self):
-        led = fake_ledger([])
-        led.grants = [{"funders": ["Wellcome Trust", "Chan Zuckerberg Initiative"], "current": True},   # co-funded
-                      {"funders": ["EMBO"], "current": False}]
-        ok = [entry("Wellcome Trust", "funder"), entry("Chan Zuckerberg Initiative", "funder", logo=None)]
-        self.assertEqual(ledger.funding_list(ok, led), ok)
-        with patch("builtins.print"):                  # EMBO no longer funds anything: left out, with a warning
-            self.assertEqual(ledger.funding_list(ok + [entry("EMBO", "funder")], led), ok)
-        with self.assertRaises(SystemExit):            # the co-funder CZI has no entry
-            ledger.funding_list(ok[:1], led)
+    def setUp(self):
+        self.led = fake_ledger([])
+        self.led.grants = [
+            {"title": "CoE", "funders": ["RCF"], "program": "CoE programme", "current": True},
+            {"title": "Project", "funders": ["RCF"], "current": True},
+            {"title": "EOSS", "funders": ["Wellcome", "CZI"], "program": "EOSS 6",
+             "program_cofunders": ["Kavli"], "current": True},                        # one joint award
+            {"title": "Old", "funders": ["EMBO"], "current": False}]
+        self.funders = [entry(n, "funder", logo=None) for n in ("RCF", "Wellcome", "CZI")]   # text: no image files
+        self.programmes = [entry("CoE programme", "program", logo=None), entry("EOSS 6", "program", logo=None)]
+
+    def test_grouped_by_meaning(self):
+        groups = ledger.support_list(self.funders, self.programmes, self.led)
+        rcf, eoss = groups
+        self.assertEqual([f["funder"] for f in rcf["logos"]], ["RCF"])                # RCF once,
+        self.assertEqual([p["program"] for p in rcf["programmes"]], ["CoE programme"])  # CoE beneath it
+        self.assertEqual([f["funder"] for f in eoss["logos"]], ["Wellcome", "CZI"])   # the joint award once,
+        self.assertEqual(eoss["title"]["program"], "EOSS 6")                         # under its programme,
+        self.assertEqual(eoss["cofunders"], ["Kavli"])                               # co-funder named
+        html = support_row(groups)
+        self.assertEqual(html.count('class="cm-support__item'), 2)
+        self.assertIn("Programme co-funder: Kavli", html)
+
+    def test_missing_entries_stop_the_build_and_stale_ones_are_left_out(self):
+        with self.assertRaises(SystemExit):            # CZI (a co-funder) has no entry
+            ledger.support_list(self.funders[:2], self.programmes, self.led)
+        with self.assertRaises(SystemExit):            # the EOSS programme has no entry
+            ledger.support_list(self.funders, self.programmes[:1], self.led)
+        with patch("builtins.print") as warn:          # EMBO funds nothing current
+            groups = ledger.support_list(self.funders + [entry("EMBO", "funder")], self.programmes, self.led)
+        self.assertEqual(len(groups), 2)
+        self.assertIn("no longer current", warn.call_args[0][0])
+
+    def test_joint_award_without_programme_stops_the_build(self):
+        self.led.grants[2] = {**self.led.grants[2], "program": None}
+        with self.assertRaises(SystemExit):
+            ledger.support_list(self.funders, self.programmes[:1], self.led)
 
     def test_logo_row_text_only_entry(self):
         html = logo_row([{"name": "ImmuDocs", "url": "https://example.org/", "logo": None}])
