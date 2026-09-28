@@ -39,7 +39,7 @@ themes:
     papers:
       - 10.64898/2026.09.02.749041   # PDAC: breaching endothelial barriers (preprint, current work)
       - 10.1016/j.devcel.2022.09.016 # MYO10-filopodia at pre-invasive tumour boundaries
-      - 10.1038/ncomms13297          # calcium channels, filopodia and cancer cell invasion
+      - 10.1038/s44318-025-00678-9   # FlowVision: cancer cell arrest on endothelial monolayers
 
   - title: Cell migration
     image: wp-content/uploads/2020/03/merged-1.gif
@@ -102,6 +102,7 @@ themes:
       - See [our software](software/) and [the datasets and models we share](datasets/).
     credit: "Image: Time projection illustrating the dynamics of focal adhesions in human endothelial cells."
     papers:
-      - 10.1038/s41467-021-22518-0   # ZeroCostDL4Mic (foundational: deep learning for everyone)
+      - 10.1038/s41592-024-02295-6   # DL4MicEverywhere (deep learning for microscopy, successor of ZeroCostDL4Mic)
       - 10.1371/journal.pbio.3002740 # CellTracksColab (analysis platform)
       - 10.1242/jcs.265152           # NucleiSky (recent tool)
+      - 10.1038/s41592-022-01507-1   # TrackMate 7 (tracking with deep-learning segmentation)
