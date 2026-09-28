@@ -50,6 +50,18 @@ class StructuredDataTests(unittest.TestCase):
         self.assertEqual(work["abstract"], "Line one. Line two.")
         self.assertEqual([i["position"] for i in crumbs["itemListElement"]], [1, 2, 3])
 
+    def test_no_lab_ownership_claim_on_papers(self):
+        """Featured papers, including ones from before the lab (2019), name their
+        authors but do not claim the current lab as their source (#30)."""
+        old = {**STORY, "year": 2016, "pubs": [{**STORY["pubs"][0], "year": 2016}]}
+        for story in (STORY, old):
+            with self.subTest(year=story["year"]):
+                work = article(story, "https://example.org/portfolio/a/", None)["@graph"][0]
+                self.assertNotIn("sourceOrganization", work)
+                self.assertNotIn("publisher", work)
+                self.assertEqual([a["name"] for a in work["author"]], ["Ana B", "Guillaume Jacquemet"])
+                self.assertNotIn("#lab", json.dumps(work))
+
     def test_scholar_tags(self):
         tags = scholar_tags(STORY)
         self.assertIn(["citation_doi", "10.1/x"], tags)
