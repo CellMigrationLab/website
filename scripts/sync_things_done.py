@@ -56,7 +56,7 @@ PUBLICATION_FIELDS = (
     "abstract", "peer_reviewed", "open_access_status", "related_dois",
 )
 SOFTWARE_FIELDS = (
-    "id", "title", "start_date", "github_repo_url", "description", "related_publication_dois",
+    "id", "title", "start_date", "github_repo_url", "description", "summary", "related_publication_dois",
 )
 DATASET_FIELDS = (
     "title", "dataset_type", "start_date", "repository_url",

@@ -1,178 +1,74 @@
 # How each software project looks on https://cellmig.org/software/
 #
-# The list of projects, their names, years, GitHub links and paper DOIs come
-# from the things_done ledger (data/things_done/software.yaml, synced
-# automatically). This file only adds the website presentation:
+# The list of projects and their facts come from the things_done ledger
+# (ledger/registries/software.yaml, synced to data/things_done/software.yaml):
+# name, year, GitHub link, paper DOIs (a preprint is followed to its journal
+# version once published) and the text shown next to the picture (`summary`).
+# This file only adds the look; giving a fact here stops the build.
 #
-#   id:      the project id in the ledger (ledger/registries/software.yaml)
-#   fit:     (optional) contain for a logo, screenshot or drawing (shown whole,
-#            with a margin); pictures fill the tile (cover) otherwise
+#   id:      the project id in the ledger
 #   image:   picture or logo shown next to the text (a .gif is played as a video)
 #   video:   short video file instead of a picture (in docs/assets/media/)
-#   text:    longer description for the website (the ledger's one-line
-#            description is used when this is missing)
-#   paper:   link to the paper, when the ledger has no related DOI
+#   fit:     (optional) contain for a logo, screenshot or drawing (shown whole,
+#            with a margin); pictures fill the tile (cover) otherwise
 #   links:   extra links shown under the text
 #
 # The page is newest year first and, within a year, in this file's order. A
-# project in the ledger but not here is still shown, with its ledger
-# description. A project that is only here (no ledger id) needs `title`,
-# `year` and `github`/`paper` itself.
+# project in the ledger but not here is still shown, as text only; a new
+# project is added to the ledger, not here.
 
 - id: nucleisky
   image: wp-content/uploads/2026/07/gemini_generated_image_kc5ezfkc5ezfkc5e.png
-  text: >-
-    NucleiSky registers microscopy images in 2D and 3D by matching the spatial arrangement of
-    segmented nuclei. It can align partial fields of view, regions of interest or tissue subvolumes
-    to larger reference images without relying on pixel-intensity similarity. It can be used through
-    Google Colab, a desktop interface or directly from Python.
 
 - id: labconstrictor
   image: wp-content/uploads/2026/07/comic-e1782918385802.png
   fit: contain
-  paper: https://arxiv.org/abs/2603.10704
-  text: >-
-    LabConstrictor turns Jupyter notebooks into installable desktop applications. It lets
-    researchers share notebook-based analysis workflows with users who do not have Python, pip or a
-    terminal set up. Projects remain versioned and reproducible, while LabConstrictor handles
-    packaging, cross-platform installers and the application interface.
 
 - id: ezinput
   image: wp-content/uploads/2026/07/logo_white_bg.png
   fit: contain
-  paper: https://arxiv.org/abs/2601.08859
-  text: >-
-    EZInput is a Python library for building simple interfaces for scientific computing workflows.
-    Inputs are defined once and can then be used across Jupyter notebooks, Google Colab and terminal
-    applications. It supports validated inputs, saved sessions and shareable parameter files, making
-    computational workflows easier to run repeatedly with consistent settings.
 
 - id: rxiv-maker
-  title: Rxiv-Maker
   image: wp-content/uploads/2026/07/logo-rxiv-maker.png
   fit: contain
-  paper: https://arxiv.org/abs/2508.00836
-  text: >-
-    Rxiv-Maker is a framework for writing scientific manuscripts in Markdown and generating
-    publication-ready outputs. It handles citations, figures, LaTeX typesetting, executable code
-    blocks, DOCX export and preprint submission packages. The aim is to keep manuscripts, figures,
-    data-derived results and version history in sync throughout the writing process.
 
 - id: sred
-  title: SReD
   image: wp-content/uploads/2026/07/logo_small.png
   fit: contain
-  text: >-
-    SReD, the Structural Repetition Detector, is an ImageJ/Fiji plugin for detecting repetitive
-    structures in microscopy images. It measures local structural similarity to generate maps of
-    recurring patterns across different spatial scales. The method does not require labelled training
-    data and applies to a range of biological structures and imaging modalities.
 
 - id: photofitt
   image: wp-content/uploads/2024/08/photofitt-logo.png
   fit: contain
-  text: >-
-    PhotoFiTT measures phototoxicity during live-cell microscopy. It combines a standardised imaging
-    protocol with image analysis that quantifies changes in mitotic timing, cell size and cellular
-    activity after light exposure. The framework helps compare imaging conditions and identify
-    settings that preserve cell health while still producing useful images.
 
 - id: celltrackscolab
   image: wp-content/uploads/2024/01/celltrackscolab_logo.png
   fit: contain
-  github: https://github.com/CellMigrationLab/CellTracksColab
-  text: >-
-    CellTracksColab brings tracking data from multiple movies, conditions and experiments into a
-    single analysis workflow in Google Colab. It can be used to inspect individual tracks, compare
-    conditions, analyse movement and spatial relationships, and explore high-dimensional tracking
-    features using dimensionality reduction and clustering. The notebooks make these analyses
-    accessible without requiring users to build an analysis pipeline from scratch.
 
 - id: nanopyx
   image: wp-content/uploads/2024/01/259983552-ef7aa814-16ba-4947-a69f-1f096d70370e.png
   fit: contain
-  paper: https://www.biorxiv.org/content/10.1101/2023.08.13.553080v2
-  text: >-
-    NanoPyx is a Python library for analysing light-microscopy and super-resolution images. It builds
-    on methods originally developed in the [NanoJ](https://github.com/HenriquesLab/NanoJ-Core)
-    ecosystem and includes tools developed by the
-    [Henriques Laboratory](https://henriqueslab.org/) and collaborators.
 
 - id: dl4miceverywhere
   image: wp-content/uploads/2024/01/dl4miceverywhere-logo.png
   fit: contain
-  paper: https://doi.org/10.1038/s41592-024-02295-6
-  text: >-
-    DL4MicEverywhere makes deep-learning workflows for bioimage analysis portable across different
-    computing environments. It provides interactive Jupyter notebooks with graphical interfaces and
-    uses Docker [containers](https://hub.docker.com/repository/docker/henriqueslab/dl4miceverywhere)
-    to reproduce the required software environment. Workflows can run on laptops, workstations,
-    high-performance computing systems or cloud infrastructure. DL4MicEverywhere extends
-    [ZeroCostDL4Mic](https://github.com/HenriquesLab/ZeroCostDL4Mic) beyond Google Colab while keeping
-    the notebook-based interface.
 
 - id: esrrf
   video: assets/media/esrrf.mp4
-  text: >-
-    eSRRF is a fluorescence-fluctuation method for super-resolution microscopy. It reconstructs
-    higher-resolution images from image sequences and includes tools for selecting reconstruction
-    parameters. The parameter-selection approach helps users balance resolution, image quality and
-    reconstruction artefacts across different datasets.
 
 - id: fast4dreg
   video: assets/media/fast4dreg-drift.mp4
-  paper: https://doi.org/10.1242/jcs.260728
-  text: >-
-    Fast4DReg is a Fiji plugin for correcting drift in 2D and 3D time-lapse microscopy datasets. It
-    uses intensity projections and cross-correlation to estimate displacement along the x-, y- and
-    z-axes, then corrects each frame. It can also align channels in multichannel 2D and 3D datasets.
 
 - id: trackmate
   video: assets/media/fast4dreg-glioblastoma.mp4
-  paper: https://doi.org/10.1038/s41592-022-01507-1
-  text: >-
-    [TrackMate](https://imagej.net/plugins/trackmate/index) is a Fiji plugin for detecting and
-    tracking objects in microscopy images. Our work has helped extend TrackMate to modern segmentation
-    methods, including machine-learning and deep-learning detectors such as StarDist, and to workflows
-    for tracking cells and subcellular structures.
   links:
     - label: TrackMate documentation
       url: https://imagej.net/plugins/trackmate/index
 
 - id: zerocostdl4mic
-  title: ZeroCostDL4Mic
   video: assets/media/zerocostdl4mic.mp4
-  text: >-
-    [ZeroCostDL4Mic](https://github.com/HenriquesLab/ZeroCostDL4Mic/wiki) provides notebook-based
-    deep-learning workflows for microscopy that can run in Google Colab without local software
-    installation. The notebooks cover common bioimage-analysis tasks including segmentation,
-    denoising, restoration, super-resolution and image-to-image translation using established
-    deep-learning models.
-
-- title: SRRF TFM
-  year: 2020
-  video: assets/media/srrf-tfm.mp4
-  paper: https://doi.org/10.1021/acs.nanolett.9b04083
-  text: >-
-    SRRF-TFM combines fluorescence-fluctuation super-resolution microscopy with traction-force
-    microscopy. Increasing the number of detectable fluorescent beads improves both bead tracking and
-    the spatial sampling of the force field. The approach can be used with spinning-disk confocal or
-    widefield microscopy and analysed with existing traction-force microscopy software.
 
 - id: filomap
-  title: FiloMap
   image: wp-content/uploads/2019/08/vasp.jpg
-  paper: https://doi.org/10.1016/j.cub.2018.11.053
-  text: >-
-    FiloMap consists of ImageJ and R scripts for measuring where proteins localise along filopodia.
-    The accompanying protocols describe how to generate filopodia maps and compare the localisation
-    patterns of multiple proteins.
 
 - id: filoquant
   video: assets/media/filomap-dcis-collagen.mp4
-  paper: https://doi.org/10.1083/jcb.201704045
-  text: >-
-    FiloQuant is a Fiji plugin for detecting and measuring filopodia in microscopy images. It
-    measures properties including filopodia number, length and density. A step-by-step
-    [methods chapter](https://doi.org/10.1007/978-1-4939-9686-5_16) describes workflows for analysing
-    both isolated filopodia and filopodia-like structures in more complex samples.

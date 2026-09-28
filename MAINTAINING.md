@@ -49,7 +49,7 @@ can re-run it later (*Run workflow*, *refresh_cache* `true`).
 | **A new paper or preprint** | Run the *Fetch publications from ORCID* action and review and merge the pull request it opens (or add one DOI with `python tools/fetch_publications.py --doi …`). Then check what the import cannot know: `status` (preprint, in press), and `me.corresponding_author` for papers where you are corresponding author, since that is what makes a paper Featured research. The date, open-access status and author spellings are filled in by the import. |
 | **Someone joins, changes role or leaves** | `ledger/profile/lab_members.yaml`: add them with a `role`; move the old role to `previous_roles`; set `status: alumni` when they leave. |
 | **A new grant, or one starts or ends** | `ledger/registries/grants.yaml` (`status`, dates, funders, programme). A new funder or programme also needs its logo here (below). |
-| **New software or dataset** | `ledger/registries/software.yaml` or `datasets.yaml`, with `related_publication_dois` so its paper page lists it. |
+| **New software or dataset** | `ledger/registries/software.yaml` or `datasets.yaml`. Each needs at least one paper in `related_publication_dois` (a preprint DOI is fine: the site links the journal version once it is in the ledger); software also needs `github_repo_url` and a `summary`, the text shown on the Software page. |
 | **A new affiliation, role or degree** | `ledger/profile/` or `ledger/roles/`. A new affiliation also needs its logo here (below). |
 | **The same co-author under two spellings** | `ledger/profile/coauthor_names.yaml` (`keep` / `replace`), then `python tools/coauthor_names.py --apply`. |
 | **A preprint not paired with its journal version** | `report/config/preprint_links_overrides.yaml`. |
@@ -63,7 +63,7 @@ but does not update, and the failed run names the file to fix (below).
 | --- | --- | --- |
 | **A new corresponding-author paper** reaches the site | Add it to `data/featured.yaml` with `area: biology` or `area: methods`, a picture (`image:`) and, if it has no abstract, a `summary:`; or `hide: true` to leave it out. | Yes, without an `area` |
 | **A new member** | Photo `data/photos/<id>.jpg` (their roster id without `member-`); optional links and one-liner in `data/members/<id>.yaml`. Members can send these with the *Lab member profile* issue form. | No: initials are shown until there is a photo |
-| **A new software project** | Picture or video and text in `data/software.yaml` (by its ledger `id`). | No: it shows as a text-only tile |
+| **A new software project** | Picture or video (and `fit`, extra `links`) in `data/software.yaml`, by its ledger `id`. Its name, text and links come from the ledger. | No: it shows as a text-only tile |
 | **A new funder, programme or affiliation** | Its logo and link in `data/site.yaml` (`funding`, `programmes` or `affiliations`). | Yes |
 | **Any new image** (gallery, research, featured, software, pages) | An entry in `data/media.yaml` with its rights and creators. | Yes |
 | **Research themes and selected papers** | `data/research.yaml`. | No |

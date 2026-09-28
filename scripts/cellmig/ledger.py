@@ -87,6 +87,25 @@ class Ledger:
         """The preprint of a journal paper, when the ledger links one."""
         return next((r for r in self.related(rec) if r.get("status") == "preprint"), None)
 
+    def papers(self, dois: list[str], where: str) -> list[Record]:
+        """The papers behind `dois`, each preprint replaced by its journal version
+        once the ledger links one (so a link made to a preprint follows it to
+        publication); duplicates dropped, order kept. A DOI not in the ledger
+        stops the build."""
+        out: list[Record] = []
+        for doi in dois:
+            rec = self.published_version(self.require(doi, where))
+            if rec not in out:
+                out.append(rec)
+        return out
+
+    def dataset_papers(self, d: Record) -> list[Record]:
+        """The papers of a dataset (Ledger.papers); every dataset needs one."""
+        if not d.get("related_publication_dois"):
+            fail(f"dataset {d['title']!r} has no paper: add its DOI to related_publication_dois "
+                 "in the things_done registry (ledger/registries/datasets.yaml)")
+        return self.papers(d["related_publication_dois"], f"things_done dataset {d['title']!r}")
+
     def family_dois(self, doi: str) -> set[str]:
         """Lower-case DOIs of a paper and all its versions."""
         rec = self.require(doi, "ledger")
@@ -108,32 +127,44 @@ class Ledger:
         return shown
 
 
+# data/software.yaml keys: the look of a project. Its facts (name, year, code,
+# papers, text) come from the things_done software registry.
+SOFTWARE_LOOK = {"id", "image", "video", "fit", "links"}
+
+
 def software_list(ledger: Ledger) -> list[Record]:
-    """Software projects: things_done (title, year, code link, description,
-    papers) merged with data/software.yaml (picture or video, fit, text, extra links, and
-    optional overrides). An entry in data/software.yaml without an `id` is a
-    website-only project; an entry whose `id` is not in the ledger is an error.
-    Newest first; within a year, in the order of data/software.yaml."""
+    """Software projects: things_done (title, year, code link, papers, summary
+    text) merged with data/software.yaml (picture or video, fit, extra links).
+    Every project has a code link and at least one paper in the ledger;
+    `papers` are those papers, a preprint replaced by its journal version once
+    there is one. An entry in data/software.yaml without a ledger `id`, or with
+    a key that is not about the look (a fact such as `title` or `text`), stops
+    the build. Newest first; within a year, in the order of data/software.yaml."""
     presentation = load(DATA / "software.yaml") or []
-    by_id = {s["id"]: (i, s) for i, s in enumerate(presentation) if s.get("id")}
-    unknown = set(by_id) - {r["id"] for r in ledger.software}
+    for s in presentation:
+        extra = sorted(set(s) - SOFTWARE_LOOK)
+        if extra:
+            fail(f"data/software.yaml ({s.get('id') or s.get('title')}): remove {extra}; this file only gives a "
+                 "project's look (image, video, fit, links). Its name, year, code link, papers and text come "
+                 "from the things_done software registry (ledger/registries/software.yaml)")
+    by_id = {s.get("id"): (i, s) for i, s in enumerate(presentation)}
+    unknown = sorted(str(k) for k in set(by_id) - {r["id"] for r in ledger.software})
     if unknown:
-        fail(f"data/software.yaml: ids not in the things_done software registry: {sorted(unknown)}")
+        fail(f"data/software.yaml: ids not in the things_done software registry: {unknown}")
     out = []
     for rec in ledger.software:
-        pos, extra = by_id.get(rec["id"], (999, {}))
-        s = dict(extra)
-        s.setdefault("title", rec["title"])
-        s["year"] = s.get("year") or year_of(rec["start_date"])      # start_date, github_repo_url and
-        s.setdefault("github", rec["github_repo_url"])                 # description are required in
-        s.setdefault("text", rec["description"])                       # the things_done registry
-        s.setdefault("dois", rec.get("related_publication_dois") or [])
-        s["id"], s["_pos"] = rec["id"], pos
+        absent = [k for k in ("summary", "related_publication_dois") if not rec.get(k)]
+        if absent:
+            fail(f"data/things_done/software.yaml ({rec['id']}) has no {absent}; "
+                 "add them in things_done and re-run scripts/sync_things_done.py")
+        pos, look = by_id.get(rec["id"], (999, {}))
+        s = {k: v for k, v in look.items() if k != "id"}
+        s.update(id=rec["id"], title=rec["title"], year=year_of(rec["start_date"]),   # all required in
+                 github=rec["github_repo_url"], text=rec["summary"],                  # the registry
+                 dois=rec["related_publication_dois"], _pos=pos)
+        s["papers"] = ledger.papers(s["dois"], f"things_done software {s['title']!r}")
         out.append(s)
-    for pos, s in enumerate(presentation):
-        if not s.get("id"):
-            out.append({"dois": [], **s, "_pos": pos})
-    out.sort(key=lambda s: (-(s.get("year") or 0), s["_pos"], s["title"].casefold()))
+    out.sort(key=lambda s: (-s["year"], s["_pos"], s["title"].casefold()))
     return out
 
 
