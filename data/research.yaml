@@ -16,15 +16,22 @@ videos:
     youtube: 6itvJlRl5YE
     start: 13
 
+intro: >-
+  We study how cells move and interact with their environment, with a particular focus on cancer,
+  vascular biology and filopodia, using microscopy and quantitative image analysis.
+
 themes:
   - title: Cancer metastasis
     color: grey
     image: wp-content/uploads/2019/08/cna35-merged-2.gif
-    lead: Our research aims to elucidate the mechanisms by which cancer cells spread through the body.
+    lead: We study how cancer cells spread through the body and establish themselves at distant sites.
     text:
       - Cancer caused an estimated 9.7 million deaths worldwide in 2022
         ([IARC](https://www.iarc.who.int/news-events/global-cancer-burden-growing-amidst-mounting-need-for-services/)).
-      - Most deaths from solid tumours involve metastasis, the spread of cancer cells to distant organs.
+      - Metastasis, the spread of cancer cells from a primary tumour to distant organs, is responsible
+        for much of the mortality associated with solid cancers. We investigate the cellular
+        mechanisms that allow cancer cells to migrate, interact with extracellular matrices and blood
+        vessels, and complete the different steps of the metastatic cascade.
     credit: "Video: Cancer cells (purple) invade through collagen (green). Credit: Guillaume Jacquemet and Emilia Peuhu"
     papers:
       - 10.1038/s44318-025-00678-9
@@ -34,31 +41,33 @@ themes:
   - title: Cell migration
     color: mint
     image: wp-content/uploads/2020/03/merged-1.gif
-    lead: Our research aims to elucidate the molecular mechanisms by which cells move.
+    lead: We investigate the molecular machinery that allows cells to move.
     text:
-      - Cell migration is a fundamental physiological process involved in embryonic development,
-        tissue homeostasis, immune surveillance, and wound healing.
-      - For cells to migrate, they must interact with their environment using adhesion receptors,
-        such as integrins, and form specialized adhesion complexes that mediate responses to
-        different extracellular cues.
+      - Cell migration is essential for embryonic development, tissue maintenance, immune
+        surveillance and wound healing, but it also contributes to cancer invasion and metastasis.
+      - Migrating cells continuously interact with their surroundings. We study how adhesion
+        receptors such as integrins, together with the cytoskeleton and adhesion complexes, allow
+        cells to sense extracellular cues, generate force and change direction.
     credit: "Video: Cancer cell (green) migrating on cell-derived matrices (magenta). Credit: Guillaume Jacquemet"
     papers:
       - 10.1016/j.celrep.2021.109716
       - 10.1042/EBC20190012
       - 10.1038/nprot.2017.107
 
-  - title: How cancer cells and immune cells interact with the vasculature
+  - title: How cancer and immune cells interact with blood vessels
     color: sky
     image: wp-content/uploads/2024/08/rgb.jpg
-    lead: We study how cancer cells and immune cells interact with blood vessels because these
-      encounters strongly influence how tumors grow, spread, and respond to treatment.
+    lead: We study how cancer cells and immune cells interact with the vascular endothelium.
     text:
-      - Using microfluidic “vessel-on-a-chip” systems, we can recreate tiny blood vessels in the lab
-        and watch cells move and communicate in a controlled, lifelike environment. With transparent
-        zebrafish embryos, we can observe these same processes inside a living body in real time.
-      - As part of the Center of Excellence
+      - These interactions influence how cancer cells arrest in the circulation, cross vessel walls
+        and enter new tissues. We use microfluidic systems to reproduce defined aspects of blood flow
+        and endothelial barriers in vitro, allowing us to image these events with high spatial and
+        temporal resolution.
+      - We complement these experiments with transparent zebrafish embryos, where we can observe
+        cell–vessel interactions in a living organism. As part of the Research Council of Finland
+        Centre of Excellence
         [IMMENs](https://www.helsinki.fi/en/researchgroups/immune-endothelial-interfaces), we also
-        study lymphatics.
+        investigate immune–endothelial interactions and lymphatic vessels.
     credit: "Picture: A cancer cell (magenta) inside the vasculature of a zebrafish embryo. Credit: Guillaume Jacquemet"
     papers:
       - 10.1083/jcb.202310030
@@ -67,12 +76,13 @@ themes:
   - title: Filopodia
     color: orange
     image: wp-content/uploads/2019/08/dnsecwawsaeb1il.jpg
-    lead: Our research aims to unravel how cells can sense their environment.
+    lead: We study how filopodia allow cells to explore and respond to their surroundings.
     text:
-      - Filopodia are actin-rich “antenna-like” protrusions that are responsible for constantly
-        probing the cellular environment.
-      - In cancer cells, filopodia contribute to single-cell migration and invasion, and
-        filopodia-like structures have been implicated in cancer cell survival at metastatic sites.
+      - Filopodia are thin, actin-rich protrusions that cells use to probe their environment. They
+        contain specialised adhesion and signalling machinery and can influence cell migration,
+        invasion and interactions with extracellular matrices.
+      - We investigate how filopodia are assembled, how proteins are organised within them, and how
+        they contribute to cancer-cell behaviour and tissue invasion.
     credit: "Picture: Cancer cell labeled for F-actin. Credit: Guillaume Jacquemet"
     papers:
       - 10.64898/2026.02.09.703982
@@ -82,10 +92,14 @@ themes:
   - title: Image analysis
     color: amber
     image: wp-content/uploads/2019/08/ctrl.jpg
-    lead: We use multiple microscopy approaches in our work and continuously develop tools for image
-      analysis.
+    lead: We develop image-analysis tools to extract quantitative information from microscopy data.
     text:
-      - Check out [our software](software/) and [the datasets and models we share](datasets/).
+      - Modern microscopy can generate large, complex datasets that are difficult to analyse
+        reproducibly. We develop and contribute to open tools for segmentation, tracking, image
+        registration, super-resolution microscopy and high-dimensional data exploration.
+      - Many of these tools are designed for biologists who do not routinely program, while remaining
+        flexible enough for more advanced workflows.
+      - See [our software](software/) and [the datasets and models we share](datasets/).
     credit: "Image: Time projection illustrating the dynamics of focal adhesions in human endothelial cells. Credit: Martina Lerche and Guillaume Jacquemet"
     papers:
       - 10.1371/journal.pbio.3002740

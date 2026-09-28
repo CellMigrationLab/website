@@ -1,15 +1,15 @@
 # Site-wide content: home page, footer, contact details.
 
 name: Cell Migration Lab
-motto: We study cell migration in health and diseases.
+motto: We study cell migration in health and disease.
 tagline: Cell biology, microscopy, and image analysis.
-welcome: Welcome to our lab website.
 hero:
   image: wp-content/uploads/2026/09/max_ctrl_7-processed.czi-rgb.png
 intro: >-
-  Our research aims to elucidate the mechanisms by which cells move and interact with their
-  environment. We use multiple microscopy approaches and continuously develop tools for image
-  analysis.
+  We study how cells move, interact with their surroundings, and cross tissue barriers. We combine
+  cell biology with microscopy and quantitative image analysis, and we develop tools that make
+  complex imaging experiments easier to analyse and share.
+
 
 # Full-width microscopy images between the sections of the home page (two are used).
 bands:
