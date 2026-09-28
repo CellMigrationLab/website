@@ -451,6 +451,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-toplist__n:hover { text-decoration: underline; }
 .cm-toplist__years { color: var(--cm-muted); font-size: .62rem; font-variant-numeric: tabular-nums; }
 @media (max-width: 36rem) { [dir] .md-typeset .cm-toplist > li { grid-template-columns: minmax(0, 1fr) 4.2rem; } .cm-toplist__bar, .cm-toplist__years { display: none; } }
+.cm-map { max-width: 40rem; margin: 0 auto; }   /* compact: the map does not need the full wide column */
 .cm-map__svg { display: block; width: 100%; height: auto; }
 .cm-map__svg path { fill: #ececeb; stroke: #fff; stroke-width: .6; }
 .cm-map__svg path.cm-map__on { cursor: pointer; }
