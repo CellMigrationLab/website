@@ -18,8 +18,10 @@
     if (toggle && burger) {
       const sync = () => burger.setAttribute("aria-expanded", toggle.checked ? "true" : "false");
       toggle.addEventListener("change", sync);
+      // Space opens the menu here; Enter already works (the theme turns Enter on a
+      // focused label into a click), so handling it too would toggle twice.
       burger.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle.checked = !toggle.checked; sync(); }
+        if (e.key === " ") { e.preventDefault(); toggle.checked = !toggle.checked; sync(); }
       });
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && toggle.checked) { toggle.checked = false; sync(); burger.focus(); }
@@ -51,7 +53,7 @@
     const loops = document.querySelectorAll("video.cm-loop");
     if (!loops.length) return;
     if (reduceMotion) {
-      loops.forEach((v) => { v.removeAttribute("autoplay"); v.pause(); v.controls = true; });
+      loops.forEach((v) => { v.pause(); v.controls = true; });
       return;
     }
     if (!("IntersectionObserver" in window)) {   // old browsers: just play (the HTML has no autoplay)
@@ -141,7 +143,7 @@
     apply();
   }
 
-  // Before/after image sliders (image analysis page)
+  // Tooltips on the charts and the map (Lab in numbers): hover, focus or tap
   function initChartTips() {
     document.querySelectorAll(".cm-lag__plot, .cm-bars, .cm-map").forEach((box) => {
       const tip = box.querySelector(".cm-chart-tip");

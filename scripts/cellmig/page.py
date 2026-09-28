@@ -22,6 +22,11 @@ def share_image(site_path: str | None) -> str | None:
     return share_jpeg(site_path)
 
 
+def curly_quotes(text: str) -> str:
+    """Straight double quotes -> “ ”, so the text is safe inside an HTML attribute."""
+    return re.sub(r'"([^"]*)"', "“\\1”", text).replace('"', "”")
+
+
 class Page:
     """Collects HTML/Markdown chunks and writes docs/<path> with front matter.
 
@@ -33,10 +38,12 @@ class Page:
     def __init__(self, path: str, **meta: object) -> None:
         self.path = path                      # e.g. "portfolio/cdm.md"
         meta["image"] = share_image(meta.get("image"))
+        if meta.get("description"):   # the theme prints it unescaped in <meta content="...">
+            meta["description"] = curly_quotes(str(meta["description"]))
         self.meta = {k: v for k, v in meta.items() if v not in (None, "", [])}
         self.parts: list[str] = []
         # Zensical rewrites href/src in raw HTML as paths relative to the
-        # Markdown file; other attributes (srcset, poster, data-full) are used
+        # Markdown file; other attributes (srcset, poster) are used
         # as they are, so they must be relative to the page's final URL,
         # which is one level deeper for every page except index.md.
         self.depth_file = path.count("/")
@@ -62,12 +69,12 @@ class Page:
         self.parts.extend(chunks)
 
     def fix_links(self, text: str) -> str:
-        """Make href/src/poster/data-full/srcset site paths relative to this page."""
+        """Make href/src/poster/srcset site paths relative to this page."""
         def repl(m: re.Match) -> str:
             attr, url = m.group(1), m.group(2)
             if is_external(url) or url.startswith(("../", "./")):
                 return m.group(0)
-            return f'{attr}="{self.u(url, final_url=attr in ("poster", "data-full"))}"'
+            return f'{attr}="{self.u(url, final_url=attr == "poster")}"'
 
         def repl_srcset(m: re.Match) -> str:
             items = []
@@ -77,7 +84,7 @@ class Page:
             return f'srcset="{", ".join(items)}"'
 
         text = re.sub(r'\bsrcset="([^"]*)"', repl_srcset, text)
-        return re.sub(r'\b(href|src|poster|data-full)="([^"]*)"', repl, text)
+        return re.sub(r'\b(href|src|poster)="([^"]*)"', repl, text)
 
     def write(self) -> None:
         """Write docs/<path> (front matter + body)."""

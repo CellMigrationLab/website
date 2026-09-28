@@ -1,15 +1,8 @@
 # Copied by scripts/sync_things_done.py from things_done/report/generated/publications/preprint_lag.json.
 # Do not edit by hand: change things_done instead, the website updates itself.
-generated_at: '2026-09-26T17:54:59Z'
 summary:
   pairs: 34
-  unresolved: 0
-  median_days: 317.5
   median_months: 10.4
-  mean_days: 366.7
-  mean_months: 12.0
-  min_days: 46
-  max_days: 1239
 pairs:
 - preprint_doi: 10.1101/055210
   published_doi: 10.7554/elife.18124

@@ -33,9 +33,14 @@ def papers_per_year(records: list[Record]) -> str:
             f'aria-label="Papers per year">{"".join(parts)}</svg><div class="cm-chart-tip" hidden></div></div>')
 
 
+def _known(date: str, precision: str) -> str:
+    """A lag-report date shown only as precisely as it is known."""
+    return {"day": date[:10], "month": date[:7], "year": date[:4]}[precision]
+
+
 def _is_exact(row: Record) -> bool:
     """Both dates known to the day."""
-    return row.get("preprint_date_precision") == "day" and row.get("published_date_precision") == "day"
+    return row["preprint_date_precision"] == "day" and row["published_date_precision"] == "day"
 
 
 def _lag_dots(rows: list[Record], median_months: float) -> str:
@@ -80,10 +85,11 @@ def lag_section(pairs: list[Record], summary: Record) -> str:
     median = summary["median_months"]
     rows = sorted(pairs, key=lambda r: r["published_date"], reverse=True)
     table = "".join(
-        f'<tr><td>{esc(r["published_title"])}</td><td>{r["preprint_date"]}</td>'
-        f'<td>{r["published_date"]}</td><td>{r["gap_days"] / DAYS_PER_MONTH:.1f}</td></tr>' for r in rows)
+        f'<tr><td>{esc(r["published_title"])}</td><td>{_known(r["preprint_date"], r["preprint_date_precision"])}</td>'
+        f'<td>{_known(r["published_date"], r["published_date_precision"])}</td>'
+        f'<td>{r["gap_days"] / DAYS_PER_MONTH:.1f}</td></tr>' for r in rows)
     approx = sum(1 for r in rows if not _is_exact(r))
-    note = f" Hollow dots ({approx}): one of the two dates is only known to the month." if approx else ""
+    note = f" Hollow dots ({approx}): one of the two dates is only known to the month or year." if approx else ""
     return (f'<div class="cm-lag">'
             f'<div class="cm-lag__head"><p class="cm-lag__hero"><strong>{median:.1f}</strong> months</p>'
             f'<p><span class="cm-lag__title">Median time from preprint to journal</span>'

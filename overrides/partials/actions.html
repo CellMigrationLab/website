@@ -1,7 +1,10 @@
-{#- Same as the theme's actions.html, but a page can point its edit button
-    somewhere else with `edit_url:` in its front matter (used by the
-    pages generated from data/, whose source is a YAML file). -#}
-{% set edit_url = page.meta.edit_url or page.edit_url %}
+{#- Same as the theme's actions.html, but the edit button goes to the page's
+    `edit_url:` (front matter, set by scripts/cellmig for every page with a
+    public source file: data/*.yaml or content/*.md). Pages generated from
+    the private things_done ledger (publications, datasets, numbers, news)
+    have none, so they get no button: the theme's default would link to a
+    generated, git-ignored docs/*.md file. -#}
+{% set edit_url = page.meta.edit_url %}
 {% if edit_url %}
   {% if "content.action.edit" in features %}
     <a href="{{ edit_url }}" title="{{ lang.t('action.edit') }}" class="md-content__button md-icon" rel="edit">

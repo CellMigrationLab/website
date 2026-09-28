@@ -21,11 +21,11 @@ button (top right) that opens the right file.
 | Page | Edit |
 | --- | --- |
 | Home (tagline, intro, images, logos, footer, contact) | `data/site.yaml` |
-| Funding logos (home page) | which ones: things_done `ledger/registries/grants.yaml` (funders of active/awarded grants not yet ended); logo and link per ledger direct funder (`funders[].name`; co-funded grants have several) in `data/site.yaml` `funding`, `logo: null` for a text-only entry — the build stops if the two disagree |
+| Funding logos (home page) | which ones: things_done `ledger/registries/grants.yaml` (funders of active/awarded grants not yet ended); logo and link per ledger direct funder (`funders[].name`; co-funded grants have several) in `data/site.yaml` `funding`, `logo: null` for a text-only entry — a current funder without an entry stops the build; an entry that is no longer current is left out with a warning |
 | News (and the RSS feed) | automatic, from things_done: papers, preprints, keynotes, events, funding, positions and software since 2024 (`scripts/cellmig/news.py`) |
 | Join us (recruitment) | `content/join-us.md` |
 | Group leader profile (About us) | automatic, from things_done (`ledger/profile/`, `ledger/roles/`) |
-| Affiliations (home page and footer) | which ones: things_done `ledger/profile/affiliations.yaml` (current = no end date, or one not yet passed); logo and link per ledger `id` in `data/site.yaml` `affiliations` — the build stops if the two disagree |
+| Affiliations (home page and footer) | which ones: things_done `ledger/profile/affiliations.yaml` (current = no end date, or one not yet passed); logo and link per ledger `id` in `data/site.yaml` `affiliations` — a current affiliation without an entry stops the build; an entry that is no longer current is left out with a warning |
 | Research | `data/research.yaml` |
 | Featured research (8 newest on the home page, all on `/featured-research/`, one page each under `/portfolio/`) | automatic: every paper where Guillaume is corresponding author in things_done, and only those; pictures and page addresses in `data/featured.yaml` (`hide: true` to leave one out) |
 | Publications, latest papers | automatic, from things_done |
@@ -67,7 +67,8 @@ stops the build with a message instead of being silently ignored (after a
 name change in the roster, rename the files too).
 
 Members can send a photo and links with the **Lab member profile** issue form
-linked at the bottom of the members page.
+(`.github/ISSUE_TEMPLATE/lab-member.yml`: *New issue* → *Lab member profile*;
+it is not linked from the public site).
 
 ### Pictures
 

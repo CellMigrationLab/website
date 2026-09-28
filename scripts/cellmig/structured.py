@@ -19,7 +19,7 @@ from typing import Any
 from .config import LAB_FOUNDED, SITE_URL
 from .featured import Story
 from .ledger import Record
-from .people import Person
+from .people import Person, leader
 from .text import md
 
 LAB_ID = f"{SITE_URL}#lab"
@@ -55,7 +55,7 @@ def organization(site: Record, affiliations: list[Record], members: list[Person]
     affiliations and profiles), and how it relates to each affiliation
     (data/site.yaml `relation`: parent -> parentOrganization, member ->
     memberOf, leader -> only the leader's affiliation)."""
-    leader = next(m for m in members if m["group"] == "pi" and m["status"] == "current")
+    lead = leader(members)
     by_relation = {r: [_org(a) for a in affiliations if a["relation"] == r] for r in ("parent", "member")}
     return {
         "@context": "https://schema.org",
@@ -68,19 +68,19 @@ def organization(site: Record, affiliations: list[Record], members: list[Person]
         "description": site["intro"],
         "foundingDate": str(LAB_FOUNDED),
         "address": ", ".join(site["contact"]["address"][1:]),
-        "email": leader["email"],
-        "contactPoint": {"@type": "ContactPoint", "contactType": "enquiries", "email": leader["email"],
+        "email": lead["email"],
+        "contactPoint": {"@type": "ContactPoint", "contactType": "enquiries", "email": lead["email"],
                          "url": f"{SITE_URL}join-us/"},
         "parentOrganization": by_relation["parent"],
         "memberOf": by_relation["member"],
         "founder": {
             "@type": "Person",
-            "@id": f"{SITE_URL}#{leader['slug']}",
-            "name": leader["name"],
-            "jobTitle": leader["role"],
+            "@id": f"{SITE_URL}#{lead['slug']}",
+            "name": lead["name"],
+            "jobTitle": lead["role"],
             "description": leader_bio,
             "affiliation": [{"@type": "Organization", "name": a["organization"]} for a in affiliations],
-            "sameAs": _person_links(leader),
+            "sameAs": _person_links(lead),
         },
         "sameAs": [s["url"] for s in site["social"] if s["url"].startswith("http")],
     }
@@ -100,7 +100,7 @@ def article(story: Story, page_url: str, image_url: str | None) -> Json:
         "headline": pub["title"],
         "name": pub["title"],
         "author": [{"@type": "Person", "name": a} for a in pub["authors"]],
-        "isPartOf": {"@type": "Periodical", "name": pub.get("venue") or ""},
+        "isPartOf": {"@type": "Periodical", "name": pub["venue"]},
         "identifier": {"@type": "PropertyValue", "propertyID": "DOI", "value": pub["doi"]},
         "sameAs": f"https://doi.org/{pub['doi']}",
         "url": page_url,
@@ -125,7 +125,7 @@ def scholar_tags(story: Story) -> list[list[str]]:
     tags = [["citation_title", pub["title"]]]
     tags += [["citation_author", a] for a in pub["authors"]]
     tags += [["citation_publication_date", _date(story["date"], story["year"]).replace("-", "/")],
-             ["citation_journal_title", pub.get("venue") or ""],
+             ["citation_journal_title", pub["venue"]],
              ["citation_doi", pub["doi"]]]
     return [t for t in tags if t[1]]
 
@@ -143,7 +143,7 @@ def publication_item(rec: Record, date: str | None) -> Json:
     full date is known (`date`), never a bare year."""
     item: Json = {"@type": "ScholarlyArticle", "name": rec["title"],
                   "author": [{"@type": "Person", "name": a} for a in rec["authors"]],
-                  "isPartOf": {"@type": "Periodical", "name": rec.get("venue") or ""},
+                  "isPartOf": {"@type": "Periodical", "name": rec["venue"]},
                   "sameAs": f"https://doi.org/{rec['doi']}"}
     if date:
         item["datePublished"] = date

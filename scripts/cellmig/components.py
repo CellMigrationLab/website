@@ -24,7 +24,7 @@ def author_list(authors: list[str], lab: set[str]) -> str:
     out = [f'<span class="cm-author--lab">{esc(a)}</span>' if is_lab_member(a, lab) else esc(a)
            for a in authors]
     if len(out) > AUTHOR_LIMIT:
-        hidden = len(out) - AUTHOR_LIMIT + 1
+        hidden = len(out) - AUTHOR_LIMIT   # AUTHOR_LIMIT - 1 first authors and the last one are shown
         return ", ".join(out[: AUTHOR_LIMIT - 1]) + f', <span class="cm-more">… +{hidden} more</span>, ' + out[-1]
     return ", ".join(out)
 
@@ -52,16 +52,16 @@ def citation(rec: Record, lab: set[str], ledger: Ledger, story_url: str | None =
         links.append(f'<a href="https://doi.org/{esc(pre["doi"])}">Preprint</a>')
     if story_url:
         links.append(f'<a href="{story_url}">Read more</a>')
-    year = f' · {rec["year"]}' if rec.get("year") else ""
+    year = f' · {rec["year"]}'
     parts = [
         f'<{heading} class="cm-pub__title"><a href="https://doi.org/{esc(doi)}">{esc(rec["title"])}</a></{heading}>',
         f'<p class="cm-pub__authors">{author_list(rec["authors"], lab)}</p>',
-        f'<p class="cm-pub__venue"><em>{esc(rec.get("venue") or "")}</em>{year}'
+        f'<p class="cm-pub__venue"><em>{esc(rec["venue"])}</em>{year}'
         f' · <a class="cm-doi" href="https://doi.org/{esc(doi)}">doi:{esc(doi)}</a> {badges(rec)}</p>',
     ]
     if links:
         parts.append(f'<p class="cm-pub__links">{" · ".join(links)}</p>')
-    if abstract and rec.get("abstract"):
+    if abstract and "abstract" in rec:   # the sync leaves it out when things_done has none yet
         parts.append(f'<details class="cm-pub__abstract"><summary>Abstract</summary><p>{esc(rec["abstract"])}</p></details>')
     return "\n".join(parts)
 
@@ -70,11 +70,11 @@ def feature_card(story: Story) -> str:
     """Picture card linking to a featured paper's page (venue name when no picture)."""
     pub = story["pubs"][0]
     pic = (media(story["image"], story["title"], 700) if story["image"]
-           else f'<span class="cm-card__placeholder">{esc(pub.get("venue") or "")}</span>')
+           else f'<span class="cm-card__placeholder">{esc(pub["venue"])}</span>')
     return (f'<a class="cm-card" href="portfolio/{story["slug"]}/">'
             f'<div class="cm-card__media">{pic}</div>'
             f'<p class="cm-card__title">{esc(story["title"])}</p>'
-            f'<p class="cm-card__meta">{esc(pub.get("venue") or "")} · {pub.get("year")} {badges(pub)}</p></a>')
+            f'<p class="cm-card__meta">{esc(pub["venue"])} · {pub["year"]} {badges(pub)}</p></a>')
 
 
 def logo_row(items: list[Record]) -> str:
@@ -100,9 +100,14 @@ def tile(color: str, media_html: str, body_html: str, media_right: bool = False)
 
 
 # (profile key, icon, how to build the URL from the value)
+def orcid_url(value: str) -> str:
+    """ORCID link from an iD ("0000-...") or a full URL."""
+    return value if value.startswith("http") else f"https://orcid.org/{value}"
+
+
 PROFILE_LINKS = [
     ("email", "mail", lambda v: f"mailto:{v}"),
-    ("orcid", "orcid", lambda v: v if v.startswith("http") else f"https://orcid.org/{v}"),
+    ("orcid", "orcid", orcid_url),
     ("scholar", "scholar", str),
     ("github", "github", str),
     ("bluesky", "bluesky", str),
