@@ -44,8 +44,9 @@ social:
 affiliations:
   # Which affiliations are shown comes from things_done
   # (ledger/profile/affiliations.yaml, current ones); this list adds the logo
-  # and link for each, matched by the ledger `id`. The build stops if the two
-  # disagree. logo_dark is used on the dark footer.
+  # and link for each, matched by the ledger `id`. A current affiliation
+  # without an entry stops the build; an entry that is no longer current is
+  # not shown (the build warns: remove it). logo_dark is used on the dark footer.
   # relation (for search engines and LLMs): parent = the lab is part of this
   # organisation; member = the lab belongs to this centre or network;
   # leader = an affiliation of the group leader, not of the lab.
@@ -77,8 +78,10 @@ affiliations:
 funding:
   # Which funders are shown comes from things_done (ledger/registries/grants.yaml:
   # direct funders, `funders[].name`, of grants that are active or awarded and
-  # not ended); this list adds the logo and link for each, matched by that name.
-  # The build stops if the two disagree. No amounts are shown.
+  # not ended, as of the last sync); this list adds the logo and link for each,
+  # matched by that name. A current funder without an entry stops the build; an
+  # entry for a funder with no current grant is not shown (the build warns:
+  # remove it). No amounts are shown.
   # `logo: null` shows the name as text (for funders without an official logo).
   - funder: Research Council of Finland
     name: Research Council of Finland

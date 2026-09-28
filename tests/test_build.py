@@ -28,8 +28,14 @@ def fake_ledger(pubs, lag_pairs=()):
     return led
 
 
-PRE = {"doi": "10.1101/pre", "year": 2023, "status": "preprint", "title": "Pre", "related_dois": ["10.1/J"]}
-JOURNAL = {"doi": "10.1/j", "year": 2024, "status": "published", "title": "Journal", "related_dois": ["10.1101/pre"]}
+def pub(doi, year, status="published", title="T", **extra):
+    """A publication with the fields things_done requires (and venue, which the site requires)."""
+    return {"doi": doi, "year": year, "status": status, "title": title, "authors": ["A. Author"],
+            "venue": "bioRxiv" if status == "preprint" else "J. Cell Sci.", "abstract": f"Abstract of {title}.", **extra}
+
+
+PRE = pub("10.1101/pre", 2023, "preprint", "Pre", related_dois=["10.1/J"])
+JOURNAL = pub("10.1/j", 2024, "published", "Journal", related_dois=["10.1101/pre"])
 
 
 class TextTests(unittest.TestCase):
@@ -103,7 +109,8 @@ class LedgerTests(unittest.TestCase):
 
     def test_software_merges_ledger_and_website_only_entries(self):
         led = fake_ledger([])
-        led.software = [{"id": "a", "title": "A", "start_date": "2020-01-01", "related_publication_dois": ["10.1/j"]}]
+        led.software = [{"id": "a", "title": "A", "start_date": "2020-01-01", "github_repo_url": "https://github.com/x/a",
+                         "description": "A tool.", "related_publication_dois": ["10.1/j"]}]
         with patch.object(ledger, "load", return_value=[{"title": "Web only", "year": 2022}, {"id": "a", "color": "sky"}]):
             out = ledger.software_list(led)
         self.assertEqual([s["title"] for s in out], ["Web only", "A"])
@@ -117,10 +124,10 @@ class FeaturedTests(unittest.TestCase):
             return featured.load_featured(fake_ledger(pubs, lag_pairs))
 
     def test_corresponding_author_papers_are_featured_newest_first(self):
-        a = {"doi": "10.1/a", "year": 2024, "status": "published", "title": "A", "corresponding": True}
-        b = {"doi": "10.1/b", "year": 2024, "status": "published", "title": "B", "corresponding": True}
-        c = {"doi": "10.1/c", "year": 2025, "status": "published", "title": "C", "corresponding": True}
-        d = {"doi": "10.1/d", "year": 2026, "status": "published", "title": "D"}   # not corresponding
+        a = pub("10.1/a", 2024, "published", "A", corresponding=True)
+        b = pub("10.1/b", 2024, "published", "B", corresponding=True)
+        c = pub("10.1/c", 2025, "published", "C", corresponding=True)
+        d = pub("10.1/d", 2026, "published", "D")   # not corresponding
         lag = [{"published_doi": "10.1/b", "published_date": "2024-03-01"}]
         items = self.run_featured([a, b, c, d], [{"doi": "10.1/c", "image": "c.png"}], lag)
         # 2025 first; in 2024 the dated paper comes before the undated one
@@ -129,19 +136,23 @@ class FeaturedTests(unittest.TestCase):
         self.assertIsNone(items[2]["date"])        # no made-up dates
 
     def test_hidden_paper_is_left_out(self):
-        a = {"doi": "10.1/a", "year": 2024, "status": "published", "title": "A", "corresponding": True}
+        a = pub("10.1/a", 2024, "published", "A", corresponding=True)
         self.assertEqual(self.run_featured([a], [{"doi": "10.1/a", "hide": True}]), [])
 
     def test_bad_entries_stop_the_build(self):
-        a = {"doi": "10.1/a", "year": 2024, "status": "published", "title": "A", "corresponding": True}
-        b = {"doi": "10.1/b", "year": 2024, "status": "published", "title": "B"}
+        a = pub("10.1/a", 2024, "published", "A", corresponding=True)
+        b = pub("10.1/b", 2024, "published", "B")
         for entry in ({"doi": "10.1/a", "imgae": "x.png"},          # typo in a key
                       {"doi": "10.9/missing"},                      # not in the ledger
                       {"doi": "10.1/a", "also": ["10.9/missing"]},  # `also` not in the ledger
-                      {"doi": "10.1/b", "image": "b.png"},          # not corresponding-author
-                      {"doi": "10.1/a", "show": True}):             # `show` no longer exists
+                      {"doi": "10.1/b", "image": "b.png"}):         # not corresponding-author
             with self.subTest(entry=entry), self.assertRaises(SystemExit):
                 self.run_featured([a, b], [entry])
+
+
+def entry(key, field="id", **extra):
+    """A data/site.yaml affiliation or funding entry."""
+    return {field: key, "name": key.upper(), "url": f"https://{key}.example/", "logo": f"{key}.png", **extra}
 
 
 class AffiliationTests(unittest.TestCase):
@@ -151,34 +162,36 @@ class AffiliationTests(unittest.TestCase):
                                  {"id": "fci", "organization": "Finnish Cancer Institute", "title": "Research Professor"}]
 
     def test_merged_in_website_order(self):
-        out = ledger.affiliation_list([{"id": "fci", "name": "FCI", "logo": "f.png", "relation": "leader"},
-                                       {"id": "aau", "name": "ÅA", "logo": "a.png", "relation": "parent"}], self.led)
-        self.assertEqual([a["name"] for a in out], ["FCI", "ÅA"])
+        out = ledger.affiliation_list([entry("fci", relation="leader"), entry("aau", relation="parent")], self.led)
+        self.assertEqual([a["name"] for a in out], ["FCI", "AAU"])
         self.assertEqual(out[0]["title"], "Research Professor")
 
-    def test_missing_or_stale_entries_stop_the_build(self):
-        for presentation in ([{"id": "aau", "relation": "parent"}],          # fci has no logo entry
-                             [{"id": "aau", "relation": "parent"}, {"id": "fci", "relation": "leader"},
-                              {"id": "old", "relation": "member"}],           # old is not current
-                             [{"id": "aau", "relation": "boss"}, {"id": "fci", "relation": "leader"}]):  # bad relation
+    def test_missing_entries_stop_the_build(self):
+        for presentation in ([entry("aau", relation="parent")],                                  # fci has no entry
+                             [entry("aau", relation="boss"), entry("fci", relation="leader")],   # bad relation
+                             [{"id": "aau", "relation": "parent"}, entry("fci", relation="leader")]):  # no name/url/logo
             with self.subTest(presentation=presentation), self.assertRaises(SystemExit):
                 ledger.affiliation_list(presentation, self.led)
+
+    def test_an_entry_that_is_no_longer_current_is_left_out(self):
+        with patch("builtins.print") as warn:
+            out = ledger.affiliation_list([entry("aau", relation="parent"), entry("fci", relation="leader"),
+                                           entry("old", relation="member")], self.led)
+        self.assertEqual([a["id"] for a in out], ["aau", "fci"])
+        self.assertIn("no longer current", warn.call_args[0][0])
 
 
 class FundingTests(unittest.TestCase):
     def test_current_funders_only_and_strict(self):
         led = fake_ledger([])
-        led.grants = [{"funders": [{"name": "Wellcome Trust"}, {"name": "Chan Zuckerberg Initiative"}],
-                       "status": "active", "end_date": "2027-12-31"},              # co-funded award
-                      {"funders": [{"name": "EMBO"}], "status": "completed", "end_date": "2016-12-31"},
-                      {"funders": [{"name": "Old"}], "status": "active", "end_date": "2020-01-01"}]
-        ok = [{"funder": "Wellcome Trust", "name": "Wellcome", "logo": "w.svg"},
-              {"funder": "Chan Zuckerberg Initiative", "name": "CZI", "logo": None}]
-        self.assertEqual(ledger.funding_list(ok, led, "2026-09-27"), ok)
-        with self.assertRaises(SystemExit):            # EMBO no longer funds anything
-            ledger.funding_list(ok + [{"funder": "EMBO"}], led, "2026-09-27")
+        led.grants = [{"funders": ["Wellcome Trust", "Chan Zuckerberg Initiative"], "current": True},   # co-funded
+                      {"funders": ["EMBO"], "current": False}]
+        ok = [entry("Wellcome Trust", "funder"), entry("Chan Zuckerberg Initiative", "funder", logo=None)]
+        self.assertEqual(ledger.funding_list(ok, led), ok)
+        with patch("builtins.print"):                  # EMBO no longer funds anything: left out, with a warning
+            self.assertEqual(ledger.funding_list(ok + [entry("EMBO", "funder")], led), ok)
         with self.assertRaises(SystemExit):            # the co-funder CZI has no entry
-            ledger.funding_list(ok[:1], led, "2026-09-27")
+            ledger.funding_list(ok[:1], led)
 
     def test_logo_row_text_only_entry(self):
         html = logo_row([{"name": "ImmuDocs", "url": "https://example.org/", "logo": None}])
@@ -222,3 +235,44 @@ class ChartTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class AuditRegressionTests(unittest.TestCase):
+    """Behaviours fixed after the September 2026 audit."""
+
+    def test_author_list_counts_the_hidden_names(self):
+        from cellmig.components import AUTHOR_LIMIT, author_list
+        names = [f"A{i}" for i in range(AUTHOR_LIMIT + 3)]
+        out = author_list(names, set())
+        self.assertIn("+3 more", out)                     # AUTHOR_LIMIT - 1 first ones and the last are shown
+        self.assertEqual(out.count(","), AUTHOR_LIMIT)    # AUTHOR_LIMIT names + the "more" marker
+
+    def test_unknown_dataset_tag_or_type_stops_the_build(self):
+        from cellmig.pages_content import _dataset_tag, _dataset_type
+        d = {"title": "D", "dataset_type": "image"}
+        self.assertEqual(_dataset_tag("deep-learning-ready", d), "DL-ready")
+        self.assertEqual(_dataset_type(d), "Image data")
+        with self.assertRaises(SystemExit):
+            _dataset_tag("dl-ready", d)
+        with self.assertRaises(SystemExit):
+            _dataset_type({"title": "D", "dataset_type": "video"})
+
+    def test_grouped_is_newest_first_within_a_year(self):
+        older, newer, undated = pub("10.1/o", 2026, title="A older"), pub("10.1/n", 2026, title="B newer"), pub("10.1/u", 2026, title="0 undated")
+        led = fake_ledger([undated, older, newer])
+        led.dates = {"10.1/o": "2026-02-01", "10.1/n": "2026-09-01"}
+        self.assertEqual([r["doi"] for r in led.grouped()], ["10.1/n", "10.1/o", "10.1/u"])
+
+    def test_title_slug_is_cut_at_a_word(self):
+        slug = featured._title_slug("word " * 40)
+        self.assertLessEqual(len(slug), featured.SLUG_LENGTH)
+        self.assertFalse(slug.endswith("-"))
+
+    def test_one_current_group_leader_with_an_email(self):
+        from cellmig.people import leader
+        pi = {"group": "pi", "status": "current", "slug": "g", "email": "g@x.fi"}
+        self.assertIs(leader([pi, {"group": "phd", "status": "current"}]), pi)
+        with self.assertRaises(SystemExit):
+            leader([{**pi, "email": None}])
+        with self.assertRaises(SystemExit):
+            leader([{**pi, "status": "alumni"}])

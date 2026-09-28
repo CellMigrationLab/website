@@ -7,6 +7,7 @@ paper. An entry for a paper that is not corresponding-author stops the build
 (old addresses of removed pages are redirected in mkdocs.yml).
 """
 
+import re
 from typing import Any
 
 from .config import DATA, fail, load
@@ -15,7 +16,7 @@ from .text import slugify
 
 Story = dict[str, Any]
 
-ENTRY_KEYS = {"doi", "image", "slug", "also", "hide"}
+ENTRY_KEYS = {"doi", "image", "slug", "also", "hide", "summary"}
 
 
 def _entries(ledger: Ledger) -> dict[str, Record]:
@@ -35,6 +36,26 @@ def _entries(ledger: Ledger) -> dict[str, Record]:
     return out
 
 
+SLUG_LENGTH = 90
+SLUG = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
+
+
+def _title_slug(title: str) -> str:
+    """Page address from a title, at most SLUG_LENGTH characters, cut at a word."""
+    slug = slugify(title)
+    return slug if len(slug) <= SLUG_LENGTH else slug[:SLUG_LENGTH + 1].rsplit("-", 1)[0]
+
+
+def _summary(main: Record, pubs: list[Record], entry: Record) -> str:
+    """The text of a featured page: `summary:` in data/featured.yaml, else
+    the papers' abstracts. A paper with no abstract (an editorial, say) needs
+    a summary: the build stops otherwise."""
+    text = entry.get("summary") or "\n\n".join(p["abstract"] for p in pubs if "abstract" in p)
+    if not text.strip():
+        fail(f"featured paper {main['doi']} has no abstract in things_done; add `summary:` for it to data/featured.yaml")
+    return text
+
+
 def _story(ledger: Ledger, main: Record, entry: Record, pos: int) -> Story:
     """A featured item: the paper (plus any `also` papers) and its presentation."""
     pubs = [main] + [ledger.published_version(ledger.get(d)) for d in entry.get("also") or []]
@@ -44,11 +65,11 @@ def _story(ledger: Ledger, main: Record, entry: Record, pos: int) -> Story:
         "pubs": pubs,
         "image": entry.get("image"),
         "title": main["title"],
-        "slug": entry.get("slug") or slugify(main["title"])[:90],
+        "slug": entry.get("slug") or _title_slug(main["title"]),
         "year": int(main["year"]),
         # Day-precision journal date when the lag report has one, else None.
         "date": next((ledger.dates[r["doi"].lower()] for r in family if r["doi"].lower() in ledger.dates), None),
-        "summary": "\n\n".join(p["abstract"] for p in pubs if p.get("abstract")),
+        "summary": _summary(main, pubs, entry),
         "pos": pos,
     }
 
@@ -70,6 +91,12 @@ def load_featured(ledger: Ledger) -> list[Story]:
     stray = [e["doi"] for k, e in entries.items() if k not in used]
     if stray:
         fail(f"data/featured.yaml: not corresponding-author papers in the ledger, remove them: {stray}")
+    bad = [s["slug"] for s in featured if not SLUG.fullmatch(s["slug"])]
+    if bad:
+        fail(f"data/featured.yaml: slugs must be lower-case words joined by '-': {bad}")
+    dupes = sorted({s["slug"] for s in featured if sum(t["slug"] == s["slug"] for t in featured) > 1})
+    if dupes:
+        fail(f"featured papers share a page address {dupes}; give one a `slug:` in data/featured.yaml")
     featured.sort(key=lambda s: (-s["year"], s["date"] is None, _neg(s["date"]), s["pos"]))
     return featured
 

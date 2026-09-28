@@ -70,7 +70,7 @@ succeeds, and once a day. It validates the ledger before copying anything.
 | Lab members, alumni and their roles, member counts | `ledger/profile/lab_members.yaml` (photos and links stay in this repo) |
 | Funding logos (home page) | funders of current grants in `ledger/registries/grants.yaml` (no amounts are copied) |
 | Group leader profile (About us) | `ledger/profile/person.yaml`, `education.yaml`, current records of `ledger/roles/*.yaml` |
-| Recent talks and teaching (Online talks) | `ledger/activities/*/talks.yaml`, `teaching.yaml` |
+| Recent talks (llms-full.txt) and keynotes (News) | `ledger/activities/*/talks.yaml` |
 | Affiliations (home page, footer) | current records of `ledger/profile/affiliations.yaml` (logos and links in `data/site.yaml` here, by `id`) |
 
 ## Worth adding to the ledger

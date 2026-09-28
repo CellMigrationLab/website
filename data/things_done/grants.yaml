@@ -1,163 +1,141 @@
 # Copied by scripts/sync_things_done.py from things_done/ledger/registries/grants.yaml (no amounts).
 # Do not edit by hand: change things_done instead, the website updates itself.
 records:
-- id: research-council-finland-centre-of-excellence-immens-2026-2030
-  title: IMMENs, Research Council of Finland Centre of Excellence
-  funders:
-  - name: Research Council of Finland
-    award_id: '374180'
+- title: IMMENs, Research Council of Finland Centre of Excellence
   program: Research Council of Finland Centre of Excellence Programme 2026–2033
-  role: pi
   status: active
   start_date: '2026-01-01'
   end_date: '2030-12-31'
-- id: finnish-cancer-foundation-project-grant-2026-2028
-  title: Cancer Foundation Finland project grant 2026–2029
   funders:
-  - name: Finnish Cancer Foundation
-  role: pi
+  - Research Council of Finland
+  current: true
+- title: Cancer Foundation Finland project grant 2026–2029
   status: active
   start_date: '2026-01-01'
   end_date: '2029-12-31'
-- id: research-council-finland-project-grant-2026-2029
-  title: Research Council of Finland project grant 2025–2029
   funders:
-  - name: Research Council of Finland
-  role: pi
+  - Finnish Cancer Foundation
+  current: true
+- title: Research Council of Finland project grant 2025–2029
   status: active
   start_date: '2025-09-10'
   end_date: '2029-08-31'
-- id: sigrid-juselius-foundation-grant-2023-2026
-  title: Sigrid Juselius Foundation grant
   funders:
-  - name: Sigrid Juselius Foundation
-  role: pi
+  - Research Council of Finland
+  current: true
+- title: Sigrid Juselius Foundation grant
   status: completed
   start_date: '2023-01-01'
   end_date: '2026-06-30'
-- id: sigrid-juselius-foundation-grant-2026-2029
-  title: Sigrid Jusélius Foundation project grant 2026–2029
   funders:
-  - name: Sigrid Juselius Foundation
-  role: pi
+  - Sigrid Juselius Foundation
+  current: false
+- title: Sigrid Jusélius Foundation project grant 2026–2029
   status: active
   start_date: '2026-05-01'
   end_date: '2029-04-30'
-- id: wellcome-trust-grant-2025-2027
-  title: Democratizing Deep Learning for Microscopists with DL4MicEverywhere
   funders:
-  - name: Wellcome Trust
-    award_id: 313383/Z/24/Z
-  - name: Chan Zuckerberg Initiative
-    award_id: EOSS6-0000000260
+  - Sigrid Juselius Foundation
+  current: true
+- title: Democratizing Deep Learning for Microscopists with DL4MicEverywhere
   program: Essential Open Source Software for Science (EOSS), Cycle 6
   program_cofunders:
   - The Kavli Foundation
-  role: investigator
   status: active
   start_date: '2025-08-01'
   end_date: '2027-07-31'
-- id: inflames-overheads-jacquemet-2026
-  title: InFLAMES Flagship research support 2026
   funders:
-  - name: InFLAMES Flagship
-  role: pi
+  - Wellcome Trust
+  - Chan Zuckerberg Initiative
+  current: true
+- title: InFLAMES Flagship research support 2026
   status: active
   start_date: '2026-02-04'
   end_date: '2026-12-10'
-- id: immudoc-jacquemet-costs-2025-2027
-  title: ImmuDocs doctoral education pilot funding 2025–2027
   funders:
-  - name: IMMUDOC
-  role: pi
+  - InFLAMES Flagship
+  current: true
+- title: ImmuDocs doctoral education pilot funding 2025–2027
   status: active
   start_date: '2025-01-10'
   end_date: '2027-12-10'
-- id: finnish-cancer-foundation-grant-2020-2025
-  title: Finnish Cancer Foundation grant
   funders:
-  - name: Finnish Cancer Foundation
-  role: pi
+  - IMMUDOC
+  current: true
+- title: Finnish Cancer Foundation grant
   status: completed
   start_date: '2020-01-01'
   end_date: '2025-12-31'
-- id: cancer-foundation-panmet-2024-2025
-  title: Cancer Foundation Finland PanMet grant 2024–2025
   funders:
-  - name: Finnish Cancer Foundation
-  role: pi
+  - Finnish Cancer Foundation
+  current: false
+- title: Cancer Foundation Finland PanMet grant 2024–2025
   status: completed
   start_date: '2024-01-01'
   end_date: '2025-12-31'
-- id: academy-of-finland-research-fellowship-2021-2026
-  title: Academy of Finland Research Fellowship
   funders:
-  - name: Research Council of Finland
-  role: pi
+  - Finnish Cancer Foundation
+  current: false
+- title: Academy of Finland Research Fellowship
   status: completed
   start_date: '2021-09-01'
   end_date: '2026-08-31'
-- id: sigrid-juselius-foundation-grant-2019-2022
-  title: Sigrid Juselius Foundation grant
   funders:
-  - name: Sigrid Juselius Foundation
-  role: pi
+  - Research Council of Finland
+  current: false
+- title: Sigrid Juselius Foundation grant
   status: completed
   start_date: '2019-01-01'
   end_date: '2022-12-31'
-- id: biocity-grant-2021-2023
-  title: BioCity grant
   funders:
-  - name: BioCity Turku
-  role: pi
+  - Sigrid Juselius Foundation
+  current: false
+- title: BioCity grant
   status: completed
   start_date: '2021-01-01'
   end_date: '2023-12-31'
-- id: finnish-heart-foundation-grant-2020
-  title: Finnish Heart Foundation grant
   funders:
-  - name: Finnish Heart Foundation
-  role: pi
+  - BioCity Turku
+  current: false
+- title: Finnish Heart Foundation grant
   status: completed
   start_date: '2020-01-01'
   end_date: '2020-12-31'
-- id: academy-of-finland-postdoctoral-fellowship-2017-2020
-  title: Academy of Finland Postdoctoral Fellowship
   funders:
-  - name: Academy of Finland
-  role: pi
+  - Finnish Heart Foundation
+  current: false
+- title: Academy of Finland Postdoctoral Fellowship
   status: completed
   start_date: '2017-01-01'
   end_date: '2020-12-31'
-- id: embo-long-term-fellowship-2015-2016
-  title: EMBO Long-Term Fellowship
   funders:
-  - name: EMBO
-  role: pi
+  - Academy of Finland
+  current: false
+- title: EMBO Long-Term Fellowship
   status: completed
   start_date: '2015-01-01'
   end_date: '2016-12-31'
-- id: university-of-turku-foundation-stipend-2017
-  title: University of Turku Foundation stipend for a master's student
   funders:
-  - name: University of Turku Foundation
-  role: pi
+  - EMBO
+  current: false
+- title: University of Turku Foundation stipend for a master's student
   status: completed
   start_date: '2017-01-01'
   end_date: '2017-12-31'
-- id: cancer-society-of-finland-travel-grant-2016
-  title: Travel grant
   funders:
-  - name: Cancer Society of Finland
-  role: pi
+  - University of Turku Foundation
+  current: false
+- title: Travel grant
   status: completed
   start_date: '2016-01-01'
   end_date: '2016-12-31'
-- id: university-of-turku-foundation-travel-grant-2016
-  title: Travel grant
   funders:
-  - name: University of Turku Foundation
-  role: pi
+  - Cancer Society of Finland
+  current: false
+- title: Travel grant
   status: completed
   start_date: '2016-01-01'
   end_date: '2016-12-31'
+  funders:
+  - University of Turku Foundation
+  current: false

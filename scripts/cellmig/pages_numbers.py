@@ -1,6 +1,8 @@
 """The "Lab in numbers" page (docs/lab-in-numbers.md). Every number comes from
 things_done data; this page only counts and draws."""
 
+from urllib.parse import quote
+
 from .charts import lag_section, papers_per_year
 from .components import section_title
 from .ledger import Ledger, Record, software_list
@@ -46,7 +48,7 @@ def _top_collaborators(coauthors: list[Record], lab: set[str]) -> str:
         years = str(c["last_year"]) if c["first_year"] == c["last_year"] else f'{c["first_year"]}–{c["last_year"]}'
         rows.append(f'<li><span class="cm-toplist__name">{esc(c["name"])} <span aria-hidden="true">{flag(c.get("country"))}</span></span>'
                     f'<span class="cm-toplist__bar"><span style="width:{100 * c["papers"] / most:.0f}%"></span></span>'
-                    f'<a class="cm-toplist__n" href="publications/?q={esc(c["name"].split()[-1])}">{c["papers"]} papers</a>'
+                    f'<a class="cm-toplist__n" href="publications/?q={esc(quote(c["name"]))}">{c["papers"]} papers</a>'
                     f'<span class="cm-toplist__years">{years}</span></li>')
     return '<ol class="cm-toplist">' + "".join(rows) + "</ol>"
 

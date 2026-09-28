@@ -3,80 +3,60 @@
 records:
 - id: ezinput
   title: EZInput
-  status: active
   start_date: '2026'
-  repository_url: https://github.com/HenriquesLab/EZInput
   github_repo_url: https://github.com/HenriquesLab/EZInput
   description: a Python library that simplifies the creation of graphical user interfaces
 - id: labconstrictor
   title: LabConstrictor
-  status: active
   start_date: '2026'
-  repository_url: https://github.com/CellMigrationLab/LabConstrictor
   github_repo_url: https://github.com/CellMigrationLab/LabConstrictor
   description: From Jupyter Notebook to Desktop App in One Click
 - id: nucleisky
   title: NucleiSky
-  status: active
   start_date: '2026'
-  repository_url: https://github.com/CellMigrationLab/NucleiSky
   github_repo_url: https://github.com/CellMigrationLab/NucleiSky
   description: Image registration and ROI matching for microscopy images using nuclei constellations.
   related_publication_dois:
   - 10.64898/2026.06.29.735028
 - id: rxiv-maker
   title: rxiv-maker
-  status: active
   start_date: '2025'
-  repository_url: https://github.com/HenriquesLab/rxiv-maker
   github_repo_url: https://github.com/HenriquesLab/rxiv-maker
   description: a toolbox that converts markdown into a publication-ready PDF
 - id: sred
   title: SReD
-  status: active
   start_date: '2025'
-  repository_url: https://github.com/HenriquesLab/SReD
   github_repo_url: https://github.com/HenriquesLab/SReD
   description: Structural Repetition Detector Plugin for ImageJ and Fiji
   related_publication_dois:
   - 10.1038/s41467-025-60709-1
 - id: celltrackscolab
   title: CellTracksColab
-  status: active
   start_date: '2024'
-  repository_url: https://github.com/CellMigrationLab/CellTracksColab
   github_repo_url: https://github.com/CellMigrationLab/CellTracksColab
   description: A platform for compiling, analyzing, and exploring tracking data.
   related_publication_dois:
   - 10.1371/journal.pbio.3002740
 - id: dl4miceverywhere
   title: DL4MicEverywhere
-  status: active
   start_date: '2024'
-  repository_url: https://github.com/HenriquesLab/DL4MicEverywhere
   github_repo_url: https://github.com/HenriquesLab/DL4MicEverywhere
   description: An extension of ZeroCostDL4Mic featuring interactive Jupyter notebooks for bioimage analysis
     using deep learning.
 - id: nanopyx
   title: NanoPyx
-  status: active
   start_date: '2024'
-  repository_url: https://github.com/HenriquesLab/NanoPyx
   github_repo_url: https://github.com/HenriquesLab/NanoPyx
   description: A library for analyzing light microscopy and super-resolution data, successor to NanoJ.
 - id: photofitt
   title: PhotoFiTT
-  status: active
   start_date: '2024'
-  repository_url: https://github.com/HenriquesLab/PhotoFiTT
   github_repo_url: https://github.com/HenriquesLab/PhotoFiTT
   description: Phototoxicity Fitness Time Trial. A Quantitative Framework for Assessing Phototoxicity
     in Live-Cells.
 - id: esrrf
   title: eSRRF
-  status: maintenance
   start_date: '2023'
-  repository_url: https://github.com/HenriquesLab/NanoJ-eSRRF
   github_repo_url: https://github.com/HenriquesLab/NanoJ-eSRRF
   description: Provides a super-resolution approach and optimal parameter prediction for super-resolution
     microscopy.
@@ -84,38 +64,28 @@ records:
   - 10.1038/s41592-023-02057-w
 - id: fast4dreg
   title: Fast4DReg
-  status: maintenance
   start_date: '2023'
-  repository_url: https://github.com/CellMigrationLab/Fast4DReg
   github_repo_url: https://github.com/CellMigrationLab/Fast4DReg
   description: A Fiji plugin for 2D and 3D video drift correction in all axes.
 - id: trackmate
   title: TrackMate
-  status: maintenance
   start_date: '2022'
-  repository_url: https://github.com/trackmate-sc/TrackMate
   github_repo_url: https://github.com/trackmate-sc/TrackMate
   description: Automated tracking software analyzing bioimages, distributed as a Fiji plugin.
 - id: zerocostdl4mic
   title: ZeroCostDL4Mic
-  status: maintenance
   start_date: '2021'
-  repository_url: https://github.com/HenriquesLab/ZeroCostDL4Mic
   github_repo_url: https://github.com/HenriquesLab/ZeroCostDL4Mic
   description: Allows the use of popular deep-learning neural networks for tasks in bioimage analysis.
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
 - id: filomap
   title: FiloMap
-  status: maintenance
   start_date: '2019'
-  repository_url: https://github.com/CellMigrationLab/FiloMAP
   github_repo_url: https://github.com/CellMigrationLab/FiloMAP
   description: ImageJ and R scripts for mapping protein localization within filopodia.
 - id: filoquant
   title: FiloQuant
-  status: maintenance
   start_date: '2017'
-  repository_url: https://github.com/CellMigrationLab/FiloQuant
   github_repo_url: https://github.com/CellMigrationLab/FiloQuant
   description: A Fiji plugin for automated detection and quantification of filopodia properties.

@@ -7,7 +7,7 @@ domain; data/world/). Projection: Equal Earth. Antarctica is left out.
 import json
 import math
 
-from .config import DATA
+from .config import DATA, fail
 from .text import esc, plural
 
 W, H = 960, 440
@@ -15,6 +15,8 @@ W, H = 960, 440
 STEPS = [(1, 1), (2, 4), (5, 9), (10, 24), (25, 99), (100, math.inf)]
 RAMP = ["#e9ddf7", "#d2b8ef", "#b48ae3", "#9560d3", "#733cb3", "#4f2182"]
 ANTARCTICA = "010"
+# Co-author countries with no shape in countries-110m (ISO alpha-2 -> name), listed under the map
+TOO_SMALL = {"SG": "Singapore"}
 
 
 def equal_earth(lon: float, lat: float) -> tuple[float, float]:
@@ -72,7 +74,7 @@ def world_map(counts: dict[str, int]) -> str:
     iso = json.loads((DATA / "world" / "iso-alpha2-to-numeric.json").read_text(encoding="utf-8"))
     alpha2 = {num: a2 for a2, num in iso.items()}
     arcs = decode_arcs(topo)
-    paths = []
+    paths, drawn = [], set()
     for g in topo["objects"]["countries"]["geometries"]:
         if g.get("id") == ANTARCTICA or g["type"] not in ("Polygon", "MultiPolygon"):
             continue
@@ -80,11 +82,17 @@ def world_map(counts: dict[str, int]) -> str:
         d = "".join(ring_path(r, arcs) for poly in polys for r in poly)
         n = counts.get(alpha2.get(g.get("id"), ""), 0)
         if n:
+            drawn.add(alpha2[g["id"]])
             tip = f"{g['properties']['name']}: {plural(n, 'co-author')}"
             paths.append(f'<path class="cm-map__on" d="{d}" style="fill:{color(n)}" data-tip="{esc(tip)}" tabindex="0">'
                          f'<title>{esc(tip)}</title></path>')
         else:
             paths.append(f'<path d="{d}"/>')
+    unknown = sorted(set(counts) - drawn - set(TOO_SMALL))
+    if unknown:
+        fail(f"co-author countries {unknown} have no shape on the map; add them to TOO_SMALL in scripts/cellmig/worldmap.py")
+    small = [f"{TOO_SMALL[c]} ({counts[c]})" for c in sorted(set(counts) - drawn)]
+    note = (f'<p class="cm-small">Too small to show at this scale: {esc(", ".join(small))}.</p>' if small else "")
     top = max(counts.values())
     legend = "".join(
         f'<li><span style="background:{c}"></span>{lo if lo == hi else (f"{lo}+" if hi == math.inf else f"{lo}–{hi}")}</li>'
@@ -92,4 +100,4 @@ def world_map(counts: dict[str, int]) -> str:
     return (f'<div class="cm-map"><svg class="cm-map__svg" viewBox="0 0 {W} {H}" role="img" '
             f'aria-label="World map of co-authors by country">{"".join(paths)}</svg>'
             f'<div class="cm-chart-tip" hidden></div></div>'
-            f'<ul class="cm-map__legend" aria-label="Co-authors per country">{legend}</ul>')
+            f'<ul class="cm-map__legend" aria-label="Co-authors per country">{legend}</ul>{note}')

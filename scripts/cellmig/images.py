@@ -1,18 +1,23 @@
 """Images and videos: resized WebP thumbnails and the markup that shows them.
 
-Thumbnails go to docs/assets/thumbs/ and are kept between builds; one is
-only remade when its source image is newer.
+Thumbnails go to docs/assets/thumbs/ and are kept between builds (and
+between CI runs, by actions/cache). One is only remade when its source image
+or its settings change: a hash of both is kept in .cache/cellmig-thumbs/,
+because file dates are no guide after a fresh git checkout.
 """
 
+import hashlib
+import re
 from functools import cache
 from pathlib import Path
 
 from PIL import Image, ImageOps
 
-from .config import DOCS, THUMBS, fail
+from .config import DOCS, ROOT, THUMBS, fail
 from .text import esc
 
 VECTOR_OR_ANIMATED = (".svg", ".gif")   # served as they are, never resized
+DIGESTS = ROOT / ".cache" / "cellmig-thumbs"   # source hash of each thumbnail
 SMALL_FILE = 150_000                    # bytes; smaller images are not resized
 
 
@@ -26,15 +31,37 @@ def source(site_path: str) -> Path:
 
 @cache
 def image_size(site_path: str) -> tuple[int, int] | None:
-    """(width, height) after EXIF rotation; None for SVG (no pixel size)."""
+    """(width, height) after EXIF rotation; for an SVG its width/height
+    attributes (None when it has none)."""
     if site_path.lower().endswith(".svg"):
-        return None
+        head = source(site_path).read_text(encoding="utf-8")[:2000]
+        svg = re.search(r"<svg\b[^>]*>", head)
+        w, h = (re.search(rf'\b{a}="(\d+(?:\.\d+)?)(?:px)?"', svg.group(0)) if svg else None for a in ("width", "height"))
+        return (round(float(w.group(1))), round(float(h.group(1)))) if w and h else None
     with Image.open(source(site_path)) as im:
         return ImageOps.exif_transpose(im).size
 
 
-def _stale(out: Path, src: Path) -> bool:
-    return not out.exists() or out.stat().st_mtime < src.stat().st_mtime
+@cache
+def _sha1(src: Path) -> str:
+    return hashlib.sha1(src.read_bytes()).hexdigest()
+
+
+def _digest(out: Path, src: Path, settings: str) -> tuple[Path, str]:
+    return DIGESTS / f"{out.relative_to(DOCS)}.sha1", f"{_sha1(src)} {settings}"
+
+
+def _stale(out: Path, src: Path, settings: str) -> bool:
+    """Whether `out` must be (re)made from `src` with these settings."""
+    path, want = _digest(out, src, settings)
+    return not out.exists() or not path.exists() or path.read_text() != want
+
+
+def _made(out: Path, src: Path, settings: str) -> None:
+    """Record that `out` was made from `src` with these settings."""
+    path, want = _digest(out, src, settings)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(want)
 
 
 def thumb(site_path: str, width: int) -> str:
@@ -48,7 +75,8 @@ def thumb(site_path: str, width: int) -> str:
         return site_path
     out_rel = f"{THUMBS}/{width}/{Path(site_path).with_suffix('.webp').as_posix()}"
     out = DOCS / out_rel
-    if _stale(out, src):
+    settings = f"webp {width}"
+    if _stale(out, src, settings):
         out.parent.mkdir(parents=True, exist_ok=True)
         with Image.open(src) as im:
             im = ImageOps.exif_transpose(im)
@@ -56,6 +84,7 @@ def thumb(site_path: str, width: int) -> str:
                 im = im.convert("RGBA" if "transparency" in im.info or im.mode in ("LA", "P") else "RGB")
             im.thumbnail((width, width * 4), Image.LANCZOS)
             im.save(out, "WEBP", quality=82, method=4)
+        _made(out, src, settings)
     return out_rel
 
 
@@ -65,12 +94,14 @@ def share_jpeg(site_path: str, width: int = 1200) -> str:
     src = source(site_path)
     out_rel = f"{THUMBS}/share/{Path(site_path).with_suffix('.jpg').as_posix()}"
     out = DOCS / out_rel
-    if _stale(out, src):
+    settings = f"jpeg {width}"
+    if _stale(out, src, settings):
         out.parent.mkdir(parents=True, exist_ok=True)
         with Image.open(src) as im:
             im = ImageOps.exif_transpose(im).convert("RGB")
             im.thumbnail((width, width * 4), Image.LANCZOS)
             im.save(out, "JPEG", quality=82, optimize=True, progressive=True)
+        _made(out, src, settings)
     return out_rel
 
 
@@ -82,13 +113,15 @@ def square_thumb(site_path: str, size: int = 480, position: str = "top") -> str:
     src = source(site_path)
     out_rel = f"{THUMBS}/square/{Path(site_path).with_suffix('.webp').as_posix()}"
     out = DOCS / out_rel
-    if _stale(out, src):
+    settings = f"square {size} {position}"
+    if _stale(out, src, settings):
         out.parent.mkdir(parents=True, exist_ok=True)
         with Image.open(src) as im:
             im = ImageOps.exif_transpose(im).convert("RGB")
             centering = (0.5, 0.5) if position == "center" else (0.5, 0.25)
             im = ImageOps.fit(im, (size, size), Image.LANCZOS, centering=centering)
             im.save(out, "WEBP", quality=84, method=4)
+        _made(out, src, settings)
     return out_rel
 
 
@@ -130,15 +163,13 @@ def media(site_path: str | None, alt: str = "", width: int = 900, cls: str = "",
         return (f'<video class="{cls} cm-loop" muted loop playsinline preload="none"{p}{label}>'
                 f'<source src="{mp4}" type="video/mp4"></video>')
     src = thumb(site_path, width)
-    size = image_size(src)
-    dims = f' width="{size[0]}" height="{size[1]}"' if size else ""
     srcset = ""
     if width >= 900:
         small = thumb(site_path, width // 2)
         if small != src:
             srcset = f' srcset="{small} {width // 2}w, {src} {width}w" sizes="{sizes or "(max-width: 700px) 100vw, 50vw"}"'
     loading = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
-    return f'<img class="{cls}" src="{src}"{srcset}{dims} alt="{esc(alt)}" {loading}>'
+    return f'<img class="{cls}" src="{src}"{srcset}{dims(src)} alt="{esc(alt)}" {loading}>'
 
 
 def lite_video(youtube: str | None = None, vimeo: str | None = None, title: str = "",
@@ -161,6 +192,6 @@ def lite_video(youtube: str | None = None, vimeo: str | None = None, title: str 
 
 
 def dims(site_path: str) -> str:
-    """ width="…" height="…" for an image (empty for SVG), to reserve its space."""
+    """ width="…" height="…" for an image (empty for an SVG without a size), to reserve its space."""
     size = image_size(site_path)
     return f' width="{size[0]}" height="{size[1]}"' if size else ""

@@ -13,7 +13,7 @@ from datetime import date
 from .config import CONTENT, DATA, DOCS, LAB_FOUNDED, SITE_URL, load
 from .featured import Story
 from .ledger import Ledger, Record, software_list
-from .people import Person
+from .people import Person, leader
 from .previews import preview_text
 from .profile import month_year, recent_talks
 from .structured import plain
@@ -28,19 +28,22 @@ PAGES = [  # (title, path) in the order of the menu
 
 def _cite(rec: Record) -> str:
     """"Venue, year. doi:..." for a publication."""
-    return f"{rec.get('venue') or ''}, {rec['year']}. https://doi.org/{rec['doi']}"
+    return f"{rec['venue']}, {rec['year']}. https://doi.org/{rec['doi']}"
 
 
 def leader_email(members: list[Person]) -> str:
     """The group leader's email (data/members/<slug>.yaml)."""
-    return next(m["email"] for m in members if m["group"] == "pi" and m["status"] == "current")
+    return leader(members)["email"]
 
 
 def _join_us_text() -> str:
     """content/join-us.md without its front matter and title (already Markdown)."""
     text = (CONTENT / "join-us.md").read_text(encoding="utf-8").split("---", 2)[2]
     lines = [ln for ln in text.strip().splitlines() if not ln.startswith("# ")]
-    return re.sub(r"<[^>]+>", "", "\n".join(lines)).strip().replace("## ", "### ") + "\n"
+    text = re.sub(r"<[^>]+>", "", "\n".join(lines)).strip().replace("## ", "### ")
+    # site links ("research.md") -> absolute page addresses, as everywhere else in this file
+    return re.sub(r"\]\((?!https?:|mailto:)([a-z0-9/-]+)\.md(#[^)]*)?\)",
+                  lambda m: f"]({SITE_URL}{m.group(1)}/{m.group(2) or ''})", text) + "\n"
 
 
 def llms_txt(site: Record, featured: list[Story], members: list[Person]) -> str:
@@ -52,7 +55,7 @@ def llms_txt(site: Record, featured: list[Story], members: list[Person]) -> str:
     lines += [f"- [{s['title']}]({SITE_URL}portfolio/{s['slug']}/): {_cite(s['pubs'][0])}" for s in featured]
     lines += ["", "## Contact", "",
               f"- Email: {leader_email(members)} (Guillaume Jacquemet, group leader)",
-              f"- [How to join the lab]({SITE_URL}join-us/): no funded positions at the moment; fellowship applicants welcome",
+              f"- [How to join the lab]({SITE_URL}join-us/): {preview_text('join-us')}",
               f"- Address: {', '.join(site['contact']['address'])}"]
     lines += ["", "## Optional", "",
               f"- [Everything above as one Markdown file]({SITE_URL}llms-full.txt): people, research, "

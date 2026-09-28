@@ -1,10 +1,8 @@
 # Copied by scripts/sync_things_done.py from things_done/ledger/registries/datasets.yaml.
 # Do not edit by hand: change things_done instead, the website updates itself.
 records:
-- id: pancreatic-cancer-endothelial-barrier-breach-dataset
-  title: Data associated with "Pancreatic cancer cells breach endothelial barriers through protrusion-driven
+- title: Data associated with "Pancreatic cancer cells breach endothelial barriers through protrusion-driven
     invasion or endothelial retraction"
-  status: active
   dataset_type: image
   start_date: '2026'
   repository_url: https://doi.org/10.5281/zenodo.22228666
@@ -13,10 +11,8 @@ records:
     barriers through protrusion-driven invasion or endothelial retraction."
   related_publication_dois:
   - 10.64898/2026.09.02.749041
-- id: fast-label-free-live-imaging-with-flowvision-reveals-key-pri
-  title: Fast label-free live imaging with FlowVision reveals key principles of cancer cell arrest on
+- title: Fast label-free live imaging with FlowVision reveals key principles of cancer cell arrest on
     endothelial monolayers
-  status: active
   dataset_type: image
   start_date: '2026'
   repository_url: https://zenodo.org/records/13846276
@@ -24,18 +20,14 @@ records:
   description: This repository contains all the data used to make the figure shown in the paper
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
-- id: filopodia-mediated-trans-endocytosis-dataset
-  title: Filopodia-mediated trans-endocytosis dataset
-  status: active
+- title: Filopodia-mediated trans-endocytosis dataset
   dataset_type: image
   start_date: '2026'
   repository_url: https://zenodo.org/records/18483147
   archive_doi: 10.5281/zenodo.18483147
   description: This repository contains the raw image and numerical data used to make the figures shown
     in the preprint.
-- id: nucleisky-preprint-dataset
-  title: NucleiSky enables cross-scale multimodal registration of microscopy data using nuclei constellations
-  status: active
+- title: NucleiSky enables cross-scale multimodal registration of microscopy data using nuclei constellations
   dataset_type: image
   start_date: '2026'
   repository_url: https://zenodo.org/records/20721416
@@ -43,17 +35,13 @@ records:
   description: Dataset associated with the NucleiSky preprint.
   related_publication_dois:
   - 10.64898/2026.06.29.735028
-- id: filopodome-proteomics-dataset
-  title: Filopodome proteomics dataset
-  status: active
+- title: Filopodome proteomics dataset
   dataset_type: image
   start_date: '2025'
   repository_url: https://zenodo.org/records/17779715
   archive_doi: 10.5281/zenodo.17779715
   description: This repository contains all the data used to make the figures shown in the paper.
-- id: immune-cells-perfusion-cd44-blocking-antibody-and-il1b-track
-  title: Immune cells perfusion CD44 Blocking Antibody and Il1b 2h and 16h tracking dataset
-  status: active
+- title: Immune cells perfusion CD44 Blocking Antibody and Il1b 2h and 16h tracking dataset
   dataset_type: image
   start_date: '2025'
   repository_url: https://zenodo.org/records/17159634
@@ -63,17 +51,13 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: myo10-turboid-in-u2-os-and-u-87-mg-cells
-  title: MYO10-TurboID in U2-OS and U-87 MG cells
-  status: active
+- title: MYO10-TurboID in U2-OS and U-87 MG cells
   dataset_type: proteomic
   start_date: '2025'
   repository_url: https://proteomecentral.proteomexchange.org/PXD067430
   description: Identification of Myosin-X (MYO10) proximal proteins using TurboID in U2-OS and U-87 MG
     cells.
-- id: nanopyx-figures-data
-  title: NanoPyx - Figures' Data
-  status: active
+- title: NanoPyx - Figures' Data
   dataset_type: image
   start_date: '2025'
   repository_url: https://doi.org/10.5281/zenodo.8318395
@@ -81,9 +65,7 @@ records:
   description: NanoPyx - Figures' Data
   related_publication_dois:
   - 10.1038/s41592-024-02562-6
-- id: photofitt-a-quantitative-framework-for-assessing-phototoxici
-  title: 'PhotoFiTT: A Quantitative Framework for Assessing Phototoxicity in Live-Cell Microscopy Experiments'
-  status: active
+- title: 'PhotoFiTT: A Quantitative Framework for Assessing Phototoxicity in Live-Cell Microscopy Experiments'
   dataset_type: image
   start_date: '2025'
   repository_url: https://www.ebi.ac.uk/biostudies/bioimages/studies/S-BIAD1269
@@ -91,9 +73,7 @@ records:
     Time Trial) as well as example data for PhotoFiTT computational framework
   related_publication_dois:
   - 10.1038/s41467-025-66209-6
-- id: sred-figure-s-data
-  title: SReD - Figure's data
-  status: active
+- title: SReD - Figure's data
   dataset_type: image
   start_date: '2025'
   repository_url: https://zenodo.org/records/13764726
@@ -101,9 +81,7 @@ records:
   description: This repository contains all the data related to the SReD paper
   related_publication_dois:
   - 10.1038/s41467-025-60709-1
-- id: cd44-blocking-antibody-perfusion-tracking-dataset
-  title: CD44 Blocking Antibody perfusion tracking dataset
-  status: active
+- title: CD44 Blocking Antibody perfusion tracking dataset
   dataset_type: image
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.13584215
@@ -113,9 +91,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: celltrackscolab-breast-cancer-cell-dataset
-  title: CellTracksColab - breast cancer cell dataset
-  status: active
+- title: CellTracksColab - breast cancer cell dataset
   dataset_type: image
   start_date: '2024'
   repository_url: https://zenodo.org/record/10539020
@@ -127,9 +103,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1371/journal.pbio.3002740
-- id: celltrackscolab-filopodia-dataset
-  title: CellTracksColab - Filopodia dataset
-  status: active
+- title: CellTracksColab - Filopodia dataset
   dataset_type: image
   start_date: '2024'
   repository_url: https://zenodo.org/record/10539196
@@ -141,9 +115,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1371/journal.pbio.3002740
-- id: celltrackscolab-t-cell-dataset-full
-  title: CellTracksColab - T cell dataset (full)
-  status: active
+- title: CellTracksColab - T cell dataset (full)
   dataset_type: image
   start_date: '2024'
   repository_url: https://zenodo.org/record/10539720
@@ -155,9 +127,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1371/journal.pbio.3002740
-- id: huvec-cd44-sirna-perfusion-tracking-dataset
-  title: HUVEC CD44 siRNA perfusion tracking dataset
-  status: active
+- title: HUVEC CD44 siRNA perfusion tracking dataset
   dataset_type: image
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.13377961
@@ -167,9 +137,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: hyaluronidase-treatment-perfusion-tracking-dataset
-  title: Hyaluronidase treatment perfusion tracking dataset
-  status: active
+- title: Hyaluronidase treatment perfusion tracking dataset
   dataset_type: image
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.13627037
@@ -179,9 +147,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: pdac-cells-cd44-sirna-perfusion-tracking-dataset
-  title: PDAC cells CD44 siRNA perfusion tracking dataset
-  status: active
+- title: PDAC cells CD44 siRNA perfusion tracking dataset
   dataset_type: image
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.13379627
@@ -191,9 +157,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: pdac-cells-vs-immune-cells-perfusion-tracking-dataset
-  title: PDAC cells vs Immune cells perfusion tracking dataset
-  status: active
+- title: PDAC cells vs Immune cells perfusion tracking dataset
   dataset_type: image
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.13643590
@@ -202,9 +166,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: pix2pix-huvec-juctions-dataset
-  title: pix2pix_HUVEC_juctions_dataset
-  status: active
+- title: pix2pix_HUVEC_juctions_dataset
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.10611092
@@ -214,9 +176,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: pix2pix-huvec-nuclei-cancer-cells-dataset
-  title: pix2pix_HUVEC_nuclei_cancer_cells_dataset
-  status: active
+- title: pix2pix_HUVEC_nuclei_cancer_cells_dataset
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.10621667
@@ -226,9 +186,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: pix2pix-huvec-nuclei-immuno-cells-dataset
-  title: pix2pix_HUVEC_nuclei_immuno_cells_dataset
-  status: active
+- title: pix2pix_HUVEC_nuclei_immuno_cells_dataset
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.10617565
@@ -238,9 +196,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: stardist-aspc1-lifeact
-  title: StarDist_AsPC1_Lifeact
-  status: active
+- title: StarDist_AsPC1_Lifeact
   dataset_type: model
   start_date: '2024'
   repository_url: https://zenodo.org/records/13442128
@@ -250,9 +206,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: stardist-bf-cancer-cell-dataset-10x
-  title: StarDist_BF_cancer_cell_dataset_10x
-  status: active
+- title: StarDist_BF_cancer_cell_dataset_10x
   dataset_type: model
   start_date: '2024'
   repository_url: https://zenodo.org/uploads/13304399
@@ -261,9 +215,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: stardist-bf-cancer-cell-dataset-20x
-  title: StarDist_BF_cancer_cell_dataset_20x
-  status: active
+- title: StarDist_BF_cancer_cell_dataset_20x
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.10572122
@@ -273,9 +225,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: stardist-bf-monocytes-dataset
-  title: StarDist_BF_Monocytes_dataset
-  status: active
+- title: StarDist_BF_Monocytes_dataset
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.10572200
@@ -284,9 +234,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: stardist-bf-neutrophil-dataset
-  title: StarDist_BF_Neutrophil_dataset
-  status: active
+- title: StarDist_BF_Neutrophil_dataset
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.10572231
@@ -295,9 +243,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: stardist-fluorescent-cells
-  title: StarDist_Fluorescent_cells
-  status: active
+- title: StarDist_Fluorescent_cells
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.10572310
@@ -307,9 +253,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: stardist-huvec-nuclei-dataset
-  title: StarDist_HUVEC_nuclei_dataset
-  status: active
+- title: StarDist_HUVEC_nuclei_dataset
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.10617532
@@ -318,9 +262,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: stardist-miapaca2-from-cd44
-  title: Stardist_MiaPaCa2_from_CD44
-  status: active
+- title: Stardist_MiaPaCa2_from_CD44
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.13442877
@@ -330,9 +272,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: stardist-tumorcell-nuclei
-  title: StarDist_TumorCell_nuclei
-  status: active
+- title: StarDist_TumorCell_nuclei
   dataset_type: model
   start_date: '2024'
   repository_url: https://doi.org/10.5281/zenodo.13443221
@@ -341,18 +281,14 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: tlnrd1-figures
-  title: TLNRD1 figures
-  status: active
+- title: TLNRD1 figures
   dataset_type: image
   start_date: '2024'
   repository_url: https://zenodo.org/records/8377287
   archive_doi: 10.5281/zenodo.8377287
   description: Raw microscopy images used to make the figures displayed in the article "TLNRD1 is a CCM
     complex component and regulates endothelial barrier integrity."
-- id: esrrf-supplementary-data
-  title: eSRRF - Supplementary Data
-  status: active
+- title: eSRRF - Supplementary Data
   dataset_type: image
   start_date: '2023'
   repository_url: https://zenodo.org/records/8325164
@@ -360,25 +296,19 @@ records:
   description: eSRRF datasets used in the manuscript
   related_publication_dois:
   - 10.1038/s41592-023-02057-w
-- id: fast4dregistration
-  title: Fast4DRegistration
-  status: active
+- title: Fast4DRegistration
   dataset_type: image
   start_date: '2023'
   repository_url: https://zenodo.org/records/6534570
   archive_doi: 10.5281/zenodo.6534570
   description: Data used in the manuscript
-- id: tlnrd1-gfp-pulldown-in-hek293t-cells
-  title: TLNRD1-GFP Pulldown in HEK293T Cells
-  status: active
+- title: TLNRD1-GFP Pulldown in HEK293T Cells
   dataset_type: proteomic
   start_date: '2023'
   repository_url: https://www.ebi.ac.uk/pride/archive/projects/PXD045258
   description: Pulldown of human TLNRD1-GFP and GFP in HEK cells for mass spectrometry analysis of binding
     partners.
-- id: training-dataset-for-fast4dreg-workshop
-  title: Training dataset for Fast4DReg workshop
-  status: active
+- title: Training dataset for Fast4DReg workshop
   dataset_type: image
   start_date: '2023'
   repository_url: https://zenodo.org/records/8347798
@@ -387,9 +317,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: cancer-cell-migration-followed-with-trackmate-model-and-training
-  title: Cancer cell migration followed with TrackMate
-  status: active
+- title: Cancer cell migration followed with TrackMate
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5206107
@@ -400,9 +328,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41556-021-00767-x
-- id: cancer-cell-migration-followed-with-trackmate
-  title: Cancer cell migration followed with TrackMate
-  status: active
+- title: Cancer cell migration followed with TrackMate
   dataset_type: image
   start_date: '2022'
   repository_url: https://zenodo.org/records/4812018
@@ -413,9 +339,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41556-021-00767-x
-- id: cell-migration-with-erk-signalling
-  title: Cell migration with ERK signalling
-  status: active
+- title: Cell migration with ERK signalling
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5205935
@@ -427,9 +351,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: rna-seq
-  title: MYO10-Filopodia Breast Tumor Xenograft Expression Dataset
-  status: active
+- title: MYO10-Filopodia Breast Tumor Xenograft Expression Dataset
   dataset_type: rna_seq
   start_date: '2022'
   repository_url: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE166898
@@ -437,9 +359,7 @@ records:
     expressing non-targeting control shRNA (4 tumors) or Myosin-X targeting shRNA (4 tumors).
   related_publication_dois:
   - 10.1016/j.devcel.2022.09.016
-- id: quantitative-comparison-of-tracking-performance-using-trackm
-  title: Quantitative comparison of tracking performance using TrackMate-Helper.
-  status: active
+- title: Quantitative comparison of tracking performance using TrackMate-Helper.
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.6087729
@@ -451,9 +371,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: segmenting-cells-in-a-spheroid-in-3d-using-2d-stardist-withi
-  title: Segmenting cells in a spheroid in 3D using 2D StarDist within TrackMate
-  status: active
+- title: Segmenting cells in a spheroid in 3D using 2D StarDist within TrackMate
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5220610
@@ -464,9 +382,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: t-cells-migration-followed-with-trackmate
-  title: T cells migration followed with TrackMate
-  status: active
+- title: T cells migration followed with TrackMate
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5206119
@@ -477,9 +393,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: tracking-breast-cancer-cells-migrating-collectively-with-tra
-  title: Tracking breast cancer cells migrating collectively with TrackMate-Cellpose
-  status: active
+- title: Tracking breast cancer cells migrating collectively with TrackMate-Cellpose
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5864646
@@ -490,9 +404,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: tracking-cell-migration-with-the-trackmate-threshold-detecto
-  title: Tracking cell migration with the TrackMate threshold detector
-  status: active
+- title: Tracking cell migration with the TrackMate threshold detector
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5220796
@@ -504,9 +416,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: tracking-focal-adhesions-with-trackmate-and-weka-tutorial-da-2
-  title: Tracking focal adhesions with TrackMate and Weka - tutorial dataset 1
-  status: active
+- title: Tracking focal adhesions with TrackMate and Weka - tutorial dataset 1
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5226842
@@ -517,9 +427,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: tracking-focal-adhesions-with-trackmate-and-weka-tutorial-da
-  title: Tracking focal adhesions with TrackMate and Weka - tutorial dataset 2
-  status: active
+- title: Tracking focal adhesions with TrackMate and Weka - tutorial dataset 2
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5978940
@@ -530,9 +438,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: tracking-glioblastoma-astrocytoma-cells-with-trackmate-cellp
-  title: Tracking Glioblastoma-astrocytoma cells with TrackMate-Cellpose
-  status: active
+- title: Tracking Glioblastoma-astrocytoma cells with TrackMate-Cellpose
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5863317
@@ -543,9 +449,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: tracking-label-images-with-trackmate
-  title: Tracking label images with TrackMate
-  status: active
+- title: Tracking label images with TrackMate
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5221424
@@ -557,9 +461,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: tracking-with-trackmate-using-mask-images-of-cell-migration
-  title: Tracking with TrackMate using mask images of cell migration
-  status: active
+- title: Tracking with TrackMate using mask images of cell migration
   dataset_type: image
   start_date: '2022'
   repository_url: https://doi.org/10.5281/zenodo.5243127
@@ -571,17 +473,13 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41592-022-01507-1
-- id: talin1-gfp-pulldown-in-u2os-cells
-  title: Talin1-GFP Pulldown in U2OS Cells
-  status: active
+- title: Talin1-GFP Pulldown in U2OS Cells
   dataset_type: proteomic
   start_date: '2021'
   repository_url: https://www.ebi.ac.uk/pride/archive/projects/PXD024634
   description: Study of human Talin1-GFP and GFP pulldown from U2OS cells plated on fibronectin, using
     mass spectrometry.
-- id: zerocostdl4mic-care-2d-example-training-and-test-dataset
-  title: ZeroCostDL4Mic - CARE (2D) example training and test dataset
-  status: active
+- title: ZeroCostDL4Mic - CARE (2D) example training and test dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://zenodo.org/records/3713330
@@ -592,9 +490,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: zerocostdl4mic-care-3d-example-training-and-test-dataset
-  title: ZeroCostDL4Mic - CARE (3D) example training and test dataset
-  status: active
+- title: ZeroCostDL4Mic - CARE (3D) example training and test dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://doi.org/10.5281/zenodo.3713337
@@ -605,9 +501,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: zerocostdl4mic-cyclegan-example-training-and-test-dataset
-  title: ZeroCostDL4Mic - CycleGAN example training and test dataset
-  status: active
+- title: ZeroCostDL4Mic - CycleGAN example training and test dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://doi.org/10.5281/zenodo.3941884
@@ -619,9 +513,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: zerocostdl4mic-deepstorm-training-and-example-dataset
-  title: ZeroCostDL4Mic - DeepSTORM training and example dataset
-  status: active
+- title: ZeroCostDL4Mic - DeepSTORM training and example dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://doi.org/10.5281/zenodo.3959089
@@ -633,9 +525,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: zerocostdl4mic-label-free-prediction-fnet-example-training-a
-  title: ZeroCostDL4Mic - Label-free prediction (fnet) example training and test dataset
-  status: active
+- title: ZeroCostDL4Mic - Label-free prediction (fnet) example training and test dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://doi.org/10.5281/zenodo.3748967
@@ -646,9 +536,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: zerocostdl4mic-noise2void-2d-example-training-and-test-datas
-  title: ZeroCostDL4Mic - Noise2Void (2D) example training and test dataset
-  status: active
+- title: ZeroCostDL4Mic - Noise2Void (2D) example training and test dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://doi.org/10.5281/zenodo.3713315
@@ -659,9 +547,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: zerocostdl4mic-noise2void-3d-example-training-and-test-datas
-  title: ZeroCostDL4Mic - Noise2Void (3D) example training and test dataset
-  status: active
+- title: ZeroCostDL4Mic - Noise2Void (3D) example training and test dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://doi.org/10.5281/zenodo.3713326
@@ -672,9 +558,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: zerocostdl4mic-pix2pix-example-training-and-test-dataset
-  title: ZeroCostDL4Mic - pix2pix example training and test dataset
-  status: active
+- title: ZeroCostDL4Mic - pix2pix example training and test dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://zenodo.org/records/3941889
@@ -685,9 +569,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: zerocostdl4mic-stardist-example-training-and-test-dataset
-  title: ZeroCostDL4Mic - Stardist example training and test dataset
-  status: active
+- title: ZeroCostDL4Mic - Stardist example training and test dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://doi.org/10.5281/zenodo.3713307
@@ -699,9 +581,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: zerocostdl4mic-yolov2-example-training-and-test-dataset
-  title: ZeroCostDL4Mic - YoloV2 example training and test dataset
-  status: active
+- title: ZeroCostDL4Mic - YoloV2 example training and test dataset
   dataset_type: image
   start_date: '2021'
   repository_url: https://doi.org/10.5281/zenodo.3941908
@@ -712,9 +592,7 @@ records:
   - model-zoo
   related_publication_dois:
   - 10.1038/s41467-021-22518-0
-- id: combining-stardist-and-trackmate-example-1-breast-cancer-cell-dataset
-  title: Combining StarDist and TrackMate example 1 - Breast cancer cell dataset
-  status: active
+- title: Combining StarDist and TrackMate example 1 - Breast cancer cell dataset
   dataset_type: image
   start_date: '2020'
   repository_url: https://doi.org/10.5281/zenodo.4034976
@@ -724,9 +602,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: combining-stardist-and-trackmate-example-2-t-cell-dataset
-  title: Combining StarDist and TrackMate example 2 - T cell dataset
-  status: active
+- title: Combining StarDist and TrackMate example 2 - T cell dataset
   dataset_type: image
   start_date: '2020'
   repository_url: https://doi.org/10.5281/zenodo.4034929
@@ -736,9 +612,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: combining-stardist-and-trackmate-example-3-flow-chamber-dataset
-  title: Combining StarDist and TrackMate example 3 - Flow chamber dataset
-  status: active
+- title: Combining StarDist and TrackMate example 3 - Flow chamber dataset
   dataset_type: image
   start_date: '2020'
   repository_url: https://doi.org/10.5281/zenodo.4034939
@@ -748,9 +622,7 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: filomap-test-dataset
-  title: FiloMap Test Dataset
-  status: active
+- title: FiloMap Test Dataset
   dataset_type: image
   start_date: '2019'
   repository_url: https://doi.org/10.5281/zenodo.5912949
@@ -760,24 +632,18 @@ records:
   dataset_tags:
   - deep-learning-ready
   - model-zoo
-- id: s-jcbd-201704045
-  title: S-JCBD-201704045
-  status: active
+- title: S-JCBD-201704045
   dataset_type: image
   start_date: '2017'
   repository_url: https://www.ebi.ac.uk/biostudies/jcb/studies/S-JCBD-201704045
   description: Raw data from figures
-- id: sharpin-gfp-pulldown-in-hek293t-cells
-  title: Sharpin-GFP Pulldown in HEK293T Cells
-  status: active
+- title: Sharpin-GFP Pulldown in HEK293T Cells
   dataset_type: proteomic
   start_date: '2017'
   repository_url: https://www.ebi.ac.uk/pride/archive/projects/PXD004734
   description: Analysis of human Sharpin-GFP and GFP pulldown from HEK293T cells, identifying binding
     partners through mass spectrometry.
-- id: plasma-membrane-endosomal-and-cytoplasmic-fractions-in-mouse
-  title: Plasma Membrane, Endosomal, and Cytoplasmic Fractions in Mouse Embryonic Fibroblast
-  status: active
+- title: Plasma Membrane, Endosomal, and Cytoplasmic Fractions in Mouse Embryonic Fibroblast
   dataset_type: proteomic
   start_date: '2015'
   repository_url: https://www.ebi.ac.uk/pride/archive/projects/PXD001870
@@ -785,17 +651,13 @@ records:
     fibroblast.
   related_publication_dois:
   - 10.1038/ncb3250
-- id: proteomic-analysis-of-filamin-a-iqgap1-rac1-and-rcc2-binding
-  title: Proteomic analysis of filamin-A, IQGAP1, Rac1 and RCC2 binding partners
-  status: active
+- title: Proteomic analysis of filamin-A, IQGAP1, Rac1 and RCC2 binding partners
   dataset_type: proteomic
   start_date: '2013'
   repository_url: https://www.ebi.ac.uk/pride/archive/projects/PRD000726
   description: Analysis of human filamin-A-GFP, IQGAP1-GFP, Rac1 and RCC2-GFP and GFP pulldown from HEK293T
     cells, identifying binding partners through mass spectrometry.
-- id: s-jcbd-201302041
-  title: S-JCBD-201302041
-  status: active
+- title: S-JCBD-201302041
   dataset_type: image
   start_date: '2013'
   repository_url: https://www.ebi.ac.uk/biostudies/jcb/studies/S-JCBD-201302041
