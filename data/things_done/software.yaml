@@ -23,7 +23,7 @@ records:
   related_publication_dois:
   - 10.64898/2026.06.29.735028
 - id: rxiv-maker
-  title: rxiv-maker
+  title: Rxiv-Maker
   start_date: '2025'
   github_repo_url: https://github.com/HenriquesLab/rxiv-maker
   description: a toolbox that converts markdown into a publication-ready PDF
@@ -101,6 +101,7 @@ records:
   github_repo_url: https://github.com/CellMigrationLab/FiloMAP
   description: ImageJ and R scripts for mapping protein localization within filopodia.
   related_publication_dois:
+  - 10.1016/j.cub.2018.11.053
   - 10.1007/978-1-0716-2887-4_4
 - id: filoquant
   title: FiloQuant
