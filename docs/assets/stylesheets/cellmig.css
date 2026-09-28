@@ -64,9 +64,11 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-main__inner { margin-top: 0; }
 .md-container { padding-top: 0; }
 
-/* Links: dark and underlined, like the original site */
-.md-typeset a { color: var(--cm-strong); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; transition: text-decoration-color .15s; }
-.md-typeset a:hover, .md-typeset a:focus { color: var(--cm-strong); text-decoration-thickness: 2px; }
+/* Text links, the same everywhere in the content: dark, thin underline, the
+   accent colour on hover; they never change weight or underline thickness.
+   (Buttons, cards and the menu and footer have their own look.) */
+.md-typeset a { color: var(--cm-strong); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; transition: color .15s; }
+.md-typeset a:hover, .md-typeset a:focus { color: var(--cm-accent-strong); text-decoration-thickness: 1px; }
 :focus-visible { outline: 2px solid var(--cm-accent-strong); outline-offset: 3px; }
 
 .md-typeset h1 { font-weight: 400; font-size: clamp(1.36rem, 3vw, 1.68rem); color: var(--cm-fg); letter-spacing: -.01em; margin: 0 0 .8em; }
@@ -204,12 +206,11 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-tile__body { padding: clamp(1.4rem, 4vw, 2.8rem); font-size: .76rem; align-self: center; }
 .md-typeset .cm-tile h2 { margin: 0 0 .88rem; font-size: clamp(1.04rem, 2.2vw, 1.32rem); font-weight: 400; letter-spacing: .08em; line-height: 1.3; color: inherit; }
 .md-typeset .cm-tile p { margin: 0 0 .72rem; }
-.md-typeset .cm-tile a { color: inherit; font-weight: 600; }
+.md-typeset .cm-tile a { color: inherit; }
 .md-typeset .cm-tile__lead { font-size: .84rem; font-weight: 500; }
 .md-typeset .cm-tile__label { margin-top: 1.12rem !important; font-size: .56rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .8; }
 .md-typeset ul.cm-tile__papers { margin: 0 0 .8rem; padding: 0; list-style: none; font-size: .68rem; }
 .md-typeset .cm-tile__papers li { margin: 0 0 .36rem; padding-left: .72rem; border-left: 2px solid currentColor; line-height: 1.45; }
-.md-typeset .cm-tile__papers a { font-weight: 500; }
 .md-typeset .cm-ref__meta { color: var(--cm-muted); }   /* the journal · year of a short reference */
 .md-typeset .cm-tile__credit { margin-top: .96rem !important; font-size: .624rem; opacity: .85; }
 .md-typeset .cm-tile__links { margin-top: 1.12rem !important; font-size: .68rem; }
@@ -218,6 +219,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-tile--lavender { background: var(--cm-accent-soft); color: #1d1330; }
 .cm-tile--light { background: var(--cm-soft); }
 .cm-tile--purple { background: var(--cm-accent-deep); color: #f5f0fb; }
+.md-typeset .cm-tile--purple a:hover, .md-typeset .cm-tile--purple a:focus { color: var(--cm-accent-soft); }   /* the accent would vanish on purple */
 .cm-tile--white .cm-tile__media, .cm-tile--lavender .cm-tile__media, .cm-tile--light .cm-tile__media { background: transparent; }
 
 @media (max-width: 48rem) {
@@ -275,14 +277,11 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-pubs > li { margin: 0; padding: 1.04rem 0; border-bottom: 1px solid var(--cm-line); }
 .md-typeset .cm-pub p { margin: .12rem 0; }
 .md-typeset .cm-pub__title { margin: 0 0 .24rem; font-size: .816rem; font-weight: 500; line-height: 1.45; }
-.md-typeset .cm-pub__title a { text-decoration: none; }
-.md-typeset .cm-pub__title a:hover { text-decoration: underline; }
 .md-typeset .cm-pub__authors { font-size: .68rem; line-height: 1.55; color: var(--cm-muted); }
 .cm-author--lab { color: var(--cm-accent-strong); font-weight: 600; background: linear-gradient(transparent 62%, var(--cm-highlight) 62%); }
 .cm-more { font-style: italic; }
 .md-typeset .cm-pub__venue { font-size: .68rem; color: var(--cm-fg); }
-.md-typeset .cm-doi { color: var(--cm-muted); text-decoration: none; }
-.md-typeset .cm-doi:hover { color: var(--cm-strong); text-decoration: underline; }
+.md-typeset .cm-doi { color: var(--cm-muted); }
 .md-typeset .cm-pub__links { font-size: .656rem; }
 .md-typeset details.cm-pub__abstract { display: block; margin: .4rem 0 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: none; color: inherit; font-size: .68rem; }
 .md-typeset details.cm-pub__abstract > summary { display: inline-block; margin: 0; padding: 0; border: 0; background: none; font-weight: 400; }
@@ -327,8 +326,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-related h2 { margin: 0 0 .4rem; font-size: .576rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--cm-muted); }
 .md-typeset .cm-related ul { margin: 0; padding-left: .8rem; font-size: .72rem; }
 .cm-pager { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin: 3.2rem 0 0; padding-top: 1.2rem; border-top: 1px solid var(--cm-line); }
-.md-typeset .cm-pager a { display: block; font-size: .72rem; line-height: 1.4; text-decoration: none; color: var(--cm-strong); }
-.md-typeset .cm-pager a:hover { text-decoration: underline; }
+.md-typeset .cm-pager a { display: block; font-size: .72rem; line-height: 1.4; }
 .cm-pager a span { display: block; margin-bottom: .16rem; font-size: .56rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cm-muted); }
 .cm-pager__next { grid-column: 2; text-align: right; }
 
@@ -349,8 +347,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset ul.cm-datasets { margin: 0 !important; padding: 0 !important; list-style: none; }
 .md-typeset .cm-datasets li { margin: 0; padding: .8rem 0; border-bottom: 1px solid var(--cm-line); }
 .md-typeset .cm-datasets p { margin: .16rem 0; font-size: .72rem; }
-.md-typeset .cm-datasets__title { font-weight: 500; text-decoration: none; }
-.md-typeset .cm-datasets__title:hover { text-decoration: underline; }
+.md-typeset .cm-datasets__title { font-weight: 500; }
 
 /* ------------------------------------------------------------------ gallery */
 
@@ -473,8 +470,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-toplist__name { color: var(--cm-strong); font-weight: 500; }
 .cm-toplist__bar { height: .4rem; background: var(--cm-soft); border-radius: .2rem; overflow: hidden; }
 .cm-toplist__bar span { display: block; height: 100%; background: var(--cm-accent); border-radius: .2rem; }
-.md-typeset .cm-toplist__n { text-align: right; color: var(--cm-fg); text-decoration: none; font-variant-numeric: tabular-nums; }
-.md-typeset .cm-toplist__n:hover { text-decoration: underline; }
+.md-typeset .cm-toplist__n { text-align: right; font-variant-numeric: tabular-nums; }
 .cm-toplist__years { color: var(--cm-muted); font-size: .62rem; font-variant-numeric: tabular-nums; }
 @media (max-width: 36rem) { [dir] .md-typeset .cm-toplist > li { grid-template-columns: minmax(0, 1fr) 4.2rem; } .cm-toplist__bar, .cm-toplist__years { display: none; } }
 .cm-map { max-width: 40rem; margin: 0 auto; }   /* compact: the map does not need the full wide column */
