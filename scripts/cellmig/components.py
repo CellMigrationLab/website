@@ -55,7 +55,7 @@ def citation(rec: Record, lab: set[str], ledger: Ledger, story_url: str | None =
     year = f' · {rec["year"]}' if rec.get("year") else ""
     parts = [
         f'<{heading} class="cm-pub__title"><a href="https://doi.org/{esc(doi)}">{esc(rec["title"])}</a></{heading}>',
-        f'<p class="cm-pub__authors">{author_list(rec.get("authors") or [], lab)}</p>',
+        f'<p class="cm-pub__authors">{author_list(rec["authors"], lab)}</p>',
         f'<p class="cm-pub__venue"><em>{esc(rec.get("venue") or "")}</em>{year}'
         f' · <a class="cm-doi" href="https://doi.org/{esc(doi)}">doi:{esc(doi)}</a> {badges(rec)}</p>',
     ]
@@ -78,10 +78,13 @@ def feature_card(story: Story) -> str:
 
 
 def logo_row(items: list[Record]) -> str:
-    """Row of linked logos (funders)."""
-    lis = "".join(f'<li><a href="{esc(it["url"])}" title="{esc(it["name"])}">'
-                  f'<img src="{thumb(it["logo"], 400)}"{dims(thumb(it["logo"], 400))} alt="{esc(it["name"])}" loading="lazy"></a></li>'
-                  for it in items)
+    """Row of linked logos (funders); an item with `logo: null` is shown as its name."""
+    def content(it: Record) -> str:
+        if it["logo"] is None:
+            return f'<span class="cm-logos__text">{esc(it["name"])}</span>'
+        src = thumb(it["logo"], 400)
+        return f'<img src="{src}"{dims(src)} alt="{esc(it["name"])}" loading="lazy">'
+    lis = "".join(f'<li><a href="{esc(it["url"])}" title="{esc(it["name"])}">{content(it)}</a></li>' for it in items)
     return f'<ul class="cm-logos">{lis}</ul>'
 
 

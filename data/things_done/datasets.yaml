@@ -692,7 +692,8 @@ records:
   start_date: '2021'
   repository_url: https://doi.org/10.5281/zenodo.3713307
   archive_doi: 10.5281/zenodo.3713307
-  description: Description not provided
+  description: DCIS.COM LifeAct-RFP cells stained with SiR-DNA and imaged by spinning-disk confocal microscopy
+    (20x), paired with manually segmented nuclei masks for training StarDist in ZeroCostDL4Mic.
   dataset_tags:
   - deep-learning-ready
   - model-zoo

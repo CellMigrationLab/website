@@ -18,7 +18,7 @@ The same items feed docs/news.md and the RSS feed (site_files.write_feed).
 from typing import Any
 
 from .featured import Story, story_by_doi
-from .ledger import Ledger, software_list
+from .ledger import Ledger, funder_names, software_list
 from .page import Page
 from .previews import preview
 from .profile import MONTHS
@@ -81,9 +81,9 @@ def _papers(ledger: Ledger, featured: list[Story]) -> list[NewsItem]:
 def _activities(ledger: Ledger) -> list[NewsItem]:
     """Keynotes and plenaries, events organised or chaired."""
     out = [_item(t["date"], "talk", t["title"],
-                 f'{"Keynote" if t["talk_kind"] == "keynote" else "Plenary talk"} at {esc(t.get("event_name") or "")}: '
-                 f'“{esc(t["title"])}”', "online-lectures/#recent-talks")
-           for t in ledger.talks if t.get("talk_kind") in ("keynote", "plenary")]
+                 f'{"Keynote" if t["talk_kind"] == "keynote" else "Plenary talk"} at {esc(t["event_name"])}: '
+                 f'“{esc(t["title"])}”', None)
+           for t in ledger.talks if t["talk_kind"] in ("keynote", "plenary")]
     out += [_item(e["start_date"], "event", e["event_name"],
                   f'{esc(e["title"])}, {esc(e["event_name"])}' + (f' ({esc(e["location"])})' if e.get("location") else ""),
                   None)
@@ -93,13 +93,13 @@ def _activities(ledger: Ledger) -> list[NewsItem]:
 
 def _funding_and_roles(ledger: Ledger) -> list[NewsItem]:
     """New grants and the group leader's new positions and editorial roles."""
-    out = [_item(g["start_date"], "funding", g["title"], f'New funding: {esc(g["title"])} ({esc(g["funder"])})', None)
-           for g in ledger.grants if g.get("start_date") and g.get("status") in ("active", "awarded", "completed")]
+    out = [_item(g["start_date"], "funding", g["title"], f'New funding: {esc(g["title"])} ({esc(", ".join(funder_names(g)))})', None)
+           for g in ledger.grants if g.get("start_date") and g["status"] in ("active", "awarded", "completed")]
     prof = ledger.profile
     for key in ("appointments", "editorial"):
         out += [_item(r["start_date"], "position", r["title"],
                       f'{esc(prof["name"])} becomes {esc(r["title"])}, {esc(r["organization"])}', "about-us/#group-leader")
-                for r in prof.get(key) or [] if r.get("start_date")]
+                for r in prof[key]]
     return out
 
 

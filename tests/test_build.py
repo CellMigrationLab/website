@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 from cellmig import featured, ledger
 from cellmig.charts import lag_section
-from cellmig.components import badges
+from cellmig.components import badges, logo_row
 from cellmig.pages_papers import publication_filter_kind
 from cellmig.page import Page
 from cellmig.people import is_lab_member, lab_names
@@ -168,15 +168,22 @@ class AffiliationTests(unittest.TestCase):
 class FundingTests(unittest.TestCase):
     def test_current_funders_only_and_strict(self):
         led = fake_ledger([])
-        led.grants = [{"funder": "Wellcome Trust", "status": "active", "end_date": "2027-12-31"},
-                      {"funder": "EMBO", "status": "completed", "end_date": "2016-12-31"},
-                      {"funder": "Old", "status": "active", "end_date": "2020-01-01"}]
-        ok = [{"funder": "Wellcome Trust", "name": "Wellcome", "logo": "w.svg"}]
+        led.grants = [{"funders": [{"name": "Wellcome Trust"}, {"name": "Chan Zuckerberg Initiative"}],
+                       "status": "active", "end_date": "2027-12-31"},              # co-funded award
+                      {"funders": [{"name": "EMBO"}], "status": "completed", "end_date": "2016-12-31"},
+                      {"funders": [{"name": "Old"}], "status": "active", "end_date": "2020-01-01"}]
+        ok = [{"funder": "Wellcome Trust", "name": "Wellcome", "logo": "w.svg"},
+              {"funder": "Chan Zuckerberg Initiative", "name": "CZI", "logo": None}]
         self.assertEqual(ledger.funding_list(ok, led, "2026-09-27"), ok)
         with self.assertRaises(SystemExit):            # EMBO no longer funds anything
             ledger.funding_list(ok + [{"funder": "EMBO"}], led, "2026-09-27")
-        with self.assertRaises(SystemExit):            # Wellcome has no logo entry
-            ledger.funding_list([], led, "2026-09-27")
+        with self.assertRaises(SystemExit):            # the co-funder CZI has no entry
+            ledger.funding_list(ok[:1], led, "2026-09-27")
+
+    def test_logo_row_text_only_entry(self):
+        html = logo_row([{"name": "ImmuDocs", "url": "https://example.org/", "logo": None}])
+        self.assertIn('<span class="cm-logos__text">ImmuDocs</span>', html)
+        self.assertNotIn("<img", html)
 
 
 class TalkTests(unittest.TestCase):
