@@ -5,7 +5,7 @@ import re
 
 import yaml
 
-from .components import SOFTWARE_DATA, oa_badge, section_nav, section_title, tile
+from .components import SOFTWARE_DATA, paper_link, paper_ref, section_nav, section_title, tile
 from . import rights
 from .config import (
     CONTENT,
@@ -42,9 +42,7 @@ def _theme(t: Record, ledger: Ledger) -> str:
         fail(f"data/research.yaml ({t['title']}): a paper is listed twice {sorted({d for d in dois if dois.count(d) > 1})}")
     if papers:
         body.append('<p class="cm-tile__label">Selected papers</p><ul class="cm-tile__papers">')
-        body += [f'<li><a href="https://doi.org/{esc(r["doi"])}">{esc(r["title"])}</a>'
-                 f' <span>{esc(r["venue"])}, {r["year"]}</span>'
-                 f' {oa_badge(r)}</li>' for r in papers]   # a preprint shows as such by its venue (bioRxiv)
+        body += [f'<li>{paper_ref(r)}</li>' for r in papers]
         body.append("</ul>")
     caption = " ".join(x for x in (t.get("credit"), rights.credit(t["image"]) if t.get("image") else "") if x)
     if caption:   # `credit` in research.yaml is the caption; the © line comes from data/media.yaml
@@ -81,11 +79,7 @@ def _software_body(s: Record) -> str:
     title = f'{s["title"]} ({s["year"]})' if s.get("year") else s["title"]
     text = md(s.get("text") or "")
     papers = s["papers"]   # never empty (software_list); journal versions once published
-    if len(papers) == 1:
-        links = [f'<a href="https://doi.org/{esc(papers[0]["doi"])}">Read our paper</a>']
-    else:
-        links = ["Read our papers: " + ", ".join(
-            f'<a href="https://doi.org/{esc(r["doi"])}">{esc(r["venue"])}, {r["year"]}</a>' for r in papers)]
+    links = [("Paper: " if len(papers) == 1 else "Papers: ") + ", ".join(paper_link(r) for r in papers)]
     host = "GitHub" if "github.com" in s["github"] else "Code"
     links.append(f'<a href="{esc(s["github"])}">Find {esc(s["title"])} on {host}</a>')
     links += [f'<a href="{esc(link["url"])}">{esc(link["label"])}</a>' for link in s.get("links") or []]
@@ -128,7 +122,7 @@ def _dataset_type(d: Record) -> str:
 def _dataset(d: Record, ledger: Ledger) -> str:
     """One dataset: title, description, year, archive DOI and papers."""
     papers = ledger.dataset_papers(d)
-    refs = [f'<a href="https://doi.org/{esc(rec["doi"])}">{esc(rec["venue"])}, {rec["year"]}</a>' for rec in papers]
+    refs = [paper_link(rec) for rec in papers]
     # what the search box matches: the dataset and its papers (title, authors, journal, year, DOI)
     text = " ".join([d["title"], d["description"], d.get("archive_doi") or "",
                      *(f'{r["title"]} {" ".join(r["authors"])} {r["venue"]} {r["year"]} {r["doi"]}' for r in papers)]).lower()
@@ -138,7 +132,7 @@ def _dataset(d: Record, ledger: Ledger) -> str:
     return (f'<li data-search="{esc(text)}"><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>'
             f'<p>{md(d["description"], inline=True)}</p>'
             f'<p class="cm-small">{year_of(d["start_date"])}{archive_html}'
-            f' · Paper: {", ".join(refs)}</p></li>')   # every dataset has one (Ledger.dataset_papers)
+            f' · {"Paper" if len(refs) == 1 else "Papers"}: {", ".join(refs)}</p></li>')   # every dataset has one (Ledger.dataset_papers)
 
 
 def page_datasets(ledger: Ledger, site: Record) -> None:

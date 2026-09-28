@@ -138,6 +138,14 @@ class LedgerTests(unittest.TestCase):
         self.assertEqual(paper_picture(["10.1101/pre"], stories, led), ("assets/images/j.png", "contain"))
         self.assertIsNone(paper_picture(["10.1101/pre"], [dict(stories[0], image=None)], led))
 
+    def test_short_paper_references_share_one_form(self):
+        from cellmig.components import paper_link, paper_ref
+        rec = pub("10.1101/x", 2025, "preprint", "X", venue="bioRxiv", open_access_status="green")
+        self.assertEqual(paper_link(rec), '<a href="https://doi.org/10.1101/x"><em class="cm-venue">bioRxiv</em> · 2025</a>'
+                         '<span class="cm-badge cm-badge--oa" title="Open access">Open access</span>')
+        self.assertIn('<span class="cm-ref__meta"><em class="cm-venue">bioRxiv</em> · 2025</span>', paper_ref(rec))
+        self.assertNotIn("Preprint", paper_ref(rec))   # the venue says it; only the full citation has the badge
+
     def test_dataset_search_covers_its_papers(self):
         from cellmig.pages_content import _dataset
         led = fake_ledger([PRE, JOURNAL])
