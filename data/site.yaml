@@ -41,6 +41,9 @@ social:
     url: mailto:guillaume.jacquemet@abo.fi
 
 # Logos: `logo` is shown on white (home page), `logo_dark` in the dark footer.
+# Home-page logos are sized to the same visual area with their proportions
+# kept (scripts/cellmig/components.py logo_size); an optional `scale` (e.g.
+# 1.2) corrects one whose artwork has unusual whitespace. Never stretch a file.
 affiliations:
   # Which affiliations are shown comes from things_done
   # (ledger/profile/affiliations.yaml, current ones); this list adds the logo
@@ -102,6 +105,7 @@ funding:
     name: Wellcome
     url: https://wellcome.org/
     logo: assets/images/logos/wellcome.svg
+    scale: 0.85   # a solid block looks heavier than a word mark
   - funder: Chan Zuckerberg Initiative
     name: Chan Zuckerberg Initiative
     url: https://chanzuckerberg.com/
