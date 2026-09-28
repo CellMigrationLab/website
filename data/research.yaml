@@ -1,7 +1,6 @@
-# Research themes on https://cellmig.org/research/ (one coloured tile each).
+# Research themes on https://cellmig.org/research/ (one tile each; tile colours
+# follow each other down the page, scripts/cellmig/config.py TILE_SURFACES).
 #
-#   color:   (optional) dark; tiles otherwise alternate white and light, so the
-#            microscopy carries the colour (#25)
 #   fit:     (optional) contain for a logo or diagram; pictures fill the tile
 #            (cover) otherwise
 #   image:   picture next to the text (a .gif is played as a short video)

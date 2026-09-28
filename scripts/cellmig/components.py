@@ -2,7 +2,7 @@
 
 import re
 
-from .config import COLORS, FITS, fail
+from .config import FITS, TILE_SURFACES, fail
 from .featured import Story
 from .icons import ICONS
 from .images import image_size, media, square_thumb, thumb
@@ -146,18 +146,15 @@ def support_row(groups: list[Record]) -> str:
             items += [p] if p["logo"] is not None else []
     return logo_row(items)
 
-def tile(position: int, media_html: str, body_html: str, color: str | None = None,
-         fit: str | None = None) -> str:
+def tile(index: int, media_html: str, body_html: str, fit: str | None = None, picture_right_first: bool = False) -> str:
     """Two-column block (picture + text) used on Research and Software (#25):
-    tiles alternate white and light and picture side by `position`; `color:
-    dark` (data file) overrides the surface; `fit: contain` shows a logo or
-    drawing whole instead of filling the tile."""
-    if color is not None and color not in COLORS:
-        fail(f"tile colour {color!r}: the only override is {sorted(COLORS)} (tiles alternate white and light)")
+    the surface follows TILE_SURFACES in turn by `index`; the picture side
+    alternates (starting on the right with `picture_right_first`); `fit:
+    contain` shows a logo or drawing whole instead of filling the tile."""
     if fit is not None and fit not in FITS:
         fail(f"media fit {fit!r} is not one of {sorted(FITS)}")
-    surface = color or ("white" if position % 2 == 0 else "light")
-    side = " cm-tile--right" if position % 2 == 1 else ""
+    surface = TILE_SURFACES[index % len(TILE_SURFACES)]
+    side = " cm-tile--right" if (index + picture_right_first) % 2 == 1 else ""
     media_part = f'<div class="cm-tile__media{" cm-fit-contain" if fit == "contain" else ""}">{media_html}</div>' if media_html else ""
     text_only = "" if media_html else " cm-tile--text"
     return (f'<section class="cm-tile cm-tile--{surface}{side}{text_only}">'

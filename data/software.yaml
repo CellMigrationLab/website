@@ -5,8 +5,6 @@
 # automatically). This file only adds the website presentation:
 #
 #   id:      the project id in the ledger (ledger/registries/software.yaml)
-#   color:   (optional) dark, for dark artwork; tiles otherwise alternate white
-#            and light (#25)
 #   fit:     (optional) contain for a logo, screenshot or drawing (shown whole,
 #            with a margin); pictures fill the tile (cover) otherwise
 #   image:   picture or logo shown next to the text (a .gif is played as a video)
@@ -22,7 +20,6 @@
 # `year` and `github`/`paper` itself.
 
 - id: nucleisky
-  color: dark
   image: wp-content/uploads/2026/07/gemini_generated_image_kc5ezfkc5ezfkc5e.png
   text: >-
     NucleiSky registers microscopy images in 2D and 3D by matching the spatial arrangement of
@@ -52,7 +49,6 @@
 
 - id: rxiv-maker
   title: Rxiv-Maker
-  color: dark
   image: wp-content/uploads/2026/07/logo-rxiv-maker.png
   fit: contain
   paper: https://arxiv.org/abs/2508.00836

@@ -56,6 +56,13 @@ def _theme(t: Record, ledger: Ledger) -> str:
     return "\n".join(body)
 
 
+def _no_colour(entry: Record, source: str) -> None:
+    """Tiles take their colour from their place (config.TILE_SURFACES)."""
+    if "color" in entry:
+        fail(f"{source} ({entry.get('title') or entry.get('id')}): remove `color`; "
+             "tile colours follow each other down the page")
+
+
 def page_research(ledger: Ledger) -> None:
     """docs/research.md from data/research.yaml: videos, then one tile per theme."""
     research = load(DATA / "research.yaml")
@@ -67,7 +74,8 @@ def page_research(ledger: Ledger) -> None:
             f'<figcaption>{esc(v["title"])}</figcaption></figure>' for v in research.get("videos") or []))
     p.add("</div>", '<div class="cm-wide">')
     for i, t in enumerate(research["themes"]):
-        p.add(tile(i, media(t.get("image"), t.get("credit", ""), 1000), _theme(t, ledger), t.get("color"), t.get("fit")))
+        _no_colour(t, "data/research.yaml")
+        p.add(tile(i, media(t.get("image"), t.get("credit", ""), 1000), _theme(t, ledger), t.get("fit")))
     p.add("</div>", f'<p class="cm-cta">{papers}</p>')
     p.write()
 
@@ -100,7 +108,8 @@ def page_software(ledger: Ledger) -> None:
           '<a href="datasets/">our datasets, models and materials</a>.</p>', '<div class="cm-wide">')
     for i, s in enumerate(projects):
         pic = media(s.get("video") or s.get("image"), f'{s["title"]} logo' if s.get("image") else "", 900)
-        p.add(tile(i + 1, pic, _software_body(s), s.get("color"), s.get("fit")))   # +1: picture on the right first, as before
+        _no_colour(s, "data/software.yaml")
+        p.add(tile(i, pic, _software_body(s), s.get("fit"), picture_right_first=True))   # as before
     p.add("</div>", f'<p class="cm-cta">{BROWSE_PUBLICATIONS} '
           '<a class="cm-button cm-button--ghost" href="https://github.com/CellMigrationLab">CellMigrationLab on GitHub</a></p>')
     p.write()

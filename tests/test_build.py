@@ -488,14 +488,19 @@ class ResearchThemeTests(unittest.TestCase):
 
 
 class VisualSystemTests(unittest.TestCase):
-    def test_tiles_alternate_and_fit_is_explicit(self):
-        """#25: tiles alternate white/light, `dark` is the only colour override,
-        and `fit: contain` is set in the data, not guessed from file names."""
+    def test_tiles_cycle_the_surfaces_and_fit_is_explicit(self):
+        """Tiles take white, lavender, light and purple in turn; the picture side
+        alternates; `fit: contain` is set in the data, not guessed from file names."""
         from cellmig.components import tile
-        self.assertIn("cm-tile--white", tile(0, "<img>", "t"))
-        self.assertIn("cm-tile--light cm-tile--right", tile(1, "<img>", "t"))
-        self.assertIn("cm-tile--dark", tile(2, "<img>", "t", "dark"))
+        self.assertEqual([tile(i, "<img>", "t").split('"')[1] for i in range(5)],
+                         ["cm-tile cm-tile--white", "cm-tile cm-tile--lavender cm-tile--right", "cm-tile cm-tile--light",
+                          "cm-tile cm-tile--purple cm-tile--right", "cm-tile cm-tile--white"])
+        self.assertIn("cm-tile--white cm-tile--right", tile(0, "<img>", "t", picture_right_first=True))
         self.assertIn("cm-fit-contain", tile(0, "<img>", "t", fit="contain"))
-        for bad in ({"color": "purple"}, {"fit": "stretch"}):
-            with self.subTest(bad=bad), self.assertRaises(SystemExit):
-                tile(0, "<img>", "t", **bad)
+        with self.assertRaises(SystemExit):
+            tile(0, "<img>", "t", fit="stretch")
+
+    def test_data_files_set_no_tile_colour(self):
+        from cellmig.pages_content import _no_colour
+        with self.assertRaises(SystemExit):
+            _no_colour({"title": "T", "color": "dark"}, "data/research.yaml")

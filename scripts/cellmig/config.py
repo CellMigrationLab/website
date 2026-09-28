@@ -40,10 +40,10 @@ GENERATED = [
 # to describe it better).
 UNCAPTIONED_ALT = "Microscopy image from the Cell Migration Lab"
 
-# Background colours a tile may use (cm-tile--<colour> in cellmig.css).
-# Tiles (Research, Software) alternate white and light; `color: dark` is the
-# only override (#25: the microscopy and artwork carry the colour).
-COLORS = {"dark"}
+# Tile surfaces (cm-tile--<name> in cellmig.css), in turn down the Research
+# and Software pages: the lab's purple in four strengths (owner's choice,
+# option A). A tile's colour comes only from its place; data files set none.
+TILE_SURFACES = ("white", "lavender", "light", "purple")
 FITS = {"cover", "contain"}   # optional `fit` of a picture; cover (fill) unless contain
 
 # Roster groups, in the order people are listed on the members page.
