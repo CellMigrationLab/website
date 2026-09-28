@@ -54,7 +54,7 @@ class TextTests(unittest.TestCase):
 
 class PublicationSemanticsTests(unittest.TestCase):
     def test_oa_badge_requires_explicit_open_state(self):
-        for state in ("gold", "hybrid", "green", "bronze"):
+        for state in ("gold", "diamond", "hybrid", "green", "bronze"):
             with self.subTest(state=state):
                 self.assertIn("Open access", badges({"status": "published", "open_access_status": state}))
         for state in (None, "closed", "unknown"):
