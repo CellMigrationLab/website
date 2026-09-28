@@ -138,6 +138,14 @@ class LedgerTests(unittest.TestCase):
         self.assertEqual(paper_picture(["10.1101/pre"], stories, led), ("assets/images/j.png", "contain"))
         self.assertIsNone(paper_picture(["10.1101/pre"], [dict(stories[0], image=None)], led))
 
+    def test_dataset_search_covers_its_papers(self):
+        from cellmig.pages_content import _dataset
+        led = fake_ledger([PRE, JOURNAL])
+        html = _dataset({"title": "Cells", "description": "Movies.", "start_date": "2024", "repository_url": "https://z/1",
+                         "related_publication_dois": ["10.1101/pre"]}, led)
+        self.assertIn('data-search="cells movies.', html)
+        self.assertIn("journal a. author j. cell sci. 2024 10.1/j", html)   # the journal version's title, authors, venue
+
     def test_dataset_papers_follow_preprints_and_are_required(self):
         led = fake_ledger([PRE, JOURNAL])
         self.assertEqual([r["doi"] for r in led.dataset_papers({"title": "D", "related_publication_dois": ["10.1101/pre", "10.1/j"]})],

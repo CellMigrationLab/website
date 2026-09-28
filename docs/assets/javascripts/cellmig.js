@@ -111,15 +111,18 @@
     });
   }
 
-  // Publication search and filter
-  function initPublications() {
+  // Search (and optional kind chips) over a list: Publications and Datasets.
+  // Items carry data-search (lower-case text) and, with chips, data-kind; a
+  // [data-cm-group] section (a year, a data type) hides when none of its items shows.
+  function initFilter() {
     const form = document.querySelector("[data-cm-filter]");
     if (!form) return;
     const search = form.querySelector("[data-cm-search]");
     const chips = [...form.querySelectorAll("[data-cm-kind]")];
     const count = form.querySelector("[data-cm-count]");
-    const items = [...document.querySelectorAll(".cm-pub[data-search]")];
-    const years = [...document.querySelectorAll("[data-cm-year]")];
+    const noun = form.dataset.cmFilter;
+    const items = [...document.querySelectorAll("[data-search]")];
+    const groups = [...document.querySelectorAll("[data-cm-group]")];
     let kind = "";
     const params = new URLSearchParams(location.search);
     if (params.get("q")) search.value = params.get("q");
@@ -131,8 +134,8 @@
         li.hidden = !ok;
         if (ok) shown++;
       });
-      years.forEach((y) => { y.hidden = !y.querySelector(".cm-pub:not([hidden])"); });
-      count.textContent = shown === items.length ? `${items.length} publications` : `${shown} of ${items.length} publications`;
+      groups.forEach((g) => { g.hidden = !g.querySelector("[data-search]:not([hidden])"); });
+      count.textContent = shown === items.length ? `${items.length} ${noun}` : `${shown} of ${items.length} ${noun}`;
     };
     search.addEventListener("input", apply);
     chips.forEach((c) => c.addEventListener("click", () => {
@@ -172,7 +175,7 @@
     initVideos();
     initLoops();
     initLightbox();
-    initPublications();
+    initFilter();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

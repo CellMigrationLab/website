@@ -127,12 +127,15 @@ def _dataset_type(d: Record) -> str:
 
 def _dataset(d: Record, ledger: Ledger) -> str:
     """One dataset: title, description, year, archive DOI and papers."""
-    refs = [f'<a href="https://doi.org/{esc(rec["doi"])}">{esc(rec["venue"])}, {rec["year"]}</a>'
-            for rec in ledger.dataset_papers(d)]
+    papers = ledger.dataset_papers(d)
+    refs = [f'<a href="https://doi.org/{esc(rec["doi"])}">{esc(rec["venue"])}, {rec["year"]}</a>' for rec in papers]
+    # what the search box matches: the dataset and its papers (title, authors, journal, year, DOI)
+    text = " ".join([d["title"], d["description"], d.get("archive_doi") or "",
+                     *(f'{r["title"]} {" ".join(r["authors"])} {r["venue"]} {r["year"]} {r["doi"]}' for r in papers)]).lower()
     archive = d.get("archive_doi")
     archive_html = (f' · <a href="https://doi.org/{esc(archive)}">doi:{esc(archive)}</a>'
                     if archive and archive not in d["repository_url"] else "")
-    return (f'<li><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>'
+    return (f'<li data-search="{esc(text)}"><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>'
             f'<p>{md(d["description"], inline=True)}</p>'
             f'<p class="cm-small">{year_of(d["start_date"])}{archive_html}'
             f' · Paper: {", ".join(refs)}</p></li>')   # every dataset has one (Ledger.dataset_papers)
@@ -153,12 +156,17 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     groups: dict[str, list[Record]] = {}
     for d in ledger.datasets:
         groups.setdefault(_dataset_type(d), []).append(d)
-    order = [g for g in DATASET_TYPES.values() if g in groups]
+    order = [g for g in dict.fromkeys(DATASET_TYPES.values()) if g in groups]
     p.add('<nav class="cm-toc-inline">' + " · ".join(
-        f'<a href="#{slugify(g)}">{esc(g)} ({len(groups[g])})</a>' for g in order) + "</nav>")
+        f'<a href="#{slugify(g)}">{esc(g)} ({len(groups[g])})</a>' for g in order) + "</nav>",
+          '<form class="cm-filter" data-cm-filter="datasets" role="search" onsubmit="return false">',
+          '<label class="cm-visually-hidden" for="dataset-search">Search datasets</label>',
+          '<input id="dataset-search" type="search" placeholder="Search name, description or paper…" data-cm-search>',
+          '<p class="cm-filter__count" data-cm-count aria-live="polite"></p>',
+          "</form>")
     for g in order:
-        p.add(f'<h2 id="{slugify(g)}">{esc(g)}</h2>', '<ul class="cm-datasets">',
-              *(_dataset(d, ledger) for d in groups[g]), "</ul>")
+        p.add(f'<section data-cm-group><h2 id="{slugify(g)}">{esc(g)}</h2><ul class="cm-datasets">',
+              *(_dataset(d, ledger) for d in groups[g]), "</ul></section>")
     p.write()
 
 
