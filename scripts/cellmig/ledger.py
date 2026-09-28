@@ -173,25 +173,33 @@ AFFILIATION_RELATIONS = ("parent", "member", "leader")
 
 
 def support_list(funders: list[Record], programmes: list[Record], ledger: Ledger) -> list[Record]:
-    """Current research support for the home page, grouped by meaning
-    (website#27), from the grants things_done marks `current`:
+    """Current research support (home-page logo row, llms-full.txt and the
+    JSON-LD funders), grouped by meaning (website#27), from the grants
+    things_done marks `current`:
 
-    - a funder (logo and link from data/site.yaml `funding`), with, beneath
-      it, the programmes it alone funds (e.g. the Research Council of
-      Finland -> Centre of Excellence IMMENs);
+    - a funder (logo and link from data/site.yaml `funding`), with the
+      programmes it alone funds (e.g. the Research Council of Finland ->
+      Centre of Excellence IMMENs);
     - a programme with several direct funders (e.g. EOSS Cycle 6: Wellcome
       and the Chan Zuckerberg Initiative) as one group with their logos and
-      the programme's co-funders (ledger `program_cofunders`) named in text.
-      A funder whose only current grants are such awards has no tile of its
-      own, so an award is never shown twice.
+      the programme's co-funders (ledger `program_cofunders`). A funder
+      whose only current grants are such awards has no group of its own,
+      so an award is never listed twice.
 
     Programmes are matched by the ledger `program` (data/site.yaml
-    `programmes`: program, name, url, logo). Strict like _presentation():
-    a current funder or programme without an entry stops the build; an
-    entry that is no longer current is left out with a warning."""
-    current = [g for g in ledger.grants if g["current"]]
+    `programmes`: program, name, url, logo, optional `scheme` mark with
+    name, url and logo). Strict like _presentation(): a current funder or
+    programme without an entry stops the build; an entry that is no longer
+    current is left out with a warning. A funder marked `hide: true` is left
+    out by choice, with the grants it alone funds."""
+    bad = [p["program"] for p in programmes if "scheme" in p and set(p["scheme"]) != {"name", "url", "logo"}]
+    if bad:
+        fail(f"data/site.yaml programmes: `scheme` needs exactly name, url and logo: {bad}")
+    hidden = {f["funder"] for f in funders if f.get("hide")}
+    current = [g for g in ledger.grants if g["current"] and not set(g["funders"]) <= hidden]
+    funders = [f for f in funders if not f.get("hide")]
     by_funder = {f["funder"]: f for f in _presentation(
-        "funding", funders, "funder", {n for g in current for n in g["funders"]},
+        "funding", funders, "funder", {n for g in current for n in g["funders"]} - hidden,
         "things_done ledger/registries/grants.yaml")}
     by_programme = {p["program"]: p for p in _presentation(
         "programmes", programmes, "program", {g["program"] for g in current if g.get("program")},
@@ -210,7 +218,7 @@ def support_list(funders: list[Record], programmes: list[Record], ledger: Ledger
         grants = [g for g in shared if g.get("program") == p["program"]]
         if p["program"] not in by_programme or not grants:
             continue
-        logos = [by_funder[n] for n in dict.fromkeys(n for g in grants for n in g["funders"])]
+        logos = [by_funder[n] for n in dict.fromkeys(n for g in grants for n in g["funders"]) if n not in hidden]
         cofunders = list(dict.fromkeys(c for g in grants for c in g.get("program_cofunders") or []))
         groups.append({"logos": logos, "programmes": [], "title": p, "cofunders": cofunders})
     unplaced = [g["title"] for g in shared if not g.get("program")]
