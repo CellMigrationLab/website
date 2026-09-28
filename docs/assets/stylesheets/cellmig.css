@@ -459,7 +459,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset ul.cm-map__legend { display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem 1rem; margin: .6rem 0 0; padding: 0; list-style: none; font-size: .62rem; color: var(--cm-muted); }
 [dir] .md-typeset .cm-map__legend > li { display: flex; align-items: center; gap: .3rem; margin: 0; list-style: none; }
 .cm-map__legend span { width: .8rem; height: .8rem; border-radius: .15rem; }
-.md-typeset .cm-cloud { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: .15rem .7rem; margin: 1rem 0; line-height: 1.25; text-align: center; }
+.md-typeset .cm-cloud { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: .1rem .55rem; max-width: 48rem; margin: 1rem auto; line-height: 1.2; text-align: center; }
 .cm-cloud span { color: var(--cm-fg); font-weight: 400; white-space: nowrap; max-width: 100%; }
 @media (max-width: 30rem) { .cm-cloud span { white-space: normal; } }   /* the largest names are wider than a 320 px screen */
 .cm-cloud span.cm-cloud__lab, .cm-cloud__legend .cm-cloud__lab { color: #7a35c4; }

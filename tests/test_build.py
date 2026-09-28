@@ -394,3 +394,14 @@ class WorldMapTests(unittest.TestCase):
         box = [float(v) for v in re.search(r'viewBox="([^"]+)"', world_map({"FI": 3, "SG": 1})).group(1).split()]
         self.assertLessEqual(box[2], W)          # no wider than the projection
         self.assertLess(box[3], box[2] / 2)      # Antarctica left out: much wider than tall
+
+
+class CloudTests(unittest.TestCase):
+    def test_compact_size_range_keeps_the_encoding(self):
+        """#19: the largest name stays modest, sizes still grow with joint papers."""
+        from cellmig.pages_numbers import CLOUD_MAX, CLOUD_MIN, CLOUD_SIZE, cloud_size
+        self.assertLessEqual(CLOUD_MAX, 1.6)
+        self.assertLessEqual(CLOUD_SIZE, 50)
+        self.assertEqual(cloud_size(28, 28), CLOUD_MAX)
+        self.assertLess(cloud_size(3, 28), cloud_size(10, 28))
+        self.assertGreaterEqual(cloud_size(1, 28), CLOUD_MIN)
