@@ -79,8 +79,8 @@ class PageTests(unittest.TestCase):
     def test_fix_links_leaves_external_and_relative_links(self):
         p = Page("research.md")
         html = '<a href="https://x.org"></a><a href="../y/"></a><img src="a.png" srcset="a.png 1x, b.png 2x">'
-        self.assertEqual(p.fix_links(html),
-                         '<a href="https://x.org"></a><a href="../y/"></a>'
+        self.assertEqual(p.fix_links(html),   # external kept (and opens in a new tab, #16), relative kept
+                         '<a href="https://x.org" target="_blank" rel="noopener"></a><a href="../y/"></a>'
                          '<img src="a.png" srcset="../a.png 1x, ../b.png 2x">')
 
 
@@ -338,3 +338,30 @@ class PreprintLinkTests(unittest.TestCase):
         self.assertNotIn("cm-badge--preprint", html)
         self.assertNotIn(">Preprint<", html)
         self.assertIn("cm-badge--preprint", citation({**PRE, "related_dois": []}, set(), fake_ledger([PRE])))
+
+
+class NewTabTests(unittest.TestCase):
+    """#16: outbound web links open in a new tab; nothing else does."""
+
+    def test_which_links(self):
+        from cellmig.config import SITE_URL
+        from cellmig.text import opens_new_tab
+        self.assertTrue(opens_new_tab("https://doi.org/10.1/x"))
+        for url in (f"{SITE_URL}news/", "https://cellmig.org/software/", "software/", "#top",
+                    "mailto:a@b.fi", "../index.html"):
+            with self.subTest(url=url):
+                self.assertFalse(opens_new_tab(url))
+
+    def test_html_and_markdown_rewriting(self):
+        from cellmig.page import new_tab_links, new_tab_markdown
+        self.assertEqual(new_tab_links('<a href="https://x.org/">x</a> <a href="news/">n</a> <a href="#y">y</a>'),
+                         '<a href="https://x.org/" target="_blank" rel="noopener">x</a> <a href="news/">n</a> <a href="#y">y</a>')
+        self.assertEqual(new_tab_links('<a href="https://x.org/" rel="me">x</a>'),
+                         '<a href="https://x.org/" rel="me noopener" target="_blank">x</a>')
+        self.assertEqual(new_tab_links('<a href="https://x.org/" target="_self">x</a>'),
+                         '<a href="https://x.org/" target="_self">x</a>')                 # explicit target kept
+        self.assertEqual(new_tab_markdown("[a](https://x.org/) [b](join-us.md) ![p](https://x.org/p.png) "
+                                          "[c](https://y.org/){ .cm-button } [m](mailto:a@b.fi)"),
+                         '[a](https://x.org/){ target="_blank" rel="noopener" } [b](join-us.md) '
+                         '![p](https://x.org/p.png) [c](https://y.org/){ .cm-button target="_blank" rel="noopener" } '
+                         '[m](mailto:a@b.fi)')

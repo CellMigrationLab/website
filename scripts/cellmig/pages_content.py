@@ -18,7 +18,7 @@ from .config import (
 )
 from .images import lite_video, media, thumb
 from .ledger import Ledger, Record, software_list
-from .page import Page
+from .page import Page, new_tab_markdown
 from .previews import preview
 from .structured import dataset_item, item_list, software_item, to_json
 from .text import esc, is_external, md, slugify, year_of
@@ -118,7 +118,7 @@ def _dataset(d: Record, ledger: Ledger) -> str:
     archive_html = (f' · <a href="https://doi.org/{esc(archive)}">doi:{esc(archive)}</a>'
                     if archive and archive not in d["repository_url"] else "")
     return (f'<li><a class="cm-datasets__title" href="{esc(d["repository_url"])}">{esc(d["title"])}</a>{tags}'
-            f'<p>{esc(d["description"])}</p>'
+            f'<p>{md(d["description"], inline=True)}</p>'
             f'<p class="cm-small">{year_of(d["start_date"])}{archive_html}'
             f'{" · Paper: " + ", ".join(refs) if refs else ""}</p></li>')
 
@@ -190,7 +190,7 @@ def page_handwritten(name: str, extra: str = "") -> None:
         fail(f"content/{name}.md: front matter must be only `title` "
              "(description and image go in data/previews.yaml)")
     p = Page(f"{name}.md", title=front["title"], edit_url=edit_url(f"content/{name}.md"), **preview(name))
-    p.add(_local_images(m.group(2).strip()), extra)
+    p.add(new_tab_markdown(_local_images(m.group(2).strip())), extra)
     p.write()
 
 
