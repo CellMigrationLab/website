@@ -25,6 +25,9 @@ class Ledger:
 
     def __init__(self) -> None:
         self.pubs: list[Record] = _records("publications")
+        for p in self.pubs:   # optional in things_done, but every citation on the site shows it
+            if not p.get("venue"):
+                fail(f"things_done publication {p['doi']} has no venue (journal or preprint server); add it to the ledger")
         self.software: list[Record] = _records("software")
         self.datasets: list[Record] = _records("datasets")
         self.coauthors: list[Record] = _records("coauthors", "coauthors")
@@ -36,9 +39,11 @@ class Ledger:
         for key in ("name", "title", "short_bio", "appointments", "education"):
             if not self.profile.get(key):
                 fail(f"data/things_done/profile.yaml has no {key}; re-run scripts/sync_things_done.py")
-        lag = load(LEDGER_DATA / "preprint_lag.yaml")
-        self.lag_pairs: list[Record] = [p for p in lag.get("pairs") or [] if "gap_days" in p]
-        self.lag_summary: Record = lag.get("summary") or fail(
+        for key in ("editorial", "service", "roles"):   # lists that may be empty, but must be there
+            if not isinstance(self.profile.get(key), list):
+                fail(f"data/things_done/profile.yaml has no {key} list; re-run scripts/sync_things_done.py")
+        self.lag_pairs: list[Record] = _records("preprint_lag", "pairs")   # the sync keeps pairs with a gap only
+        self.lag_summary: Record = load(LEDGER_DATA / "preprint_lag.yaml").get("summary") or fail(
             "data/things_done/preprint_lag.yaml has no summary; update things_done and re-sync")
         self.metrics: Record = load(LEDGER_DATA / "metrics.yaml")
         for key in ("citation_count", "h_index", "fetched_at", "scholar_url"):
@@ -85,11 +90,17 @@ class Ledger:
             r["doi"].lower() for r in self.related(rec)}
 
     def grouped(self) -> list[Record]:
-        """Publications (newest first), each preprint folded into its journal
-        version, unless things_done marks it `standalone` (display override)."""
-        return [r for r in self.pubs
-                if not (r.get("status") == "preprint" and not r.get("standalone")
-                        and self.published_version(r) is not r)]
+        """Publications, each preprint folded into its journal version unless
+        things_done marks it `standalone` (display override). Newest first:
+        by year, then the journal date where it is known to the day (dated
+        papers before undated ones of the same year), then ledger order."""
+        shown = [r for r in self.pubs
+                 if not (r.get("status") == "preprint" and not r.get("standalone")
+                         and self.published_version(r) is not r)]
+        day = {id(r): self.dates.get(r["doi"].lower()) for r in shown}
+        shown.sort(key=lambda r: day[id(r)] or "", reverse=True)          # stable: ties keep ledger order
+        shown.sort(key=lambda r: (-int(r["year"]), day[id(r)] is None))
+        return shown
 
 
 def software_list(ledger: Ledger) -> list[Record]:
@@ -108,9 +119,9 @@ def software_list(ledger: Ledger) -> list[Record]:
         pos, extra = by_id.get(rec["id"], (999, {}))
         s = dict(extra)
         s.setdefault("title", rec["title"])
-        s["year"] = s.get("year") or year_of(rec.get("start_date"))
-        s.setdefault("github", rec.get("github_repo_url") or rec.get("repository_url"))
-        s.setdefault("text", rec.get("description"))
+        s["year"] = s.get("year") or year_of(rec["start_date"])      # start_date, github_repo_url and
+        s.setdefault("github", rec["github_repo_url"])                 # description are required in
+        s.setdefault("text", rec["description"])                       # the things_done registry
         s.setdefault("dois", rec.get("related_publication_dois") or [])
         s["id"], s["_pos"] = rec["id"], pos
         out.append(s)
@@ -121,50 +132,48 @@ def software_list(ledger: Ledger) -> list[Record]:
     return out
 
 
-def affiliation_list(presentation: list[Record], ledger: Ledger) -> list[Record]:
-    """Guillaume's current affiliations (things_done) with their logo and link
-    from data/site.yaml `affiliations` (matched by ledger `id`), in the order
-    of data/site.yaml. Strict both ways: a current affiliation without a logo
-    entry, or an entry for an affiliation that is not current, stops the build."""
-    current = {a["id"]: a for a in ledger.affiliations}
-    listed = [a.get("id") for a in presentation]
-    missing = sorted(set(current) - set(listed))
-    stale = sorted({str(i) for i in listed} - set(current))
+def _presentation(section: str, entries: list[Record], key: str, current: set[str], source: str) -> list[Record]:
+    """The data/site.yaml `section` entries (logo and link) for what things_done
+    says is current, matched by `key`, in site.yaml order. A current item
+    without an entry, or an entry without name, url and logo (null for
+    text only), stops the build. An entry for something no longer current
+    (a grant or affiliation that ended since the last edit) is left out with
+    a warning, so the site does not break on the day something ends."""
+    listed = [e.get(key) for e in entries]
+    missing = sorted(current - set(listed))
     if missing:
-        fail(f"data/site.yaml affiliations: add an entry (id, name, url, logo) for {missing} "
-             "(current in things_done ledger/profile/affiliations.yaml)")
-    if stale:
-        fail(f"data/site.yaml affiliations: {stale} are not current affiliations in things_done; "
-             "remove them or fix the id")
-    bad = [a["id"] for a in presentation if a.get("relation") not in AFFILIATION_RELATIONS]
+        fail(f"data/site.yaml {section}: add an entry ({key}, name, url, logo) for {missing} (current in {source})")
+    for e in entries:
+        absent = [k for k in (key, "name", "url", "logo") if k not in e]
+        if absent:
+            fail(f"data/site.yaml {section}: entry {e.get(key)!r} has no {absent}")
+    for e in entries:
+        if e[key] not in current:
+            print(f"warning: data/site.yaml {section}: {e[key]!r} is no longer current in {source}; "
+                  "it is not shown, remove it")
+    return [e for e in entries if e[key] in current]
+
+
+def affiliation_list(presentation: list[Record], ledger: Ledger) -> list[Record]:
+    """Guillaume's current affiliations (things_done, current as of the sync)
+    with their logo and link from data/site.yaml `affiliations` (matched by
+    ledger `id`), in the order of data/site.yaml; see _presentation()."""
+    current = {a["id"]: a for a in ledger.affiliations}
+    shown = _presentation("affiliations", presentation, "id", set(current),
+                          "things_done ledger/profile/affiliations.yaml")
+    bad = [a["id"] for a in shown if a.get("relation") not in AFFILIATION_RELATIONS]
     if bad:
         fail(f"data/site.yaml affiliations {bad}: relation must be one of {AFFILIATION_RELATIONS}")
-    return [{**current[a["id"]], **a} for a in presentation]
+    return [{**current[a["id"]], **a} for a in shown]
 
 
-CURRENT_GRANT = ("active", "awarded")
 AFFILIATION_RELATIONS = ("parent", "member", "leader")
 
 
-def funder_names(grant: Record) -> list[str]:
-    """Names of a grant's direct funders (ledger `funders[].name`; co-funded
-    awards have several; programme co-funders are not included)."""
-    return [f["name"] for f in grant["funders"]]
-
-
-def funding_list(presentation: list[Record], ledger: Ledger, today: str) -> list[Record]:
-    """Direct funders of the current grants in things_done (status active or
-    awarded, not ended), with their logo and link from data/site.yaml
-    `funding` (matched by the ledger `funders[].name`), in the order of
-    data/site.yaml. Strict both ways, like affiliation_list()."""
-    current = {name for g in ledger.grants
-               if g["status"] in CURRENT_GRANT and str(g["end_date"]) >= today for name in funder_names(g)}
-    listed = [f["funder"] for f in presentation]
-    missing = sorted(current - set(listed))
-    stale = sorted(set(listed) - current)
-    if missing:
-        fail(f"data/site.yaml funding: add an entry (funder, name, url, logo) for {missing} "
-             "(funders of current grants in things_done ledger/registries/grants.yaml)")
-    if stale:
-        fail(f"data/site.yaml funding: {stale} fund no current grant in things_done; remove them or fix the name")
-    return presentation
+def funding_list(presentation: list[Record], ledger: Ledger) -> list[Record]:
+    """Direct funders (`funders`: names; co-funded awards have several) of the
+    grants things_done marks `current` (active or awarded and not ended, as
+    of the sync), with their logo and link from data/site.yaml `funding`,
+    in the order of data/site.yaml; see _presentation()."""
+    current = {name for g in ledger.grants if g["current"] for name in g["funders"]}
+    return _presentation("funding", presentation, "funder", current, "things_done ledger/registries/grants.yaml")

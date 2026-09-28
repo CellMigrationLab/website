@@ -14,10 +14,10 @@ Reads (in the things_done checkout)                    Writes (data/things_done/
   ledger/profile/lab_members.yaml                        lab_members.yaml
   ledger/profile/affiliations.yaml  (current ones)       affiliations.yaml
   ledger/profile/person.yaml, education.yaml,            profile.yaml
-    ledger/roles/*.yaml  (current roles)
+    ledger/roles/*.yaml  (current roles, and started ones for news)
   ledger/activities/*/talks.yaml                         talks.yaml
   ledger/activities/*/conference_organization.yaml       conference_organization.yaml
-  ledger/registries/grants.yaml  (no amounts)            grants.yaml
+  ledger/registries/grants.yaml  (no amounts; `current`)  grants.yaml
   report/generated/publications/
     preprint_publication_crosswalk.json  (pairs)         related_dois in publications.yaml
     preprint_lag.json                                    preprint_lag.yaml
@@ -28,10 +28,15 @@ Only fields that are already public are copied (title, authors, venue, DOI,
 abstract, links, whether Guillaume is corresponding author, descriptions,
 co-author countries, the public lab roster: names, roles in the lab and
 current/alumni, Guillaume's current affiliations, roles and education, talks,
-events organised, and grant titles, funders, programmes and dates without
-amounts). Supervision records, teaching, notes and conflict-of-interest data
-are never read. Every input is required: a missing file stops the sync rather
-than leaving part of the website stale without anyone noticing.
+events organised, and grant titles, funder names, programmes and dates
+without amounts). Records marked `confidentiality: internal` or
+`confidential` are never copied. Supervision records, teaching, notes and
+conflict-of-interest data are never read. Every input is required: a
+missing file or field stops the sync rather than leaving part of the website
+stale without anyone noticing. "Current" (affiliations, roles, grants) is
+decided here, on the day of the sync, so the website build does not depend on
+its own date. Files in data/things_done/ that the sync no longer writes are
+removed.
 """
 
 import argparse
@@ -48,15 +53,14 @@ OUT = ROOT / "data" / "things_done"
 REPORTS = Path("report") / "generated" / "publications"
 
 PUBLICATION_FIELDS = (
-    "doi", "year", "type", "status", "title", "authors", "venue",
+    "doi", "year", "status", "title", "authors", "venue",
     "abstract", "peer_reviewed", "open_access_status", "related_dois",
 )
 SOFTWARE_FIELDS = (
-    "id", "title", "status", "start_date", "repository_url", "github_repo_url",
-    "description", "related_publication_dois",
+    "id", "title", "start_date", "github_repo_url", "description", "related_publication_dois",
 )
 DATASET_FIELDS = (
-    "id", "title", "status", "dataset_type", "start_date", "repository_url",
+    "title", "dataset_type", "start_date", "repository_url",
     "archive_doi", "description", "dataset_tags", "related_publication_dois",
 )
 LAG_FIELDS = (
@@ -82,11 +86,20 @@ def load_json(path: Path) -> dict:
     return json.loads(require(path).read_text(encoding="utf-8"))
 
 
-def clean_text(value: object) -> str:
-    """Crossref abstracts come with JATS tags (<jats:p>...); keep plain text."""
-    value = re.sub(r"<[^>]+>", " ", str(value or ""))
-    value = html.unescape(value)
-    value = re.sub(r"^\s*(Abstract|Summary)\b[:.]?\s*", "", value, flags=re.I)
+NO_ABSTRACT = "Abstract unavailable from Crossref"   # things_done placeholder for "none found yet"
+INLINE_TAGS = r"</?(?:jats:)?(?:i|b|em|strong|italic|bold|sup|sub|sc|u)\b[^>]*>"
+
+
+def clean_text(value: str, abstract: bool = False) -> str:
+    """Crossref titles and abstracts come with JATS tags (<jats:p>, <jats:italic>
+    ...); keep plain text. Inline tags go without a space ("<i>in vitro</i>,"
+    -> "in vitro,"), block tags become a space. Abstracts also lose a leading
+    "Abstract"/"Summary" heading."""
+    value = re.sub(INLINE_TAGS, "", value, flags=re.I)
+    value = html.unescape(re.sub(r"<[^>]+>", " ", value))
+    if abstract:
+        value = re.sub(r"^\s*(Abstract|Summary)\b[:.]?\s*", "", value, flags=re.I)
+    value = re.sub(r"\s+([,.;:)])", r"\1", value)   # no space before punctuation left by a removed tag
     return re.sub(r"\s+", " ", value).strip()
 
 
@@ -104,9 +117,13 @@ def pick(record: dict, fields: tuple[str, ...]) -> dict:
     return {k: record[k] for k in fields if record.get(k) not in (None, "", [])}
 
 
+WRITTEN: set[str] = set()
+
+
 def dump(name: str, data: dict, source: str) -> None:
     """Write data/things_done/<name>.yaml with a do-not-edit header."""
     OUT.mkdir(parents=True, exist_ok=True)
+    WRITTEN.add(f"{name}.yaml")
     header = (f"# Copied by scripts/sync_things_done.py from things_done/{source}.\n"
               "# Do not edit by hand: change things_done instead, the website updates itself.\n")
     body = yaml.safe_dump(data, allow_unicode=True, sort_keys=False, width=100)
@@ -117,18 +134,17 @@ def publications(ledger: Path) -> None:
     """Publications, with preprint <-> journal links from the crosswalk report."""
     pub_dir = ledger / "ledger" / "publications"
     overrides = load(pub_dir / "display_overrides.yaml").get("overrides") or {}
-    records, skipped = [], []
+    records = []
     for path in sorted(pub_dir.glob("[0-9]*.yaml")):
-        for rec in public_records(path):
-            if not rec.get("doi") or not rec.get("title"):
-                skipped.append(rec.get("title") or rec.get("doi") or "?")
-                continue
+        for rec in public_records(path):   # doi and title are required by the ledger schema
             item = pick(rec, PUBLICATION_FIELDS)
             if (overrides.get(rec["doi"]) or {}).get("force_preprint_bucket"):
                 item["standalone"] = True   # listed on its own even when a journal version exists
             item["title"] = clean_text(item["title"])
-            if "abstract" in item:
-                item["abstract"] = clean_text(item["abstract"])
+            if item["abstract"].strip() == NO_ABSTRACT:
+                del item["abstract"]   # things_done's placeholder (tools/fetch_missing_abstracts.py fills it later)
+            else:
+                item["abstract"] = clean_text(item["abstract"], abstract=True)
             if (rec.get("me") or {}).get("corresponding_author"):
                 item["corresponding"] = True   # Guillaume is (co-)corresponding author
             records.append(item)
@@ -136,14 +152,14 @@ def publications(ledger: Path) -> None:
     # Preprint <-> journal pairs, as matched by the ledger's crosswalk report
     crosswalk = load_json(ledger / REPORTS / "preprint_publication_crosswalk.json")
     by_doi = {r["doi"].lower(): r for r in records}
-    pairs, unmatched = 0, []
-    for match in crosswalk.get("matched_pairs") or []:
-        ev = match.get("evidence") or {}
-        a = by_doi.get(str(ev.get("preprint_doi")).lower())
-        b = by_doi.get(str(ev.get("published_doi")).lower())
+    pairs = 0
+    for match in crosswalk["matched_pairs"]:
+        ev = match["evidence"]
+        a = by_doi.get(str(ev["preprint_doi"]).lower())
+        b = by_doi.get(str(ev["published_doi"]).lower())
         if not (a and b):
-            unmatched.append(f"{ev.get('preprint_doi')} -> {ev.get('published_doi')}")
-            continue
+            raise SystemExit(f"sync_things_done: crosswalk pair {ev['preprint_doi']} -> {ev['published_doi']} is not "
+                             "in ledger/publications; re-run 'Ledger Cleanup and Preprint Links' in things_done")
         pairs += 1
         for x, y in ((a, b), (b, a)):
             links = x.setdefault("related_dois", [])
@@ -152,10 +168,6 @@ def publications(ledger: Path) -> None:
     records.sort(key=lambda r: (-int(r.get("year") or 0), r["title"].casefold()))
     dump("publications", {"records": records}, "ledger/publications")
     print(f"publications: {len(records)} records, {pairs} preprint/journal pairs")
-    for title in skipped:
-        print(f"  left out (no DOI or title): {title}")
-    for pair in unmatched:
-        print(f"  crosswalk pair not in the ledger, left out: {pair}")
 
 
 def registry(ledger: Path, name: str, fields: tuple[str, ...]) -> None:
@@ -179,24 +191,31 @@ def lab_members(ledger: Path) -> None:
 def affiliations(ledger: Path, today: str) -> None:
     """Guillaume's current affiliations: no end date, or one not yet passed."""
     path = ledger / "ledger" / "profile" / "affiliations.yaml"
-    records = [pick(r, ("id", "organization", "title")) for r in public_records(path)
-               if str(r.get("end_date") or "9999") >= today]
+    records = [pick(r, ("id", "organization", "title")) for r in public_records(path) if not ended(r, today)]
     dump("affiliations", {"records": records}, "ledger/profile/affiliations.yaml (current)")
     print(f"affiliations: {len(records)} current")
 
 
+def ended(record: dict, today: str) -> bool:
+    """Whether a record's (optional) end date has passed."""
+    return "end_date" in record and str(record["end_date"]) < today
+
+
 def current(records: list[dict], today: str) -> list[dict]:
-    """Records without an end date, or whose end date has not passed."""
-    return [r for r in records if str(r.get("end_date") or "9999") >= today]
+    """Roles that are current: ledger status `current` and not ended."""
+    return [r for r in records if r["status"] == "current" and not ended(r, today)]
 
 
 def profile(ledger: Path, today: str) -> None:
     """Guillaume's public profile: title, short bio (Markdown; paragraphs kept,
     lines within a paragraph joined), current appointments, editorial and
-    service roles, and education."""
+    service roles, education, and `roles`: every appointment and editorial
+    role that has started (current or completed), for the news history."""
     person = load(ledger / "ledger" / "profile" / "person.yaml")
     roles = ledger / "ledger" / "roles"
     role_fields = ("title", "organization", "start_date")
+    started = [pick(r, role_fields) for name in ("appointments", "editorial_roles")
+               for r in public_records(roles / f"{name}.yaml") if r["status"] in ("current", "completed")]
     data = {
         "name": person["preferred_name"],
         "title": person["primary_title"],
@@ -204,8 +223,9 @@ def profile(ledger: Path, today: str) -> None:
         "appointments": [pick(r, role_fields) for r in current(public_records(roles / "appointments.yaml"), today)],
         "editorial": [pick(r, role_fields) for r in current(public_records(roles / "editorial_roles.yaml"), today)],
         "service": [pick(r, role_fields) for r in current(public_records(roles / "service_and_leadership.yaml"), today)],
-        "education": [pick(r, ("degree", "organization", "end_date", "thesis_title"))
+        "education": [pick(r, ("degree", "organization", "end_date"))
                       for r in public_records(ledger / "ledger" / "profile" / "education.yaml")],
+        "roles": sorted(started, key=lambda r: str(r["start_date"]), reverse=True),
     }
     dump("profile", data, "ledger/profile/person.yaml, education.yaml and ledger/roles/ (current)")
     print(f"profile: {len(data['appointments'])} appointments, {len(data['editorial'])} editorial, "
@@ -221,13 +241,22 @@ def activities(ledger: Path, kind: str, fields: tuple[str, ...]) -> None:
     print(f"{kind}: {len(records)} records")
 
 
-def grants(ledger: Path) -> None:
-    """Public grant metadata (amounts are not copied)."""
-    fields = (
-        "id", "title", "funders", "program", "program_cofunders",
-        "role", "status", "start_date", "end_date",
-    )
-    records = [pick(r, fields) for r in public_records(ledger / "ledger" / "registries" / "grants.yaml")]
+CURRENT_GRANT = ("active", "awarded")
+
+
+def grants(ledger: Path, today: str) -> None:
+    """Public grant metadata: title, direct funder names, programme and
+    programme co-funders (for website#27), status, dates, and `current`
+    (active or awarded, not ended; decided here so the website does not
+    depend on the build date). Amounts, award ids and descriptions (which
+    hold internal order numbers) are never copied."""
+    fields = ("title", "program", "program_cofunders", "status", "start_date", "end_date")
+    records = []
+    for r in public_records(ledger / "ledger" / "registries" / "grants.yaml"):
+        item = pick(r, fields)
+        item["funders"] = [f["name"] for f in r["funders"]]
+        item["current"] = r["status"] in CURRENT_GRANT and not ended(r, today)
+        records.append(item)
     dump("grants", {"records": records}, "ledger/registries/grants.yaml (no amounts)")
     print(f"grants: {len(records)} records")
 
@@ -238,8 +267,9 @@ def preprint_lag(ledger: Path) -> None:
     if not data.get("summary"):
         raise SystemExit("sync_things_done: preprint_lag.json has no summary; "
                          "re-run 'Analyze Preprint-to-Publication Lag' in things_done")
-    pairs = [pick(p, LAG_FIELDS) for p in data.get("pairs") or [] if "gap_days" in p]
-    dump("preprint_lag", {"generated_at": data["generated_at"], "summary": data["summary"], "pairs": pairs},
+    pairs = [pick(p, LAG_FIELDS) for p in data["pairs"] if "gap_days" in p]   # unresolved pairs have no gap
+    summary = {k: data["summary"][k] for k in ("pairs", "median_months")}
+    dump("preprint_lag", {"summary": summary, "pairs": pairs},
          f"{REPORTS}/preprint_lag.json")
     print(f"preprint lag: {len(pairs)} pairs, median {data['summary']['median_months']} months")
 
@@ -248,28 +278,36 @@ def coauthors(ledger: Path) -> None:
     """Co-authors (joint papers, first/last year) with their country."""
     network = load_json(ledger / REPORTS / "coauthor_network.json")
     countries = load_json(ledger / REPORTS / "coauthor_countries.json")
-    country = {c["name"]: c["country"] for c in countries.get("coauthors") or []}
+    country = {c["name"]: c["country"] for c in countries["coauthors"] if c.get("country")}
+    if not country:
+        raise SystemExit("sync_things_done: coauthor_countries.json has no countries; "
+                         "re-run 'Co-author Countries' in things_done")
     nodes = []
-    for n in network.get("nodes") or []:
+    for n in network["nodes"]:
         if n.get("is_self"):
             continue
-        item = {"name": n["id"], "papers": n.get("total", 0),
-                "first_year": n.get("first_year"), "last_year": n.get("last_year")}
+        item = {"name": n["id"], "papers": n["total"], "first_year": n["first_year"], "last_year": n["last_year"]}
         if country.get(n["id"]):
             item["country"] = country[n["id"]]
         nodes.append(item)
     nodes.sort(key=lambda n: (-n["papers"], n["name"]))
-    dump("coauthors", {"generated_at": network.get("generated_at"), "coauthors": nodes},
+    dump("coauthors", {"coauthors": nodes},
          f"{REPORTS}/coauthor_network.json + coauthor_countries.json")
     print(f"coauthors: {len(nodes)} ({sum(1 for n in nodes if 'country' in n)} with a country)")
+
+
+METRICS = ("citation_count", "h_index", "fetched_at", "scholar_url")
 
 
 def metrics(ledger: Path) -> None:
     """Citation count and h-index (Google Scholar, fetched by things_done)."""
     data = load_json(ledger / ".cache" / "scholar_metrics.json")
-    keep = {k: data[k] for k in ("citation_count", "h_index", "i10_index", "fetched_at", "scholar_url") if k in data}
+    missing = [k for k in METRICS if k not in data]
+    if missing:
+        raise SystemExit(f"sync_things_done: .cache/scholar_metrics.json has no {missing}")
+    keep = {k: data[k] for k in METRICS}
     dump("metrics", keep, ".cache/scholar_metrics.json")
-    print(f"metrics: {keep.get('citation_count')} citations, h-index {keep.get('h_index')}")
+    print(f"metrics: {keep['citation_count']} citations, h-index {keep['h_index']}")
 
 
 def main() -> None:
@@ -287,11 +325,14 @@ def main() -> None:
     affiliations(ledger, today)
     profile(ledger, today)
     activities(ledger, "talks", ("date", "title", "event_name", "location", "talk_kind"))
-    activities(ledger, "conference_organization", ("title", "event_name", "location", "start_date", "conference_role"))
-    grants(ledger)
+    activities(ledger, "conference_organization", ("title", "event_name", "location", "start_date"))
+    grants(ledger, today)
     preprint_lag(ledger)
     coauthors(ledger)
     metrics(ledger)
+    for old in sorted(p for p in OUT.glob("*.yaml") if p.name not in WRITTEN):   # outputs no longer made
+        old.unlink()
+        print(f"removed {old.name} (no longer copied)")
 
 
 if __name__ == "__main__":

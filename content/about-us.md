@@ -15,14 +15,14 @@ the [InFLAMES](https://inflames.utu.fi/) Flagship and the
 [Solutions for Health](https://www.abo.fi/en/solutions-for-health/) research profile at Åbo Akademi University.
 
 Our work uses microscopy, cell biology and quantitative image analysis. Through Turku Bioscience Centre,
-we also have access to facilities for [bioimaging](https://bioscience.fi/services/cell-imaging/services/),
-genomics, [proteomics](https://bioscience.fi/services/proteomics/services/),
-[zebrafish research](https://bioscience.fi/services/zebrafish/services/), genome editing and bioinformatics.
+we also have access to facilities for [bioimaging](https://bioscience.fi/aic/),
+genomics, [proteomics](https://bioscience.fi/proteomics/services/),
+[zebrafish research](https://bioscience.fi/zebrafish/services/), genome editing and bioinformatics.
 
 Interested in working with us? See [Join us](join-us.md).
 
 <figure markdown>
-![The Aura river in Turku, with a sailing ship moored along the riverbank](wp-content/uploads/2019/08/p1080272-1-e1566674878737.jpg){ loading=lazy }
+![The Aura river in Turku, with a sailing ship moored along the riverbank](wp-content/uploads/2019/08/p1080272-1-e1566674878737.jpg)
 <figcaption>Aura River, Turku, Finland</figcaption>
 </figure>
 

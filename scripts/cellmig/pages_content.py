@@ -9,8 +9,8 @@ from .components import section_title, tile
 from .config import (
     CONTENT,
     DATA,
+    DATASET_TAGS,
     DATASET_TYPES,
-    OTHER_DATA,
     UNCAPTIONED_ALT,
     edit_url,
     fail,
@@ -37,7 +37,7 @@ def _theme(t: Record, ledger: Ledger) -> str:
     if papers:
         body.append('<p class="cm-tile__label">Selected papers</p><ul class="cm-tile__papers">')
         body += [f'<li><a href="https://doi.org/{esc(r["doi"])}">{esc(r["title"])}</a>'
-                 f' <span>{esc(r.get("venue") or "")}, {r["year"]}</span></li>' for r in papers]
+                 f' <span>{esc(r["venue"])}, {r["year"]}</span></li>' for r in papers]
         body.append("</ul>")
     if t.get("credit"):
         body.append(f'<p class="cm-tile__credit">{esc(t["credit"])}</p>')
@@ -91,14 +91,29 @@ def page_software(ledger: Ledger) -> None:
     p.write()
 
 
+def _dataset_tag(tag: str, d: Record) -> str:
+    """Badge text of a things_done dataset tag; an unknown tag stops the build."""
+    if tag not in DATASET_TAGS:
+        fail(f"dataset {d['title']!r}: tag {tag!r} has no badge; add it to DATASET_TAGS in scripts/cellmig/config.py")
+    return DATASET_TAGS[tag]
+
+
+def _dataset_type(d: Record) -> str:
+    """Section of a dataset; an unknown things_done dataset_type stops the build."""
+    if d["dataset_type"] not in DATASET_TYPES:
+        fail(f"dataset {d['title']!r}: type {d['dataset_type']!r} has no section; add it to DATASET_TYPES "
+             "in scripts/cellmig/config.py")
+    return DATASET_TYPES[d["dataset_type"]]
+
+
 def _dataset(d: Record, ledger: Ledger) -> str:
     """One dataset: title, tags, description, year, archive DOI and papers."""
     refs = []
     for doi in d.get("related_publication_dois") or []:
-        rec = ledger.get(doi)
-        label = f'{rec.get("venue")}, {rec["year"]}' if rec else f"doi:{doi}"   # paper not in the ledger
+        rec = ledger.require(doi, f"things_done dataset {d['title']!r} (related_publication_dois)")
+        label = f'{rec["venue"]}, {rec["year"]}'
         refs.append(f'<a href="https://doi.org/{esc(doi)}">{esc(label)}</a>')
-    tags = "".join(f'<span class="cm-badge">{esc(t)}</span>' for t in d.get("dataset_tags") or [] if t in ("model-zoo", "dl-ready"))
+    tags = "".join(f'<span class="cm-badge">{esc(_dataset_tag(t, d))}</span>' for t in d.get("dataset_tags") or [])
     archive = d.get("archive_doi")
     archive_html = (f' · <a href="https://doi.org/{esc(archive)}">doi:{esc(archive)}</a>'
                     if archive and archive not in d["repository_url"] else "")
@@ -122,8 +137,8 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
         for r in site["resources"]), "</ul>")
     groups: dict[str, list[Record]] = {}
     for d in ledger.datasets:
-        groups.setdefault(DATASET_TYPES.get(d["dataset_type"].lower(), OTHER_DATA), []).append(d)
-    order = [g for g in [*dict.fromkeys(DATASET_TYPES.values()), OTHER_DATA] if g in groups]
+        groups.setdefault(_dataset_type(d), []).append(d)
+    order = [g for g in DATASET_TYPES.values() if g in groups]
     p.add('<nav class="cm-toc-inline">' + " · ".join(
         f'<a href="#{slugify(g)}">{esc(g)} ({len(groups[g])})</a>' for g in order) + "</nav>")
     for g in order:
@@ -138,9 +153,9 @@ def page_gallery() -> None:
     p = Page("gallery.md", title="Gallery", edit_url=edit_url("data/gallery.yaml"), **preview("gallery"))
     p.add("# Gallery", section_title("Journal covers"), '<ul class="cm-covers">')
     for c in gallery["covers"]:
-        cap = esc(c.get("caption", ""))
+        cap = esc(c["caption"])   # a cover's caption is its journal and issue: required
         p.add(f'<li><a href="{thumb(c["image"], 1600)}" data-cm-lightbox data-caption="{cap}">'
-              f'{media(c["image"], c.get("caption", ""), 500)}</a><span>{cap}</span></li>')
+              f'{media(c["image"], c["caption"], 500)}</a><span>{cap}</span></li>')
     p.add("</ul>", section_title("Images"), '<ul class="cm-gallery">')
     for g in gallery["images"]:
         p.add(f'<li><a href="{thumb(g["image"], 2000)}" data-cm-lightbox data-caption="{esc(g.get("caption", ""))}">'
@@ -186,8 +201,10 @@ def _local_images(markdown_text: str) -> str:
     """Markdown images of files under docs/ -> resized, lazy <img> with width,
     height and srcset (like every generated page); external images unchanged."""
     def repl(m: re.Match) -> str:
-        alt, path = m.group(1), m.group(2)
+        alt, path, attrs = m.group(1), m.group(2), m.group(3)
         if is_external(path):
             return m.group(0)
+        if attrs:   # would be lost: the <img> is generated (always lazy, with its size)
+            fail(f"content/: image {path} has attributes {attrs}; remove them (images are resized and lazy-loaded)")
         return media(path, alt, 900, sizes="(max-width: 900px) 100vw, 900px")
     return MD_IMAGE.sub(repl, markdown_text)

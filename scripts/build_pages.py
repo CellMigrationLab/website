@@ -3,10 +3,10 @@
     python scripts/build_pages.py     (then: zensical build / zensical serve)
 
 Reads                                        Writes (git-ignored, rebuilt every time)
-  data/site.yaml                               docs/index.md (home), footer, RSS feed
+  data/site.yaml                               docs/index.md (home), footer
   data/research.yaml                           docs/research.md
-  data/things_done/lab_members.yaml            docs/lab-members.md
-    + data/members/, data/photos/, team.yaml
+  data/things_done/lab_members.yaml            docs/lab-members.md,
+    + data/members/, data/photos/, team.yaml     docs/assets/images/members/ (photos)
   data/things_done/software.yaml               docs/software.md
     + data/software.yaml
   data/things_done/publications.yaml           docs/publications.md,
@@ -15,8 +15,9 @@ Reads                                        Writes (git-ignored, rebuilt every 
   data/things_done/ (all of it)                docs/lab-in-numbers.md
   data/gallery.yaml                            docs/gallery.md
   data/talks.yaml                              docs/online-lectures.md
-                                               docs/feed.xml, docs/feed/index.html (RSS)
-                                               overrides/partials/cm-footer.html, cm-jsonld.html
+  data/things_done/ (papers, talks, events,    docs/news.md, docs/feed.xml and
+    grants, roles, software)                     docs/feed/index.html (RSS)
+  data/site.yaml + affiliations, members       overrides/partials/cm-footer.html, cm-jsonld.html
   data/previews.yaml                           link previews (title, text, picture) of every page
   content/*.md                                 docs/about-us.md, docs/join-us.md
   (all of the above)                           docs/llms.txt, docs/llms-full.txt (Markdown for LLMs)
@@ -30,7 +31,6 @@ The code is in scripts/cellmig/ (see its __init__.py for a map).
 """
 
 import shutil
-from datetime import date
 
 from cellmig.config import DATA, DOCS, GENERATED, load
 from cellmig.featured import load_featured
@@ -49,7 +49,7 @@ from cellmig.pages_home import page_home
 from cellmig.pages_numbers import page_numbers
 from cellmig.pages_papers import page_featured, page_publications
 from cellmig.pages_people import page_members
-from cellmig.people import lab_names, load_members
+from cellmig.people import lab_names, leader, load_members
 from cellmig.previews import check_all_used
 from cellmig.profile import pi_profile
 from cellmig.site_files import write_feed, write_footer, write_jsonld
@@ -75,7 +75,7 @@ def main() -> None:
     lab = lab_names(members)
     featured = load_featured(ledger)
     affiliations = affiliation_list(site["affiliations"], ledger)
-    funding = funding_list(site["funding"], ledger, date.today().isoformat())
+    funding = funding_list(site["funding"], ledger)
 
     news = build_news(ledger, featured)
     page_home(site, featured, ledger, lab, affiliations, funding, news)
@@ -84,12 +84,11 @@ def main() -> None:
     page_software(ledger)
     page_featured(featured, ledger, lab)
     page_numbers(ledger, lab, members)
-    page_publications(ledger, featured, lab)
+    page_publications(ledger, featured, lab, leader(members))
     page_datasets(ledger, site)
     page_gallery()
     page_talks()
-    leader = next(m for m in members if m["group"] == "pi" and m["status"] == "current")
-    page_handwritten("about-us", extra=pi_profile(ledger.profile, leader))
+    page_handwritten("about-us", extra=pi_profile(ledger.profile, leader(members)))
     page_handwritten("join-us")
     page_news(news)
     write_feed(site, news)

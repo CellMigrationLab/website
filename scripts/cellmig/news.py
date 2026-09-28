@@ -27,7 +27,7 @@ from .text import esc, slugify
 NEWS_SINCE = "2024-01-01"
 NewsItem = dict[str, Any]
 
-KIND_LABELS = {"paper": "Paper", "preprint": "Preprint", "talk": "Keynote", "event": "Event",
+KIND_LABELS = {"paper": "Paper", "preprint": "Preprint", "keynote": "Keynote", "plenary": "Plenary", "event": "Event",
                "funding": "Funding", "position": "Position", "software": "Software"}
 
 
@@ -68,38 +68,39 @@ def _papers(ledger: Ledger, featured: list[Story]) -> list[NewsItem]:
         if rec.get("status") == "preprint":
             date = preprint_dates.get(rec["doi"].lower())
             out.append(_item(date or str(rec["year"]), "preprint", rec["title"],
-                             f"New preprint on {esc(rec.get('venue') or 'a preprint server')}: {link}", url,
+                             f"New preprint on {esc(rec['venue'])}: {link}", url,
                              "day" if date else "year"))
         else:
             date = ledger.dates.get(rec["doi"].lower())
             out.append(_item(date or str(rec["year"]), "paper", rec["title"],
-                             f"New paper in <em>{esc(rec.get('venue') or '')}</em>: {link}", url,
+                             f"New paper in <em>{esc(rec['venue'])}</em>: {link}", url,
                              "day" if date else "year"))
     return out
 
 
 def _activities(ledger: Ledger) -> list[NewsItem]:
     """Keynotes and plenaries, events organised or chaired."""
-    out = [_item(t["date"], "talk", t["title"],
+    out = [_item(t["date"], t["talk_kind"], t["title"],
                  f'{"Keynote" if t["talk_kind"] == "keynote" else "Plenary talk"} at {esc(t["event_name"])}: '
                  f'“{esc(t["title"])}”', None)
            for t in ledger.talks if t["talk_kind"] in ("keynote", "plenary")]
     out += [_item(e["start_date"], "event", e["event_name"],
                   f'{esc(e["title"])}, {esc(e["event_name"])}' + (f' ({esc(e["location"])})' if e.get("location") else ""),
                   None)
-            for e in ledger.events if e.get("start_date")]
+            for e in ledger.events]   # start_date is required in things_done
     return out
 
 
 def _funding_and_roles(ledger: Ledger) -> list[NewsItem]:
-    """New grants and the group leader's new positions and editorial roles."""
-    out = [_item(g["start_date"], "funding", g["title"], f'New funding: {esc(g["title"])}', None)   # public titles name the funder (things_done)
-           for g in ledger.grants if g.get("start_date") and g["status"] in ("active", "awarded", "completed")]
+    """New grants (their public titles name the funder) and the group
+    leader's positions and editorial roles, current or completed (things_done
+    profile `roles`, so a role stays in the news after it ends)."""
+    out = [_item(g["start_date"], "funding", g["title"], f'New funding: {esc(g["title"])}', None)
+           for g in ledger.grants if g["status"] in ("active", "awarded", "completed")]   # these have dates
     prof = ledger.profile
-    for key in ("appointments", "editorial"):
-        out += [_item(r["start_date"], "position", r["title"],
-                      f'{esc(prof["name"])} becomes {esc(r["title"])}, {esc(r["organization"])}', "about-us/#group-leader")
-                for r in prof[key]]
+    out += [_item(r["start_date"], "position", r["title"],
+                  f'{esc(prof["name"])}: {esc(r["title"])}, {esc(r["organization"])}', "about-us/#group-leader")
+            for r in prof["roles"]]
     return out
 
 

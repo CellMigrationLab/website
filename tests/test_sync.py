@@ -19,5 +19,18 @@ class PublicRecordsTests(unittest.TestCase):
             self.assertEqual([r["id"] for r in sync_things_done.public_records(path)], ["a", "b"])
 
 
+
+class CleanTextTests(unittest.TestCase):
+    def test_inline_tags_leave_no_space_before_punctuation(self):
+        text = "Mounting <jats:italic>in vitro</jats:italic>\n , <i>in vivo</i> and clinical evidence."
+        self.assertEqual(sync_things_done.clean_text(text, abstract=True), "Mounting in vitro, in vivo and clinical evidence.")
+
+    def test_only_abstracts_lose_a_leading_heading(self):
+        self.assertEqual(sync_things_done.clean_text("<jats:title>Abstract</jats:title><jats:p>Cells move.</jats:p>",
+                                                     abstract=True), "Cells move.")
+        self.assertEqual(sync_things_done.clean_text("Summary statistics of cell migration"),
+                         "Summary statistics of cell migration")
+
+
 if __name__ == "__main__":
     unittest.main()

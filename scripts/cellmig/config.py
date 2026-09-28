@@ -33,7 +33,7 @@ GENERATED = [
     "index.md", "research.md", "lab-members.md", "software.md", "lab-in-numbers.md",
     "featured-research.md", "publications.md", "datasets.md", "gallery.md",
     "online-lectures.md", "about-us.md", "join-us.md", "news.md", "portfolio", "feed.xml", "feed",
-    "llms.txt", "llms-full.txt",
+    "llms.txt", "llms-full.txt", "assets/images/members",   # copied from data/photos/
 ]
 
 # Alt text for a picture that has no caption in its data file (add a caption
@@ -49,15 +49,15 @@ GROUPS = ["pi", "staff", "postdoc", "phd", "student", "other"]
 
 # Dataset type (things_done `dataset_type`) -> heading on the datasets page.
 # Headings are listed in this order; any other type goes under "Other data".
+# things_done dataset_type (schema enum) -> section of the Datasets page, in page order
 DATASET_TYPES = {
     "image": "Image data",
-    "video": "Image data",
     "proteomic": "Proteomic data",
     "rna_seq": "Sequencing data",
-    "sequencing": "Sequencing data",
     "model": "Deep learning models",
 }
-OTHER_DATA = "Other data"
+# things_done dataset_tags (schema enum) -> badge
+DATASET_TAGS = {"deep-learning-ready": "DL-ready", "model-zoo": "Model zoo"}
 
 
 def fail(message: str) -> NoReturn:

@@ -97,7 +97,7 @@
     NanoPyx is a Python library for analysing light-microscopy and super-resolution images. It builds
     on methods originally developed in the [NanoJ](https://github.com/HenriquesLab/NanoJ-Core)
     ecosystem and includes tools developed by the
-    [Henriques Laboratory](https://henriqueslab.github.io/) and collaborators.
+    [Henriques Laboratory](https://henriqueslab.org/) and collaborators.
 
 - id: dl4miceverywhere
   color: mint

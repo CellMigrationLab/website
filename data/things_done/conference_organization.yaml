@@ -5,80 +5,64 @@ records:
   event_name: 'BioCity Symposium 2026: Vision, Expanded'
   location: Mauno Koivisto Centre, BioCity, Turku, Finland
   start_date: '2026-08-27'
-  conference_role: organizer
 - title: Co-organizer
   event_name: IMMENs Kick-off Symposium
   location: Hanaholmen, Finland
   start_date: '2026-08-19'
-  conference_role: organizer
 - title: Session chair
   event_name: 'Sigrid Jusélius Symposium 2026: Session 5 (Part 1), AI for Optical Biology and Multimodal
     Analysis'
   location: Finland
   start_date: '2026-06-10'
-  conference_role: session_chair
 - title: Session co-chair
   event_name: 'EACR 2026 Congress: Symposium: Mechanisms of Tumour Metastasis'
   location: Budapest, Hungary
   start_date: '2026-06-09'
-  conference_role: session_chair
 - title: Organising committee member
   event_name: Imaging Cell Dynamics 2026
   location: Montanyà Hotel, Catalonia, Spain
   start_date: '2026-05-11'
-  conference_role: organizer
 - title: Organising committee member
   event_name: 4th BioImage Informatics Finland Network Symposium (BIIF2025)
   location: Seili island (Turku Archipelago), Finland
   start_date: '2025-05-22'
-  conference_role: co_organizer
 - title: Session chair
   event_name: Biologists @ 100 (The Company of Biologists Centenary)
   location: Liverpool, UK
   start_date: '2025-03-24'
-  conference_role: session_chair
 - title: Organising committee member
   event_name: EACR Early Career Researcher Meeting 2025
   location: Europe
   start_date: '2025-01-01'
-  conference_role: co_organizer
 - title: Session chair and organiser
   event_name: EACR 2024 Congress
   location: Europe
   start_date: '2024-01-01'
-  conference_role: session_chair
 - title: Organising committee member
-  event_name: EACR 2025 Congress planning
+  event_name: EACR 2025 Congress
   location: Europe
   start_date: '2024-01-01'
-  conference_role: co_organizer
 - title: Organising committee member
   event_name: Biocity Symposium 2023
   location: Turku, Finland
   start_date: '2023-01-01'
-  conference_role: co_organizer
 - title: Organising committee member
-  event_name: EACR 2024 Congress planning
+  event_name: EACR 2024 Congress
   location: Europe
   start_date: '2023-01-01'
-  conference_role: co_organizer
 - title: Main organizer
   event_name: ELMI 2022
   location: Europe
   start_date: '2022-01-01'
-  conference_role: organizer
 - title: Organizer
   event_name: BIIF 2021 meeting
   location: Finland
   start_date: '2021-01-01'
-  conference_role: organizer
 - title: Organising committee member
   event_name: ELMI 2022
   location: Logomo, Turku, Finland
   start_date: '2021-01-01'
-  conference_role: co_organizer
 - title: Vice-Chair
   event_name: Gordon Research Seminar on Signaling by Adhesion Receptors
   location: USA
   start_date: '2014-01-01'
-  conference_role: organizer

@@ -75,7 +75,6 @@ education:
 - degree: Ph.D., Biochemistry
   organization: Faculty of Life Sciences, University of Manchester
   end_date: '2013-01-31'
-  thesis_title: Integrin-mediated regulation of small GTPases during cell migration and invasion
 - degree: MSc
   organization: University of Reims
   end_date: '2008-12-31'
@@ -88,3 +87,40 @@ education:
 - degree: BSc
   organization: University of Reims
   end_date: '2007-12-31'
+roles:
+- title: Professor in Bioimaging
+  organization: Åbo Akademi University
+  start_date: '2026-05-01'
+- title: K. Albin Johansson Research Professor
+  organization: Åbo Akademi University
+  start_date: '2026-01-01'
+- title: Guest Editor, Imaging Cell Architecture and Dynamics special issue
+  organization: Journal of Cell Science
+  start_date: '2024-01-01'
+- title: Editorial contributor, CSHL manual on cell migration
+  organization: Cold Spring Harbor Laboratory
+  start_date: '2024-01-01'
+- title: Associate Editor (Bioimaging and image analysis)
+  organization: Journal of Cell Science
+  start_date: '2023-01-01'
+- title: Associate Professor in Bioimaging
+  organization: Åbo Akademi University
+  start_date: '2022-01-01'
+- title: Academy of Finland Research Fellow
+  organization: Research Council of Finland
+  start_date: '2021-01-01'
+- title: bioRxiv affiliate (preprint screening)
+  organization: bioRxiv
+  start_date: '2020-01-01'
+- title: Principal Investigator
+  organization: Åbo Akademi University
+  start_date: '2019-09-01'
+- title: 'Post-doctoral Researcher (mentor: Prof. Johanna Ivaska)'
+  organization: University of Turku
+  start_date: '2014-01-01'
+- title: 'Post-doctoral Researcher (mentor: Prof. Martin Humphries)'
+  organization: University of Manchester
+  start_date: '2013-01-01'
+- title: 'PhD Student (mentor: Prof. Martin Humphries)'
+  organization: University of Manchester
+  start_date: '2009-09-01'
