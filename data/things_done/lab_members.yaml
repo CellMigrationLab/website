@@ -1,96 +1,117 @@
 # Copied by scripts/sync_things_done.py from things_done/ledger/profile/lab_members.yaml.
 # Do not edit by hand: change things_done instead, the website updates itself.
 records:
-- name: Guillaume Jacquemet
+- id: member-guillaume-jacquemet
+  name: Guillaume Jacquemet
   role: Professor in Bioimaging
   group: pi
   status: current
-- name: Mario Del Rosario
+- id: member-mario-del-rosario
+  name: Mario Del Rosario
   role: University Researcher in Bioimaging
   group: staff
   status: current
-- name: Jaakko Lehtimäki
+- id: member-jaakko-lehtimaki
+  name: Jaakko Lehtimäki
   role: Postdoc
   group: postdoc
   status: current
-- name: Christine Touma
+- id: member-christine-touma
+  name: Christine Touma
   role: Postdoc
   group: postdoc
   status: current
-- name: Adán Olguín-Olguín
+- id: member-adan-olguin-olguin
+  name: Adán Olguín-Olguín
   role: Postdoc
   group: postdoc
   status: current
-- name: Isabel Stötzel
+- id: member-isabel-stotzel
+  name: Isabel Stötzel
   role: Postdoc
   group: postdoc
   status: current
-- name: Léa Pechtimaldjian
+- id: member-lea-pechtimaldjian
+  name: Léa Pechtimaldjian
   role: Postdoc
   group: postdoc
   status: current
-- name: Ana Popović
+- id: member-ana-popovic
+  name: Ana Popović
   role: PhD student
   group: phd
   status: current
   also_known_as:
   - Ana Gračanin
-- name: Sujan Ghimire
+- id: member-sujan-ghimire
+  name: Sujan Ghimire
   role: PhD student
   group: phd
   status: current
-- name: Sarah Massaad
+- id: member-sarah-massaad
+  name: Sarah Massaad
   role: PhD student
   group: phd
   status: current
-- name: Monika Vaitkevičiūtė
+- id: member-monika-vaitkeviciute
+  name: Monika Vaitkevičiūtė
   role: PhD student
   group: phd
   status: current
-- name: Marcela Rivera
+- id: member-marcela-rivera
+  name: Marcela Rivera
   role: PhD student
   group: phd
   status: current
   also_known_as:
   - Marcela Xiomara Rivera Pineda
-- name: Iván Hidalgo Cenalmor
+- id: member-ivan-hidalgo-cenalmor
+  name: Iván Hidalgo Cenalmor
   role: PhD student
   group: phd
   status: current
-- name: Daniil Iukhtanov
+- id: member-daniil-iukhtanov
+  name: Daniil Iukhtanov
   role: PhD student
   previous_roles:
   - Intern
   - Master's student
   group: phd
   status: current
-- name: Huy Nguyen
+- id: member-huy-nguyen
+  name: Huy Nguyen
   role: Master's student
   previous_roles:
   - Summer intern
   group: student
   status: current
-- name: Helene Helo
+- id: member-helene-helo
+  name: Helene Helo
   role: Research assistant
   group: other
   status: alumni
-- name: Marjaana Ojalill
+- id: member-marjaana-ojalill
+  name: Marjaana Ojalill
   role: Postdoc
   group: postdoc
   status: alumni
-- name: Gautier Follain
+- id: member-gautier-follain
+  name: Gautier Follain
   role: Postdoc
   group: postdoc
   status: alumni
-- name: Hiba Daafane
+- id: member-hiba-daafane
+  name: Hiba Daafane
   role: Research assistant
   group: other
   status: alumni
-- name: Hanna Grobe
+- id: member-hanna-grobe
+  name: Hanna Grobe
   role: Postdoc
   group: postdoc
   status: alumni
-- name: Joanna Pylvänäinen
+- id: member-joanna-pylvanainen
+  name: Joanna Pylvänäinen
   role: Postdoc
   previous_roles:
   - PhD student
@@ -99,23 +120,27 @@ records:
   also_known_as:
   - Joanna W. Pylvänäinen
   - Joanna W. Pylvanainen
-- name: Johanna Tammi
+- id: member-johanna-tammi
+  name: Johanna Tammi
   role: Master's student
   previous_roles:
   - Research assistant
   group: student
   status: alumni
-- name: Marie-Catherine Laisne
+- id: member-marie-catherine-laisne
+  name: Marie-Catherine Laisne
   role: PhD student
   group: phd
   status: alumni
-- name: Ada Pajari
+- id: member-ada-pajari
+  name: Ada Pajari
   role: Master's student
   group: student
   status: alumni
   also_known_as:
   - Ada O. Pajari
-- name: Anna Nylund
+- id: member-anna-nylund
+  name: Anna Nylund
   role: Licentiate student
   previous_roles:
   - Master's student
@@ -123,23 +148,28 @@ records:
   status: alumni
   also_known_as:
   - Anna S. Nylund
-- name: Theotime Dubois
+- id: member-theotime-dubois
+  name: Theotime Dubois
   role: Master's student
   group: student
   status: alumni
-- name: Johanna Jukkala
+- id: member-johanna-jukkala
+  name: Johanna Jukkala
   role: Master's student
   group: student
   status: alumni
-- name: Seyed Hosseini
+- id: member-seyed-hosseini
+  name: Seyed Hosseini
   role: Summer intern
   group: other
   status: alumni
-- name: Amin Rezaei
+- id: member-amin-rezaei
+  name: Amin Rezaei
   role: Summer intern
   group: other
   status: alumni
-- name: Diana Wurzinger
+- id: member-diana-wurzinger
+  name: Diana Wurzinger
   role: Intern
   group: other
   status: alumni
