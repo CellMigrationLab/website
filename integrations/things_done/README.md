@@ -12,6 +12,11 @@ ledger/publications/*.yaml ──────────────┐
 ledger/registries/{software,datasets}  ──┤
 ledger/profile/lab_members.yaml        ──┤
 ledger/profile/affiliations.yaml       ──┤
+ledger/profile/{person,education}.yaml ──┤
+ledger/roles/*.yaml                    ──┤
+ledger/activities/*/{talks,            ──┤
+  conference_organization}.yaml          │
+ledger/registries/grants.yaml          ──┤  (no amounts)
 report/generated/publications/           │  update_website.yml runs
   preprint_publication_crosswalk.json  ──┼─ scripts/sync_things_done.py ─▶ data/things_done/*.yaml ─▶ site
   preprint_lag.json                    ──┤  (copy only, public fields)
@@ -31,8 +36,9 @@ below only lets things_done *write* to this repository.
 
 ## Setup (once, about 5 minutes)
 
-The workflow is `.github/workflows/update_website.yml` in things_done. It skips
-with a notice until the token exists.
+The workflow is `.github/workflows/update_website.yml` in things_done. It fails
+(red run, with an error pointing here) until the token exists, so a missing
+token cannot leave the website silently stale.
 
 1. **Create a token.** GitHub → your avatar → Settings → Developer settings →
    Personal access tokens → Fine-grained tokens → *Generate new token*.
@@ -43,8 +49,10 @@ with a notice until the token exists.
    *New repository secret*: `WEBSITE_TOKEN`.
 3. **Test it.** things_done → Actions → *Update lab website* → *Run workflow*.
 
-It then runs after every change to publications, software, datasets or the
-generated reports, after the ledger's own automation, and once a day.
+It then runs after every change to the ledger files the website uses
+(publications, software, datasets, grants, profile, roles, talks, events), the
+generated reports and the Scholar metrics, after the ledger's own automation
+succeeds, and once a day. It validates the ledger before copying anything.
 
 ## Where each thing on the website comes from
 
