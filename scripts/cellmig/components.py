@@ -2,7 +2,7 @@
 
 import re
 
-from .config import COLORS, fail
+from .config import COLORS, FITS, fail
 from .featured import Story
 from .icons import ICONS
 from .images import dims, image_size, media, square_thumb, thumb
@@ -79,7 +79,7 @@ def feature_card(story: Story) -> str:
     pic = (media(story["image"], story["title"], 700) if story["image"]
            else f'<span class="cm-card__placeholder">{esc(pub["venue"])}</span>')
     return (f'<a class="cm-card" href="portfolio/{story["slug"]}/">'
-            f'<div class="cm-card__media">{pic}</div>'
+            f'<div class="cm-card__media{" cm-fit-contain" if story["fit"] == "contain" else ""}">{pic}</div>'
             f'<p class="cm-card__title">{esc(story["title"])}</p>'
             f'<p class="cm-card__meta">{esc(pub["venue"])} · {pub["year"]} {badges(pub)}</p></a>')
 
@@ -144,14 +144,21 @@ def support_row(groups: list[Record]) -> str:
         items.append(f'<li class="cm-support__item{joint}"><div class="cm-support__logos">{logos}</div>{caption}</li>')
     return '<ul class="cm-logos cm-support">' + "".join(items) + "</ul>"
 
-def tile(color: str, media_html: str, body_html: str, media_right: bool = False) -> str:
-    """Coloured two-column block (picture + text) used on Research and Software."""
-    if color not in COLORS:
-        fail(f"tile colour {color!r} is not one of {sorted(COLORS)}")
-    side = " cm-tile--right" if media_right else ""
-    media_part = f'<div class="cm-tile__media">{media_html}</div>' if media_html else ""
+def tile(position: int, media_html: str, body_html: str, color: str | None = None,
+         fit: str | None = None) -> str:
+    """Two-column block (picture + text) used on Research and Software (#25):
+    tiles alternate white and light and picture side by `position`; `color:
+    dark` (data file) overrides the surface; `fit: contain` shows a logo or
+    drawing whole instead of filling the tile."""
+    if color is not None and color not in COLORS:
+        fail(f"tile colour {color!r}: the only override is {sorted(COLORS)} (tiles alternate white and light)")
+    if fit is not None and fit not in FITS:
+        fail(f"media fit {fit!r} is not one of {sorted(FITS)}")
+    surface = color or ("white" if position % 2 == 0 else "light")
+    side = " cm-tile--right" if position % 2 == 1 else ""
+    media_part = f'<div class="cm-tile__media{" cm-fit-contain" if fit == "contain" else ""}">{media_html}</div>' if media_html else ""
     text_only = "" if media_html else " cm-tile--text"
-    return (f'<section class="cm-tile cm-tile--{color}{side}{text_only}">'
+    return (f'<section class="cm-tile cm-tile--{surface}{side}{text_only}">'
             f'{media_part}<div class="cm-tile__body">{body_html}</div></section>')
 
 

@@ -8,6 +8,8 @@
 #   doi:    the paper (journal version or preprint; a preprint's journal version
 #           is used automatically when the ledger links them)
 #   image:  picture or logo (a .gif plays as a short video)
+#   fit:    (optional) contain for a logo or diagram (shown whole in the square
+#           card); pictures fill the card (cover) otherwise
 #   slug:   page address; kept from the old website - leave unchanged
 #   also:   other DOIs told by the same story (optional)
 #   hide:   true to leave a corresponding-author paper out
@@ -21,15 +23,18 @@
 
 - doi: 10.48550/arXiv.2603.10704
   image: wp-content/uploads/2026/07/comic-e1782918385802.png
+  fit: contain
   slug: packaging-jupyter-notebooks-as-installable-desktop-apps-using-labconstrictor
 - doi: 10.48550/arXiv.2601.08859
   image: wp-content/uploads/2026/07/logo_white_bg.png
+  fit: contain
   slug: ezinput-a-cross-environment-python-library-for-easy-ui-generation-in-scientific-computing
 - doi: 10.64898/2026.06.29.735028
   image: wp-content/uploads/2026/07/gemini_generated_image_kc5ezfkc5ezfkc5e.png
   slug: nucleisky-enables-cross-scale-multimodal-registration-of-microscopy-data-using-nuclei-constellations
 - doi: 10.1242/jcs.265183
   image: wp-content/uploads/2026/07/logo-rxiv-maker.png
+  fit: contain
   slug: rxiv-maker-an-automated-template-engine-for-streamlined-scientific-publications
 - doi: 10.64898/2026.02.09.703982
   image: wp-content/uploads/2026/07/filopodia-1.png
@@ -51,12 +56,14 @@
   slug: practical-considerations-for-data-exploration-in-quantitative-cell-biology
 - doi: 10.1371/journal.pbio.3002740
   image: wp-content/uploads/2024/01/celltrackscolab_logo.png
+  fit: contain
   slug: celltrackscolab-a-platform-for-compiling-analyzing-and-exploring-tracking-data
 - doi: 10.1083/jcb.202310030
   image: wp-content/uploads/2023/10/max_220913-sitlnrd1-2.sld-si2-position-5-fav.jpg
   slug: tlnrd1-is-a-ccm-complex-component-and-regulates-endothelial-barrier-integrity
 - doi: 10.1038/s41592-024-02295-6
   image: wp-content/uploads/2024/01/dl4miceverywhere-logo.png
+  fit: contain
   slug: dl4miceverywhere-deep-learning-for-microscopy-made-flexible-shareable-and-reproducible
 - doi: 10.1101/2022.08.22.504744
   image: wp-content/uploads/2022/10/cover-3.jpg

@@ -10,13 +10,13 @@ paper. An entry for a paper that is not corresponding-author stops the build
 import re
 from typing import Any
 
-from .config import DATA, fail, load
+from .config import DATA, FITS, fail, load
 from .ledger import Ledger, Record
 from .text import slugify
 
 Story = dict[str, Any]
 
-ENTRY_KEYS = {"doi", "image", "slug", "also", "hide", "summary"}
+ENTRY_KEYS = {"doi", "image", "slug", "also", "hide", "summary", "fit"}
 
 
 def _entries(ledger: Ledger) -> dict[str, Record]:
@@ -46,6 +46,14 @@ def _title_slug(title: str) -> str:
     return slug if len(slug) <= SLUG_LENGTH else slug[:SLUG_LENGTH + 1].rsplit("-", 1)[0]
 
 
+def _fit(entry: Record) -> str:
+    """How the card shows the picture: cover (fill the square) unless `fit: contain`."""
+    fit = entry.get("fit", "cover")
+    if fit not in FITS:
+        fail(f"data/featured.yaml ({entry['doi']}): fit must be one of {sorted(FITS)}")
+    return fit
+
+
 def _summary(main: Record, pubs: list[Record], entry: Record) -> str:
     """The text of a featured page: `summary:` in data/featured.yaml, else
     the papers' abstracts. A paper with no abstract (an editorial, say) needs
@@ -64,6 +72,7 @@ def _story(ledger: Ledger, main: Record, entry: Record, pos: int) -> Story:
         "papers": [main["doi"], *(entry.get("also") or [])],
         "pubs": pubs,
         "image": entry.get("image"),
+        "fit": _fit(entry),
         "title": main["title"],
         "slug": entry.get("slug") or _title_slug(main["title"]),
         "year": int(main["year"]),
