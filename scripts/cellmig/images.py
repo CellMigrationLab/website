@@ -1,9 +1,11 @@
 """Images and videos: resized WebP thumbnails and the markup that shows them.
 
 Thumbnails go to docs/assets/thumbs/ and are kept between builds (and
-between CI runs, by actions/cache). One is only remade when its source image
-or its settings change: a hash of both is kept in .cache/cellmig-thumbs/,
-because file dates are no guide after a fresh git checkout.
+between CI runs, by actions/cache). One is only remade when its source image,
+its settings or this file (which holds every encoder setting: quality,
+resampling, cropping) change: a hash of the three is kept in
+.cache/cellmig-thumbs/, because file dates are no guide after a fresh git
+checkout, and CI may restore thumbnails made by older code.
 """
 
 import hashlib
@@ -20,6 +22,7 @@ from .text import esc
 VECTOR_OR_ANIMATED = (".svg", ".gif")   # served as they are, never resized
 DIGESTS = ROOT / ".cache" / "cellmig-thumbs"   # source hash of each thumbnail
 SMALL_FILE = 150_000                    # bytes; smaller images are not resized
+CODE = hashlib.sha1(Path(__file__).read_bytes()).hexdigest()   # this file: part of every digest
 
 
 def source(site_path: str) -> Path:
@@ -52,7 +55,7 @@ def _sha1(src: Path) -> str:
 
 
 def _digest(out: Path, src: Path, settings: str) -> tuple[Path, str]:
-    return DIGESTS / f"{out.relative_to(DOCS)}.sha1", f"{_sha1(src)} {settings}"
+    return DIGESTS / f"{out.relative_to(DOCS)}.sha1", f"{_sha1(src)} {CODE} {settings}"
 
 
 def _stale(out: Path, src: Path, settings: str) -> bool:

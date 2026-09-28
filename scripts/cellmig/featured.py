@@ -64,7 +64,7 @@ def _summary(main: Record, pubs: list[Record], entry: Record) -> str:
     return text
 
 
-def _story(ledger: Ledger, main: Record, entry: Record, pos: int) -> Story:
+def _story(ledger: Ledger, main: Record, entry: Record) -> Story:
     """A featured item: the paper (plus any `also` papers) and its presentation."""
     pubs = [main] + [ledger.published_version(ledger.get(d)) for d in entry.get("also") or []]
     family = [main, *ledger.related(main)]
@@ -76,27 +76,27 @@ def _story(ledger: Ledger, main: Record, entry: Record, pos: int) -> Story:
         "title": main["title"],
         "slug": entry.get("slug") or _title_slug(main["title"]),
         "year": int(main["year"]),
-        # Day-precision journal date when the lag report has one, else None.
+        # Journal date as far as the lag report knows it (Ledger.dates), else None.
         "date": next((ledger.dates[r["doi"].lower()] for r in family if r["doi"].lower() in ledger.dates), None),
         "summary": _summary(main, pubs, entry),
-        "pos": pos,
     }
 
 
 def load_featured(ledger: Ledger) -> list[Story]:
     """Featured papers, newest first.
 
-    Order: year, then the exact date where known (papers with no known date
-    come after dated ones of the same year), then ledger order."""
+    Order: as Ledger.grouped: year, then the date as far as it is known
+    (papers with no known date come after dated ones of the same year), then
+    ledger order."""
     entries = _entries(ledger)
     featured, used = [], set()
-    for pos, main in enumerate(ledger.grouped()):
+    for main in ledger.grouped():
         key = main["doi"].lower()
         entry = entries.get(key, {})
         if any(r.get("corresponding") for r in [main, *ledger.related(main)]):
             used.add(key)
             if not entry.get("hide"):
-                featured.append(_story(ledger, main, entry, pos))
+                featured.append(_story(ledger, main, entry))
     stray = [e["doi"] for k, e in entries.items() if k not in used]
     if stray:
         fail(f"data/featured.yaml: not corresponding-author papers in the ledger, remove them: {stray}")
@@ -106,13 +106,9 @@ def load_featured(ledger: Ledger) -> list[Story]:
     dupes = sorted({s["slug"] for s in featured if sum(t["slug"] == s["slug"] for t in featured) > 1})
     if dupes:
         fail(f"featured papers share a page address {dupes}; give one a `slug:` in data/featured.yaml")
-    featured.sort(key=lambda s: (-s["year"], s["date"] is None, _neg(s["date"]), s["pos"]))
+    featured.sort(key=lambda s: s["date"] or "", reverse=True)   # stable: ties keep ledger order
+    featured.sort(key=lambda s: (-s["year"], s["date"] is None))
     return featured
-
-
-def _neg(date: str | None) -> tuple[int, ...]:
-    """Sort key that orders ISO dates newest first."""
-    return tuple(-int(x) for x in date.split("-")) if date else ()
 
 
 def story_by_doi(featured: list[Story], ledger: Ledger) -> dict[str, Story]:

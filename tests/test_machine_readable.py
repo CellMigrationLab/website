@@ -68,13 +68,26 @@ class StructuredDataTests(unittest.TestCase):
         self.assertEqual([t[1] for t in tags if t[0] == "citation_author"], ["Ana B", "Guillaume Jacquemet"])
         self.assertIn(["citation_publication_date", "2025"], tags)
 
-
-if __name__ == "__main__":
-    unittest.main()
+    def test_dates_known_only_to_the_month_are_not_made_full(self):
+        month = {**STORY, "date": "2025-09"}
+        work = article(month, "https://example.org/p/", None)["@graph"][0]
+        self.assertNotIn("datePublished", work)
+        self.assertIn(["citation_publication_date", "2025"], scholar_tags(month))
+        day = {**STORY, "date": "2025-09-14"}
+        self.assertEqual(article(day, "https://example.org/p/", None)["@graph"][0]["datePublished"], "2025-09-14")
+        self.assertIn(["citation_publication_date", "2025/09/14"], scholar_tags(day))
 
 
 class RightsTests(unittest.TestCase):
     """#28: rights come from data/media.yaml; nothing is inferred or implied."""
+
+    def test_theme_images_are_recorded(self):
+        """The favicon and touch icon are named in mkdocs.yml and overrides/, not by images.py."""
+        from cellmig import rights
+        with patch.object(rights, "_used", set()):
+            rights.use_theme_images()
+            self.assertIn("apple-touch-icon.png", rights._used)
+            self.assertIn("wp-content/uploads/2019/08/cropped-cover4-1.jpg", rights._used)
 
     def use(self, entries):
         from cellmig import rights
@@ -104,3 +117,7 @@ class RightsTests(unittest.TestCase):
                 rights.registry()
         with self.use([]), self.assertRaises(SystemExit):
             rights.entry("missing.jpg")
+
+
+if __name__ == "__main__":
+    unittest.main()
