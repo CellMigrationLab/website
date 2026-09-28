@@ -27,6 +27,7 @@ from .config import DATA, DOCS, ROOT, fail, load
 RIGHTS = ("all-rights-reserved", "third-party", "CC-BY-4.0", "CC0-1.0", "unknown")
 OPEN_LICENCES = {"CC-BY-4.0": "https://creativecommons.org/licenses/by/4.0/",
                  "CC0-1.0": "https://creativecommons.org/publicdomain/zero/1.0/"}
+LICENCE_NAMES = {"CC-BY-4.0": "CC BY 4.0", "CC0-1.0": "CC0 1.0"}   # as shown in credit lines
 TYPES = ("microscopy", "photo", "portrait", "journal-cover", "paper-figure", "logo", "software-media")
 KEYS = {"path", "type", "rights", "creators", "owner", "source", "source_url"}
 Entry = dict[str, Any]
@@ -86,16 +87,26 @@ def entry(site_path: str) -> Entry:
     return e
 
 
+def _holder(e: Entry) -> str:
+    """Who is credited: "Emilia Peuhu and Guillaume Jacquemet", an owner or a source."""
+    who = e.get("creators") or [e.get("owner") or e["source"]]
+    return " and ".join([", ".join(who[:-1]), who[-1]] if len(who) > 1 else who)
+
+
 def credit(site_path: str) -> str:
-    """Public credit line ("© Emilia Peuhu and Guillaume Jacquemet",
-    "Cover © the publisher"), or "" when unknown."""
+    """Public credit line, or "" when unknown: "© Emilia Peuhu and Guillaume
+    Jacquemet", "© Guillaume Jacquemet · CC BY 4.0" (an open licence is named,
+    as it asks), "Guillaume Jacquemet · CC0 1.0" (no rights reserved: no ©),
+    "Cover © the publisher"."""
     e = entry(site_path)
     if e["rights"] == "unknown":
         return ""
     if e["type"] == "journal-cover":   # the caption names the journal; the cover is its publisher's
         return "Cover © the publisher"
-    who = e.get("creators") or [e.get("owner") or e["source"]]
-    return "© " + " and ".join([", ".join(who[:-1]), who[-1]] if len(who) > 1 else who)
+    if e["rights"] == "CC0-1.0":
+        return f"{_holder(e)} · {LICENCE_NAMES['CC0-1.0']}"
+    licence = f" · {LICENCE_NAMES[e['rights']]}" if e["rights"] in LICENCE_NAMES else ""
+    return f"© {_holder(e)}{licence}"
 
 
 def image_object(site_path: str, url: str) -> dict[str, Any]:
@@ -106,10 +117,10 @@ def image_object(site_path: str, url: str) -> dict[str, Any]:
     item: dict[str, Any] = {"@type": "ImageObject", "contentUrl": url}
     if e.get("creators"):
         item["creator"] = [{"@type": "Person", "name": n} for n in e["creators"]]
-    text = credit(site_path)
-    if text:
-        item["creditText"] = text.split("© ", 1)[1]
-        item["copyrightNotice"] = text
+    if e["rights"] != "unknown":
+        item["creditText"] = "the publisher" if e["type"] == "journal-cover" else _holder(e)
+        if e["rights"] != "CC0-1.0":
+            item["copyrightNotice"] = f"© {item['creditText']}"
     if e["rights"] in OPEN_LICENCES:
         item["license"] = OPEN_LICENCES[e["rights"]]
     return item
