@@ -5,7 +5,7 @@ import re
 
 import yaml
 
-from .components import section_title, tile
+from .components import SOFTWARE_DATA, section_nav, section_title, tile
 from . import rights
 from .config import (
     CONTENT,
@@ -28,7 +28,6 @@ BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our 
 
 
 # The menu's "Software & data" covers two pages; this row links them (#25).
-SOFTWARE_DATA_NAV = '<p class="cm-toc-inline">{software} · {datasets}</p>'
 PREPRINT_BADGE = ' <span class="cm-badge cm-badge--preprint">Preprint</span>'
 
 
@@ -90,8 +89,7 @@ def page_software(ledger: Ledger) -> None:
     projects = software_list(ledger)
     p.meta["jsonld"] = to_json(item_list("Software from the Cell Migration Lab", [
         software_item(s, f"{p.url}#{slugify(s['title'])}") for s in projects]))
-    p.add("# Software", SOFTWARE_DATA_NAV.format(software='<strong aria-current="page">Software</strong>',
-                                                 datasets='<a href="datasets/">Datasets</a>'),
+    p.add("# Software", section_nav(SOFTWARE_DATA, "Software"),
           '<p class="cm-lead">Here are the tools we have developed or contributed to. '
           'Many are designed to make microscopy and image analysis easier to run, reproduce and share. '
           'Looking for example data or trained models? See '
@@ -138,11 +136,10 @@ def _dataset(d: Record, ledger: Ledger) -> str:
 
 def page_datasets(ledger: Ledger, site: Record) -> None:
     """docs/datasets.md: shared resources (data/site.yaml), then datasets by type."""
-    p = Page("datasets.md", title="Datasets", **preview("datasets"))
+    p = Page("datasets.md", title="Datasets", menu="software/", **preview("datasets"))
     p.meta["jsonld"] = to_json(item_list("Datasets shared by the Cell Migration Lab",
                                          [dataset_item(d) for d in ledger.datasets]))
-    p.add("# Datasets", SOFTWARE_DATA_NAV.format(software='<a href="software/">Software</a>',
-                                                 datasets='<strong aria-current="page">Datasets</strong>'),
+    p.add("# Datasets", section_nav(SOFTWARE_DATA, "Datasets"),
           '<p class="cm-lead">We share microscopy datasets, trained models and other research data from our work. '
           'Many accompany published papers or provide examples for our image-analysis tools. '
           'Looking for analysis software? See <a href="software/">our software</a>.</p>')

@@ -284,7 +284,6 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-pub__abstract summary::before { content: "+ "; }
 .md-typeset .cm-pub__abstract[open] summary::before { content: "– "; }
 .md-typeset .cm-pub__abstract p { margin: .4rem 0 0; line-height: 1.6; }
-.cm-pubs--compact .cm-pub__authors { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .md-typeset .cm-year h2 { position: sticky; top: 2.88rem; z-index: 1; margin: 2rem 0 0; padding: .32rem 0; background: rgba(255, 255, 255, .95); font-size: .8rem; font-weight: 600; letter-spacing: .2em; border-bottom: 1px solid var(--cm-strong); }
 
 .cm-filter { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem .8rem; margin: 1.6rem 0 .8rem; padding: .8rem; background: var(--cm-soft); }
