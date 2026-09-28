@@ -69,7 +69,7 @@ themes:
         Centre of Excellence
         [IMMENs](https://www.helsinki.fi/en/researchgroups/immune-endothelial-interfaces), we also
         investigate immune–endothelial interactions and lymphatic vessels.
-    credit: "Picture: A cancer cell (magenta) inside the vasculature of a zebrafish embryo."
+    credit: "Image: A cancer cell (magenta) inside the vasculature of a zebrafish embryo."
     papers:
       - 10.1083/jcb.202310030        # TLNRD1 and endothelial barrier integrity
       - 10.1038/s44318-025-00678-9   # FlowVision: cancer cell arrest on endothelial monolayers
@@ -84,7 +84,7 @@ themes:
         invasion and interactions with extracellular matrices.
       - We investigate how filopodia are assembled, how proteins are organised within them, and how
         they contribute to cancer-cell behaviour and tissue invasion.
-    credit: "Picture: Cancer cell labeled for F-actin."
+    credit: "Image: Cancer cell labelled for F-actin."
     papers:
       - 10.64898/2026.02.09.703982   # filopodia-mediated trans-endocytosis (preprint)
       - 10.1242/jcs.265278           # CCT8 and the MYO10 motor domain

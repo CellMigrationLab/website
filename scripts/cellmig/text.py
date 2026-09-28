@@ -62,6 +62,17 @@ def full_date(date: str | None) -> str | None:
     return date if date and precision_of(date) == "day" else None
 
 
+MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August",
+          "September", "October", "November", "December")
+
+
+def long_date(iso: str) -> str:
+    """"2026-09-21" (or a longer ISO timestamp) -> "21 September 2026", the way
+    dates are written on the site."""
+    y, m, d = (int(x) for x in str(iso)[:10].split("-"))
+    return f"{d} {MONTHS[m - 1]} {y}"
+
+
 def is_external(url: str) -> bool:
     """True for absolute URLs, mailto:, fragments and protocol-relative links."""
     return bool(re.match(r"^([a-z][a-z0-9+.-]*:|#|//)", str(url), flags=re.I))

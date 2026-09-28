@@ -16,9 +16,9 @@ from .text import esc, slugify
 
 def page_featured(featured: list[Story], ledger: Ledger, lab: set[str]) -> None:
     """docs/featured-research.md (the grid) and docs/portfolio/<slug>.md for each story."""
-    p = Page("featured-research.md", title="Featured Research", menu="publications/", edit_url=edit_url("data/featured.yaml"),
+    p = Page("featured-research.md", title="Featured research", menu="publications/", edit_url=edit_url("data/featured.yaml"),
              **preview("featured-research"))
-    p.add("# Featured Research", section_nav(PAPERS, "Featured research"),
+    p.add("# Featured research", section_nav(PAPERS, "Featured research"),
           '<div class="cm-cards cm-cards--grid">', *(feature_card(s) for s in featured), "</div>")
     p.write()
     software = software_list(ledger)

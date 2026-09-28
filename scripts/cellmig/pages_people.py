@@ -43,7 +43,7 @@ def page_members(members: list[Person]) -> None:
     if alumni:
         p.add(section_title("Alumni"), '<ul class="cm-alumni">', *(_alumnus(m) for m in alumni), "</ul>")
     p.add('<aside class="cm-join">',
-          '<h2>Join us</h2>',
+          section_title("Join us"),
           '<p>Interested in joining the lab? We welcome enquiries from students, researchers and '
           'fellowship applicants. <a href="join-us/">See opportunities and how to apply</a>.</p>',
           "</aside>")

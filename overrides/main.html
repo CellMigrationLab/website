@@ -6,7 +6,7 @@
 {% block htmltitle %}
   {#- Zensical does not set page.is_homepage, so the home page passes head_title. -#}
   {%- if page.meta and page.meta.head_title %}<title>{{ page.meta.head_title }}</title>
-  {%- else %}{{ super() }}{% endif %}
+  {%- else %}<title>{{ page.title | striptags }} – {{ config.site_name }}</title>{% endif %}
 {% endblock %}
 
 {% block extrahead %}
