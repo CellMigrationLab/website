@@ -32,7 +32,7 @@ SITE_URL = _site_url()
 GENERATED = [
     "index.md", "research.md", "lab-members.md", "software.md", "lab-in-numbers.md",
     "featured-research.md", "publications.md", "datasets.md", "gallery.md",
-    "online-lectures.md", "about-us.md", "join-us.md", "news.md", "portfolio", "feed.xml", "feed",
+    "online-lectures.md", "about-us.md", "join-us.md", "portfolio", "feed.xml", "feed",
     "llms.txt", "llms-full.txt", "assets/images/members",   # copied from data/photos/
 ]
 

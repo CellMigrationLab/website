@@ -23,7 +23,7 @@ PAGES = [  # (title, path) in the order of the menu
     ("Research", "research/"), ("Featured research", "featured-research/"), ("Publications", "publications/"),
     ("Software", "software/"), ("Datasets", "datasets/"), ("Lab members", "lab-members/"),
     ("Lab in numbers", "lab-in-numbers/"), ("Gallery", "gallery/"), ("Online talks", "online-lectures/"),
-    ("About us", "about-us/"), ("News", "news/"), ("Join us", "join-us/"),
+    ("About us", "about-us/"), ("Join us", "join-us/"),
 ]
 
 
@@ -61,7 +61,7 @@ def llms_txt(site: Record, featured: list[Story], members: list[Person]) -> str:
     lines += ["", "## Optional", "",
               f"- [Everything above as one Markdown file]({SITE_URL}llms-full.txt): people, research, "
               "papers with abstracts, software, datasets and talks",
-              f"- [News feed (RSS)]({SITE_URL}feed.xml): papers, talks, events and funding", ""]
+              f"- [Research outputs (RSS)]({SITE_URL}feed.xml): new papers, preprints, software and datasets", ""]
     return "\n".join(lines)
 
 
