@@ -84,6 +84,13 @@ def page_story(story: Story, stories: list[Story], i: int, ledger: Ledger, lab: 
     p.write()
 
 
+def publication_filter_kind(rec: Record) -> str:
+    """Browser-filter category: peer review is an explicit ledger fact, not inferred from status."""
+    if rec.get("status") == "preprint":
+        return "preprint"
+    return "peer-reviewed" if rec.get("peer_reviewed") is True else "other"
+
+
 def page_publications(ledger: Ledger, featured: list[Story], lab: set[str]) -> None:
     """docs/publications.md: every publication by year, with search and filters
     (filtering itself is done in the browser by cellmig.js)."""
@@ -105,7 +112,7 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str]) -> N
           '<input id="pub-search" type="search" placeholder="Search title, author, journal…" data-cm-search>',
           '<div class="cm-filter__chips" role="group" aria-label="Show">',
           '<button type="button" class="is-active" data-cm-kind="">All</button>',
-          '<button type="button" data-cm-kind="published">Peer-reviewed</button>',
+          '<button type="button" data-cm-kind="peer-reviewed">Peer-reviewed</button>',
           f'<button type="button" data-cm-kind="preprint">Preprints ({n_pre})</button>',
           "</div>",
           '<p class="cm-filter__count" data-cm-count aria-live="polite"></p>',
@@ -115,7 +122,7 @@ def page_publications(ledger: Ledger, featured: list[Story], lab: set[str]) -> N
         for rec in (r for r in records if r["year"] == y):
             story = stories.get(rec["doi"].lower())
             link = f"portfolio/{story['slug']}/" if story else None
-            kind = "preprint" if rec.get("status") == "preprint" else "published"
+            kind = publication_filter_kind(rec)
             text = " ".join([rec["title"], *(rec.get("authors") or []), rec.get("venue") or "", rec["doi"]]).lower()
             p.add(f'<li class="cm-pub" data-kind="{kind}" data-search="{esc(text)}">'
                   f'{citation(rec, lab, ledger, link, abstract=True)}</li>')

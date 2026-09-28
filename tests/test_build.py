@@ -9,6 +9,8 @@ from unittest.mock import patch
 
 from cellmig import featured, ledger
 from cellmig.charts import lag_section
+from cellmig.components import badges
+from cellmig.pages_papers import publication_filter_kind
 from cellmig.page import Page
 from cellmig.people import is_lab_member, lab_names
 from cellmig.profile import month_year, recent_talks
@@ -42,6 +44,22 @@ class TextTests(unittest.TestCase):
         self.assertTrue(is_external("mailto:x@y.z"))
         self.assertTrue(is_external("#top"))
         self.assertFalse(is_external("software/"))
+
+
+class PublicationSemanticsTests(unittest.TestCase):
+    def test_oa_badge_requires_explicit_open_state(self):
+        for state in ("gold", "hybrid", "green", "bronze"):
+            with self.subTest(state=state):
+                self.assertIn("Open access", badges({"status": "published", "open_access_status": state}))
+        for state in (None, "closed", "unknown"):
+            with self.subTest(state=state):
+                self.assertNotIn("Open access", badges({"status": "published", "open_access_status": state}))
+
+    def test_peer_review_filter_uses_explicit_flag(self):
+        self.assertEqual(publication_filter_kind({"status": "published", "peer_reviewed": True}), "peer-reviewed")
+        self.assertEqual(publication_filter_kind({"status": "in_press", "peer_reviewed": True}), "peer-reviewed")
+        self.assertEqual(publication_filter_kind({"status": "published", "peer_reviewed": False}), "other")
+        self.assertEqual(publication_filter_kind({"status": "preprint", "peer_reviewed": False}), "preprint")
 
 
 class PageTests(unittest.TestCase):
