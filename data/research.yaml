@@ -6,7 +6,10 @@
 #   lead:    first sentence, shown larger
 #   text:    paragraphs (Markdown allowed)
 #   credit:  image caption
-#   papers:  (optional) DOIs from the ledger to list under "Selected papers"
+#   papers:  (optional) DOIs from the ledger to list under "Selected papers":
+#            about 3 per theme, the most representative of the current work
+#            (preprints welcome; a preprint with a journal version shows the
+#            journal version; listing the same paper twice stops the build)
 
 videos:
   - title: Cancer in motion
@@ -34,9 +37,9 @@ themes:
         vessels, and complete the different steps of the metastatic cascade.
     credit: "Video: Cancer cells (purple) invade through collagen (green). Credit: Guillaume Jacquemet and Emilia Peuhu"
     papers:
-      - 10.1038/s44318-025-00678-9
-      - 10.1016/j.devcel.2022.09.016
-      - 10.1038/ncomms13297
+      - 10.64898/2026.09.02.749041   # PDAC: breaching endothelial barriers (preprint, current work)
+      - 10.1016/j.devcel.2022.09.016 # MYO10-filopodia at pre-invasive tumour boundaries
+      - 10.1038/ncomms13297          # calcium channels, filopodia and cancer cell invasion
 
   - title: Cell migration
     color: mint
@@ -50,9 +53,9 @@ themes:
         cells to sense extracellular cues, generate force and change direction.
     credit: "Video: Cancer cell (green) migrating on cell-derived matrices (magenta). Credit: Guillaume Jacquemet"
     papers:
-      - 10.1016/j.celrep.2021.109716
-      - 10.1042/EBC20190012
-      - 10.1038/nprot.2017.107
+      - 10.1016/j.celrep.2021.109716 # myosin-X and talin: integrin activity at filopodia tips
+      - 10.1242/jcs.260574           # myosin-X recruits lamellipodin
+      - 10.1042/EBC20190012          # review: cell-matrix adhesion in cell migration
 
   - title: How cancer and immune cells interact with blood vessels
     color: sky
@@ -70,8 +73,9 @@ themes:
         investigate immune–endothelial interactions and lymphatic vessels.
     credit: "Picture: A cancer cell (magenta) inside the vasculature of a zebrafish embryo. Credit: Guillaume Jacquemet"
     papers:
-      - 10.1083/jcb.202310030
-      - 10.1101/2025.11.24.689779
+      - 10.1083/jcb.202310030        # TLNRD1 and endothelial barrier integrity
+      - 10.1038/s44318-025-00678-9   # FlowVision: cancer cell arrest on endothelial monolayers
+      - 10.64898/2026.09.02.749041   # PDAC: breaching endothelial barriers (preprint)
 
   - title: Filopodia
     color: orange
@@ -85,9 +89,9 @@ themes:
         they contribute to cancer-cell behaviour and tissue invasion.
     credit: "Picture: Cancer cell labeled for F-actin. Credit: Guillaume Jacquemet"
     papers:
-      - 10.64898/2026.02.09.703982
-      - 10.64898/2025.12.03.691809
-      - 10.1016/j.cub.2018.11.053
+      - 10.64898/2026.02.09.703982   # filopodia-mediated trans-endocytosis (preprint)
+      - 10.1242/jcs.265278           # CCT8 and the MYO10 motor domain
+      - 10.1016/j.cub.2018.11.053    # filopodome mapping (foundational)
 
   - title: Image analysis
     color: amber
@@ -102,6 +106,6 @@ themes:
       - See [our software](software/) and [the datasets and models we share](datasets/).
     credit: "Image: Time projection illustrating the dynamics of focal adhesions in human endothelial cells. Credit: Martina Lerche and Guillaume Jacquemet"
     papers:
-      - 10.1371/journal.pbio.3002740
-      - 10.1038/s41592-024-02295-6
-      - 10.1038/s41467-021-22518-0
+      - 10.1038/s41467-021-22518-0   # ZeroCostDL4Mic (foundational: deep learning for everyone)
+      - 10.1371/journal.pbio.3002740 # CellTracksColab (analysis platform)
+      - 10.1242/jcs.265152           # NucleiSky (recent tool)

@@ -26,6 +26,9 @@ from .text import esc, is_external, md, slugify, year_of
 BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our publications</a>'
 
 
+PREPRINT_BADGE = ' <span class="cm-badge cm-badge--preprint">Preprint</span>'
+
+
 def _theme(t: Record, ledger: Ledger) -> str:
     """Text of one research theme: title, lead, paragraphs, selected papers, credit."""
     body = [f'<h2 id="{slugify(t["title"])}">{esc(t["title"])}</h2>']
@@ -34,10 +37,14 @@ def _theme(t: Record, ledger: Ledger) -> str:
     body += [md(x) for x in t.get("text") or []]
     papers = [ledger.published_version(ledger.require(d, f"data/research.yaml ({t['title']})"))
               for d in t.get("papers") or []]
+    dois = [r["doi"] for r in papers]
+    if len(dois) != len(set(dois)):   # e.g. a preprint and its journal version both listed
+        fail(f"data/research.yaml ({t['title']}): a paper is listed twice {sorted({d for d in dois if dois.count(d) > 1})}")
     if papers:
         body.append('<p class="cm-tile__label">Selected papers</p><ul class="cm-tile__papers">')
         body += [f'<li><a href="https://doi.org/{esc(r["doi"])}">{esc(r["title"])}</a>'
-                 f' <span>{esc(r["venue"])}, {r["year"]}</span></li>' for r in papers]
+                 f' <span>{esc(r["venue"])}, {r["year"]}</span>'
+                 f'{PREPRINT_BADGE if r["status"] == "preprint" else ""}</li>' for r in papers]
         body.append("</ul>")
     if t.get("credit"):
         body.append(f'<p class="cm-tile__credit">{esc(t["credit"])}</p>')
