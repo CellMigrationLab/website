@@ -303,3 +303,13 @@ class AuditRegressionTests(unittest.TestCase):
             leader([{**pi, "email": None}])
         with self.assertRaises(SystemExit):
             leader([{**pi, "status": "alumni"}])
+
+
+class PublicCopyTests(unittest.TestCase):
+    def test_internal_pipeline_names_stop_the_build(self):
+        """#17: how the site is built is not shown to visitors."""
+        from cellmig.page import check_public
+        check_public("docs/x.md", "Citations and h-index from Google Scholar.")
+        for text in ("Generated from our things_done ledger.", "From our Things Done activity ledger."):
+            with self.subTest(text=text), self.assertRaises(SystemExit):
+                check_public("docs/x.md", text)

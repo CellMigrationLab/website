@@ -461,7 +461,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-cloud span.cm-cloud__lab, .cm-cloud__legend .cm-cloud__lab { color: #7a35c4; }
 .cm-cloud__legend { text-align: center; }
 
-/* Group leader profile (About us) and talk/teaching lists (Online talks), generated from things_done */
+/* Group leader profile (About us) and dated lists (.cm-talklist: news on Home and News) */
 .md-typeset .cm-profile { margin: 1.2rem 0 2rem; }
 .cm-profile__head { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; }
 .cm-profile__photo { width: 7.2rem; height: 7.2rem; border-radius: 50%; object-fit: cover; flex: none; }

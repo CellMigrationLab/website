@@ -124,8 +124,8 @@ def build_news(ledger: Ledger, featured: list[Story]) -> list[NewsItem]:
 def page_news(items: list[NewsItem]) -> None:
     """docs/news.md: news items grouped by year."""
     p = Page("news.md", title="News", **preview("news"))
-    p.add("# News", '<p class="cm-lead">What the lab has been up to, generated automatically from our activity '
-                    'ledger. Also as an <a href="feed.xml">RSS feed</a>.</p>')
+    p.add("# News", '<p class="cm-lead">What the lab has been up to: papers, preprints, talks, events and '
+                    'funding. Also as an <a href="feed.xml">RSS feed</a>.</p>')
     year = None
     for item in items:
         if item["date"][:4] != year:
