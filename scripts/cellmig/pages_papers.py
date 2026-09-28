@@ -19,7 +19,9 @@ def page_featured(featured: list[Story], ledger: Ledger, lab: set[str]) -> None:
     p = Page("featured-research.md", title="Featured Research", edit_url=edit_url("data/featured.yaml"),
              **preview("featured-research"))
     p.add("# Featured Research",
-          '<p class="cm-lead">Papers led by our lab, newest first. See <a href="publications/">all our publications</a>.</p>',
+          '<p class="cm-lead">Papers where Guillaume Jacquemet is corresponding or co-corresponding author, '
+          f'including work from before the lab was founded in {LAB_FOUNDED}; newest first. '
+          'See <a href="publications/">all our publications</a>.</p>',
           '<div class="cm-cards cm-cards--grid">', *(feature_card(s) for s in featured), "</div>")
     p.write()
     software = software_list(ledger)
