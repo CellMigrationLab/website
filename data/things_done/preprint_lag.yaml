@@ -271,9 +271,9 @@ pairs:
     cell invasion
   preprint_date: '2025-12-05'
   preprint_date_precision: day
-  published_date: '2026-09-01'
+  published_date: '2026-09-15'
   published_date_precision: day
-  gap_days: 270
+  gap_days: 284
 - preprint_doi: 10.48550/arXiv.2508.00836
   published_doi: 10.1242/jcs.265183
   published_title: 'Rxiv-Maker: An automated template engine for streamlined scientific publications'
