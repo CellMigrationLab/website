@@ -13,7 +13,7 @@
 #   video:   short video file instead of a picture (in docs/assets/media/)
 #   fit:     (optional) contain for a logo, screenshot or drawing (shown whole,
 #            with a margin); pictures fill the tile (cover) otherwise
-#   links:   extra links shown under the text
+#   links:   extra links, shown as buttons after the code and paper buttons
 #
 # The page is newest year first and, within a year, in this file's order. A
 # project in the ledger but not here is still shown, as text only; a new

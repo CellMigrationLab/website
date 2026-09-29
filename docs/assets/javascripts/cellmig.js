@@ -69,6 +69,55 @@
     loops.forEach((v) => io.observe(v));
   }
 
+  // Sideways-scrolling rows (the journal covers): previous/next buttons,
+  // hidden at either end and when everything fits
+  function initStrips() {
+    document.querySelectorAll("[data-cm-strip]").forEach((strip) => {
+      const track = strip.querySelector("ul");
+      const make = (cls, label, text, dir) => {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = cls; b.setAttribute("aria-label", label); b.textContent = text;
+        b.addEventListener("click", () => track.scrollBy({ left: dir * track.clientWidth * 0.8 }));
+        strip.appendChild(b);
+        return b;
+      };
+      const prev = make("cm-strip__prev", "Previous covers", "‹", -1);
+      const next = make("cm-strip__next", "Next covers", "›", 1);
+      const update = () => {
+        prev.hidden = track.scrollLeft <= 2;
+        next.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      };
+      track.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    });
+  }
+
+  // Email links: without a mail app a mailto: link does nothing, so a click
+  // also copies the address and says so (the mail app still opens if there is one)
+  function initMailCopy() {
+    const note = document.createElement("div");
+    note.className = "cm-toast";
+    note.setAttribute("role", "status");
+    note.hidden = true;
+    document.body.appendChild(note);
+    let timer;
+    document.addEventListener("click", (ev) => {
+      const a = ev.target.closest && ev.target.closest('a[href^="mailto:"]');
+      if (!a) return;
+      const address = decodeURIComponent(a.getAttribute("href").slice(7).split("?")[0]);
+      const show = (text) => {
+        note.textContent = text;
+        note.hidden = false;
+        clearTimeout(timer);
+        timer = setTimeout(() => { note.hidden = true; }, 4000);
+      };
+      // Where copying is not allowed, the note still shows the address
+      const copied = navigator.clipboard ? navigator.clipboard.writeText(address) : Promise.reject();
+      copied.then(() => show(`Copied ${address}`), () => show(`Email: ${address}`));
+    });
+  }
+
   // Gallery lightbox (arrow keys, swipe, Escape)
   function initLightbox() {
     const links = [...document.querySelectorAll("a[data-cm-lightbox]")];
@@ -77,23 +126,37 @@
     dialog.className = "cm-lightbox";
     dialog.setAttribute("aria-label", "Image viewer");
     dialog.innerHTML =
-      '<figure><img alt=""><figcaption></figcaption></figure>' +
+      '<figure><img alt=""><video controls playsinline loop hidden></video><figcaption></figcaption></figure>' +
       '<button class="cm-lightbox__close" type="button" aria-label="Close">×</button>' +
       '<button class="cm-lightbox__prev" type="button" aria-label="Previous image">‹</button>' +
       '<button class="cm-lightbox__next" type="button" aria-label="Next image">›</button>';
     document.body.appendChild(dialog);
     const img = dialog.querySelector("img");
+    const video = dialog.querySelector("video");
     const cap = dialog.querySelector("figcaption");
     let index = 0;
+    // An item with data-cm-video (a gallery video) opens in the player, the others as an image.
     const show = (i) => {
       index = (i + links.length) % links.length;
       const a = links[index];
-      img.src = a.href;
-      img.alt = a.dataset.caption || "";
+      const isVideo = "cmVideo" in a.dataset;
+      img.hidden = isVideo;
+      video.hidden = !isVideo;
+      video.pause();
+      if (isVideo) {
+        video.src = a.href;
+        video.setAttribute("aria-label", a.dataset.caption || "");
+        video.play().catch(() => {});
+      } else {
+        video.removeAttribute("src");
+        img.src = a.href;
+        img.alt = a.dataset.caption || "";
+      }
       cap.textContent = a.dataset.caption || "";
     };
     links.forEach((a, i) => a.addEventListener("click", (e) => { e.preventDefault(); show(i); dialog.showModal(); }));
     dialog.querySelector(".cm-lightbox__close").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("close", () => video.pause());
     dialog.querySelector(".cm-lightbox__prev").addEventListener("click", () => show(index - 1));
     dialog.querySelector(".cm-lightbox__next").addEventListener("click", () => show(index + 1));
     dialog.addEventListener("click", (e) => { if (e.target === dialog || e.target.tagName === "FIGURE") dialog.close(); });
@@ -174,6 +237,8 @@
     initHeader();
     initVideos();
     initLoops();
+    initStrips();
+    initMailCopy();
     initLightbox();
     initFilter();
   }
