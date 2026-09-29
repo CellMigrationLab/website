@@ -258,5 +258,5 @@ def _local_images(markdown_text: str) -> str:
             return m.group(0)
         if attrs:   # would be lost: the <img> is generated (always lazy, with its size)
             fail(f"content/: image {path} has attributes {attrs}; remove them (images are resized and lazy-loaded)")
-        return media(path, alt, 900, sizes="(max-width: 900px) 100vw, 900px")
+        return media(path, alt, 1600, sizes="(max-width: 1100px) 100vw, 1040px")   # the page width
     return MD_IMAGE.sub(repl, markdown_text)
