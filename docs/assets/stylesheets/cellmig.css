@@ -126,6 +126,8 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 /* Every page has the same width: the width of the tiles and grids */
 .cm-content { max-width: calc(var(--cm-wide) + 2 * var(--cm-gutter)); margin: 0 auto; padding: 0 var(--cm-gutter); float: none; }
 .cm-content .cm-wide, .cm-content .cm-cards, .cm-content .cm-talks, .cm-content .md-typeset ul.cm-gallery { --w: 100%; }   /* already the page width: no breakout (100vw counts a scrollbar) */
+/* Running text keeps a reading width, left-aligned with everything else */
+.cm-content .md-typeset > :is(p, ul:not([class]), ol:not([class]), blockquote, dl, h2, h3), .md-typeset .cm-profile__bio { max-width: var(--cm-text); }
 .cm-content .md-content__inner { margin: 2rem 0 4rem; padding: 0; }
 .cm-content .md-content__inner::before { display: none; }
 .cm-content .md-content__button { float: right; margin: .32rem 0 0 .8rem; opacity: .35; }
@@ -535,7 +537,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-profile__photo { width: 7.2rem; height: 7.2rem; border-radius: 50%; object-fit: cover; flex: none; }
 .md-typeset .cm-profile__name { margin: 0; font-size: 1rem; }
 .md-typeset .cm-profile__title { margin: .2rem 0 .4rem; color: var(--cm-muted); }
-.md-typeset .cm-profile__bio { margin: 0; line-height: 1.65; }
+.md-typeset .cm-profile__bio { margin: 0; line-height: 1.65; }   /* reading width: see .cm-content above */
 .md-typeset .cm-profile__links { display: flex; gap: .1rem; margin: 0 0 0 -.3rem; }
 .md-typeset .cm-profile__links a { display: inline-flex; padding: .3rem; color: var(--cm-fg); opacity: .8; }
 .md-typeset .cm-profile__links a:hover { opacity: 1; }
