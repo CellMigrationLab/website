@@ -358,6 +358,17 @@ class PeopleTests(unittest.TestCase):
         self.assertIn('<a href="https://u.example"', html)
 
 
+class StatisticsTests(unittest.TestCase):
+    def test_goatcounter_code_is_a_valid_subdomain(self):
+        """extra.goatcounter is put into https://<code>.goatcounter.com: a typo or a URL there would break every page's counting."""
+        import re
+        from pathlib import Path
+        text = (Path(__file__).resolve().parents[1] / "mkdocs.yml").read_text(encoding="utf-8")
+        found = re.search(r"^extra:\n(?:[ \t]+#.*\n)*[ \t]+goatcounter:[ \t]*(\S*)", text, re.M)
+        self.assertIsNotNone(found, "mkdocs.yml: extra.goatcounter is missing (delete this test to turn the counting off)")
+        self.assertRegex(found.group(1), r"^[a-z0-9][a-z0-9-]*$")
+
+
 class SoftwareTests(unittest.TestCase):
     def test_code_and_papers_are_buttons(self):
         from cellmig.pages_content import _software_body

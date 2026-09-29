@@ -79,6 +79,16 @@ but does not update, and the failed run names the file to fix (below).
   create a new token as in [integrations/things_done](integrations/things_done/README.md#setup-once-about-5-minutes),
   replace the secret in things_done and run *Update lab website* to test it.
   Until then every sync run fails.
+- **Visit statistics:** open **https://cellmig.goatcounter.com/** and log in
+  with the GoatCounter account. It shows visits per page, countries, and the
+  websites people arrive from. Nothing to maintain: every page carries the
+  counting script (no cookies, no personal data; the sentence on the
+  *Licensing* page says so). The code `cellmig` is `extra.goatcounter` in
+  `mkdocs.yml`; delete that line to stop counting.
+- **Search:** [Google Search Console](https://search.google.com/search-console)
+  (property `cellmig.org`, verified with a DNS record at WordPress.com) shows
+  which searches lead here, which pages Google has indexed, and any crawling
+  problem. The sitemap it reads is https://cellmig.org/sitemap.xml.
 - **Open access:** `python tools/check_open_access.py` in things_done re-checks
   every paper against OpenAlex; a green copy added later (in a repository, say)
   turns up there. `--apply` writes the changes that need no review.

@@ -22,3 +22,8 @@ funders and software projects – belongs to its owners and keeps their terms.
 
 To ask about using an image, or if you think one is credited wrongly, contact
 [Guillaume Jacquemet](about-us.md#group-leader).
+
+**Visit statistics.** This website counts visits with [GoatCounter](https://www.goatcounter.com/),
+a privacy-friendly service: it sets no cookies and stores no personal data. It records which
+pages are read, from which country and from which website a visitor arrived, so that the
+lab can see how the site is used.
