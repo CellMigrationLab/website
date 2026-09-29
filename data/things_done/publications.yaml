@@ -64,8 +64,8 @@ records:
   open_access_status: green
 - doi: 10.1242/jcs.265278
   year: 2026
-  publication_date: '2026-09-01'
-  status: in_press
+  publication_date: '2026-09-15'
+  status: published
   title: CCT8 associates with the MYO10 motor domain and regulates filopodia and breast cancer cell invasion
   authors:
   - Ana Popović
@@ -80,17 +80,17 @@ records:
   - Benjamin T. Goult
   - Guillaume Jacquemet
   venue: Journal of Cell Science
-  abstract: Cancer cells utilize filopodia to explore, adhere to, and invade their surrounding microenvironment,
+  abstract: Cancer cells utilize filopodia to explore, adhere to and invade their surrounding microenvironment,
     yet the protein networks that organize these protrusions remain incompletely defined. To uncover the
     molecular machinery underlying MYO10-positive filopodia, we targeted the fast biotin ligase TurboID
     to the motor protein MYO10. Proximity biotinylation in two cell types revealed hundreds of potential
-    MYO10 interactors. A targeted microscopy and siRNA screen identified MINK1, SCRIB, CSNK1A1, and CCT8
-    as new regulators of MYO10 filopodia formation. Focusing on one of the common interactors between
-    cell lines, CCT8, known as a subunit of the chaperonin TRiC (TCP1 Ring Complex), we found that CCT8
-    associates with the MYO10 motor domain and regulates MYO10 filopodia independently of TRiC. Depleting
-    CCT8 affected filopodia dynamics and impaired cell spreading, migration, and invasion in breast cancer
-    cells. These findings establish CCT8 as a TRiC-independent regulator of MYO10 filopodia across diverse
-    cancer cell types.
+    MYO10 interactors. A targeted microscopy and siRNA screen identified MINK1, SCRIB, CSNK1A1 and CCT8
+    as new regulators of MYO10-mediated filopodia formation. Focusing on one of the interactors shared
+    between cell lines, CCT8, known as a subunit of the chaperonin TCP1 ring complex (TRiC), we found
+    that CCT8 associates with the MYO10 motor domain and regulates MYO10 filopodia independently of the
+    TRiC. Depleting CCT8 affected filopodia dynamics and impaired cell spreading, migration and invasion
+    in breast cancer cells. These findings establish CCT8 as a TRiC-independent regulator of MYO10 filopodia
+    across diverse cancer cell types.
   peer_reviewed: true
   open_access_status: hybrid
   related_dois:
