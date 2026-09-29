@@ -61,7 +61,7 @@ def _no_colour(entry: Record, source: str) -> None:
 def page_research(ledger: Ledger) -> None:
     """docs/research.md from data/research.yaml: videos, then one tile per theme."""
     research = load(DATA / "research.yaml")
-    p = Page("research.md", layout="wide", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
+    p = Page("research.md", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
     papers = f'{FEATURED_RESEARCH} {BROWSE_PUBLICATIONS.replace("cm-button", "cm-button cm-button--ghost", 1)}'
     p.add("# Research", f'<p class="cm-lead">{esc(research["intro"])}</p>', f'<p class="cm-research-links">{papers}</p>',
           '<div class="cm-videos">')
@@ -95,7 +95,7 @@ def page_software(ledger: Ledger, featured: list[Story]) -> None:
     """docs/software.md: one tile per project (things_done + data/software.yaml).
     A project with no picture or video of its own shows its paper's featured
     picture (featured.paper_picture), so one picture serves both."""
-    p = Page("software.md", layout="wide", title="Software", edit_url=edit_url("data/software.yaml"), **preview("software"))
+    p = Page("software.md", title="Software", edit_url=edit_url("data/software.yaml"), **preview("software"))
     projects = software_list(ledger)
     p.meta["jsonld"] = to_json(item_list("Software from the Cell Migration Lab", [
         software_item(s, f"{p.url}#{slugify(s['title'])}") for s in projects]))
@@ -148,7 +148,7 @@ def _dataset(d: Record, ledger: Ledger) -> str:
 
 def page_datasets(ledger: Ledger, site: Record) -> None:
     """docs/datasets.md: shared resources (data/site.yaml), then datasets by type."""
-    p = Page("datasets.md", layout="wide", title="Datasets", menu="software/", **preview("datasets"))
+    p = Page("datasets.md", title="Datasets", menu="software/", **preview("datasets"))
     p.meta["jsonld"] = to_json(item_list("Datasets shared by the Cell Migration Lab",
                                          [dataset_item(d, ledger.dataset_papers(d)) for d in ledger.datasets]))
     p.add("# Datasets", section_nav(SOFTWARE_DATA, "Datasets"),
@@ -195,7 +195,7 @@ def _justified(site_path: str) -> str:
 def page_gallery() -> None:
     """docs/gallery.md from data/gallery.yaml: journal covers and images (lightbox)."""
     gallery = load(DATA / "gallery.yaml")
-    p = Page("gallery.md", layout="wide", title="Gallery", edit_url=edit_url("data/gallery.yaml"), **preview("gallery"))
+    p = Page("gallery.md", title="Gallery", edit_url=edit_url("data/gallery.yaml"), **preview("gallery"))
     # the covers scroll sideways in one row (arrows from cellmig.js initStrips), so no half-empty row
     p.add("# Gallery", section_title("Journal covers"), '<div class="cm-strip" data-cm-strip>',
           '<ul class="cm-covers" tabindex="0" aria-label="Journal covers (scroll sideways)">')

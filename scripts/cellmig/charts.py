@@ -6,6 +6,10 @@ from .ledger import Record
 from .text import esc, known_date, plural
 
 DAYS_PER_MONTH = 30.44   # same constant as things_done's analyze_preprint_lag.py
+# Each chart is drawn twice: for the page width (about 920 px, so text and dots
+# keep their size) and narrower for a phone, where the wide drawing would shrink
+# its labels too far; cellmig.css shows one of the two.
+CHART_SIZES = (("cm-chart--wide", 920, 200), ("cm-chart--narrow", 640, 170))   # class, width, bar chart height
 
 
 def papers_per_year(records: list[Record]) -> str:
@@ -14,8 +18,14 @@ def papers_per_year(records: list[Record]) -> str:
     for r in records:
         counts[int(r["year"])] = counts.get(int(r["year"]), 0) + 1
     years = list(range(min(counts), max(counts) + 1))
+    svgs = "".join(_bars(counts, years, cls, W, H) for cls, W, H in CHART_SIZES)
+    return f'<div class="cm-bars">{svgs}<div class="cm-chart-tip" hidden></div></div>'
+
+
+def _bars(counts: dict[int, int], years: list[int], cls: str, W: int, H: int) -> str:
+    """One drawing of the papers-per-year bars, `W` × `H` units."""
     top = max(counts.values())
-    W, H, pad, base = 640, 170, 24, 140
+    pad, base = 24, H - 30   # the year labels go below the axis
     bw = (W - 2 * pad) / len(years)
     parts = []
     for i, y in enumerate(years):
@@ -29,8 +39,8 @@ def papers_per_year(records: list[Record]) -> str:
         if y % 2 == years[-1] % 2:   # label every other year, always the latest
             parts.append(f'<text class="cm-lag__tick" x="{bx + (bw - 4) / 2:.1f}" y="{base + 18}">{y}</text>')
     parts.append(f'<line class="cm-lag__axis" x1="{pad}" x2="{W - pad}" y1="{base}" y2="{base}"/>')
-    return (f'<div class="cm-bars"><svg class="cm-lag__chart" viewBox="0 0 {W} {H}" role="img" '
-            f'aria-label="Papers per year">{"".join(parts)}</svg><div class="cm-chart-tip" hidden></div></div>')
+    return (f'<svg class="cm-lag__chart {cls}" viewBox="0 0 {W} {H}" role="img" '
+            f'aria-label="Papers per year">{"".join(parts)}</svg>')
 
 
 def _is_exact(row: Record) -> bool:
@@ -38,12 +48,12 @@ def _is_exact(row: Record) -> bool:
     return row["preprint_date_precision"] == "day" and row["published_date_precision"] == "day"
 
 
-def _lag_dots(rows: list[Record], median_months: float) -> str:
-    """Dot plot of the lag: one dot per paper, stacked per month."""
+def _lag_dots(rows: list[Record], median_months: float, cls: str, W: int) -> str:
+    """Dot plot of the lag, `W` units wide: one dot per paper, stacked per month."""
     months = [r["gap_days"] / DAYS_PER_MONTH for r in rows]
     lo = min(0, math.floor(min(months) / 6) * 6)      # a negative gap extends the axis left
     hi = max(12, math.ceil((max(months) + 0.01) / 6) * 6)
-    W, left, right, radius, step = 640, 16, 16, 5, 12
+    left, right, radius, step = 16, 16, 5, 12
 
     def x(m: float) -> float:
         return left + (W - left - right) * (m - lo) / (hi - lo)
@@ -53,7 +63,7 @@ def _lag_dots(rows: list[Record], median_months: float) -> str:
         bins.setdefault(math.floor(row["gap_days"] / DAYS_PER_MONTH), []).append(row)
     base = 24 + max(len(v) for v in bins.values()) * step
     H = base + 34
-    parts = [f'<svg class="cm-lag__chart" viewBox="0 0 {W} {H}" role="img" aria-label="Months from preprint to '
+    parts = [f'<svg class="cm-lag__chart {cls}" viewBox="0 0 {W} {H}" role="img" aria-label="Months from preprint to '
              f'journal publication for {len(rows)} papers; median {median_months:.1f} months">']
     for t in range(lo, hi, 6):
         parts.append(f'<line class="cm-lag__grid" x1="{x(t):.1f}" x2="{x(t):.1f}" y1="12" y2="{base}"/>'
@@ -90,6 +100,6 @@ def lag_section(pairs: list[Record], summary: Record) -> str:
             f'<p><span class="cm-lag__title">Median time from preprint to journal</span>'
             f'Months between posting and journal publication, for {summary["pairs"]} papers. '
             f'Each dot is a paper; hover or tap for details.{note}</p></div>'
-            f'<div class="cm-lag__plot">{_lag_dots(rows, median)}<div class="cm-chart-tip" hidden></div></div>'
+            f'<div class="cm-lag__plot">{"".join(_lag_dots(rows, median, cls, W) for cls, W, _ in CHART_SIZES)}<div class="cm-chart-tip" hidden></div></div>'
             f'<details class="cm-lag__table"><summary>Show as table</summary><table><thead><tr><th>Paper</th>'
             f'<th>Preprint</th><th>Journal</th><th>Months</th></tr></thead><tbody>{table}</tbody></table></details></div>')
