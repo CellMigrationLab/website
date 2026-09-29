@@ -488,8 +488,11 @@ class NewTabTests(unittest.TestCase):
         from cellmig.text import opens_new_tab
         from urllib.parse import urlsplit
         site = urlsplit(SITE_URL)
-        for url in ("https://doi.org/10.1/x", "https://cellmig.org.example.org/", "https://notcellmig.org/",
-                    f"https://{site.hostname}.example.org{site.path}", f"https://{site.hostname}/other-project/"):
+        outside = ["https://doi.org/10.1/x", "https://cellmig.org.example.org/", "https://notcellmig.org/",
+                   f"https://{site.hostname}.example.org{site.path}"]
+        if site.path != "/":   # a site in a sub-path (project pages): the rest of its host is another site
+            outside.append(f"https://{site.hostname}/other-project/")
+        for url in outside:
             with self.subTest(url=url):
                 self.assertTrue(opens_new_tab(url))
         for url in (f"{SITE_URL}news/", SITE_URL.rstrip("/"),
