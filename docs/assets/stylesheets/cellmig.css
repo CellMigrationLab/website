@@ -41,7 +41,7 @@
   --cm-accent-deep: #3b1a63;   /* deep accent surface (white text, 14:1) */
   --cm-on-accent: #ffffff;
   --cm-highlight: var(--cm-accent-soft);
-  --cm-text: 41.6rem;          /* reading width */
+  --cm-text: 41.6rem;          /* the home page's "more" links */
   --cm-wide: 52rem;          /* page width: tiles, grids, header and footer */
   --cm-gutter: clamp(.8rem, 4vw, 2rem);
   --cm-serif: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
@@ -128,8 +128,6 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 /* Every page has the same width: the width of the tiles and grids */
 .cm-content { max-width: calc(var(--cm-wide) + 2 * var(--cm-gutter)); margin: 0 auto; padding: 0 var(--cm-gutter); float: none; }
 .cm-content .cm-wide, .cm-content .cm-cards, .cm-content .cm-talks, .cm-content .md-typeset ul.cm-gallery { --w: 100%; }   /* already the page width: no breakout (100vw counts a scrollbar) */
-/* Running text keeps a reading width, left-aligned with everything else */
-.cm-content .md-typeset > :is(p, ul:not([class]), ol:not([class]), blockquote, dl, h2, h3), .md-typeset .cm-profile__bio { max-width: var(--cm-text); }
 .cm-content .md-content__inner { margin: 2rem 0 4rem; padding: 0; }
 .cm-content .md-content__inner::before { display: none; }
 .cm-content .md-content__button { float: right; margin: .32rem 0 0 .8rem; opacity: .35; }
@@ -536,14 +534,14 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-cloud__more summary { display: inline-block; cursor: pointer; font-size: .72rem; color: var(--cm-accent-strong); text-decoration: underline; }
 
 /* Group leader profile (About us) */
-.md-typeset .cm-profile { display: grid; grid-template-columns: 12rem minmax(0, var(--cm-text)); gap: 1.2rem 2.4rem; align-items: start; margin: 1.2rem 0 2rem; }   /* photo, name and links beside the bio */
+.md-typeset .cm-profile { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 1.2rem 2.4rem; align-items: start; margin: 1.2rem 0 2rem; }   /* photo, name and links beside the bio */
 @media (max-width: 40rem) { .md-typeset .cm-profile { grid-template-columns: minmax(0, 1fr); } }
 .cm-profile__head { display: flex; flex-direction: column; gap: .8rem; }
 @media (max-width: 40rem) { .cm-profile__head { flex-direction: row; align-items: center; gap: 1.2rem; } }
 .cm-profile__photo { width: 7.2rem; height: 7.2rem; border-radius: 50%; object-fit: cover; flex: none; }
 .md-typeset .cm-profile__name { margin: 0; font-size: 1rem; }
 .md-typeset .cm-profile__title { margin: .2rem 0 .4rem; color: var(--cm-muted); }
-.md-typeset .cm-profile__bio { margin: 0; line-height: 1.65; }   /* reading width: see .cm-content above */
+.md-typeset .cm-profile__bio { margin: 0; line-height: 1.65; }
 .md-typeset .cm-profile__bio > p:first-child { margin-top: 0; }
 .md-typeset .cm-profile__links { display: flex; gap: .1rem; margin: 0 0 0 -.3rem; }
 .md-typeset .cm-profile__links a { display: inline-flex; padding: .3rem; color: var(--cm-fg); opacity: .8; }
