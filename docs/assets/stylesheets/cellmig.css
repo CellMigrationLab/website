@@ -127,6 +127,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 /* Pages made of wide blocks (Research, Software, Datasets, Gallery): the title,
    intro and videos take the width of the tiles below them (Page layout="wide"). */
 .cm-content.cm-content--wide { max-width: calc(var(--cm-wide) + 2 * var(--cm-gutter)); }
+.cm-content--wide .cm-wide, .cm-content--wide .cm-cards, .cm-content--wide .cm-talks, .cm-content--wide .md-typeset ul.cm-gallery { --w: 100%; }   /* the page is already wide: no breakout (100vw counts a scrollbar) */
 .cm-content .md-content__inner { margin: 2rem 0 4rem; padding: 0; }
 .cm-content .md-content__inner::before { display: none; }
 .cm-content .md-content__button { float: right; margin: .32rem 0 0 .8rem; opacity: .35; }
@@ -384,9 +385,11 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-covers a:hover img { transform: translateY(-3px); }
 /* Justified rows: each <li> has flex sizes from its aspect ratio (pages_content._justified),
    so a row's pictures share one height; ::after keeps the last row from stretching. */
-.md-typeset ul.cm-gallery { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 0 calc(50% - var(--w) / 2) !important; padding: 0 !important; list-style: none; }
+.md-typeset ul.cm-gallery { --cm-gallery-row: 8.5rem;   /* the height a row aims for before it is stretched to the full width */
+  display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 0 calc(50% - var(--w) / 2) !important; padding: 0 !important; list-style: none; }
 .md-typeset ul.cm-gallery::after { content: ""; flex: 100000 1 0; }
 .md-typeset .cm-gallery li { margin: 0; min-width: 0; }
+@media (max-width: 30em) { .md-typeset ul.cm-gallery { --cm-gallery-row: 6.5rem; } }   /* two pictures a row on a phone */
 .cm-gallery a { display: block; }
 .cm-gallery img, .cm-gallery video { display: block; width: 100%; height: auto; transition: opacity .2s; }
 .cm-gallery a:hover video { opacity: .85; }

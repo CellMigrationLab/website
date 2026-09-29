@@ -537,7 +537,7 @@ class GalleryTests(unittest.TestCase):
         """Flex basis and growth are both proportional to width/height, so a row's pictures share one height."""
         from cellmig import pages_content
         with patch.object(pages_content, "image_size", return_value=(800, 400)):
-            self.assertEqual(pages_content._justified("x.jpg"), f"flex: 200.0 1 {2 * pages_content.GALLERY_ROW:.2f}rem")
+            self.assertEqual(pages_content._justified("x.jpg"), "flex: 200.0 1 calc(2.000 * var(--cm-gallery-row))")
         with patch.object(pages_content, "image_size", return_value=None), self.assertRaises(SystemExit):
             pages_content._justified("x.svg")
 

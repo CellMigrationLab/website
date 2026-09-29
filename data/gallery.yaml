@@ -4,7 +4,8 @@
 # lightbox and read by screen readers, so describe what is in the picture.
 # A .gif that has an MP4 twin in docs/assets/media/gif/ is shown as a looping
 # video and opens in the video player; it needs a caption.
-# Covers are shown in one row that scrolls sideways, newest additions last.
+# Covers are shown in one row; when they do not all fit, it scrolls sideways
+# and loops (the first cover follows the last).
 
 covers:
 - image: wp-content/uploads/2023/02/m_jcb_216_10_cover.png
