@@ -123,18 +123,16 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 /* ------------------------------------------------------------------ layout */
 
 .md-main__inner.md-grid { max-width: none; margin: 0; }
-.cm-content { max-width: calc(var(--cm-text) + 2 * var(--cm-gutter)); margin: 0 auto; padding: 0 var(--cm-gutter); float: none; }
-/* Pages made of wide blocks (Research, Software, Datasets, Gallery): the title,
-   intro and videos take the width of the tiles below them (Page layout="wide"). */
-.cm-content.cm-content--wide { max-width: calc(var(--cm-wide) + 2 * var(--cm-gutter)); }
-.cm-content--wide .cm-wide, .cm-content--wide .cm-cards, .cm-content--wide .cm-talks, .cm-content--wide .md-typeset ul.cm-gallery { --w: 100%; }   /* the page is already wide: no breakout (100vw counts a scrollbar) */
+/* Every page has the same width: the width of the tiles and grids */
+.cm-content { max-width: calc(var(--cm-wide) + 2 * var(--cm-gutter)); margin: 0 auto; padding: 0 var(--cm-gutter); float: none; }
+.cm-content .cm-wide, .cm-content .cm-cards, .cm-content .cm-talks, .cm-content .md-typeset ul.cm-gallery { --w: 100%; }   /* already the page width: no breakout (100vw counts a scrollbar) */
 .cm-content .md-content__inner { margin: 2rem 0 4rem; padding: 0; }
 .cm-content .md-content__inner::before { display: none; }
 .cm-content .md-content__button { float: right; margin: .32rem 0 0 .8rem; opacity: .35; }
 .cm-content .md-content__button:hover { opacity: 1; }
 .cm-wide, .cm-cards, .cm-talks, .md-typeset ul.cm-gallery { --w: min(var(--cm-wide), 100vw - 2 * var(--cm-gutter)); width: var(--w); }
-/* Wider than the text column and centred on the page. A margin, not a
-   transform: Safari can shift or blur transformed content by half a pixel. */
+/* On the home page: wider than its text and centred on the page. A margin,
+   not a transform: Safari can shift or blur transformed content by half a pixel. */
 .cm-wide, .cm-cards, .cm-talks { margin: 1.6rem 0 1.6rem calc(50% - var(--w) / 2); }
 
 /* Section titles: small caps with a hairline on both sides ("FEATURED RESEARCH") */
@@ -485,13 +483,19 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-lag__table td:nth-child(n+2), .md-typeset .cm-lag__table th:nth-child(n+2) { white-space: nowrap; font-variant-numeric: tabular-nums; }
 @media (max-width: 30rem) { .cm-lag__head { flex-direction: column; align-items: flex-start; gap: .4rem; } }
 .md-typeset .cm-lag__table .md-typeset__table, .md-typeset .cm-lag__table table { display: block; max-width: 100%; overflow-x: auto; }
-@media (max-width: 40rem) { .cm-lag__tick, .cm-lag__label { font-size: 24px; } .cm-lag__dot { r: 8; } }
+/* Each chart is drawn for the page width and for a phone (charts.py CHART_SIZES) */
+.cm-chart--narrow { display: none !important; }
+@media (max-width: 40rem) {
+  .cm-chart--wide { display: none !important; }
+  .cm-chart--narrow { display: block !important; }
+  .cm-lag__tick, .cm-lag__label { font-size: 24px; } .cm-lag__dot { r: 8; }
+}
 
 @media (max-width: 64rem) { .cm-cards--home { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .md-typeset .cm-card .cm-card__meta .cm-badge { font-size: .5rem; }
 
 /* ------------------------------------------------------------------ lab in numbers */
-.md-typeset ul.cm-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(7.4rem, 100%), 1fr)); gap: .6rem; margin: 1.4rem 0 .6rem; padding: 0; list-style: none; }
+.md-typeset ul.cm-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(6rem, 100%), 1fr)); gap: .6rem; margin: 1.4rem 0 .6rem; padding: 0; list-style: none; }   /* narrow enough for all the numbers in one row at the page width */
 [dir] .md-typeset .cm-tiles > li { margin: 0; list-style: none; }
 .md-typeset .cm-tiles a { display: flex; flex-direction: column; height: 100%; padding: .9rem .8rem; background: var(--cm-soft); text-decoration: none; transition: background .15s; }
 .md-typeset .cm-tiles a:hover { background: #ecebe9; }
@@ -531,7 +535,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-profile__photo { width: 7.2rem; height: 7.2rem; border-radius: 50%; object-fit: cover; flex: none; }
 .md-typeset .cm-profile__name { margin: 0; font-size: 1rem; }
 .md-typeset .cm-profile__title { margin: .2rem 0 .4rem; color: var(--cm-muted); }
-.md-typeset .cm-profile__bio { max-width: 38rem; margin: 0; line-height: 1.65; }
+.md-typeset .cm-profile__bio { margin: 0; line-height: 1.65; }
 .md-typeset .cm-profile__links { display: flex; gap: .1rem; margin: 0 0 0 -.3rem; }
 .md-typeset .cm-profile__links a { display: inline-flex; padding: .3rem; color: var(--cm-fg); opacity: .8; }
 .md-typeset .cm-profile__links a:hover { opacity: 1; }
