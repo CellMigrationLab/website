@@ -15,16 +15,16 @@ records:
     endothelial monolayers
   dataset_type: image
   start_date: '2026'
-  repository_url: https://zenodo.org/records/13846276
-  archive_doi: 10.5281/zenodo.13846276
+  repository_url: https://doi.org/10.5281/zenodo.13846275
+  archive_doi: 10.5281/zenodo.13846275
   description: This repository contains all the data used to make the figure shown in the paper
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
 - title: Filopodia-mediated trans-endocytosis dataset
   dataset_type: image
   start_date: '2026'
-  repository_url: https://zenodo.org/records/18483147
-  archive_doi: 10.5281/zenodo.18483147
+  repository_url: https://doi.org/10.5281/zenodo.18483146
+  archive_doi: 10.5281/zenodo.18483146
   description: This repository contains the raw image and numerical data used to make the figures shown
     in the preprint.
   related_publication_dois:
@@ -40,8 +40,8 @@ records:
 - title: Filopodome proteomics dataset
   dataset_type: image
   start_date: '2025'
-  repository_url: https://zenodo.org/records/17779715
-  archive_doi: 10.5281/zenodo.17779715
+  repository_url: https://doi.org/10.5281/zenodo.17779714
+  archive_doi: 10.5281/zenodo.17779714
   description: This repository contains all the data used to make the figures shown in the paper.
   related_publication_dois:
   - 10.1016/j.cub.2018.11.053
@@ -98,8 +98,8 @@ records:
 - title: CellTracksColab - breast cancer cell dataset
   dataset_type: image
   start_date: '2024'
-  repository_url: https://zenodo.org/record/10539020
-  archive_doi: 10.5281/zenodo.10539020
+  repository_url: https://doi.org/10.5281/zenodo.10539019
+  archive_doi: 10.5281/zenodo.10539019
   description: Dataset used in the manuscript "CellTracksColab—A platform for compiling, analyzing, and
     exploring tracking data"
   related_publication_dois:
@@ -107,8 +107,8 @@ records:
 - title: CellTracksColab - Filopodia dataset
   dataset_type: image
   start_date: '2024'
-  repository_url: https://zenodo.org/record/10539196
-  archive_doi: 10.5281/zenodo.10539196
+  repository_url: https://doi.org/10.5281/zenodo.10539195
+  archive_doi: 10.5281/zenodo.10539195
   description: Dataset used in the manuscript "CellTracksColab—A platform for compiling, analyzing, and
     exploring tracking data"
   related_publication_dois:
@@ -116,8 +116,8 @@ records:
 - title: CellTracksColab - T cell dataset (full)
   dataset_type: image
   start_date: '2024'
-  repository_url: https://zenodo.org/record/10539720
-  archive_doi: 10.5281/zenodo.10539720
+  repository_url: https://doi.org/10.5281/zenodo.10539719
+  archive_doi: 10.5281/zenodo.10539719
   description: Dataset used in the manuscript "CellTracksColab—A platform for compiling, analyzing, and
     exploring tracking data"
   related_publication_dois:
@@ -152,8 +152,8 @@ records:
 - title: PDAC cells vs Immune cells perfusion tracking dataset
   dataset_type: image
   start_date: '2024'
-  repository_url: https://doi.org/10.5281/zenodo.13643590
-  archive_doi: 10.5281/zenodo.13643590
+  repository_url: https://doi.org/10.5281/zenodo.13643589
+  archive_doi: 10.5281/zenodo.13643589
   description: Tracking dataset used to analyze attachment of PDAC and immune cells to endothelium.
   related_publication_dois:
   - 10.1038/s44318-025-00678-9
@@ -311,8 +311,8 @@ records:
 - title: TLNRD1 figures
   dataset_type: image
   start_date: '2024'
-  repository_url: https://zenodo.org/records/8377287
-  archive_doi: 10.5281/zenodo.8377287
+  repository_url: https://doi.org/10.5281/zenodo.8377286
+  archive_doi: 10.5281/zenodo.8377286
   description: Raw microscopy images used to make the figures displayed in the article "TLNRD1 is a CCM
     complex component and regulates endothelial barrier integrity."
   related_publication_dois:
@@ -328,8 +328,8 @@ records:
 - title: Fast4DRegistration
   dataset_type: image
   start_date: '2023'
-  repository_url: https://zenodo.org/records/6534570
-  archive_doi: 10.5281/zenodo.6534570
+  repository_url: https://doi.org/10.5281/zenodo.6534569
+  archive_doi: 10.5281/zenodo.6534569
   description: Data used in the manuscript
   related_publication_dois:
   - 10.1242/jcs.260728
@@ -368,8 +368,8 @@ records:
 - title: Cell migration with ERK signalling
   dataset_type: image
   start_date: '2022'
-  repository_url: https://doi.org/10.5281/zenodo.5205935
-  archive_doi: 10.5281/zenodo.5205935
+  repository_url: https://doi.org/10.5281/zenodo.5205934
+  archive_doi: 10.5281/zenodo.5205934
   description: Movie following cells expressing ERK and a nuclei staining, tracked with TrackMate and
     later analyzed with MATLAB.
   related_publication_dois:
@@ -385,8 +385,8 @@ records:
 - title: Quantitative comparison of tracking performance using TrackMate-Helper.
   dataset_type: image
   start_date: '2022'
-  repository_url: https://doi.org/10.5281/zenodo.6087729
-  archive_doi: 10.5281/zenodo.6087729
+  repository_url: https://doi.org/10.5281/zenodo.6087728
+  archive_doi: 10.5281/zenodo.6087728
   description: we used TrackMate-Helper to assess the performance of TrackMate on four datasets that cover
     a wide range of biological and imaging situations
   related_publication_dois:
@@ -543,8 +543,8 @@ records:
 - title: ZeroCostDL4Mic - Stardist example training and test dataset
   dataset_type: image
   start_date: '2021'
-  repository_url: https://doi.org/10.5281/zenodo.3713307
-  archive_doi: 10.5281/zenodo.3713307
+  repository_url: https://doi.org/10.5281/zenodo.3713306
+  archive_doi: 10.5281/zenodo.3713306
   description: DCIS.COM LifeAct-RFP cells stained with SiR-DNA and imaged by spinning-disk confocal microscopy
     (20x), paired with manually segmented nuclei masks for training StarDist in ZeroCostDL4Mic.
   related_publication_dois:
