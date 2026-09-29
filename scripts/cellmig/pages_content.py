@@ -178,7 +178,6 @@ def page_datasets(ledger: Ledger, site: Record) -> None:
     p.write()
 
 
-GALLERY_ROW = 8.5   # rem: height a gallery row aims for before it is stretched to the full width
 
 
 def _justified(site_path: str) -> str:
@@ -190,7 +189,7 @@ def _justified(site_path: str) -> str:
     if not size:
         fail(f"data/gallery.yaml: {site_path} has no size (an SVG needs width and height attributes)")
     ratio = size[0] / size[1]
-    return f"flex: {ratio * 100:.1f} 1 {ratio * GALLERY_ROW:.2f}rem"
+    return f"flex: {ratio * 100:.1f} 1 calc({ratio:.3f} * var(--cm-gallery-row))"   # the row height is in cellmig.css
 
 
 def page_gallery() -> None:

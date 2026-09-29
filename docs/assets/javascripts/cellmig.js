@@ -69,11 +69,16 @@
     loops.forEach((v) => io.observe(v));
   }
 
-  // Sideways-scrolling rows (the journal covers): previous/next buttons,
-  // hidden at either end and when everything fits
+  // Sideways-scrolling rows (the journal covers). When they all fit, one row
+  // and no buttons. Otherwise the row loops: copies of the covers sit on either
+  // side, and after a scroll the position jumps by one set of covers back into
+  // the middle copy, which looks the same, so there is no end to reach.
+  // Copies are hidden from screen readers and keyboards, and a click on one
+  // opens the original in the lightbox.
   function initStrips() {
     document.querySelectorAll("[data-cm-strip]").forEach((strip) => {
       const track = strip.querySelector("ul");
+      const originals = [...track.children];
       const make = (cls, label, text, dir) => {
         const b = document.createElement("button");
         b.type = "button"; b.className = cls; b.setAttribute("aria-label", label); b.textContent = text;
@@ -81,15 +86,75 @@
         strip.appendChild(b);
         return b;
       };
-      const prev = make("cm-strip__prev", "Previous covers", "‹", -1);
-      const next = make("cm-strip__next", "Next covers", "›", 1);
-      const update = () => {
-        prev.hidden = track.scrollLeft <= 2;
-        next.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      const buttons = [make("cm-strip__prev", "Previous covers", "‹", -1),
+                       make("cm-strip__next", "Next covers", "›", 1)];
+      const copy = (li) => {
+        const c = li.cloneNode(true);
+        c.setAttribute("aria-hidden", "true");
+        c.dataset.cmCopy = "";
+        c.querySelectorAll("a").forEach((a) => {
+          a.tabIndex = -1;
+          a.removeAttribute("data-cm-lightbox");   // the lightbox lists each cover once
+          a.addEventListener("click", (ev) => { ev.preventDefault(); li.querySelector("a").click(); });
+        });
+        return c;
       };
-      track.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", update);
-      update();
+      let set = 0;   // width of one set of covers, gap included; 0 when they all fit
+      const jump = (by) => {
+        track.style.scrollBehavior = "auto";
+        track.scrollLeft += by;
+        track.style.scrollBehavior = "";
+      };
+      const layout = () => {
+        const at = set ? track.scrollLeft - set : 0;
+        track.querySelectorAll("[data-cm-copy]").forEach((c) => c.remove());
+        set = 0;
+        const fits = track.scrollWidth <= track.clientWidth + 2;
+        buttons.forEach((b) => { b.hidden = fits; });
+        if (fits) return;
+        track.prepend(...originals.map(copy));
+        track.append(...originals.map(copy));
+        set = originals[0].offsetLeft - track.children[0].offsetLeft;
+        jump(set + at - track.scrollLeft);
+      };
+      let settle;
+      track.addEventListener("scroll", () => {
+        clearTimeout(settle);
+        settle = setTimeout(() => {   // once the scroll has stopped: back into the middle copy
+          if (!set) return;
+          if (track.scrollLeft < set * 0.5) jump(set);
+          else if (track.scrollLeft >= set * 1.5) jump(-set);
+        }, 150);
+      }, { passive: true });
+      let resized;
+      window.addEventListener("resize", () => { clearTimeout(resized); resized = setTimeout(layout, 150); });
+      layout();
+    });
+  }
+
+  // Gallery: full rows stretch to the page width, but the last row is not full
+  // and would stay at its smaller starting size. Give it the height of the row
+  // above, so every row matches (the flex growth set by the build is the
+  // picture's aspect ratio times 100, the first number of its inline flex).
+  function initGalleryRows() {
+    document.querySelectorAll("ul.cm-gallery").forEach((list) => {
+      const items = [...list.children];
+      const flex = items.map((li) => li.style.flex);   // as built: "<ratio × 100> 1 <basis>"
+      const layout = () => {
+        items.forEach((li, i) => { li.style.flex = flex[i]; });
+        const lastTop = items[items.length - 1].offsetTop;
+        const last = items.filter((li) => li.offsetTop === lastTop);
+        const above = items.filter((li) => li.offsetTop < lastTop).pop();
+        if (!above) return;   // one row: nothing to match
+        const height = above.getBoundingClientRect().height;
+        last.forEach((li) => {
+          const ratio = parseFloat(flex[items.indexOf(li)]) / 100;
+          li.style.flex = `0 1 ${ratio * height}px`;
+        });
+      };
+      let resized;
+      window.addEventListener("resize", () => { clearTimeout(resized); resized = setTimeout(layout, 150); });
+      layout();
     });
   }
 
@@ -238,6 +303,7 @@
     initVideos();
     initLoops();
     initStrips();
+    initGalleryRows();
     initMailCopy();
     initLightbox();
     initFilter();
