@@ -5,7 +5,7 @@ import re
 
 import yaml
 
-from .components import RESEARCH, SOFTWARE_DATA, oa_badge, paper_link, paper_ref, section_nav, section_title, tile, venue_year
+from .components import SOFTWARE_DATA, oa_badge, paper_link, paper_ref, section_nav, section_title, tile, venue_year
 from . import rights
 from .config import (
     CONTENT,
@@ -26,8 +26,9 @@ from .structured import dataset_item, item_list, software_item, to_json
 from .text import esc, is_external, md, slugify, year_of
 
 BROWSE_PUBLICATIONS = '<a class="cm-button" href="publications/">Browse all our publications</a>'
-# Research page: the papers behind the themes, at the top and the bottom.
+# Research page: the papers behind the themes and the online talks, at the top and the bottom.
 FEATURED_RESEARCH = '<a class="cm-button" href="featured-research/">Explore our featured research</a>'
+ONLINE_TALKS = '<a class="cm-button cm-button--ghost" href="online-lectures/">Watch our online talks</a>'
 
 
 def _theme(t: Record, ledger: Ledger) -> str:
@@ -62,8 +63,8 @@ def page_research(ledger: Ledger) -> None:
     """docs/research.md from data/research.yaml: videos, then one tile per theme."""
     research = load(DATA / "research.yaml")
     p = Page("research.md", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
-    papers = f'{FEATURED_RESEARCH} {BROWSE_PUBLICATIONS.replace("cm-button", "cm-button cm-button--ghost", 1)}'
-    p.add("# Research", section_nav(RESEARCH, "Research"), f'<p class="cm-lead">{esc(research["intro"])}</p>', f'<p class="cm-research-links">{papers}</p>',
+    papers = f'{FEATURED_RESEARCH} {BROWSE_PUBLICATIONS.replace("cm-button", "cm-button cm-button--ghost", 1)} {ONLINE_TALKS}'
+    p.add("# Research", f'<p class="cm-lead">{esc(research["intro"])}</p>', f'<p class="cm-research-links">{papers}</p>',
           '<div class="cm-videos">')
     p.add(*(f'<figure>{lite_video(v.get("youtube"), v.get("vimeo"), v["title"], v.get("start"))}'
             f'<figcaption>{esc(v["title"])}</figcaption></figure>' for v in research.get("videos") or []))
@@ -220,7 +221,7 @@ def page_talks() -> None:
     """docs/online-lectures.md: recorded talks from data/talks.yaml."""
     p = Page("online-lectures.md", title="Online talks", menu="research/", edit_url=edit_url("data/talks.yaml"),
              **preview("online-lectures"))
-    p.add("# Online talks", section_nav(RESEARCH, "Online talks"), '<div class="cm-talks">')
+    p.add("# Online talks", '<div class="cm-talks">')
     for t in load(DATA / "talks.yaml"):
         meta = " · ".join(str(x) for x in (t.get("event"), t.get("year")) if x)
         p.add(f'<figure class="cm-talk">{lite_video(t.get("youtube"), t.get("vimeo"), t["title"], t.get("start"))}'

@@ -21,7 +21,6 @@ def section_title(text: str, level: int = 2, id_: str | None = None) -> str:
 
 # Sibling pages shown as a row under a page title; each page belongs to one
 # main-menu item (Page `menu`), which stays highlighted on all of them.
-RESEARCH = [("Research", "research/"), ("Online talks", "online-lectures/")]
 SOFTWARE_DATA = [("Software", "software/"), ("Datasets", "datasets/")]
 PAPERS = [("Featured research", "featured-research/"), ("All publications", "publications/")]
 
