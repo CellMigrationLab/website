@@ -36,12 +36,12 @@ social:
   - label: Google Scholar
     icon: scholar
     url: https://scholar.google.com/citations?user=dnBWtfsAAAAJ&hl=en
-  - label: Mail
+  - label: guillaume.jacquemet@abo.fi   # the address itself: not everyone has a mail app (clicking also copies it)
     icon: mail
     url: mailto:guillaume.jacquemet@abo.fi
 
 # Logos: affiliation logos are shown in the dark footer; funding logos on white
-# (home page). Home-page logos are sized to the same visual area with their proportions
+# (home page). Both are sized to the same visual area with their proportions
 # kept (scripts/cellmig/components.py logo_size); an optional `scale` (e.g.
 # 1.2) corrects one whose artwork has unusual whitespace. Never stretch a file.
 affiliations:
@@ -59,6 +59,7 @@ affiliations:
     name: Åbo Akademi University
     url: https://www.abo.fi/en/
     logo: wp-content/uploads/2023/02/aboakademi-logo_black-300x300-1.png   # on the dark footer
+    scale: 1.2   # the artwork has wide margins
   - id: turku-bioscience-centre-utuaau-affiliation
     relation: member
     name: Turku Bioscience Centre

@@ -5,7 +5,7 @@ import re
 
 import yaml
 
-from .components import SOFTWARE_DATA, paper_link, paper_ref, section_nav, section_title, tile
+from .components import SOFTWARE_DATA, oa_badge, paper_link, paper_ref, section_nav, section_title, tile, venue_year
 from . import rights
 from .config import (
     CONTENT,
@@ -16,7 +16,8 @@ from .config import (
     fail,
     load,
 )
-from .images import image_size, lite_video, media, thumb
+from .icons import ICONS
+from .images import gif_video, image_size, lite_video, media, thumb
 from .featured import Story, paper_picture
 from .ledger import Ledger, Record, software_list
 from .page import Page, new_tab_markdown
@@ -60,7 +61,7 @@ def _no_colour(entry: Record, source: str) -> None:
 def page_research(ledger: Ledger) -> None:
     """docs/research.md from data/research.yaml: videos, then one tile per theme."""
     research = load(DATA / "research.yaml")
-    p = Page("research.md", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
+    p = Page("research.md", layout="wide", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
     papers = f'{FEATURED_RESEARCH} {BROWSE_PUBLICATIONS.replace("cm-button", "cm-button cm-button--ghost", 1)}'
     p.add("# Research", f'<p class="cm-lead">{esc(research["intro"])}</p>', f'<p class="cm-research-links">{papers}</p>',
           '<div class="cm-videos">')
@@ -75,22 +76,26 @@ def page_research(ledger: Ledger) -> None:
 
 
 def _software_body(s: Record) -> str:
-    """Text of one software tile: title (year), description, links."""
+    """Text of one software tile: title (year), description, then buttons: the
+    code (GitHub), each paper and any extra links."""
     title = f'{s["title"]} ({s["year"]})' if s.get("year") else s["title"]
     text = md(s.get("text") or "")
     papers = s["papers"]   # never empty (software_list); journal versions once published
-    links = [("Paper: " if len(papers) == 1 else "Papers: ") + ", ".join(paper_link(r) for r in papers)]
-    host = "GitHub" if "github.com" in s["github"] else "Code"
-    links.append(f'<a href="{esc(s["github"])}">Find {esc(s["title"])} on {host}</a>')
-    links += [f'<a href="{esc(link["url"])}">{esc(link["label"])}</a>' for link in s.get("links") or []]
-    return f'<h2 id="{slugify(s["title"])}">{esc(title)}</h2>{text}<p class="cm-tile__links">{" · ".join(links)}</p>'
+    github = "github.com" in s["github"]
+    buttons = [f'<a class="cm-button" href="{esc(s["github"])}">{ICONS["github"] if github else ""}'
+               f'{"View on GitHub" if github else "Get the code"}</a>']
+    buttons += [f'<a class="cm-button cm-button--ghost" href="https://doi.org/{esc(r["doi"])}">'
+                f'Paper: {venue_year(r)}{oa_badge(r)}</a>' for r in papers]
+    buttons += [f'<a class="cm-button cm-button--ghost" href="{esc(link["url"])}">{esc(link["label"])}</a>'
+                for link in s.get("links") or []]
+    return f'<h2 id="{slugify(s["title"])}">{esc(title)}</h2>{text}<p class="cm-tile__buttons">{"".join(buttons)}</p>'
 
 
 def page_software(ledger: Ledger, featured: list[Story]) -> None:
     """docs/software.md: one tile per project (things_done + data/software.yaml).
     A project with no picture or video of its own shows its paper's featured
     picture (featured.paper_picture), so one picture serves both."""
-    p = Page("software.md", title="Software", edit_url=edit_url("data/software.yaml"), **preview("software"))
+    p = Page("software.md", layout="wide", title="Software", edit_url=edit_url("data/software.yaml"), **preview("software"))
     projects = software_list(ledger)
     p.meta["jsonld"] = to_json(item_list("Software from the Cell Migration Lab", [
         software_item(s, f"{p.url}#{slugify(s['title'])}") for s in projects]))
@@ -143,7 +148,7 @@ def _dataset(d: Record, ledger: Ledger) -> str:
 
 def page_datasets(ledger: Ledger, site: Record) -> None:
     """docs/datasets.md: shared resources (data/site.yaml), then datasets by type."""
-    p = Page("datasets.md", title="Datasets", menu="software/", **preview("datasets"))
+    p = Page("datasets.md", layout="wide", title="Datasets", menu="software/", **preview("datasets"))
     p.meta["jsonld"] = to_json(item_list("Datasets shared by the Cell Migration Lab",
                                          [dataset_item(d, ledger.dataset_papers(d)) for d in ledger.datasets]))
     p.add("# Datasets", section_nav(SOFTWARE_DATA, "Datasets"),
@@ -191,16 +196,22 @@ def _justified(site_path: str) -> str:
 def page_gallery() -> None:
     """docs/gallery.md from data/gallery.yaml: journal covers and images (lightbox)."""
     gallery = load(DATA / "gallery.yaml")
-    p = Page("gallery.md", title="Gallery", edit_url=edit_url("data/gallery.yaml"), **preview("gallery"))
-    p.add("# Gallery", section_title("Journal covers"), '<ul class="cm-covers">')
+    p = Page("gallery.md", layout="wide", title="Gallery", edit_url=edit_url("data/gallery.yaml"), **preview("gallery"))
+    # the covers scroll sideways in one row (arrows from cellmig.js initStrips), so no half-empty row
+    p.add("# Gallery", section_title("Journal covers"), '<div class="cm-strip" data-cm-strip>',
+          '<ul class="cm-covers" tabindex="0" aria-label="Journal covers (scroll sideways)">')
     for c in gallery["covers"]:
         cap = esc(f'{c["caption"]} · {rights.credit(c["image"])}')   # journal and issue (required) · © the journal
         p.add(f'<li><a href="{thumb(c["image"], 1600)}" data-cm-lightbox data-caption="{cap}">'
               f'{media(c["image"], c["caption"], 500)}</a><span>{cap}</span></li>')
-    p.add("</ul>", section_title("Images"), '<ul class="cm-gallery">')
+    p.add("</ul></div>", section_title("Images"), '<ul class="cm-gallery">')
     for g in gallery["images"]:
         cap = " ".join(x for x in (g.get("caption"), rights.credit(g["image"])) if x)   # © from data/media.yaml
-        p.add(f'<li style="{_justified(g["image"])}"><a href="{thumb(g["image"], 2000)}" data-cm-lightbox data-caption="{esc(cap)}">'
+        twin = gif_video(g["image"])   # a GIF with an MP4 twin loops here and opens as a video
+        if twin and not g.get("caption"):
+            fail(f"data/gallery.yaml: the video {g['image']} needs a caption (it describes the video)")
+        target = f'href="{twin[0]}" data-cm-video' if twin else f'href="{thumb(g["image"], 2000)}"'
+        p.add(f'<li style="{_justified(g["image"])}"><a {target} data-cm-lightbox data-caption="{esc(cap)}">'
               f'{media(g["image"], g.get("caption") or UNCAPTIONED_ALT, 600)}</a></li>')
     p.add("</ul>")
     p.write()

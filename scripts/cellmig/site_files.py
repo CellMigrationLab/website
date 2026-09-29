@@ -7,7 +7,8 @@ from email.utils import format_datetime
 
 from .config import DOCS, ROOT, SITE_URL, fail
 from .icons import ICONS
-from .images import dims, thumb
+from .components import logo_size
+from .images import dims, image_size, thumb
 from .ledger import Record
 from .outputs import KIND_LABELS, ResearchOutput
 from .page import check_public
@@ -36,9 +37,17 @@ def write_footer(site: Record, affiliations: list[Record]) -> None:
     for s in site["social"]:
         if s["icon"] not in ICONS:
             fail(f"data/site.yaml social {s['label']!r}: icon must be one of {sorted(ICONS)}")
-    logos = "".join(
-        f'<li><a href="{t(a["url"])}" title="{t(a["name"])}"{tab(a["url"])}><img src="{u(thumb(a["logo"], 300))}"{dims(thumb(a["logo"], 300))} '
-        f'alt="{t(a["name"])}" loading="lazy"></a></li>' for a in affiliations)
+    def logo(a: Record) -> str:
+        """An affiliation logo at the same visual area as the others (as the home-page logos)."""
+        src = thumb(a["logo"], 300)
+        size = image_size(src)
+        if not size:
+            fail(f"data/site.yaml affiliations: logo {a['logo']} has no size (an SVG needs width and height attributes)")
+        w, h = logo_size(*size, a.get("scale", 1.0))
+        return f'<img src="{u(src)}" width="{w}" height="{h}" alt="{t(a["name"])}" loading="lazy">'
+
+    logos = "".join(f'<li><a href="{t(a["url"])}" title="{t(a["name"])}"{tab(a["url"])}>{logo(a)}</a></li>'
+                    for a in affiliations)
     social = "".join(f'<li><a href="{t(s["url"])}"{tab(s["url"])}>{ICONS[s["icon"]]}<span>{t(s["label"])}</span></a></li>'
                      for s in site["social"])
     address = "<br>".join(t(x) for x in site["contact"]["address"])

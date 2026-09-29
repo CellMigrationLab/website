@@ -2,6 +2,9 @@
 # Add a picture: put the file in docs/wp-content/uploads/<year>/<month>/ (or
 # docs/assets/images/gallery/) and add an entry below. Captions are shown in the
 # lightbox and read by screen readers, so describe what is in the picture.
+# A .gif that has an MP4 twin in docs/assets/media/gif/ is shown as a looping
+# video and opens in the video player; it needs a caption.
+# Covers are shown in one row that scrolls sideways, newest additions last.
 
 covers:
 - image: wp-content/uploads/2023/02/m_jcb_216_10_cover.png
@@ -15,6 +18,10 @@ covers:
 - image: wp-content/uploads/2023/02/cover.webp
   caption: Developmental Cell, October 2022
 images:
+- image: wp-content/uploads/2019/08/cna35-merged-2.gif
+  caption: Cancer cells (purple) invading through collagen (green).
+- image: wp-content/uploads/2020/03/merged-1.gif
+  caption: A cancer cell (green) migrating on cell-derived matrices (magenta).
 - image: wp-content/uploads/2019/08/result-of-result-of-110619_si60x_514_tiff_fn_pax_attopha_002_sir_alx-1.jpg
   caption: Human fibroblast stained for paxillin (green), actin (blue) and fibronectin (orange). Image
     acquired using a structured illumination microscope.

@@ -338,6 +338,29 @@ class PeopleTests(unittest.TestCase):
         self.assertNotIn('cm-author--lab">Other Person', html)
 
 
+    def test_group_leader_card_opens_the_profile(self):
+        from cellmig.components import person_card
+        m = {"name": "Group Leader", "slug": "group-leader", "role": "Professor", "email": "gl@example.org"}
+        card = person_card(m, "about-us/#group-leader")
+        self.assertIn('<a class="cm-person__profile" href="about-us/#group-leader"', card)
+        self.assertIn('<span class="cm-person__name"><a href="about-us/#group-leader">Group Leader</a></span>', card)
+        self.assertIn('href="mailto:gl@example.org"', card)   # the profile icons stay their own links
+        self.assertNotIn("cm-person__profile", person_card(m))
+
+
+class SoftwareTests(unittest.TestCase):
+    def test_code_and_papers_are_buttons(self):
+        from cellmig.pages_content import _software_body
+        paper = pub("10.1/j", 2026, venue="J Cell Sci", open_access_status="gold")
+        body = _software_body({"title": "Tool", "year": 2026, "github": "https://github.com/lab/tool",
+                               "papers": [paper], "links": [{"label": "Docs", "url": "https://docs.example"}]})
+        self.assertIn('<a class="cm-button" href="https://github.com/lab/tool"><svg', body)
+        self.assertIn("View on GitHub</a>", body)
+        self.assertIn('<a class="cm-button cm-button--ghost" href="https://doi.org/10.1/j">Paper: '
+                      '<em class="cm-venue">J Cell Sci</em> · 2026<span class="cm-badge cm-badge--oa"', body)
+        self.assertIn('<a class="cm-button cm-button--ghost" href="https://docs.example">Docs</a>', body)
+
+
 class ChartTests(unittest.TestCase):
     def test_map_colour_steps(self):
         self.assertEqual(color(1), "#e9ddf7")

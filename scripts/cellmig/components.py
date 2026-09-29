@@ -209,8 +209,10 @@ PROFILE_LINKS = [
 ]
 
 
-def person_card(m: Person) -> str:
-    """Member photo (or initials), name, current role, bio and profile links."""
+def person_card(m: Person, profile_url: str | None = None) -> str:
+    """Member photo (or initials), name, current role, bio and profile links.
+    With `profile_url` (the group leader's profile on About us), the photo and
+    the name link there; the profile icons stay separate links."""
     if m.get("photo"):
         img = square_thumb(m["photo"], 480, m.get("photo_position", "top"))
         pic = f'<img src="{img}" alt="{esc(m["name"])}" width="480" height="480" loading="lazy">'
@@ -221,9 +223,20 @@ def person_card(m: Person) -> str:
                     for key, icon, url in PROFILE_LINKS if m.get(key))
     link_html = f'<span class="cm-person__links">{links}</span>' if links else ""
     bio = f'<span class="cm-person__bio">{md(m["bio"], inline=True)}</span>' if m.get("bio") else ""
+    name = esc(m["name"])
+    if profile_url:
+        pic = f'<a class="cm-person__profile" href="{profile_url}" aria-label="{name}: profile">{pic}</a>'
+        name = f'<a href="{profile_url}">{name}</a>'
     return (f'<li class="cm-person" id="{esc(m["slug"])}"><figure>{pic}'
-            f'<figcaption><span class="cm-person__name">{esc(m["name"])}</span>'
+            f'<figcaption><span class="cm-person__name">{name}</span>'
             f'<span class="cm-person__role">{esc(m["role"])}</span>{bio}{link_html}</figcaption></figure></li>')
+
+
+# The last card of the members grid: an invitation to join, shaped like a member's card.
+JOIN_CARD = ('<li class="cm-person cm-person--join"><a href="join-us/"><figure>'
+             '<span class="cm-person__initials" aria-hidden="true">+</span>'
+             '<figcaption><span class="cm-person__name">This could be you</span>'
+             '<span class="cm-person__role">Join us</span></figcaption></figure></a></li>')
 
 
 def one_line(text: str, limit: int) -> str:

@@ -68,7 +68,7 @@ but does not update, and the failed run names the file to fix (below).
 | **Any new image** (gallery, research, featured, software, pages) | An entry in `data/media.yaml` with its rights and creators. | Yes |
 | **Research themes and selected papers** | `data/research.yaml`. | No |
 | **Join us, About us, Licensing** | `content/join-us.md`, `about-us.md`, `licensing.md`. | No |
-| **Gallery, online talks, link previews** | `data/gallery.yaml`, `data/talks.yaml`, `data/previews.yaml`. | No |
+| **Gallery, online talks, link previews** | `data/gallery.yaml` (pictures, journal covers, and looping videos: a GIF with an MP4 twin, with a caption), `data/talks.yaml`, `data/previews.yaml`. | Yes, for a video without a caption |
 
 ## Now and then
 

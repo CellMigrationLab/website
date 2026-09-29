@@ -1,6 +1,6 @@
 """The lab members page (docs/lab-members.md)."""
 
-from .components import person_card, section_title
+from .components import JOIN_CARD, person_card, section_title
 from .config import DATA, GROUPS, REPO, load
 from .images import lite_video, media
 from .page import Page
@@ -38,13 +38,10 @@ def page_members(members: list[Person]) -> None:
     p = Page("lab-members.md", title="Lab members", edit_url=f"{REPO}/tree/main/data/members",
              **preview("lab-members"))
     p.meta["jsonld"] = to_json(item_list("Members of the Cell Migration Lab", [person_item(m) for m in current]))
-    p.add("# Lab members", '<ul class="cm-people">', *(person_card(m) for m in current), "</ul>")
+    # the group leader's card opens the profile on About us
+    cards = [person_card(m, "about-us/#group-leader" if m["group"] == "pi" else None) for m in current]
+    p.add("# Lab members", '<ul class="cm-people">', *cards, JOIN_CARD, "</ul>")
     p.add(_team_media())
     if alumni:
         p.add(section_title("Alumni"), '<ul class="cm-alumni">', *(_alumnus(m) for m in alumni), "</ul>")
-    p.add('<aside class="cm-join">',
-          section_title("Join us"),
-          '<p>Interested in joining the lab? We welcome enquiries from students, researchers and '
-          'fellowship applicants. <a href="join-us/">See opportunities and how to apply</a>.</p>',
-          "</aside>")
     p.write()
