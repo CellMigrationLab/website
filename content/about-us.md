@@ -41,8 +41,10 @@ Tykistökatu 6<br>
 BioCity is a ten-minute walk from Turku railway station and next to the Åbo Akademi and University of
 Turku campuses.
 
+<p class="cm-buttons" markdown>
 [Open in OpenStreetMap](https://www.openstreetmap.org/?mlat=60.4499&mlon=22.2720#map=16/60.4499/22.2720){ .cm-button }
 [Open in Google Maps](https://www.google.com/maps/search/?api=1&query=BioCity+Tykist%C3%B6katu+6+Turku){ .cm-button .cm-button--ghost }
+</p>
 </div>
 
 </div>

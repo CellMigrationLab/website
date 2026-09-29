@@ -42,6 +42,7 @@
   --cm-on-accent: #ffffff;
   --cm-highlight: var(--cm-accent-soft);
   --cm-text: 41.6rem;          /* the home page's "more" links */
+  --cm-button-w: 16rem;      /* the width of every button in a row: fits the longest label */
   --cm-wide: 52rem;          /* page width: tiles, grids, header and footer */
   --cm-gutter: clamp(.8rem, 4vw, 2rem);
   --cm-serif: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
@@ -145,8 +146,16 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-button:hover { background: #fff; color: var(--cm-strong); }
 .md-typeset .cm-button--ghost { background: transparent; color: var(--cm-strong); }
 .md-typeset .cm-button--ghost:hover { background: var(--cm-strong); color: #fff; }
-.cm-cta { text-align: center; margin: 2.4rem 0; }
+.cm-cta { margin: 2.4rem 0; }
 .cm-research-links, .cm-section-nav { margin: 0 0 1.6rem; }
+/* Button rows (section links, page-end links, paper links): the row is centred, every button has
+   the same width, and on a phone they stack at the full width. */
+.md-typeset :is(.cm-section-nav, .cm-research-links, .cm-cta, .cm-story__links) { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; }
+.md-typeset :is(.cm-section-nav, .cm-research-links, .cm-cta, .cm-story__links) > .cm-button { flex: 0 1 var(--cm-button-w); margin: 0; text-align: center; }
+@media (max-width: 40rem) { .md-typeset :is(.cm-section-nav, .cm-research-links, .cm-cta, .cm-story__links) > .cm-button { flex: 1 1 100%; } }
+/* Buttons inside a text block (a software tile, the address box): one column, each as wide as the block. */
+.md-typeset .cm-buttons { display: grid; grid-template-columns: minmax(0, 1fr); gap: .5rem; margin: 1.12rem 0 0; }
+.md-typeset .cm-buttons > .cm-button { margin: 0; text-align: center; }
 .md-typeset span.cm-button:hover { background: var(--cm-strong); color: #fff; }   /* the current page's button: not a link */
 .cm-more-link { text-align: center; margin: 1.2rem 0 0; font-size: .64rem; letter-spacing: .15em; text-transform: uppercase; }
 
@@ -220,8 +229,8 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-tile__papers li { margin: 0 0 .36rem; padding-left: .72rem; border-left: 2px solid currentColor; line-height: 1.45; }
 .md-typeset .cm-ref__meta { color: var(--cm-muted); }   /* the journal · year of a short reference */
 .md-typeset .cm-tile__credit { margin-top: .96rem !important; font-size: .624rem; opacity: .85; }
-.md-typeset .cm-tile__buttons { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .5rem; margin-top: 1.12rem !important; }
-.md-typeset .cm-tile .cm-tile__buttons .cm-button { margin: 0; display: inline-flex; align-items: center; gap: .4rem; background: var(--cm-strong); color: #fff; }   /* beats the tile's link colour */
+.md-typeset .cm-tile__buttons { display: grid; grid-template-columns: minmax(0, 1fr); gap: .5rem; margin-top: 1.12rem !important; }   /* one column: each button as wide as the text */
+.md-typeset .cm-tile .cm-tile__buttons .cm-button { margin: 0; display: inline-flex; align-items: center; justify-content: center; text-align: center; gap: .4rem; background: var(--cm-strong); color: #fff; }   /* beats the tile's link colour */
 .md-typeset .cm-tile .cm-tile__buttons .cm-button:hover, .md-typeset .cm-tile .cm-tile__buttons .cm-button:focus { background: #fff; color: var(--cm-strong); }
 .md-typeset .cm-tile .cm-tile__buttons .cm-button--ghost { background: transparent; color: var(--cm-strong); }
 .md-typeset .cm-tile .cm-tile__buttons .cm-button--ghost:hover, .md-typeset .cm-tile .cm-tile__buttons .cm-button--ghost:focus { background: var(--cm-strong); color: #fff; }
