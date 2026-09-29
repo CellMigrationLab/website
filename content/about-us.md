@@ -26,7 +26,7 @@ Interested in working with us? See [Join us](join-us.md).
 <figcaption>Aura River, Turku, Finland</figcaption>
 </figure>
 
-## Find our laboratory
+<h2 class="cm-section-title" id="find-our-laboratory"><span>Find our laboratory</span></h2>
 
 <div class="cm-address" markdown>
 
