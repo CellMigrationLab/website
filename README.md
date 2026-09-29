@@ -125,6 +125,15 @@ PYTHONPATH=scripts python -m unittest discover -s tests
    the RSS feed at `/feed/`) exists at the same path. Removed pages (the old
    news posts, archives) redirect (see `redirects` in `mkdocs.yml`).
 
+## Visit statistics
+
+Visits are counted with [GoatCounter](https://www.goatcounter.com/) (no
+cookies, no personal data). **The statistics are at
+https://cellmig.goatcounter.com/** (log in with the lab's GoatCounter account).
+The script is added to every page by `overrides/main.html` from `extra.goatcounter`
+in `mkdocs.yml` (the site code, `cellmig`); remove that line to turn the counting
+off. The *Licensing* page tells visitors about it (`content/licensing.md`).
+
 ## How it fits together
 
 ```

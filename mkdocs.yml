@@ -71,6 +71,11 @@ markdown_extensions:
   - toc:
       permalink: false
 
+extra:
+  # Visit statistics (GoatCounter: no cookies, no personal data): the dashboard is
+  # https://<this code>.goatcounter.com. Remove the line to turn the counting off.
+  goatcounter: cellmig
+
 extra_css:
   - assets/stylesheets/cellmig.css
 extra_javascript:
