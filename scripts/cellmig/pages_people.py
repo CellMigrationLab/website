@@ -29,8 +29,8 @@ def _alumnus(m: Person) -> str:
     return f'<li><strong>{esc(m["name"])}</strong> <span>{esc(", ".join(m["roles"]))}</span>{now}</li>'
 
 
-def page_members(members: list[Person]) -> None:
-    """Current members in one grid (group leader first, then by group and roster
+def page_members(members: list[Person], teaser: str) -> None:
+    """The group leader's teaser (profile.pi_teaser), then current members in one grid (group leader first, then by group and roster
     order) showing only their current role; team pictures; alumni with all roles."""
     current = sorted((m for m in members if m["status"] == "current"),
                      key=lambda m: (GROUPS.index(m["group"]), m["order"]))
@@ -40,7 +40,7 @@ def page_members(members: list[Person]) -> None:
     p.meta["jsonld"] = to_json(item_list("Members of the Cell Migration Lab", [person_item(m) for m in current]))
     # the group leader's card opens the profile on About us
     cards = [person_card(m, "about-us/#group-leader" if m["group"] == "pi" else None) for m in current]
-    p.add("# Lab members", '<ul class="cm-people">', *cards, JOIN_CARD, "</ul>")
+    p.add("# Lab members", teaser, '<ul class="cm-people">', *cards, JOIN_CARD, "</ul>")
     p.add(_team_media())
     if alumni:
         p.add(section_title("Alumni"), '<ul class="cm-alumni">', *(_alumnus(m) for m in alumni), "</ul>")

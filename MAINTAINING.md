@@ -39,7 +39,7 @@ can re-run it later (*Run workflow*, *refresh_cache* `true`).
 | Lab in numbers: papers, preprint lag, top collaborators, map, co-author cloud | ledger publications and reports |
 | Datasets page, software list, paper links to code and data | ledger registries |
 | Members and alumni, roles, member counts | ledger roster (`lab_members.yaml`) |
-| Group leader profile (About us), footer affiliations, current research support | ledger profile, roles, affiliations and grants |
+| Group leader profile (About us, and its first sentence on Lab members), footer affiliations, current research support | ledger profile, roles, affiliations and grants |
 | RSS feed, sitemap, search-engine and LLM metadata, resized images | the build |
 
 ## Manual, in things_done (facts)
