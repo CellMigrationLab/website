@@ -1,8 +1,9 @@
 site_name: Cell Migration Lab
 site_description: The Cell Migration Lab (Jacquemet lab) studies how cells move and interact with their environment using microscopy and image analysis. Åbo Akademi University and Turku Bioscience Centre, Turku, Finland.
 site_author: Cell Migration Lab
-# Change to https://cellmig.org/ when the domain points to GitHub Pages (see README).
-site_url: https://cellmigrationlab.github.io/website/
+# The address of the site: canonical links, sitemap, robots.txt, feed and structured data follow it
+# (README: Hosting and the cellmig.org domain).
+site_url: https://cellmig.org/
 repo_url: https://github.com/CellMigrationLab/website
 repo_name: CellMigrationLab/website
 edit_uri: edit/main/docs/

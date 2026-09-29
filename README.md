@@ -1,7 +1,7 @@
 # Cell Migration Lab website
 
-Source of the Cell Migration Lab website, **https://cellmig.org** (preview:
-https://cellmigrationlab.github.io/website/).
+Source of the Cell Migration Lab website, **https://cellmig.org** (the old
+address https://cellmigrationlab.github.io/website/ redirects there).
 
 The site is built with [Zensical](https://zensical.org) (like the
 [doctoral programme pages](https://github.com/AAUGS-DP-Biosciences-and-Drug-Research/Home))
@@ -106,20 +106,20 @@ PYTHONPATH=scripts python -m unittest discover -s tests
 
 ## Hosting and the cellmig.org domain
 
-1. **Turn on GitHub Pages:** repository Settings → Pages → Source: **GitHub
-   Actions**. The site is then live at https://cellmigrationlab.github.io/website/.
-2. **Point cellmig.org here** (when the new site is ready):
-   - in `mkdocs.yml`, set `site_url: https://cellmig.org/` (canonical links,
-     sitemap and robots.txt follow);
-   - Settings → Pages → Custom domain: `cellmig.org`; after the check, tick
-     *Enforce HTTPS*;
-   - verify the domain for the organisation (Organisation settings → Pages)
-     to prevent takeovers;
-   - DNS at WordPress.com (the registrar): replace the two `A` records of
-     `cellmig.org` with GitHub's `185.199.108.153`, `185.199.109.153`,
-     `185.199.110.153`, `185.199.111.153`, and set `www` → `CNAME
-     cellmigrationlab.github.io`. **Keep the `MX` records** (Google
-     Workspace email).
+1. **GitHub Pages:** repository Settings → Pages → Source: **GitHub Actions**,
+   Custom domain: `cellmig.org`, *Enforce HTTPS* ticked.
+2. **The domain** `cellmig.org` is registered at WordPress.com, which also
+   runs its DNS (Domains → cellmig.org → DNS records):
+   - four `A` records for `@`: `185.199.108.153`, `185.199.109.153`,
+     `185.199.110.153`, `185.199.111.153`; `www` → `CNAME
+     cellmigrationlab.github.io`;
+   - `TXT` `_github-pages-challenge-CellMigrationLab` (the organisation's
+     domain verification, Organisation settings → Pages, against takeovers);
+   - **the `MX` records are the lab's Google Workspace email: do not delete
+     them**;
+   - the domain and the old WordPress plan are separate subscriptions:
+     cancelling the plan does not cancel the domain, whose own renewal keeps
+     going (WordPress.com → Purchases; never press *Delete* on the domain).
 3. Old addresses keep working: every WordPress page (`/lab-members/`,
    `/software/`, `/portfolio/<name>/`, images under `/wp-content/uploads/`,
    the RSS feed at `/feed/`) exists at the same path. Removed pages (the old
