@@ -1,6 +1,7 @@
-"""Guillaume's short profile (About us) and his recent talks (llms-full.txt),
-from things_done data."""
+"""Guillaume's short profile (About us), its teaser (Lab members) and his recent
+talks (llms-full.txt), from things_done data."""
 
+import re
 from datetime import date, timedelta
 
 from .components import PROFILE_LINKS, section_title
@@ -37,6 +38,15 @@ def pi_profile(profile: Record, leader: Person) -> str:
             f'<p class="cm-profile__title">{esc(profile["title"])}</p>'
             f'<p class="cm-profile__links">{links}</p></div></div>'
             f'<div class="cm-profile__bio">{md(profile["short_bio"])}</div></section>')
+
+
+def pi_teaser(profile: Record) -> str:
+    """The first sentence of the group leader's bio, with a link to the whole
+    profile on About us (Lab members page)."""
+    # a sentence ends with a word or a link, then ". " (so "K. Albin" does not end one)
+    first = re.split(r"(?<=[a-z)\]])\.\s+", profile["short_bio"].strip(), maxsplit=1)[0].rstrip(".")
+    return (f'<p class="cm-lead">{md(first, inline=True)}. '
+            f'<a href="about-us/#group-leader">More about {esc(profile["name"].split()[0])}</a></p>')
 
 
 def recent_talks(ledger: Ledger, today: date) -> list[Record]:

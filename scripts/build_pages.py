@@ -54,7 +54,7 @@ from cellmig.pages_people import page_members
 from cellmig.people import lab_names, leader, load_members
 from cellmig import rights
 from cellmig.previews import check_all_used
-from cellmig.profile import pi_profile
+from cellmig.profile import pi_profile, pi_teaser
 from cellmig.site_files import write_feed, write_footer, write_jsonld
 from cellmig.structured import plain
 
@@ -83,7 +83,7 @@ def main() -> None:
     outputs = build_outputs(ledger, featured)
     page_home(site, featured, funding)
     page_research(ledger)
-    page_members(members)
+    page_members(members, pi_teaser(ledger.profile))
     page_software(ledger, featured)
     page_featured(featured, ledger, lab)
     page_numbers(ledger, lab, members)

@@ -348,6 +348,16 @@ class PeopleTests(unittest.TestCase):
         self.assertNotIn("cm-person__profile", person_card(m))
 
 
+    def test_leader_teaser_is_the_first_sentence_of_the_bio(self):
+        from cellmig.profile import pi_teaser
+        bio = ("Ann Lee is Professor at [Uni](https://u.example) and holds a K. Albin Johansson Professorship. "
+               "She trained in Turku. More text.")
+        html = pi_teaser({"name": "Ann Lee", "short_bio": bio})
+        self.assertIn('K. Albin Johansson Professorship. <a href="about-us/#group-leader">More about Ann</a>', html)
+        self.assertNotIn("She trained", html)
+        self.assertIn('<a href="https://u.example"', html)
+
+
 class SoftwareTests(unittest.TestCase):
     def test_code_and_papers_are_buttons(self):
         from cellmig.pages_content import _software_body
