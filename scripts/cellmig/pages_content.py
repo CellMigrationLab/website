@@ -5,7 +5,7 @@ import re
 
 import yaml
 
-from .components import SOFTWARE_DATA, oa_badge, paper_link, paper_ref, section_nav, section_title, tile, venue_year
+from .components import RESEARCH, SOFTWARE_DATA, oa_badge, paper_link, paper_ref, section_nav, section_title, tile, venue_year
 from . import rights
 from .config import (
     CONTENT,
@@ -63,7 +63,7 @@ def page_research(ledger: Ledger) -> None:
     research = load(DATA / "research.yaml")
     p = Page("research.md", title="Research", edit_url=edit_url("data/research.yaml"), **preview("research"))
     papers = f'{FEATURED_RESEARCH} {BROWSE_PUBLICATIONS.replace("cm-button", "cm-button cm-button--ghost", 1)}'
-    p.add("# Research", f'<p class="cm-lead">{esc(research["intro"])}</p>', f'<p class="cm-research-links">{papers}</p>',
+    p.add("# Research", section_nav(RESEARCH, "Research"), f'<p class="cm-lead">{esc(research["intro"])}</p>', f'<p class="cm-research-links">{papers}</p>',
           '<div class="cm-videos">')
     p.add(*(f'<figure>{lite_video(v.get("youtube"), v.get("vimeo"), v["title"], v.get("start"))}'
             f'<figcaption>{esc(v["title"])}</figcaption></figure>' for v in research.get("videos") or []))
@@ -218,9 +218,9 @@ def page_gallery() -> None:
 
 def page_talks() -> None:
     """docs/online-lectures.md: recorded talks from data/talks.yaml."""
-    p = Page("online-lectures.md", title="Online talks", edit_url=edit_url("data/talks.yaml"),
+    p = Page("online-lectures.md", title="Online talks", menu="research/", edit_url=edit_url("data/talks.yaml"),
              **preview("online-lectures"))
-    p.add("# Online talks", '<div class="cm-talks">')
+    p.add("# Online talks", section_nav(RESEARCH, "Online talks"), '<div class="cm-talks">')
     for t in load(DATA / "talks.yaml"):
         meta = " · ".join(str(x) for x in (t.get("event"), t.get("year")) if x)
         p.add(f'<figure class="cm-talk">{lite_video(t.get("youtube"), t.get("vimeo"), t["title"], t.get("start"))}'

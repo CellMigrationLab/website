@@ -363,7 +363,6 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .cm-resources span { font-size: .68rem; color: var(--cm-muted); }
 /* Internal page masthead (#25): H1, then an optional sub-navigation row and an
    optional lead, with the same spacing before the first component everywhere. */
-.cm-toc-inline { font-size: .68rem; margin: 0 0 1.2rem; }
 .md-typeset h1 + * { margin-top: 0; }
 .md-typeset h1 ~ .cm-lead { margin: 0 0 1.6rem; }
 .md-typeset h1 + .cm-section-title { margin-top: 1.6rem; }
