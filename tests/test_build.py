@@ -358,6 +358,13 @@ class PeopleTests(unittest.TestCase):
         self.assertIn('<a href="https://u.example"', html)
 
 
+    def test_group_leader_profile_links_to_the_lab_members(self):
+        from cellmig.profile import pi_profile
+        html = pi_profile({"name": "Ann Lee", "title": "Professor", "short_bio": "Ann Lee is a professor."},
+                          {"name": "Ann Lee"})
+        self.assertIn('<a class="cm-button" href="lab-members/">Meet the lab members</a>', html)
+
+
 class StatisticsTests(unittest.TestCase):
     def test_goatcounter_code_is_a_valid_subdomain(self):
         """extra.goatcounter is put into https://<code>.goatcounter.com: a typo or a URL there would break every page's counting."""

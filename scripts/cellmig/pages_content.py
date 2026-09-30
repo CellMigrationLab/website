@@ -230,10 +230,11 @@ def page_talks() -> None:
     p.write()
 
 
-def page_handwritten(name: str, extra: str = "") -> None:
+def page_handwritten(name: str, after_title: str = "") -> None:
     """docs/<name>.md from the hand-written content/<name>.md (front matter:
     only `title`), with its link preview from data/previews.yaml, an edit link
-    to the file in content/, and `extra` (generated HTML) at the end."""
+    to the file in content/, and `after_title` (generated HTML) right after the
+    page's first heading."""
     source = CONTENT / f"{name}.md"
     m = re.match(r"---\n(.*?)\n---\n(.*)", source.read_text(encoding="utf-8"), re.S)
     if not m:
@@ -243,7 +244,14 @@ def page_handwritten(name: str, extra: str = "") -> None:
         fail(f"content/{name}.md: front matter must be only `title` "
              "(description and image go in data/previews.yaml)")
     p = Page(f"{name}.md", title=front["title"], edit_url=edit_url(f"content/{name}.md"), **preview(name))
-    p.add(new_tab_markdown(_local_images(m.group(2).strip())), extra)
+    body = m.group(2).strip()
+    if after_title:
+        title_line, _, rest = body.partition("\n")
+        if not title_line.startswith("# "):
+            fail(f"content/{name}.md must start with its '# ' heading (generated content goes below it)")
+        p.add(title_line, after_title, new_tab_markdown(_local_images(rest.strip())))
+    else:
+        p.add(new_tab_markdown(_local_images(body)))
     p.write()
 
 
