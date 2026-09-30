@@ -4,6 +4,8 @@ title: About us
 
 # About us
 
+<h2 class="cm-section-title" id="our-environment"><span>Our environment</span></h2>
+
 The Cell Migration Lab is based in [Turku, Finland](https://en.wikipedia.org/wiki/Turku), at
 Åbo Akademi University and [Turku Bioscience Centre](https://bioscience.fi/).
 
