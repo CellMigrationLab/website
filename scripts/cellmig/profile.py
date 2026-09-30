@@ -25,8 +25,9 @@ def month_year(value: str) -> str:
 
 
 def pi_profile(profile: Record, leader: Person) -> str:
-    """About-us section on the group leader: photo, name, title, profile links
-    and the public short bio from Things Done."""
+    """About-us section on the group leader (shown first): photo, name, title,
+    profile links, the public short bio from Things Done and a link to the other
+    lab members."""
     photo = ""
     if leader.get("photo"):
         img = square_thumb(leader["photo"], 480, leader.get("photo_position", "top"))
@@ -37,7 +38,8 @@ def pi_profile(profile: Record, leader: Person) -> str:
             f'<div class="cm-profile__head">{photo}<div><h2 class="cm-profile__name">{esc(profile["name"])}</h2>'
             f'<p class="cm-profile__title">{esc(profile["title"])}</p>'
             f'<p class="cm-profile__links">{links}</p></div></div>'
-            f'<div class="cm-profile__bio">{md(profile["short_bio"])}</div></section>')
+            f'<div class="cm-profile__bio">{md(profile["short_bio"])}'
+            f'<p class="cm-buttons"><a class="cm-button" href="lab-members/">Meet the lab members</a></p></div></section>')
 
 
 def pi_teaser(profile: Record) -> str:

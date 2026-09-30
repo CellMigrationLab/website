@@ -91,7 +91,7 @@ def main() -> None:
     page_datasets(ledger, site)
     page_gallery()
     page_talks()
-    page_handwritten("about-us", extra=pi_profile(ledger.profile, leader(members)))
+    page_handwritten("about-us", after_title=pi_profile(ledger.profile, leader(members)))
     page_handwritten("join-us")
     page_handwritten("licensing")
     write_feed(site, outputs)
