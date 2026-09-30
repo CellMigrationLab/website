@@ -172,7 +172,7 @@ body, input, button { font-feature-settings: "cv11", "ss01"; }
 .md-typeset .cm-hero__image, .md-typeset .cm-band { display: block; width: 100%; max-width: none; }
 .md-typeset .cm-hero__image { margin: 0; height: clamp(14.4rem, 48vw, 33.6rem); background: #000; }
 .cm-hero__image img, .cm-hero__image video { width: 100%; height: 100%; object-fit: cover; }
-.cm-intro { max-width: 36.8rem; margin: clamp(2.8rem, 8vw, 5.2rem) auto; padding: 0 var(--cm-gutter); text-align: center; font-size: clamp(.92rem, 2vw, 1.16rem); font-weight: 300; line-height: 1.65; color: var(--cm-fg); }
+.cm-intro { max-width: min(52rem, 100%); margin: clamp(2.8rem, 8vw, 5.2rem) auto; padding: 0 var(--cm-gutter); text-align: center; font-size: clamp(.92rem, 2vw, 1.16rem); font-weight: 300; line-height: 1.65; color: var(--cm-fg); }
 .cm-home .cm-more-link { max-width: var(--cm-text); margin-left: auto; margin-right: auto; padding: 0 var(--cm-gutter); }
 .md-typeset .cm-band { position: relative; margin: 4rem 0 0; height: clamp(11.2rem, 34vw, 22.4rem); overflow: hidden; background: #000; }
 .cm-band img, .cm-band video { width: 100%; height: 100%; object-fit: cover; }
