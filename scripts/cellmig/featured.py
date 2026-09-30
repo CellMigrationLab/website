@@ -16,7 +16,7 @@ from .text import slugify
 
 Story = dict[str, Any]
 
-ENTRY_KEYS = {"doi", "image", "slug", "also", "hide", "summary", "fit", "area"}
+ENTRY_KEYS = {"doi", "image", "alt", "slug", "also", "hide", "summary", "fit", "area"}
 # What a featured paper is mainly about; the home page shows the newest of
 # each in its own group (config.HOME_FEATURED each). Required on every paper.
 AREAS = {"biology": "Biology", "methods": "Methods and tools"}
@@ -75,6 +75,7 @@ def _story(ledger: Ledger, main: Record, entry: Record) -> Story:
         "papers": [main["doi"], *(entry.get("also") or [])],
         "pubs": pubs,
         "image": entry.get("image"),
+        "alt": entry.get("alt") or main["title"],   # describes the picture; the paper's title when none is given
         "fit": _fit(entry),
         "area": entry.get("area"),
         "title": main["title"],
