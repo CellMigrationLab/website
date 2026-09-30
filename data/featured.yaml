@@ -150,7 +150,18 @@
     imaged with Airyscan microscopy. Image by Sujan Ghimire.
 - doi: 10.1016/j.ceb.2023.102271
   area: methods
+  image: wp-content/uploads/2019/08/cancer-cell-vasculature.jpg
+  alt: >-
+    Cancer cells, in red, inside a blood vessel, in green, of a living zebrafish embryo.
 - doi: 10.1038/s41592-021-01284-3
   area: methods
+  image: wp-content/uploads/2026/09/nuclei-segmentation-image-and-prediction.jpg
+  alt: >-
+    Square image split along the diagonal: on one side a microscopy image of cell nuclei in a migrating
+    monolayer, in orange on purple, on the other the white nuclear masks predicted from it by a deep-learning
+    segmentation model.
 - doi: 10.1242/jcs.240713
   area: methods
+  image: wp-content/uploads/2019/08/sim-rgb4.jpg
+  alt: >-
+    Structured illumination microscopy image of an osteosarcoma cell, with actin in magenta and paxillin in green.
