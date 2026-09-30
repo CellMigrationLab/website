@@ -458,11 +458,10 @@ media:
   type: portrait
   rights: all-rights-reserved
   owner: Cell Migration Lab
-- path: wp-content/uploads/2019/08/cancer-cell-vasculature.jpg
+- path: wp-content/uploads/2026/09/noisy-and-denoised-image.jpg
   type: microscopy
-  rights: all-rights-reserved
+  rights: CC-BY-4.0
   creators:
-  - Ilkka Paatero
   - Guillaume Jacquemet
 - path: wp-content/uploads/2026/09/nuclei-segmentation-image-and-prediction.jpg
   type: microscopy

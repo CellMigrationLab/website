@@ -150,9 +150,11 @@
     imaged with Airyscan microscopy. Image by Sujan Ghimire.
 - doi: 10.1016/j.ceb.2023.102271
   area: methods
-  image: wp-content/uploads/2019/08/cancer-cell-vasculature.jpg
+  image: wp-content/uploads/2026/09/noisy-and-denoised-image.jpg
   alt: >-
-    Cancer cells, in red, inside a blood vessel, in green, of a living zebrafish embryo.
+    Square image split along the diagonal: a noisy fluorescence microscopy image of a cell with many fine
+    actin protrusions on one side, and the same field after denoising by a deep-learning model, with
+    cleaner and sharper protrusions, on the other.
 - doi: 10.1038/s41592-021-01284-3
   area: methods
   image: wp-content/uploads/2026/09/nuclei-segmentation-image-and-prediction.jpg
