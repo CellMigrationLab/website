@@ -191,6 +191,13 @@ class FeaturedTests(unittest.TestCase):
         self.assertEqual(items[0]["image"], "c.png")
         self.assertIsNone(items[2]["date"])        # no made-up dates
 
+    def test_picture_description_defaults_to_the_title(self):
+        a = pub("10.1/a", 2024, "published", "A", corresponding=True)
+        b = pub("10.1/b", 2024, "published", "B", corresponding=True)
+        items = self.run_featured([a, b], [{"doi": "10.1/a", "area": "biology", "alt": "A green cell"},
+                                          {"doi": "10.1/b", "area": "biology"}])
+        self.assertEqual({i["title"]: i["alt"] for i in items}, {"A": "A green cell", "B": "B"})
+
     def test_hidden_paper_is_left_out(self):
         a = pub("10.1/a", 2024, "published", "A", corresponding=True)
         self.assertEqual(self.run_featured([a], [{"doi": "10.1/a", "hide": True}]), [])

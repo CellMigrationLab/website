@@ -10,6 +10,8 @@
 #   area:   biology or methods (computational and imaging tools); required,
 #           so a new corresponding-author paper stops the build until it has one
 #   image:  picture or logo (a .gif plays as a short video)
+#   alt:    (optional) what the picture shows, for screen readers; the paper's
+#           title is used when it is missing
 #   fit:    (optional) contain for a logo or diagram (shown whole in the square
 #           card); pictures fill the card (cover) otherwise
 #   slug:   page address; kept from the old website - leave unchanged
@@ -142,6 +144,10 @@
 - doi: 10.64898/2026.09.02.749041
   area: biology
   image: wp-content/uploads/2026/09/miapaca2-extravasation-airyscan-3d.jpg
+  alt: >-
+    3D reconstruction of a MIA PaCa-2 pancreatic cancer cell, in green with many
+    filopodia-like protrusions, crossing an endothelial monolayer shown in magenta,
+    imaged with Airyscan microscopy. Image by Sujan Ghimire.
 - doi: 10.1016/j.ceb.2023.102271
   area: methods
 - doi: 10.1038/s41592-021-01284-3
