@@ -19,6 +19,11 @@ we also have access to facilities for [bioimaging](https://bioscience.fi/aic/),
 genomics, [proteomics](https://bioscience.fi/proteomics/services/),
 [zebrafish research](https://bioscience.fi/zebrafish/services/), genome editing and bioinformatics.
 
+We work in the BioCity Turku campus, where the Advanced Imaging Core
+([AIC-Turku](https://bioscience.fi/aic/)) is in our building. Our neighbours include the headquarters of
+[Euro-BioImaging](https://www.eurobioimaging.fi/) and the [Turku BioImaging](https://bioimaging.fi/) community,
+which makes Turku a European hub for biological and biomedical imaging.
+
 Interested in working with us? See [Join us](join-us.md).
 
 <figure markdown>
