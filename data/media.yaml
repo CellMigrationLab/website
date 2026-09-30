@@ -458,6 +458,11 @@ media:
   type: portrait
   rights: all-rights-reserved
   owner: Cell Migration Lab
+- path: wp-content/uploads/2026/09/miapaca2-extravasation-airyscan-3d.jpg
+  type: microscopy
+  rights: all-rights-reserved
+  creators:
+  - Sujan Ghimire
 - path: wp-content/uploads/2026/07/comic-e1782918385802.png
   type: software-media
   rights: CC-BY-4.0
