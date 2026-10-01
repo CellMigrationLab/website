@@ -10,13 +10,16 @@ from .text import NEW_TAB, is_external, opens_new_tab
 
 
 def share_image(site_path: str | None) -> str | None:
-    """A link-preview image: a 1200 px JPEG still (a GIF's poster frame); None
-    when there is no still, so the template's default image is used."""
+    """A link-preview image: a 1200 px JPEG still (the poster frame of a GIF or
+    an MP4); None when there is no still, so the template's default image is used."""
     if not site_path:
         return None
     if site_path.lower().endswith(".gif"):
         twin = gif_video(site_path)
         return share_jpeg(twin[1]) if twin and twin[1] else None
+    if site_path.lower().endswith(".mp4"):
+        poster = site_path[:-4] + ".jpg"
+        return share_jpeg(poster) if (DOCS / poster).is_file() else None
     if site_path.lower().endswith(".svg"):
         return None
     return share_jpeg(site_path)

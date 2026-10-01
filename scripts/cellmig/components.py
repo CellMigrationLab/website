@@ -121,7 +121,7 @@ def citation(rec: Record, lab: set[str], ledger: Ledger, story_url: str | None =
 def feature_card(story: Story) -> str:
     """Picture card linking to a featured paper's page (venue name when no picture)."""
     pub = story["pubs"][0]
-    pic = (media(story["image"], story["alt"], 700) if story["image"]
+    pic = (media(story["image"], story["alt"], 700, loop=True) if story["image"]
            else f'<span class="cm-card__placeholder">{esc(pub["venue"])}</span>')
     return (f'<a class="cm-card" href="portfolio/{story["slug"]}/">'
             f'<div class="cm-card__media{" cm-fit-contain" if story["fit"] == "contain" else ""}">{pic}</div>'

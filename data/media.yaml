@@ -468,7 +468,12 @@ media:
   rights: CC-BY-4.0
   creators:
   - Guillaume Jacquemet
-- path: wp-content/uploads/2026/09/miapaca2-extravasation-airyscan-3d.jpg
+- path: assets/media/miapaca2-extravasation-3d.mp4
+  type: microscopy
+  rights: all-rights-reserved
+  creators:
+  - Sujan Ghimire
+- path: assets/media/miapaca2-extravasation-3d.jpg
   type: microscopy
   rights: all-rights-reserved
   creators:
