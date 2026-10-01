@@ -78,7 +78,7 @@ def page_story(story: Story, stories: list[Story], i: int, ledger: Ledger, lab: 
                       for rec in story["pubs"]),
                     *(f"<p>{esc(para.strip())}</p>" for para in story["summary"].splitlines() if para.strip())])
     credit = rights.credit(image) if image else ""
-    pic = (f'<figure class="cm-story__media">{media(image, story["alt"], 1000, eager=True, sizes="(max-width: 760px) 100vw, 360px")}'
+    pic = (f'<figure class="cm-story__media">{media(image, story["alt"], 1000, eager=True, loop=True, sizes="(max-width: 760px) 100vw, 360px")}'
            f'{f"<figcaption>{esc(credit)}</figcaption>" if credit else ""}</figure>' if image else "")
     p.add(f'<div class="cm-story__lead{"" if image else " cm-story__lead--text"}">{pic}<div class="cm-story__text">{text}</div></div>')
     main = story["pubs"][0]

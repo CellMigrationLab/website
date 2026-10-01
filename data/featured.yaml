@@ -143,11 +143,11 @@
   hide: true
 - doi: 10.64898/2026.09.02.749041
   area: biology
-  image: wp-content/uploads/2026/09/miapaca2-extravasation-airyscan-3d.jpg
+  image: assets/media/miapaca2-extravasation-3d.mp4
   alt: >-
-    3D reconstruction of a MIA PaCa-2 pancreatic cancer cell, in green with many
-    filopodia-like protrusions, crossing an endothelial monolayer shown in magenta,
-    imaged with Airyscan microscopy. Image by Sujan Ghimire.
+    Looping 3D time-lapse of a MIA PaCa-2 pancreatic cancer cell, in green with many filopodia-like
+    protrusions, crossing an endothelial monolayer shown in magenta, imaged with Airyscan microscopy.
+    Video by Sujan Ghimire.
 - doi: 10.1016/j.ceb.2023.102271
   area: methods
   image: wp-content/uploads/2026/09/noisy-and-denoised-image.jpg

@@ -146,10 +146,12 @@ def gif_video(site_path: str) -> tuple[str, str | None] | None:
 
 
 def media(site_path: str | None, alt: str = "", width: int = 900, cls: str = "",
-          eager: bool = False, sizes: str | None = None) -> str:
+          eager: bool = False, sizes: str | None = None, loop: bool = False) -> str:
     """Markup for an image or video file.
 
-    - .mp4: a <video> with controls (poster = same name .jpg, if present)
+    - .mp4: a <video> with controls (poster = same name .jpg, if present); with
+      `loop`, a silent looping <video> like a GIF's (for a picture slot, where
+      controls would get in the way)
     - .gif with an MP4 twin: a silent looping <video>
     - anything else: a lazy <img> (with a half-size srcset from 900 px up)
     """
@@ -160,6 +162,10 @@ def media(site_path: str | None, alt: str = "", width: int = 900, cls: str = "",
         source(site_path)
         poster = site_path[:-4] + ".jpg"
         p = f' poster="{poster}"' if (DOCS / poster).is_file() else ""
+        if loop:
+            label = f' aria-label="{esc(alt)}"' if alt else ""
+            return (f'<video class="{cls} cm-loop" muted loop playsinline preload="none"{p}{label}>'
+                    f'<source src="{site_path}" type="video/mp4"></video>')
         return (f'<video class="{cls}" controls preload="none" playsinline{p}>'
                 f'<source src="{site_path}" type="video/mp4"></video>')
     twin = gif_video(site_path)
