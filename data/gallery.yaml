@@ -8,6 +8,9 @@
 # and loops (the first cover follows the last).
 
 covers:
+- image: wp-content/uploads/2026/09/jcs_139_18_cover.webp
+  caption: 'Journal of Cell Science, September 2026. An osteosarcoma cell visualised by structured illumination
+    microscopy: actin in magenta, paxillin in green and myosin-X in cyan. See the article by A. Popović et al. (jcs265278).'
 - image: wp-content/uploads/2023/02/m_jcb_216_10_cover.png
   caption: Journal of Cell Biology, October 2017
 - image: wp-content/uploads/2023/02/markmorganguillaumejacquemet-2013jcscover.webp
