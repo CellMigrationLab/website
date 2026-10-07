@@ -408,6 +408,10 @@ media:
   rights: CC-BY-4.0
   creators:
   - Guillaume Jacquemet
+- path: wp-content/uploads/2026/10/lab-bowling-october-2026.jpg
+  type: photo
+  rights: all-rights-reserved
+  owner: Cell Migration Lab
 - path: wp-content/uploads/2025/01/img_3147.jpg
   type: photo
   rights: all-rights-reserved
