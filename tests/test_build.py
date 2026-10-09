@@ -391,8 +391,8 @@ class SoftwareTests(unittest.TestCase):
                                "papers": [paper], "links": [{"label": "Docs", "url": "https://docs.example"}]})
         self.assertIn('<a class="cm-button" href="https://github.com/lab/tool"><svg', body)
         self.assertIn("View on GitHub</a>", body)
-        self.assertIn('<a class="cm-button cm-button--ghost" href="https://doi.org/10.1/j">Paper: '
-                      '<em class="cm-venue">J Cell Sci</em> · 2026<span class="cm-badge cm-badge--oa"', body)
+        self.assertIn('<a class="cm-button cm-button--ghost" href="https://doi.org/10.1/j"><span>Paper: '
+                      '<em class="cm-venue">J Cell Sci</em> · 2026</span><span class="cm-badge cm-badge--oa"', body)
         self.assertIn('<a class="cm-button cm-button--ghost" href="https://docs.example">Docs</a>', body)
 
 
