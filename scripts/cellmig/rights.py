@@ -111,12 +111,14 @@ def credit(site_path: str) -> str:
 
 def image_object(site_path: str, url: str) -> dict[str, Any]:
     """schema.org ImageObject with the rights that are established: creator
-    and creditText when known, copyrightNotice, and a licence URL only for an
+    (the named people, else the owner or source organisation) and creditText when known, copyrightNotice, and a licence URL only for an
     open licence (never for all-rights-reserved, third-party or unknown)."""
     e = entry(site_path)
     item: dict[str, Any] = {"@type": "ImageObject", "contentUrl": url}
     if e.get("creators"):
         item["creator"] = [{"@type": "Person", "name": n} for n in e["creators"]]
+    elif e["rights"] != "unknown":   # no named person: the recorded owner or source (publisher) is the credited party
+        item["creator"] = {"@type": "Organization", "name": e.get("owner") or e["source"]}
     if e["rights"] != "unknown":
         item["creditText"] = "the publisher" if e["type"] == "journal-cover" else _holder(e)
         if e["rights"] != "CC0-1.0":
