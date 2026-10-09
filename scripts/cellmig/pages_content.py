@@ -86,7 +86,7 @@ def _software_body(s: Record) -> str:
     buttons = [f'<a class="cm-button" href="{esc(s["github"])}">{ICONS["github"] if github else ""}'
                f'{"View on GitHub" if github else "Get the code"}</a>']
     buttons += [f'<a class="cm-button cm-button--ghost" href="https://doi.org/{esc(r["doi"])}">'
-                f'Paper: {venue_year(r)}{oa_badge(r)}</a>' for r in papers]
+                f'<span>Paper: {venue_year(r)}</span>{oa_badge(r)}</a>' for r in papers]
     buttons += [f'<a class="cm-button cm-button--ghost" href="{esc(link["url"])}">{esc(link["label"])}</a>'
                 for link in s.get("links") or []]
     return f'<h2 id="{slugify(s["title"])}">{esc(title)}</h2>{text}<p class="cm-tile__buttons">{"".join(buttons)}</p>'
