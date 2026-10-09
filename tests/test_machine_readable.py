@@ -107,6 +107,9 @@ class RightsTests(unittest.TestCase):
             for path in ("a.jpg", "c.jpg", "u.jpg"):                            # no open licence on these
                 self.assertNotIn("license", rights.image_object(path, "https://x/"))
             self.assertEqual(rights.image_object("a.jpg", "https://x/")["creator"][0]["name"], "Emilia Peuhu")
+            self.assertEqual(rights.image_object("c.jpg", "https://x/")["creator"],   # no person named: the source
+                             {"@type": "Organization", "name": "J Cell Sci"})
+            self.assertNotIn("creator", rights.image_object("u.jpg", "https://x/"))   # unknown: nothing implied
             # an open licence is named in the credit and linked in the ImageObject
             self.assertEqual(rights.credit("b.jpg"), "© Ana Popović · CC BY 4.0")
             obj = rights.image_object("b.jpg", "https://x/")
