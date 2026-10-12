@@ -467,7 +467,7 @@ records:
   year: 2026
   publication_date: '2026-09-04'
   status: published
-  title: 'Rxiv-Maker: An automated template engine for streamlined scientific publications'
+  title: Rxiv-Maker – an automated template engine for streamlined scientific publications
   authors:
   - Bruno M. Saraiva
   - Rita Carlota
@@ -476,21 +476,21 @@ records:
   - Guillaume Jacquemet
   - Ricardo Henriques
   venue: Journal of Cell Science
-  abstract: Preprints have transformed how biologists share results, yet how well a preprint reads still
+  abstract: Preprints have transformed how biologists share results; yet, how well a preprint reads still
     depends on formatting, a task that has shifted from publishers to authors. Cell biology has also become
-    increasingly quantitative, with conclusions resting on multi-step image analysis whose figures, values,
-    and statistics are revised repeatedly across a project. Keeping a well-formatted manuscript in step
-    with the latest analysis is tedious and error-prone. We introduce Rxiv-Maker, an open-source framework
-    that lets authors write in simple Markdown and produce a formatted article, as a PDF or an editable
-    Word document, with consistent styling, automatic figure and citation numbering, and reliable cross-referencing.
-    For quantitative work, it can optionally regenerate figures and recompute reported values directly
-    from the data, so the text stays consistent with the analysis. Built on familiar tools such as Git
-    and Visual Studio Code, it gives a transparent, collaborative path from analysis to a submission-ready
-    preprint. Researchers have already used Rxiv-Maker for cell-biology studies spanning bacterial cell-cycle
-    analysis, filopodia proteomics, and zebrafish live imaging, showing it supports reproducible reporting
-    of genuine biological findings.
+    increasingly quantitative, with conclusions resting on multi-step image analysis, for which figures,
+    values and statistics are revised repeatedly across a project. Keeping a well-formatted manuscript
+    in step with the latest analysis is tedious and error prone. We introduce Rxiv-Maker, an open-source
+    framework that lets authors write in simple Markdown and produce a formatted article, as a PDF or
+    an editable Word document, with consistent styling, automatic figure and citation numbering, and reliable
+    cross-referencing. For quantitative work, it can optionally regenerate figures and recompute reported
+    values directly from the data, so the text stays consistent with the analysis. Built on familiar tools
+    such as Git and Visual Studio Code, it gives a transparent, collaborative path from analysis to a
+    submission-ready preprint. Researchers have already used Rxiv-Maker for cell biology studies spanning
+    bacterial cell cycle analysis, filopodia proteomics and zebrafish live imaging, showing that it supports
+    reproducible reporting of genuine biological findings.
   peer_reviewed: true
-  open_access_status: green
+  open_access_status: hybrid
   related_dois:
   - 10.48550/arXiv.2508.00836
   corresponding: true

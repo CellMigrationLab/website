@@ -38,7 +38,7 @@ records:
   title: Rxiv-Maker
   start_date: '2025'
   github_repo_url: https://github.com/HenriquesLab/rxiv-maker
-  description: a toolbox that converts markdown into a publication-ready PDF
+  description: Write scientific manuscripts in Markdown and export formatted PDF or editable Word documents
   summary: Rxiv-Maker is a framework for writing scientific manuscripts in Markdown and generating publication-ready
     outputs. It handles citations, figures, LaTeX typesetting, executable code blocks, DOCX export and
     preprint submission packages. The aim is to keep manuscripts, figures, data-derived results and version
