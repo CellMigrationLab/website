@@ -276,12 +276,12 @@ pairs:
   gap_days: 284
 - preprint_doi: 10.48550/arXiv.2508.00836
   published_doi: 10.1242/jcs.265183
-  published_title: 'Rxiv-Maker: An automated template engine for streamlined scientific publications'
+  published_title: Rxiv-Maker – an automated template engine for streamlined scientific publications
   preprint_date: '2025-01-01'
   preprint_date_precision: year
-  published_date: '2026-09-04'
+  published_date: '2026-10-01'
   published_date_precision: day
-  gap_days: 611
+  gap_days: 638
 - preprint_doi: 10.64898/2026.06.29.735028
   published_doi: 10.1242/jcs.265152
   published_title: NucleiSky enables cross-scale multimodal registration of microscopy data using nuclei
