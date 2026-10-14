@@ -85,6 +85,13 @@ records:
   - Summer intern
   group: student
   status: current
+- id: member-leonie-haas
+  name: Leonie Haas
+  role: Bachelor's student
+  group: student
+  status: current
+  also_known_as:
+  - Leonie Sofia Haas
 - id: member-helene-helo
   name: Helene Helo
   role: Research assistant
