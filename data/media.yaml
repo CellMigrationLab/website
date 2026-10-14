@@ -518,6 +518,11 @@ media:
   type: portrait
   rights: all-rights-reserved
   owner: Cell Migration Lab
+- path: wp-content/uploads/2026/10/leonie-haas.jpg
+  type: portrait
+  rights: all-rights-reserved
+  creators:
+  - Leonie Haas
 - path: wp-content/uploads/2026/09/297bab59-c8b1-46a8-b233-26e4cc467494-e1790156529741.png
   type: portrait
   rights: all-rights-reserved
