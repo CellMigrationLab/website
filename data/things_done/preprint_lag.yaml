@@ -288,6 +288,6 @@ pairs:
     constellations
   preprint_date: '2026-06-29'
   preprint_date_precision: day
-  published_date: '2026-08-14'
+  published_date: '2026-10-14'
   published_date_precision: day
-  gap_days: 46
+  gap_days: 107
