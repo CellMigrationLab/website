@@ -7,7 +7,7 @@ coauthors:
   last_year: 2026
   country: FI
 - name: Ricardo Henriques
-  papers: 23
+  papers: 24
   first_year: 2020
   last_year: 2026
   country: PT
@@ -16,16 +16,16 @@ coauthors:
   first_year: 2022
   last_year: 2026
   country: FI
+- name: Bruno M. Saraiva
+  papers: 10
+  first_year: 2023
+  last_year: 2026
+  country: PT
 - name: Hellyeh Hamidi
   papers: 10
   first_year: 2015
   last_year: 2026
   country: FI
-- name: Bruno M. Saraiva
-  papers: 9
-  first_year: 2023
-  last_year: 2026
-  country: PT
 - name: Estibaliz Gómez-de-Mariscal
   papers: 9
   first_year: 2022
@@ -201,6 +201,11 @@ coauthors:
   first_year: 2021
   last_year: 2026
   country: FI
+- name: Inês Cunha
+  papers: 3
+  first_year: 2025
+  last_year: 2026
+  country: SE
 - name: Jean-Yves Tinevez
   papers: 3
   first_year: 2020
@@ -386,11 +391,6 @@ coauthors:
   first_year: 2017
   last_year: 2024
   country: GB
-- name: Inês Cunha
-  papers: 2
-  first_year: 2025
-  last_year: 2026
-  country: SE
 - name: Jenny C. Pessa
   papers: 2
   first_year: 2022
@@ -546,6 +546,10 @@ coauthors:
   first_year: 2021
   last_year: 2022
   country: GB
+- name: Tayla Shakespeare
+  papers: 2
+  first_year: 2026
+  last_year: 2026
 - name: Thomas Zacharchenko
   papers: 2
   first_year: 2017
@@ -818,6 +822,10 @@ coauthors:
   first_year: 2026
   last_year: 2026
 - name: Caroline Beck Adiels
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+- name: Caron Jacobs
   papers: 1
   first_year: 2026
   last_year: 2026
@@ -1977,10 +1985,6 @@ coauthors:
   first_year: 2024
   last_year: 2024
   country: FI
-- name: Tayla Shakespeare
-  papers: 1
-  first_year: 2026
-  last_year: 2026
 - name: Teng-Leong Chew
   papers: 1
   first_year: 2019
