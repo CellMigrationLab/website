@@ -23,6 +23,18 @@ records:
     installers and the application interface.
   related_publication_dois:
   - 10.48550/arXiv.2603.10704
+- id: mapping-bioimage-software
+  title: mapping-bioimage-software
+  start_date: '2026-10-21'
+  github_repo_url: https://github.com/HenriquesLab/mapping-bioimage-software
+  description: Data and code for mapping bioimage-analysis software adoption across the microscopy literature.
+  summary: mapping-bioimage-software contains the reproducible analysis pipeline, processed data, validation
+    records and figure walkthroughs for the study "Mapping bioimage-analysis software adoption in microscopy".
+    It measures mentions and reporting of image-analysis software across large microscopy literature corpora,
+    including adoption trends, deep-learning estimates, research-area enrichment, citation coverage and
+    software-reporting audits.
+  related_publication_dois:
+  - 10.64898/2026.10.21.760457
 - id: nucleisky
   title: NucleiSky
   start_date: '2026'

@@ -221,6 +221,34 @@ records:
   peer_reviewed: false
   open_access_status: green
   corresponding: true
+- doi: 10.64898/2026.10.21.760457
+  year: 2026
+  publication_date: '2026-10-26'
+  status: preprint
+  title: Mapping bioimage-analysis software adoption in microscopy
+  authors:
+  - Tayla Shakespeare
+  - Bruno M. Saraiva
+  - Inês Cunha
+  - Caron Jacobs
+  - Guillaume Jacquemet
+  - Ricardo Henriques
+  venue: bioRxiv
+  abstract: Most quantitative microscopy measurements pass through image-analysis software, and different
+    programs can return different measurements from the same images. Which programs researchers rely on
+    therefore matters for reproducibility; however, this information lies scattered across the methods
+    sections of the microscopy literature. In this analysis, we show how mentions of 30 software packages
+    changed across 1.7 million full-text microscopy papers published between 2010 and 2025. In 2010, 12%
+    of these papers mentioned at least one of the 22 analysis packages we tracked; by 2025, 30% did. Mentions
+    stayed concentrated on a few general-purpose platforms, led by ImageJ/Fiji. Newer packages are mentioned
+    more often in particular fields, such as QuPath in pathology and napari in electron microscopy. Deep-learning
+    methods are usually mentioned alongside an established platform; papers often run StarDist inside
+    Fiji and Cellpose on its own. Many papers mention a package without citing it, so citation counts
+    understate how often packages appear in published work; authors should make that use visible by citing
+    each package and reporting how they ran it.
+  peer_reviewed: false
+  open_access_status: green
+  corresponding: true
 - doi: 10.64898/2026.06.29.735028
   year: 2026
   publication_date: '2026-06-29'

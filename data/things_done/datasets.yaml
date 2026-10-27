@@ -11,6 +11,16 @@ records:
     barriers through protrusion-driven invasion or endothelial retraction."
   related_publication_dois:
   - 10.64898/2026.09.02.749041
+- title: Data for Mapping bioimage-analysis software adoption in microscopy
+  dataset_type: tabular
+  start_date: '2026-10-21'
+  repository_url: https://zenodo.org/records/23528077
+  archive_doi: 10.5281/zenodo.23528077
+  description: Archived tabular data and provenance files supporting the analysis of bioimage-analysis
+    software adoption in 1.7 million full-text microscopy papers, released with the associated analysis
+    code.
+  related_publication_dois:
+  - 10.64898/2026.10.21.760457
 - title: Fast label-free live imaging with FlowVision reveals key principles of cancer cell arrest on
     endothelial monolayers
   dataset_type: image
