@@ -57,6 +57,7 @@ DATASET_TYPES = {
     "proteomic": "Proteomic data",
     "rna_seq": "Sequencing data",
     "model": "Image data",   # trained models are listed with the image data they come from
+    "tabular": "Tabular data",
 }
 
 
