@@ -537,3 +537,8 @@ media:
   rights: CC-BY-4.0
   creators:
   - Ana Popović
+- path: assets/images/logos/mapping-bioimage-software.svg
+  type: software-media
+  rights: third-party
+  source: HenriquesLab mapping-bioimage-software repository
+  source_url: https://github.com/HenriquesLab/mapping-bioimage-software
