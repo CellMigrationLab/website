@@ -12,7 +12,7 @@ coauthors:
   last_year: 2026
   country: PT
 - name: Joanna W. Pylvänäinen
-  papers: 12
+  papers: 13
   first_year: 2022
   last_year: 2026
   country: FI
@@ -56,14 +56,14 @@ coauthors:
   first_year: 2016
   last_year: 2026
   country: GB
+- name: Iván Hidalgo-Cenalmor
+  papers: 8
+  first_year: 2024
+  last_year: 2026
+  country: FI
 - name: Camilo Guzmán
   papers: 7
   first_year: 2017
-  last_year: 2026
-  country: FI
-- name: Iván Hidalgo-Cenalmor
-  papers: 7
-  first_year: 2024
   last_year: 2026
   country: FI
 - name: Sujan Ghimire
