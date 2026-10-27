@@ -237,6 +237,7 @@ records:
     application.'
   peer_reviewed: false
   open_access_status: gold
+  corresponding: true
 - doi: 10.64898/2026.10.21.760457
   year: 2026
   publication_date: '2026-10-26'
