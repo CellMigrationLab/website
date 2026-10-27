@@ -167,3 +167,6 @@
   image: wp-content/uploads/2019/08/sim-rgb4.jpg
   alt: >-
     Structured illumination microscopy image of an osteosarcoma cell, with actin in magenta and paxillin in green.
+- doi: 10.64898/2026.10.21.760457
+  area: methods
+
