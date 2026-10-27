@@ -221,6 +221,22 @@ records:
   peer_reviewed: false
   open_access_status: green
   corresponding: true
+- doi: 10.5281/zenodo.23669197
+  year: 2026
+  publication_date: '2026'
+  status: published
+  title: How to Train and Use Deep Learning Models in Microscopy
+  authors:
+  - Joanna W. Pylvänäinen
+  - Iván Hidalgo-Cenalmor
+  - Guillaume Jacquemet
+  venue: 'AI in Microscopy: A BioImaging Guide'
+  abstract: 'Chapter 9 of the open online textbook "AI in Microscopy: A BioImaging Guide". The chapter
+    provides practical guidance for biologists and microscopists on training and using deep-learning models
+    in microscopy, with particular emphasis on segmentation workflows, model training, evaluation and
+    application.'
+  peer_reviewed: false
+  open_access_status: gold
 - doi: 10.64898/2026.10.21.760457
   year: 2026
   publication_date: '2026-10-26'
