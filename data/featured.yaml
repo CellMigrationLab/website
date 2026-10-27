@@ -171,4 +171,5 @@
   area: methods
   image: assets/images/logos/mapping-bioimage-software.svg
   fit: contain
-
+- doi: 10.5281/zenodo.23669197
+  area: methods
