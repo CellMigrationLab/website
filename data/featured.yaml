@@ -169,4 +169,6 @@
     Structured illumination microscopy image of an osteosarcoma cell, with actin in magenta and paxillin in green.
 - doi: 10.64898/2026.10.21.760457
   area: methods
+  image: assets/images/logos/mapping-bioimage-software.svg
+  fit: contain
 
