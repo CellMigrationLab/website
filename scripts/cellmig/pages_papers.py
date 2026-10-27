@@ -68,7 +68,8 @@ def page_story(story: Story, stories: list[Story], i: int, ledger: Ledger, lab: 
     p = Page(f"portfolio/{story['slug']}.md", title=story["title"], menu="publications/", edit_url=edit_url("data/featured.yaml"),
              description=one_line(story["summary"], 300),
              image=image or paper_image(), og_type="article")
-    picture = rights.image_object(image or paper_image(), SITE_URL + p.meta["image"])   # the preview picture
+    preview_image = p.meta.get("image") or image or paper_image()
+    picture = rights.image_object(image or paper_image(), SITE_URL + preview_image)   # structured image; SVGs have no JPEG preview
     p.meta["jsonld"] = to_json(article(story, p.url, picture))
     p.meta["citation"] = scholar_tags(story)
     p.add(f'# {esc(story["title"])}')
