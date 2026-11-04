@@ -46,6 +46,21 @@ records:
     interface or directly from Python.
   related_publication_dois:
   - 10.64898/2026.06.29.735028
+- id: phenome
+  title: PhenoMe
+  start_date: '2026'
+  github_repo_url: https://github.com/PhenoMe-Ecosystem/PhenoMe
+  description: Dataset- and model-agnostic tool for phenotyping analysis using deep learning embeddings
+    and image properties.
+  summary: PhenoMe is an open-source, model-agnostic framework for exploring microscopy image datasets
+    through the embeddings of pretrained foundation models, together with quantitative image properties
+    and experimental metadata. It provides scriptable and interactive workflows for embedding-space visualisation,
+    dimensionality reduction and clustering, similarity-based retrieval of representative images for each
+    phenotype, and correlation analyses linking the embeddings to interpretable image properties. Guided
+    notebooks, reproducible configurations, extensible model wrappers and a napari plugin make it accessible
+    without dedicated technical expertise.
+  related_publication_dois:
+  - 10.64898/2026.10.29.762637
 - id: rxiv-maker
   title: Rxiv-Maker
   start_date: '2025'
