@@ -21,19 +21,24 @@ coauthors:
   first_year: 2023
   last_year: 2026
   country: PT
+- name: Estibaliz Gómez-de-Mariscal
+  papers: 10
+  first_year: 2022
+  last_year: 2026
+  country: PT
 - name: Hellyeh Hamidi
   papers: 10
   first_year: 2015
   last_year: 2026
   country: FI
-- name: Estibaliz Gómez-de-Mariscal
-  papers: 9
-  first_year: 2022
-  last_year: 2026
-  country: PT
 - name: Gautier Follain
   papers: 9
   first_year: 2020
+  last_year: 2026
+  country: FI
+- name: Iván Hidalgo-Cenalmor
+  papers: 9
+  first_year: 2024
   last_year: 2026
   country: FI
 - name: Martin J. Humphries
@@ -56,11 +61,6 @@ coauthors:
   first_year: 2016
   last_year: 2026
   country: GB
-- name: Iván Hidalgo-Cenalmor
-  papers: 8
-  first_year: 2024
-  last_year: 2026
-  country: FI
 - name: Camilo Guzmán
   papers: 7
   first_year: 2017
@@ -121,6 +121,11 @@ coauthors:
   first_year: 2019
   last_year: 2023
   country: FI
+- name: Ignacio Arganda-Carreras
+  papers: 4
+  first_year: 2021
+  last_year: 2026
+  country: ES
 - name: Johanna Lilja
   papers: 4
   first_year: 2017
@@ -191,11 +196,6 @@ coauthors:
   first_year: 2024
   last_year: 2026
   country: FI
-- name: Ignacio Arganda-Carreras
-  papers: 3
-  first_year: 2021
-  last_year: 2026
-  country: ES
 - name: Ilpo Vattulainen
   papers: 3
   first_year: 2021
@@ -271,6 +271,10 @@ coauthors:
   first_year: 2024
   last_year: 2025
   country: PT
+- name: Aitor González-Marfil
+  papers: 2
+  first_year: 2026
+  last_year: 2026
 - name: Alana R. Cowell
   papers: 2
   first_year: 2021
@@ -599,10 +603,6 @@ coauthors:
   first_year: 2021
   last_year: 2021
   country: US
-- name: Aitor González-Marfil
-  papers: 1
-  first_year: 2026
-  last_year: 2026
 - name: Albert JR Heck
   papers: 1
   first_year: 2016
@@ -687,6 +687,10 @@ coauthors:
   first_year: 2017
   last_year: 2017
   country: FI
+- name: Antoine Dufour
+  papers: 1
+  first_year: 2026
+  last_year: 2026
 - name: Antoni Homs-Corbera
   papers: 1
   first_year: 2026
@@ -1051,6 +1055,10 @@ coauthors:
   first_year: 2022
   last_year: 2022
   country: FI
+- name: Flavie Lavoie-Cardinal
+  papers: 1
+  first_year: 2026
+  last_year: 2026
 - name: Franck Perez
   papers: 1
   first_year: 2026
@@ -1487,6 +1495,10 @@ coauthors:
   first_year: 2026
   last_year: 2026
   country: 'NO'
+- name: Lenka Backová
+  papers: 1
+  first_year: 2026
+  last_year: 2026
 - name: Leo M. Carlin
   papers: 1
   first_year: 2026
@@ -1840,6 +1852,10 @@ coauthors:
   first_year: 2017
   last_year: 2017
   country: FI
+- name: Renaud Bernatchez
+  papers: 1
+  first_year: 2026
+  last_year: 2026
 - name: Riikka Huhtaniemi
   papers: 1
   first_year: 2025
