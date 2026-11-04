@@ -19,6 +19,10 @@
 # project in the ledger but not here is still shown, as text only; a new
 # project is added to the ledger, not here.
 
+- id: phenome
+  image: wp-content/uploads/2026/11/phenome-logo.png
+  fit: contain
+
 - id: nucleisky
 
 - id: labconstrictor

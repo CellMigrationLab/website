@@ -506,6 +506,10 @@ media:
   type: software-media
   rights: all-rights-reserved
   owner: Cell Migration Lab
+- path: wp-content/uploads/2026/11/phenome-logo.png
+  type: software-media
+  rights: third-party
+  source: PhenoMe project
 - path: wp-content/uploads/2026/07/logo_small.png
   type: software-media
   rights: third-party
