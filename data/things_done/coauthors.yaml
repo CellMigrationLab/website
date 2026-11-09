@@ -7,7 +7,7 @@ coauthors:
   last_year: 2026
   country: FI
 - name: Ricardo Henriques
-  papers: 24
+  papers: 25
   first_year: 2020
   last_year: 2026
   country: PT
@@ -16,14 +16,14 @@ coauthors:
   first_year: 2022
   last_year: 2026
   country: FI
+- name: Estibaliz Gómez-de-Mariscal
+  papers: 11
+  first_year: 2022
+  last_year: 2026
+  country: PT
 - name: Bruno M. Saraiva
   papers: 10
   first_year: 2023
-  last_year: 2026
-  country: PT
-- name: Estibaliz Gómez-de-Mariscal
-  papers: 10
-  first_year: 2022
   last_year: 2026
   country: PT
 - name: Hellyeh Hamidi
@@ -31,14 +31,14 @@ coauthors:
   first_year: 2015
   last_year: 2026
   country: FI
+- name: Iván Hidalgo-Cenalmor
+  papers: 10
+  first_year: 2024
+  last_year: 2026
+  country: FI
 - name: Gautier Follain
   papers: 9
   first_year: 2020
-  last_year: 2026
-  country: FI
-- name: Iván Hidalgo-Cenalmor
-  papers: 9
-  first_year: 2024
   last_year: 2026
   country: FI
 - name: Martin J. Humphries
