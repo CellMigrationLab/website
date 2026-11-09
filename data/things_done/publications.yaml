@@ -238,6 +238,33 @@ records:
   peer_reviewed: false
   open_access_status: gold
   corresponding: true
+- doi: 10.1242/jcs.265173
+  year: 2026
+  publication_date: '2026-11-05'
+  status: published
+  title: Making smart microscopy deployable in imaging core facilities
+  authors:
+  - Iván Hidalgo-Cenalmor
+  - Ricardo Henriques
+  - Estibaliz Gómez-de-Mariscal
+  - Guillaume Jacquemet
+  venue: Journal of Cell Science
+  abstract: 'Smart microscopy, in which real-time image analysis enables microscopes to adapt their acquisition
+    dynamically, is becoming central to biological imaging. However, deploying such workflows in imaging
+    facilities remains challenging. The computers that control microscopes in a facility are shared, governed
+    by institutional policies, often offline and run vendor-specific software. As a result, installing
+    custom software environments for the workflow of each user is both unsafe and unsustainable. We argue
+    that smart microscopy requires a practical deployment strategy that links open-source bioimage analysis
+    with commercial acquisition software without turning acquisition computers into development platforms.
+    Using our recently developed tools, NucleiSky and LabConstrictor, as examples, we demonstrate how
+    microscope control and external image analysis can be integrated while keeping the custom Python environment
+    separate from the vendor-managed environment. The deployment strategy might vary – for instance, a
+    USB drive, a facility workstation, a server or a network share – but the underlying principle remains
+    the same: smart-microscopy workflows must be straightforward to approve, launch, reuse, audit and
+    remove. Smart microscopy will become routine only when it is both powerful and deployable.'
+  peer_reviewed: true
+  open_access_status: unknown
+  corresponding: true
 - doi: 10.64898/2026.10.21.760457
   year: 2026
   publication_date: '2026-10-26'
