@@ -11,6 +11,11 @@ records:
   role: University Researcher in Bioimaging
   group: staff
   status: current
+- id: member-carolina-prieto-wahnon-de-morais
+  name: Carolina Prieto Wahnon de Morais
+  role: Research assistant
+  group: staff
+  status: current
 - id: member-jaakko-lehtimaki
   name: Jaakko Lehtimäki
   role: Postdoc
