@@ -16,15 +16,25 @@ TOP_COLLABORATORS = 12
 CLOUD_MIN, CLOUD_MAX = 0.62, 1.55   # font sizes (rem) of the least and most frequent co-author
 
 
+def _preprint_counts(ledger: Ledger) -> tuple[int, int]:
+    """(preprints not yet published, preprints in all). Ledger.grouped() shows a
+    preprint with a linked journal version as that paper, so a paper that has a
+    preprint counts once however many preprints it had."""
+    records = ledger.grouped()
+    unpublished = sum(1 for r in records if r.get("status") == "preprint")
+    since_published = sum(1 for r in records if r.get("status") != "preprint" and ledger.preprint_of(r))
+    return unpublished, unpublished + since_published
+
+
 def _tiles(ledger: Ledger, members: list[Person], countries: dict[str, int]) -> str:
     """Headline numbers, each linking to where it comes from."""
     records = ledger.grouped()
-    n_pre = sum(1 for r in records if r.get("status") == "preprint")
+    n_pre, n_pre_all = _preprint_counts(ledger)
     n_now = sum(1 for m in members if m["status"] == "current")
     mt = ledger.metrics
     tiles = [
         (fmt(len(records) - n_pre), "papers", "publications/"),
-        (fmt(n_pre), "preprints", "publications/"),
+        (fmt(n_pre_all), f"preprints · {n_pre} not yet published", "publications/"),
         (fmt(mt["citation_count"]), "citations", mt["scholar_url"]),
         (str(mt["h_index"]), "h-index", mt["scholar_url"]),
         (str(len(members)), f"members · {n_now} current", "lab-members/"),
@@ -89,6 +99,14 @@ def _cloud(coauthors: list[Record], lab: set[str]) -> str:
     return "".join(out)
 
 
+def _preprint_note(ledger: Ledger) -> str:
+    """Under the papers-per-year chart: how many of its manuscripts are preprints."""
+    unpublished, total = _preprint_counts(ledger)
+    return (f'<p class="cm-small">Each paper counts once: a preprint and its journal version are one paper. '
+            f'{fmt(unpublished)} are preprints not yet published; {fmt(total)} preprints in all, '
+            f'{fmt(total - unpublished)} of them since published.</p>')
+
+
 def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
     """Tiles, papers per year, preprint lag, top collaborators, map, co-author cloud."""
     countries: dict[str, int] = {}
@@ -98,7 +116,7 @@ def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
     p = Page("lab-in-numbers.md", title="Lab in numbers", **preview("lab-in-numbers"))
     p.add("# Lab in numbers",
           _tiles(ledger, members, countries),
-          section_title("Papers and preprints per year"), papers_per_year(ledger.grouped()),
+          section_title("Papers and preprints per year"), papers_per_year(ledger.grouped()), _preprint_note(ledger),
           section_title("From preprint to paper"), lag_section(ledger.lag_pairs, ledger.lag_summary),
           section_title("Top collaborators", id_="collaborators"), _top_collaborators(ledger.coauthors, lab),
           section_title("Where our co-authors are", id_="map"), world_map(countries),
