@@ -98,7 +98,7 @@ def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:
     p = Page("lab-in-numbers.md", title="Lab in numbers", **preview("lab-in-numbers"))
     p.add("# Lab in numbers",
           _tiles(ledger, members, countries),
-          section_title("Papers per year"), papers_per_year(ledger.grouped()),
+          section_title("Papers and preprints per year"), papers_per_year(ledger.grouped()),
           section_title("From preprint to paper"), lag_section(ledger.lag_pairs, ledger.lag_summary),
           section_title("Top collaborators", id_="collaborators"), _top_collaborators(ledger.coauthors, lab),
           section_title("Where our co-authors are", id_="map"), world_map(countries),

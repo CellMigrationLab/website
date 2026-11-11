@@ -402,6 +402,18 @@ class ChartTests(unittest.TestCase):
         self.assertEqual(color(5), "#b48ae3")
         self.assertEqual(color(1000), "#4f2182")
 
+    def test_papers_per_year_stacks_papers_and_unpublished_preprints(self):
+        from cellmig.charts import papers_per_year
+        records = [{"year": 2024, "status": "published"}, {"year": 2024, "status": "published"},
+                   {"year": 2024, "status": "preprint"}, {"year": 2026, "status": "preprint"}]
+        html = papers_per_year(records)
+        self.assertIn('data-tip="2024: 3 manuscripts (2 papers, 1 preprint)"', html)
+        self.assertIn('data-tip="2026: 1 preprint"', html)
+        self.assertNotIn("2025:", html)   # a year with nothing has no bar
+        self.assertEqual(html.count('class="cm-bars__paper"'), 2)       # one paper segment per drawing (wide, narrow)
+        self.assertEqual(html.count('class="cm-bars__preprint"'), 4)    # 2024 and 2026, in both drawings
+        self.assertIn("Preprints not yet published", html)
+
     def test_lag_section_uses_the_ledger_summary_and_handles_negative_gaps(self):
         pair = {"published_doi": "10.1/j", "published_title": "T", "preprint_date": "2020-01-01",
                 "published_date": "2020-03-01", "preprint_date_precision": "day", "published_date_precision": "day"}
