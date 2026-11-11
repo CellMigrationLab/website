@@ -29,12 +29,12 @@ def _preprint_counts(ledger: Ledger) -> tuple[int, int]:
 def _tiles(ledger: Ledger, members: list[Person], countries: dict[str, int]) -> str:
     """Headline numbers, each linking to where it comes from."""
     records = ledger.grouped()
-    n_pre, n_pre_all = _preprint_counts(ledger)
+    n_pre, _ = _preprint_counts(ledger)
     n_now = sum(1 for m in members if m["status"] == "current")
     mt = ledger.metrics
     tiles = [
-        (fmt(len(records) - n_pre), "papers", "publications/"),
-        (fmt(n_pre_all), f"preprints · {n_pre} not yet published", "publications/"),
+        (fmt(len(records) - n_pre), "published papers", "publications/"),
+        (fmt(n_pre), "preprints not yet published", "publications/"),
         (fmt(mt["citation_count"]), "citations", mt["scholar_url"]),
         (str(mt["h_index"]), "h-index", mt["scholar_url"]),
         (str(len(members)), f"members · {n_now} current", "lab-members/"),
@@ -100,11 +100,14 @@ def _cloud(coauthors: list[Record], lab: set[str]) -> str:
 
 
 def _preprint_note(ledger: Ledger) -> str:
-    """Under the papers-per-year chart: how many of its manuscripts are preprints."""
+    """Under the papers-per-year chart: published papers, preprints still in the
+    publication process and all preprints posted (those since published included)."""
     unpublished, total = _preprint_counts(ledger)
-    return (f'<p class="cm-small">Each paper counts once: a preprint and its journal version are one paper. '
-            f'{fmt(unpublished)} are preprints not yet published; {fmt(total)} preprints in all, '
-            f'{fmt(total - unpublished)} of them since published.</p>')
+    papers = len(ledger.grouped()) - unpublished
+    return (f'<p class="cm-small"><strong>{fmt(papers)}</strong> published papers · '
+            f'<strong>{fmt(unpublished)}</strong> preprints in the publication process · '
+            f'<strong>{fmt(total)}</strong> preprints posted in total. '
+            f'Each paper counts once: a preprint and its journal version are one paper.</p>')
 
 
 def page_numbers(ledger: Ledger, lab: set[str], members: list[Person]) -> None:

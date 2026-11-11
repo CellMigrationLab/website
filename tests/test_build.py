@@ -418,8 +418,9 @@ class ChartTests(unittest.TestCase):
         alone = {"doi": "10.1/a", "year": 2026, "status": "preprint", "publication_date": "2026"}
         ledger = fake_ledger([pre, journal, alone])
         note = _preprint_note(ledger)
-        self.assertIn("1 are preprints not yet published", note)
-        self.assertIn("2 preprints in all, 1 of them since published", note)
+        self.assertIn("<strong>1</strong> published papers", note)
+        self.assertIn("<strong>1</strong> preprints in the publication process", note)
+        self.assertIn("<strong>2</strong> preprints posted in total", note)
 
     def test_lag_section_uses_the_ledger_summary_and_handles_negative_gaps(self):
         pair = {"published_doi": "10.1/j", "published_title": "T", "preprint_date": "2020-01-01",
