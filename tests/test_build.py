@@ -402,17 +402,24 @@ class ChartTests(unittest.TestCase):
         self.assertEqual(color(5), "#b48ae3")
         self.assertEqual(color(1000), "#4f2182")
 
-    def test_papers_per_year_stacks_papers_and_unpublished_preprints(self):
+    def test_papers_per_year_counts_every_manuscript_once(self):
         from cellmig.charts import papers_per_year
         records = [{"year": 2024, "status": "published"}, {"year": 2024, "status": "published"},
                    {"year": 2024, "status": "preprint"}, {"year": 2026, "status": "preprint"}]
         html = papers_per_year(records)
-        self.assertIn('data-tip="2024: 3 manuscripts (2 papers, 1 preprint)"', html)
-        self.assertIn('data-tip="2026: 1 preprint"', html)
+        self.assertIn('data-tip="2024: 3 papers and preprints"', html)
+        self.assertIn('data-tip="2026: 1 paper or preprint"', html)
         self.assertNotIn("2025:", html)   # a year with nothing has no bar
-        self.assertEqual(html.count('class="cm-bars__paper"'), 2)       # one paper segment per drawing (wide, narrow)
-        self.assertEqual(html.count('class="cm-bars__preprint"'), 4)    # 2024 and 2026, in both drawings
-        self.assertIn("Preprints not yet published", html)
+
+    def test_preprint_note_counts_unpublished_and_all_preprints(self):
+        from cellmig.pages_numbers import _preprint_note
+        pre = {"doi": "10.1/p", "year": 2024, "status": "preprint", "related_dois": ["10.1/j"], "publication_date": "2024"}
+        journal = {"doi": "10.1/j", "year": 2025, "status": "published", "related_dois": ["10.1/p"], "publication_date": "2025"}
+        alone = {"doi": "10.1/a", "year": 2026, "status": "preprint", "publication_date": "2026"}
+        ledger = fake_ledger([pre, journal, alone])
+        note = _preprint_note(ledger)
+        self.assertIn("1 are preprints not yet published", note)
+        self.assertIn("2 preprints in all, 1 of them since published", note)
 
     def test_lag_section_uses_the_ledger_summary_and_handles_negative_gaps(self):
         pair = {"published_doi": "10.1/j", "published_title": "T", "preprint_date": "2020-01-01",
