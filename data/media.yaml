@@ -524,7 +524,9 @@ media:
   owner: Cell Migration Lab
 - path: wp-content/uploads/2026/11/carolina-prieto-wahnon-de-morais.jpg
   type: portrait
-  rights: unknown
+  rights: all-rights-reserved
+  creators:
+  - Carolina Prieto Wahnon de Morais
 - path: wp-content/uploads/2026/10/leonie-haas.jpg
   type: portrait
   rights: all-rights-reserved
