@@ -13,34 +13,47 @@ CHART_SIZES = (("cm-chart--wide", 920, 200), ("cm-chart--narrow", 640, 170))   #
 
 
 def papers_per_year(records: list[Record]) -> str:
-    """Bar chart: number of publications per year."""
-    counts: dict[int, int] = {}
+    """Stacked bar chart: papers (solid) and, on top, preprints not yet
+    published (outlined) per year; the whole bar counts every manuscript. `records` is Ledger.grouped(): a preprint
+    with a linked journal version is already folded into it."""
+    counts: dict[int, tuple[int, int]] = {}   # year -> (papers, preprints)
     for r in records:
-        counts[int(r["year"])] = counts.get(int(r["year"]), 0) + 1
+        papers, preprints = counts.get(int(r["year"]), (0, 0))
+        counts[int(r["year"])] = (papers, preprints + 1) if r.get("status") == "preprint" else (papers + 1, preprints)
     years = list(range(min(counts), max(counts) + 1))
     svgs = "".join(_bars(counts, years, cls, W, H) for cls, W, H in CHART_SIZES)
-    return f'<div class="cm-bars">{svgs}<div class="cm-chart-tip" hidden></div></div>'
+    legend = ('<p class="cm-small cm-bars__legend"><span class="cm-bars__key cm-bars__key--paper"></span>Papers '
+              '<span class="cm-bars__key cm-bars__key--preprint"></span>Preprints not yet published. Bar height: all manuscripts of the year.</p>')
+    return f'<div class="cm-bars">{svgs}<div class="cm-chart-tip" hidden></div></div>{legend}'
 
 
-def _bars(counts: dict[int, int], years: list[int], cls: str, W: int, H: int) -> str:
+def _bars(counts: dict[int, tuple[int, int]], years: list[int], cls: str, W: int, H: int) -> str:
     """One drawing of the papers-per-year bars, `W` × `H` units."""
-    top = max(counts.values())
+    top = max(sum(c) for c in counts.values())
     pad, base = 24, H - 30   # the year labels go below the axis
     bw = (W - 2 * pad) / len(years)
     parts = []
     for i, y in enumerate(years):
-        n = counts.get(y, 0)
-        h = (base - 16) * n / top
+        papers, preprints = counts.get(y, (0, 0))
+        unit = (base - 16) / top
         bx = pad + i * bw + 2
-        tip = f"{y}: {plural(n, 'paper')}"
-        if n:
-            parts.append(f'<rect class="cm-bars__bar" x="{bx:.1f}" y="{base - h:.1f}" width="{bw - 4:.1f}" height="{h:.1f}" rx="3" '
-                         f'data-tip="{esc(tip)}" tabindex="0"><title>{esc(tip)}</title></rect>')
+        if papers or preprints:
+            parts_of = [plural(n, word) for n, word in ((papers, "paper"), (preprints, "preprint")) if n]
+            # a bar is one unit, a manuscript, whether published or not: name the total when it has both parts
+            tip = f"{y}: " + (parts_of[0] if len(parts_of) == 1
+                              else f"{plural(papers + preprints, 'manuscript')} ({', '.join(parts_of)})")
+            hp, hq = papers * unit, preprints * unit
+            segments = []
+            if papers:
+                segments.append(f'<rect class="cm-bars__paper" x="{bx:.1f}" y="{base - hp:.1f}" width="{bw - 4:.1f}" height="{hp:.1f}" rx="2"/>')
+            if preprints:
+                segments.append(f'<rect class="cm-bars__preprint" x="{bx:.1f}" y="{base - hp - hq:.1f}" width="{bw - 4:.1f}" height="{hq:.1f}" rx="2"/>')
+            parts.append(f'<g class="cm-bars__col" data-tip="{esc(tip)}" tabindex="0"><title>{esc(tip)}</title>{"".join(segments)}</g>')
         if y % 2 == years[-1] % 2:   # label every other year, always the latest
             parts.append(f'<text class="cm-lag__tick" x="{bx + (bw - 4) / 2:.1f}" y="{base + 18}">{y}</text>')
     parts.append(f'<line class="cm-lag__axis" x1="{pad}" x2="{W - pad}" y1="{base}" y2="{base}"/>')
     return (f'<svg class="cm-lag__chart {cls}" viewBox="0 0 {W} {H}" role="img" '
-            f'aria-label="Papers per year">{"".join(parts)}</svg>')
+            f'aria-label="Papers and preprints per year">{"".join(parts)}</svg>')
 
 
 def _is_exact(row: Record) -> bool:
