@@ -11,11 +11,6 @@ records:
   role: University Researcher in Bioimaging
   group: staff
   status: current
-- id: member-carolina-prieto-wahnon-de-morais
-  name: Carolina Prieto Wahnon de Morais
-  role: Research assistant
-  group: staff
-  status: current
 - id: member-jaakko-lehtimaki
   name: Jaakko Lehtimäki
   role: Postdoc
@@ -97,6 +92,13 @@ records:
   status: current
   also_known_as:
   - Leonie Sofia Haas
+- id: member-carolina-prieto-wahnon-de-morais
+  name: Carolina Prieto Wahnon de Morais
+  role: Research assistant
+  group: other
+  status: current
+  also_known_as:
+  - Carolina Prieto
 - id: member-helene-helo
   name: Helene Helo
   role: Research assistant
