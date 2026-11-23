@@ -238,6 +238,19 @@ records:
   peer_reviewed: false
   open_access_status: gold
   corresponding: true
+- doi: 10.1242/jcs.265433
+  year: 2026
+  publication_date: '2026-11-12'
+  status: published
+  title: Imaging cell architecture and dynamics – from images to insight
+  authors:
+  - Francesca Bottanelli
+  - Guillaume Jacquemet
+  - Giulia Zanetti
+  venue: Journal of Cell Science
+  peer_reviewed: false
+  open_access_status: bronze
+  corresponding: true
 - doi: 10.1242/jcs.265173
   year: 2026
   publication_date: '2026-11-05'
