@@ -1059,6 +1059,11 @@ coauthors:
   papers: 1
   first_year: 2026
   last_year: 2026
+- name: Francesca Bottanelli
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: DE
 - name: Franck Perez
   papers: 1
   first_year: 2026
@@ -1097,6 +1102,11 @@ coauthors:
   first_year: 2022
   last_year: 2022
   country: FI
+- name: Giulia Zanetti
+  papers: 1
+  first_year: 2026
+  last_year: 2026
+  country: GB
 - name: Gorka Azkune
   papers: 1
   first_year: 2026
